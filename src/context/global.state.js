@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from 'react';
-import Service from '../utils/admin.service';
+import Service from '../utils/model.service';
 
 import {
     globalReducer,

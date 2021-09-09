@@ -1,4 +1,4 @@
-import util from './admin';
+import util from './model';
 
 const Service = {
     storeList: (reqData) => util.serviceProxy('/store/storeList', reqData),

@@ -1,16 +1,24 @@
 import { Fragment, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { Box } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
+import { GlobalStyles, Box } from '@mui/material';
 
 // Context
 import { GlobalProvider } from '../src/context/global.state';
 
 import Header from '../src/containers/Header';
 import Content from '../src/containers/Content';
+import theme from '../src/utils/theme';
 
-const theme = createTheme();
+const styles = {
+    body: {
+        fontFamily: '微軟正黑體, regular',
+        color: '#fff',
+        backgroundColor: '#1F2023',
+        margin: 0,
+    },
+};
 
 //
 const WebSite = ({ Component, pageProps }) => {
@@ -48,6 +56,8 @@ const WebSite = ({ Component, pageProps }) => {
             </Head>
 
             <ThemeProvider theme={theme}>
+                <GlobalStyles styles={styles} />
+
                 <GlobalProvider>
                     <Box sx={{ display: 'flex' }}>
                         <Header />

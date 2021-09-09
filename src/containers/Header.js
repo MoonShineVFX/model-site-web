@@ -7,10 +7,19 @@ import {
 
 import LinkText from '../components/LinkText';
 
-const HeaderBase = styled(Toolbar)(() => ({
+const AppBarBase = styled(AppBar, {
+    name: 'header-appbar',
+})(({ theme }) => ({
+    borderBottom: `1px solid ${theme.palette.border.main}`, // debug
+    backgroundColor: theme.palette.bgColor,
+    boxShadow: 'none',
+}));
+
+const HeaderBase = styled(Toolbar)(({ theme }) => ({
     width: '100%',
     maxWidth: '1200px',
     margin: 'auto',
+    padding: `${theme.spacing(3)} 0`,
 }));
 
 const LinkTextBase = styled('div', {
@@ -25,10 +34,10 @@ const LinkTextBase = styled('div', {
 //
 const Header = () => (
 
-    <AppBar position="fixed">
+    <AppBarBase position="fixed">
         <HeaderBase>
             <img
-                src="//fakeimg.pl/200x40/?text=MoonSin Market"
+                src="//fakeimg.pl/200x60/?text=MoonSin Market"
                 alt="夢想模型"
             />
 
@@ -43,7 +52,7 @@ const Header = () => (
                 </LinkTextBase>
             </Box>
         </HeaderBase>
-    </AppBar>
+    </AppBarBase>
 
 );
 

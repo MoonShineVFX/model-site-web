@@ -14,6 +14,7 @@ const button = {
         styleOverrides: {
             root: {
                 minHeight: '40px',
+                fontSize: '1em',
                 borderRadius: '30px',
             },
         },
@@ -22,6 +23,7 @@ const button = {
 
 export default createTheme({
     spacing: 4,
+    borderRadius: '30px',
     palette: {
         primary: {
             light: '#BCCCF2',
@@ -30,7 +32,7 @@ export default createTheme({
             contrastText: 'rgba(0,0,0,.7)',
         },
         secondary: {
-            main: '#FFFFFF',
+            main: '#FFF',
             dark: 'rgba(255,255,255,.6)',
             contrastText: '#000',
         },

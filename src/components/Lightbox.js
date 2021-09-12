@@ -13,17 +13,17 @@ import { Close as CloseIcon } from '@mui/icons-material';
 import { GlobalContext } from '../context/global.state';
 
 const DialogBase = styled(Dialog)(({ theme }) => ({
-    '& .MuiTypography-root': {
+    '.MuiTypography-root': {
         fontWeight: 'bold',
     },
-    '& .MuiDialog-paper': {
+    '.MuiDialog-paper': {
         width: '100%',
     },
-    '& .MuiDialogContent-root': {
+    '.MuiDialogContent-root': {
         minHeight: '50px',
         fontSize: '16px',
     },
-    '& .MuiButton-text': {
+    '.MuiButton-text': {
         fontSize: '15px',
     },
 }));

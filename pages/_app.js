@@ -7,9 +7,10 @@ import { GlobalStyles, Box } from '@mui/material';
 // Context
 import { GlobalProvider } from '../src/context/global.state';
 
+import theme from '../src/utils/theme';
 import Header from '../src/containers/Header';
 import Content from '../src/containers/Content';
-import theme from '../src/utils/theme';
+import Footer from '../src/containers/Footer';
 
 const styles = {
     body: {
@@ -17,6 +18,24 @@ const styles = {
         color: '#fff',
         backgroundColor: '#1F2023',
         margin: 0,
+    },
+    '.Model-container': {
+        width: '100%',
+        maxWidth: '1200px',
+        margin: 'auto',
+    },
+    '.Model-align': {
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+    },
+    '.Model-x-align': {
+        left: '50%',
+        transform: 'translateX(-50%)',
+    },
+    '.Model-y-align': {
+        top: '50%',
+        transform: 'translateY(-50%)',
     },
 };
 
@@ -59,17 +78,22 @@ const WebSite = ({ Component, pageProps }) => {
                 <GlobalStyles styles={styles} />
 
                 <GlobalProvider>
-                    <Box sx={{ display: 'flex' }}>
-                        <Header />
+                    <Header />
+                    <Box
+                        component="main"
+                        sx={{
+                            display: 'flex',
+                            marginTop: '90px',
+                        }}
+                    >
                         <Box
-                            component="main"
+                            component="div"
+                            className="Model-container"
                             sx={{
-                                maxWidth: '1200px',
                                 display: 'flex',
                                 flexGrow: 1,
-                                margin: '64px auto 0',
-                                paddingTop: '40px',
-                                paddingBottom: '40px',
+                                paddingTop: '20px',
+                                paddingBottom: '20px',
                             }}
                         >
                             <Content
@@ -78,6 +102,7 @@ const WebSite = ({ Component, pageProps }) => {
                             />
                         </Box>
                     </Box>
+                    <Footer />
                 </GlobalProvider>
             </ThemeProvider>
         </Fragment>

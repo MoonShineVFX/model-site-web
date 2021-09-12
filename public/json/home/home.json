@@ -1,0 +1,47 @@
+{
+    "result": 1,
+    "message": "",
+    "errors": [],
+    "data": {
+        "banner": [
+            {
+                "id": "11111",
+                "title": "標題-1",
+                "price": 1000,
+                "imgUrl": "//fakeimg.pl/1200x280",
+                "status": "???"
+            },
+            {
+                "id": "22222",
+                "title": "標題-2",
+                "price": 1000,
+                "imgUrl": "//fakeimg.pl/1200x280",
+                "status": "???"
+            },
+            {
+                "id": "33333",
+                "title": "標題-3",
+                "price": 1000,
+                "imgUrl": "//fakeimg.pl/1200x280",
+                "status": "???"
+            }
+        ],
+        "newArrival": [
+            {
+                "id": "22222",
+                "title": "標題",
+                "price": 1000,
+                "imgUrl": "/domain/path/xxx.jpg",
+                "status": "???"
+            }
+        ],
+        "document": [
+            {
+                "id": "33333",
+                "title": "標題",
+                "description": "描述",
+                "imgUrl": "/domain/path/xxx.jpg"
+            }
+        ]
+    }
+}

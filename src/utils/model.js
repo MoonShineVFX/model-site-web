@@ -29,6 +29,7 @@ const util = {
 
                 return {
                     url: `/api${url}`,
+                    // url: `${url}`,
                     method,
                 };
 
@@ -82,7 +83,7 @@ const util = {
 
     serviceServer: (url, reqData = {}) => {
 
-        return axios.post(`http://localhost:8080/${url}`, reqData);
+        return axios.post(`http://localhost:1006/${url}`, reqData);
 
     },
 

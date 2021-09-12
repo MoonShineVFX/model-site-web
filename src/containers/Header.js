@@ -1,55 +1,42 @@
-import { styled, alpha } from '@mui/system';
-import {
-    AppBar,
-    Toolbar,
-    Box,
-} from '@mui/material';
-
-import LinkText from '../components/LinkText';
+import { styled } from '@mui/system';
+import { AppBar, Toolbar, Box } from '@mui/material';
+import { Links, ButtonLink } from '../components/Links';
+import Navbar from './Navbar';
 
 const AppBarBase = styled(AppBar, {
     name: 'header-appbar',
 })(({ theme }) => ({
+    maxHeight: '90px',
     borderBottom: `1px solid ${theme.palette.border.main}`, // debug
     backgroundColor: theme.palette.bgColor,
     boxShadow: 'none',
 }));
 
 const HeaderBase = styled(Toolbar)(({ theme }) => ({
-    width: '100%',
-    maxWidth: '1200px',
-    margin: 'auto',
     padding: `${theme.spacing(3)} 0`,
-}));
-
-const LinkTextBase = styled('div', {
-    name: 'header-button-link',
-})(() => ({
-    marginLeft: '40px',
-    '& a': {
-        color: 'white',
-    },
 }));
 
 //
 const Header = () => (
 
     <AppBarBase position="fixed">
-        <HeaderBase>
-            <img
-                src="//fakeimg.pl/200x60/?text=MoonSin Market"
-                alt="夢想模型"
-            />
+        <HeaderBase className="Model-container">
+            <Links>
+                <img
+                    src="//fakeimg.pl/200x60/?text=MoonSin Market"
+                    alt="夢想模型"
+                />
+            </Links>
 
-            <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ flexGrow: 1 }}>
+                <Navbar />
+            </Box>
 
             <Box sx={{ display: { xs: 'flex', md: 'flex' } }}>
-                <LinkTextBase>
-                    <LinkText
-                        url="login"
-                        text="登入"
-                    />
-                </LinkTextBase>
+                <ButtonLink
+                    url="login"
+                    text="登入"
+                />
             </Box>
         </HeaderBase>
     </AppBarBase>

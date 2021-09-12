@@ -16,13 +16,13 @@ const TableDataGrid = styled(DataGrid)(({ theme }) => ({
             },
         },
     },
-    '& .MuiDataGrid-columnsContainer': {
-        '& .MuiDataGrid-columnHeaderTitle': {
+    '.MuiDataGrid-columnsContainer': {
+        '.MuiDataGrid-columnHeaderTitle': {
             fontSize: '16px',
         },
     },
-    '& .MuiDataGrid-dataContainer': {
-        '& .MuiDataGrid-cell': {
+    '.MuiDataGrid-dataContainer': {
+        '.MuiDataGrid-cell': {
             fontSize: '15px',
             padding: `0 ${theme.spacing(2)}`,
         },

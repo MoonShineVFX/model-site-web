@@ -5,11 +5,8 @@ import { Button } from '@mui/material';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import FontIcon from './FontIcon';
 
-let test;
-
-const SlideshowBase = styled('section', {
-    name: 'slideshowWrap',
-})(() => ({
+const SlideshowBase = styled('section')(() => ({
+    width: '100%',
     position: 'relative',
 }));
 

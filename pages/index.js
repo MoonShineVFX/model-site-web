@@ -1,7 +1,7 @@
 import React, { Fragment, useContext, useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import util from '../src/utils/model';
+import { styled } from '@mui/system';
 
+import util from '../src/utils/model';
 import { Links } from '../src/components/Links';
 import Slideshow from '../src/components/Slideshow';
 
@@ -30,6 +30,38 @@ export async function getStaticProps () {
 
 };
 
+const SlideshowWrap = styled('div')(({ theme }) => ({
+    '.inner': {
+        maxHeight: '420px',
+        display: 'flex',
+        '> *': {
+            flex: 1,
+        },
+    },
+}));
+
+const SlideshowInfo = styled('div')(({ theme }) => ({
+    backgroundColor: '#2F3137',
+    padding: '40px',
+    position: 'relative',
+    'h1': {
+        fontSize: '2.1em',
+        margin: '0 0 8px',
+    },
+    '.price': {
+        fontSize: '1.4em',
+        color: theme.palette.primary.main,
+    },
+    '.status': {
+        fontSize: '1.4em',
+        border: `1px solid ${theme.palette.border.light}`,
+        borderRadius: theme.borderRadius,
+        padding: '12px 80px',
+        position: 'absolute',
+        bottom: '60px',
+    },
+}));
+
 const Home = ({ pageData }) => {
 
     // console.log('pageData:', pageData);
@@ -47,6 +79,7 @@ const Home = ({ pageData }) => {
 
     // }, [globalDispatch, pathname]);
 
+    // State
     const [active, setActive] = useState(0);
 
     // 左箭頭
@@ -73,17 +106,33 @@ const Home = ({ pageData }) => {
                 handleArrowRight={handleArrowRight}
             >
                 {
-                    pageData.banner.map(({ id, title, imgUrl }, idx) => (
+                    pageData.banner.map(({
+                        id,
+                        title,
+                        price,
+                        imgUrl,
+                        status,
+                    }, idx) => (
 
-                        <Links
+                        <SlideshowWrap
                             key={id}
-                            url="login"
-                            target="_blank"
                             className={(idx === active) ? 'active' : 'hide'}
                         >
-                            <span style={{ position: 'absolute' }}>{title}</span>
-                            <img src={imgUrl} alt={title} />
-                        </Links>
+                            <div className="inner">
+                                <Links
+                                    url="login"
+                                    target="_blank"
+                                >
+                                    <img src={imgUrl} alt={title} />
+                                </Links>
+
+                                <SlideshowInfo>
+                                    <h1>{title}</h1>
+                                    <div className="price">NT$ {price} 元</div>
+                                    <span className="Model-x-align status">{status}</span>
+                                </SlideshowInfo>
+                            </div>
+                        </SlideshowWrap>
 
                     ))
                 }

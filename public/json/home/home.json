@@ -8,21 +8,21 @@
                 "id": "11111",
                 "title": "標題-1",
                 "price": 1000,
-                "imgUrl": "//fakeimg.pl/1200x280",
+                "imgUrl": "//fakeimg.pl/830x420",
                 "status": "???"
             },
             {
                 "id": "22222",
                 "title": "標題-2",
                 "price": 1000,
-                "imgUrl": "//fakeimg.pl/1200x280",
+                "imgUrl": "//fakeimg.pl/830x420",
                 "status": "???"
             },
             {
                 "id": "33333",
                 "title": "標題-3",
                 "price": 1000,
-                "imgUrl": "//fakeimg.pl/1200x280",
+                "imgUrl": "//fakeimg.pl/830x420",
                 "status": "???"
             }
         ],

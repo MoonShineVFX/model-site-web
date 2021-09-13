@@ -1,6 +1,5 @@
 import { Fragment, useEffect } from 'react';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { ThemeProvider } from '@mui/material/styles';
 import { GlobalStyles, Box } from '@mui/material';
 
@@ -18,6 +17,12 @@ const styles = {
         color: '#fff',
         backgroundColor: '#1F2023',
         margin: 0,
+        '*': {
+            boxSizing: 'border-box',
+        },
+    },
+    a: {
+        display: 'inline-block',
     },
     '.Model-container': {
         width: '100%',
@@ -37,34 +42,17 @@ const styles = {
         top: '50%',
         transform: 'translateY(-50%)',
     },
+    '.Model-clear-box': {
+        '&:after': {
+            content: '""',
+            display: 'block',
+            clear: 'both',
+        },
+    },
 };
 
 //
 const WebSite = ({ Component, pageProps }) => {
-
-    const router = useRouter();
-
-    // useEffect(() => {
-
-    //     const handleRouteChange = (url, { shallow }) => {
-
-    //         console.log(
-    //             `App is changing to ${url} ${
-    //             shallow ? 'with' : 'without'
-    //             } shallow routing`
-    //         );
-
-    //     };
-
-    //     router.events.on('routeChangeStart', handleRouteChange);
-
-    //     return () => {
-
-    //         router.events.off('routeChangeStart', handleRouteChange);
-
-    //     };
-
-    // }, []);
 
     return (
 
@@ -81,17 +69,12 @@ const WebSite = ({ Component, pageProps }) => {
                     <Header />
                     <Box
                         component="main"
-                        sx={{
-                            display: 'flex',
-                            marginTop: '90px',
-                        }}
+                        sx={{ display: 'flex' }}
                     >
                         <Box
                             component="div"
                             className="Model-container"
                             sx={{
-                                display: 'flex',
-                                flexGrow: 1,
                                 paddingTop: '20px',
                                 paddingBottom: '20px',
                             }}

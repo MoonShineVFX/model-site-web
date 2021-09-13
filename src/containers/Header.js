@@ -1,11 +1,9 @@
 import { styled } from '@mui/system';
-import { AppBar, Toolbar, Box } from '@mui/material';
+import { Toolbar, Box } from '@mui/material';
 import { Links, ButtonLink } from '../components/Links';
 import Navbar from './Navbar';
 
-const AppBarBase = styled(AppBar, {
-    name: 'header-appbar',
-})(({ theme }) => ({
+const AppBarBase = styled('header')(({ theme }) => ({
     maxHeight: '90px',
     borderBottom: `1px solid ${theme.palette.border.main}`, // debug
     backgroundColor: theme.palette.bgColor,
@@ -19,7 +17,7 @@ const HeaderBase = styled(Toolbar)(({ theme }) => ({
 //
 const Header = () => (
 
-    <AppBarBase position="fixed">
+    <AppBarBase>
         <HeaderBase className="Model-container">
             <Links>
                 <img

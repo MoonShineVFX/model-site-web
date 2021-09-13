@@ -8,30 +8,51 @@
                 "id": "11111",
                 "title": "標題-1",
                 "price": 1000,
-                "imgUrl": "//fakeimg.pl/830x420",
+                "imgUrl": "//fakeimg.pl/840x420",
                 "status": "???"
             },
             {
                 "id": "22222",
                 "title": "標題-2",
                 "price": 1000,
-                "imgUrl": "//fakeimg.pl/830x420",
+                "imgUrl": "//fakeimg.pl/840x420",
                 "status": "???"
             },
             {
                 "id": "33333",
                 "title": "標題-3",
                 "price": 1000,
-                "imgUrl": "//fakeimg.pl/830x420",
+                "imgUrl": "//fakeimg.pl/840x420",
                 "status": "???"
             }
         ],
         "newArrival": [
             {
-                "id": "22222",
-                "title": "標題",
+                "id": "92813",
+                "title": "標題-92813",
                 "price": 1000,
-                "imgUrl": "/domain/path/xxx.jpg",
+                "imgUrl": "//fakeimg.pl/270x328",
+                "status": "???"
+            },
+            {
+                "id": "92814",
+                "title": "標題-92814",
+                "price": 1000,
+                "imgUrl": "//fakeimg.pl/270x328",
+                "status": "???"
+            },
+            {
+                "id": "92815",
+                "title": "標題-92815",
+                "price": 1000,
+                "imgUrl": "//fakeimg.pl/270x328",
+                "status": "???"
+            },
+            {
+                "id": "92816",
+                "title": "標題-92816",
+                "price": 1000,
+                "imgUrl": "//fakeimg.pl/270x328",
                 "status": "???"
             }
         ],

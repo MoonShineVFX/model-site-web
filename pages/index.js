@@ -1,33 +1,20 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { styled } from '@mui/system';
+import { GlobalStyles } from '@mui/material';
 
-import util from '../src/utils/model';
 import { Links } from '../src/components/Links';
 import Slideshow from '../src/components/Slideshow';
+import ItemsWrap from '../src/components/ItemsWrap';
 
-export async function getStaticProps () {
+import { GlobalContext } from '../src/context/global.state';
+import util from '../src/utils/model';
 
-    // const res = await util.serviceServer('/json/home/home.json');
-    // const { data } = res;
+const { priceWithCommas } = util;
 
-    const res = await fetch('http://localhost:1006/json/home/home.json');
-    const data = await res.json();
-
-    if (!data.result) {
-
-        return {
-            redirect: {
-                destination: '/',
-                permanent: false,
-            },
-        };
-
-    }
-
-    return {
-        props: { pageData: data.data },
-    };
-
+const styles = {
+    section: {
+        marginBottom: '40px',
+    },
 };
 
 const SlideshowWrap = styled('div')(({ theme }) => ({
@@ -62,49 +49,61 @@ const SlideshowInfo = styled('div')(({ theme }) => ({
     },
 }));
 
+const ItemsBase = styled('div', {
+    name: 'items',
+})(({ theme }) => ({
+    '.itemWrap': {
+        width: 'calc(100% / 4 - 30px)',
+        height: '328px',
+        float: 'left',
+        borderRadius: '16px',
+        margin: '0 calc(30px * 4 / 3) 0 0',
+        position: 'relative',
+        overflow: 'hidden',
+        '&:nth-of-type(4n)': {
+            marginRight: 0,
+        },
+    },
+    '.item-thumb': {
+        height: '100%',
+        'img': {
+            margin: '0 auto',
+        },
+    },
+    '.item-content': {
+        width: '100%',
+        color: theme.palette.border.light,
+        backgroundColor: '#2F3137',
+        padding: '16px 24px',
+        position: 'absolute',
+        bottom: 0,
+        opacity: .8,
+        '*': {
+            fontSize: '1.2em',
+        },
+        'h4': {
+            margin: '0 0 4px',
+        },
+    },
+    '.price': {
+        fontWeight: 'bold',
+        color: theme.palette.primary.main,
+    },
+}));
+
 const Home = ({ pageData }) => {
 
     // console.log('pageData:', pageData);
 
     // Context
-    // const { globalDispatch } = useContext(GlobalContext);
-    // const { pathname } = useRouter();
-
-    // useEffect(() => {
-
-    //     globalDispatch({
-    //         type: 'PAGE',
-    //         payload: util.pathnameKey(pathname),
-    //     });
-
-    // }, [globalDispatch, pathname]);
-
-    // State
-    const [active, setActive] = useState(0);
-
-    // 左箭頭
-    const handleArrowLeft = () => {
-
-        setActive(active - 1 < 0 ? pageData.banner.length - 1 : active - 1);
-
-    };
-
-    // 右箭頭
-    const handleArrowRight = () => {
-
-        setActive(active + 1 >= pageData.banner.length ? 0 : active + 1);
-
-    };
+    const { slideshowActive } = useContext(GlobalContext);
 
     return (
 
         <Fragment>
-            <Slideshow
-                active={active}
-                data={pageData.banner}
-                handleArrowLeft={handleArrowLeft}
-                handleArrowRight={handleArrowRight}
-            >
+            <GlobalStyles styles={styles} />
+
+            <Slideshow data={pageData.banner}>
                 {
                     pageData.banner.map(({
                         id,
@@ -116,7 +115,7 @@ const Home = ({ pageData }) => {
 
                         <SlideshowWrap
                             key={id}
-                            className={(idx === active) ? 'active' : 'hide'}
+                            className={(idx === slideshowActive) ? 'active' : 'hide'}
                         >
                             <div className="inner">
                                 <Links
@@ -128,7 +127,7 @@ const Home = ({ pageData }) => {
 
                                 <SlideshowInfo>
                                     <h1>{title}</h1>
-                                    <div className="price">NT$ {price} 元</div>
+                                    <div className="price">{util.priceWithCommas(price)}</div>
                                     <span className="Model-x-align status">{status}</span>
                                 </SlideshowInfo>
                             </div>
@@ -137,9 +136,65 @@ const Home = ({ pageData }) => {
                     ))
                 }
             </Slideshow>
+
+            <ItemsWrap
+                title="新品"
+                url="login"
+            >
+                <ItemsBase className="Model-clear-box">
+                    {
+                        pageData.newArrival.map(({ id, title, price, imgUrl }) => (
+
+                            <Links
+                                key={id}
+                                url="login"
+                                target="_blank"
+                                className="itemWrap"
+                            >
+                                <div className="item-thumb">
+                                    <img
+                                        src={imgUrl}
+                                        alt={title}
+                                    />
+                                </div>
+                                <div className="item-content">
+                                    <h4>{title}</h4>
+                                    <span className="price">{priceWithCommas(price)}</span>
+                                </div>
+                            </Links>
+
+                        ))
+                    }
+                </ItemsBase>
+            </ItemsWrap>
         </Fragment>
 
     );
+
+};
+
+export async function getStaticProps () {
+
+    // const res = await util.serviceServer('/json/home/home.json');
+    // const { data } = res;
+
+    const res = await fetch('http://localhost:1006/json/home/home.json');
+    const data = await res.json();
+
+    if (!data.result) {
+
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+        };
+
+    }
+
+    return {
+        props: { pageData: data.data },
+    };
 
 };
 

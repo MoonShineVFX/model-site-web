@@ -9,15 +9,27 @@ const style = {
     },
 };
 
-const ButtonBase = styled(Button, {
-    name: 'btn-link-text',
-})(({ theme }) => ({
-    minHeight: '50px',
-    color: theme.palette.border.light,
-    backgroundColor: theme.palette.primary.dark,
-    padding: theme.spacing(0, 8),
-    '&:hover, &:focus': {
-        backgroundColor: theme.palette.primary.main,
+const ButtonBase = styled(Button)(({ theme }) => ({
+    minHeight: 'auto',
+    lineHeight: 1,
+    '&.default': {
+        color: theme.palette.border.light,
+        backgroundColor: theme.palette.primary.dark,
+        padding: theme.spacing(4, 9),
+        '&:hover, &:focus': {
+            backgroundColor: theme.palette.primary.main,
+        },
+    },
+    '&.third': {
+        fontSize: '1em',
+        color: theme.palette.border.dark,
+        border: `1px solid ${theme.palette.border.dark}`,
+        borderRadius: 0,
+        padding: theme.spacing(2, 4),
+        '&:hover, &:focus': {
+            color: theme.palette.border.main,
+            border: `1px solid ${theme.palette.border.main}`,
+        },
     },
 }));
 
@@ -31,13 +43,17 @@ const Links = ({ url, children, ...rest }) => (
 );
 
 //
-const ButtonLink = ({ url, text }) => (
+const ButtonLink = ({ url, text, type }) => (
 
     <Links
         url={url}
         style={style.alink}
     >
-        <ButtonBase>{text}</ButtonBase>
+        <ButtonBase
+            className={(type === 'third') ? 'third' : 'default'}
+        >
+            {text}
+        </ButtonBase>
     </Links>
 
 );
@@ -53,11 +69,13 @@ Links.propTypes = {
 
 ButtonLink.defaultProps = {
     text: '回首頁',
+    type: 'default',
 };
 
 ButtonLink.propTypes = {
     url: PropTypes.string,
     text: PropTypes.string,
+    type: PropTypes.string,
 };
 
 export {

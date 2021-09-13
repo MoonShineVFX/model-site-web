@@ -10,8 +10,7 @@ import {
 // Global
 const globalInitState = {
     page: '',
-
-    // 全域資料
+    slideshowActive: 0,
 };
 
 // Form values
@@ -36,8 +35,7 @@ const GlobalProvider = ({ children }) => {
     const [lightboxState, lightboxDispatch] = useReducer(lightboxReducer, lightboxInitState);
     const {
         page,
-
-        // 全域資料
+        slideshowActive,
     } = globalState;
 
     const { formStorageData } = formStorageState;
@@ -57,6 +55,7 @@ const GlobalProvider = ({ children }) => {
         <Provider value={{
             // 全域資料
             page,
+            slideshowActive,
 
             // Lightbox
             visible,

@@ -89,6 +89,28 @@ const util = {
 
     pathnameKey: (path) => path.split('/')[1] || 'index',
 
+    /**
+     * @author Betty
+     * @param  {number} price - 金額
+     * @param  {number} fixed - 位數
+     * @returns {string}}
+     */
+    priceWithCommas: (price, fixed) => {
+
+        let priceFormat = '';
+
+        if (price == null) price = '';
+
+        if (fixed != null && !isNaN(parseFloat(price)))
+            price = parseFloat(price.toString().replace(/,/g, '')).toFixed(fixed);
+
+        // 千分位處理
+        priceFormat = Math.round(price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+        return (price < 0) ? `-$${priceFormat.replace(/-/g, '')}` : `NT$ ${priceFormat} 元`;
+
+    },
+
 };
 
 export default util;

@@ -1,9 +1,10 @@
-import { Fragment, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/system';
 import { Button } from '@mui/material';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import FontIcon from './FontIcon';
+import { GlobalContext } from '../context/global.state';
 
 const SlideshowBase = styled('section')(() => ({
     width: '100%',
@@ -13,7 +14,7 @@ const SlideshowBase = styled('section')(() => ({
 // 容器
 const SlideshowContainer = styled('div', {
     name: 'slideshow-container',
-})(({ theme }) => ({
+})(() => ({
     '.hide': {
         display: 'none',
     },
@@ -70,48 +71,69 @@ const Arrows = styled('span', {
     },
 }));
 
-const Slideshow = ({
-    active,
-    data,
-    showDot,
-    handleArrowLeft,
-    handleArrowRight,
-    children,
-}) => (
+const Slideshow = ({ data, showDot, children }) => {
 
-    <SlideshowBase>
-        <SlideshowContainer>{children}</SlideshowContainer>
+    // Context
+    const {
+        slideshowActive,
+        globalDispatch,
+    } = useContext(GlobalContext);
 
-        {
-            showDot &&
-                <Dots className="Model-x-align">
-                    {
-                        data.map((obj, idx) => (
-                            <span key={idx} className={(idx === active) ? 'active' : 'hide'}></span>
-                        ))
-                    }
-                </Dots>
-        }
+    // 左箭頭
+    const handleArrowLeft = () => {
 
-        <Arrows>
-            <Button
-                active={active}
-                className="Model-y-align"
-                onClick={handleArrowLeft}
-            >
-                <FontIcon icon={faChevronLeft} />
-            </Button>
-            <Button
-                active={active}
-                className="Model-y-align"
-                onClick={handleArrowRight}
-            >
-                <FontIcon icon={faChevronRight} />
-            </Button>
-        </Arrows>
-    </SlideshowBase>
+        globalDispatch({
+            type: 'slideshow',
+            payload: slideshowActive - 1 < 0 ? data.length - 1 : slideshowActive - 1,
+        });
 
-);
+    };
+
+    // 右箭頭
+    const handleArrowRight = () => {
+
+        globalDispatch({
+            type: 'slideshow',
+            payload: slideshowActive + 1 >= data.length ? 0 : slideshowActive + 1,
+        });
+
+    };
+
+    return (
+
+        <SlideshowBase>
+            <SlideshowContainer>{children}</SlideshowContainer>
+
+            {
+                showDot &&
+                    <Dots className="Model-x-align">
+                        {
+                            data.map((obj, idx) => (
+                                <span key={idx} className={(idx === slideshowActive) ? 'active' : 'hide'}></span>
+                            ))
+                        }
+                    </Dots>
+            }
+
+            <Arrows>
+                <Button
+                    className="Model-y-align"
+                    onClick={handleArrowLeft}
+                >
+                    <FontIcon icon={faChevronLeft} />
+                </Button>
+                <Button
+                    className="Model-y-align"
+                    onClick={handleArrowRight}
+                >
+                    <FontIcon icon={faChevronRight} />
+                </Button>
+            </Arrows>
+        </SlideshowBase>
+
+    );
+
+};
 
 Slideshow.defaultProps = {
     data: [],
@@ -119,11 +141,8 @@ Slideshow.defaultProps = {
 };
 
 Slideshow.propTypes = {
-    active: PropTypes.number.isRequired,
     data: PropTypes.array,
     showDot: PropTypes.bool,
-    handleArrowLeft: PropTypes.func.isRequired,
-    handleArrowRight: PropTypes.func.isRequired,
 };
 
 export default Slideshow;

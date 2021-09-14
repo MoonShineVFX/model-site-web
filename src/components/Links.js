@@ -13,11 +13,11 @@ const ButtonBase = styled(Button)(({ theme }) => ({
     minHeight: 'auto',
     lineHeight: 1,
     '&.default': {
-        color: theme.palette.border.light,
-        backgroundColor: theme.palette.primary.dark,
+        color: theme.palette.textColor,
+        backgroundColor: theme.palette.primary.main,
         padding: theme.spacing(4, 9),
         '&:hover, &:focus': {
-            backgroundColor: theme.palette.primary.main,
+            backgroundColor: theme.palette.primary.light,
         },
     },
     '&.third': {

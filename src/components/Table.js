@@ -18,7 +18,7 @@ const TableDataGrid = styled(DataGrid)(({ theme }) => ({
     },
     '.MuiDataGrid-columnsContainer': {
         '.MuiDataGrid-columnHeaderTitle': {
-            fontSize: '16px',
+            fontSize: '1em',
         },
     },
     '.MuiDataGrid-dataContainer': {

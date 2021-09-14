@@ -17,16 +17,17 @@ const socialMedia = [
 
 const FooterBase = styled('footer')(({ theme }) => ({
     textAlign: 'center',
+    marginTop: '100px',
     '*': {
-        color: theme.palette.border.light,
+        color: theme.palette.textColor,
     },
     'a': {
-        fontSize: '28px',
+        fontSize: '1.8em',
         margin: theme.spacing(0, 3),
         padding: theme.spacing(1),
     },
     'p': {
-        fontSize: '14px',
+        fontSize: '0.9em',
         marginTop: theme.spacing(5),
     },
 }));

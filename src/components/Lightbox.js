@@ -21,7 +21,7 @@ const DialogBase = styled(Dialog)(({ theme }) => ({
     },
     '.MuiDialogContent-root': {
         minHeight: '50px',
-        fontSize: '16px',
+        fontSize: '1em',
     },
     '.MuiButton-text': {
         fontSize: '15px',

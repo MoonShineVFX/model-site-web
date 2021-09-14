@@ -13,14 +13,16 @@ const { priceWithCommas } = util;
 
 const styles = {
     section: {
-        marginBottom: '40px',
+        marginBottom: '80px',
     },
 };
 
 const SlideshowWrap = styled('div')(({ theme }) => ({
     '.inner': {
         maxHeight: '420px',
+        borderRadius: theme.borderRadius,
         display: 'flex',
+        overflow: 'hidden',
         '> *': {
             flex: 1,
         },
@@ -37,7 +39,7 @@ const SlideshowInfo = styled('div')(({ theme }) => ({
     },
     '.price': {
         fontSize: '1.4em',
-        color: theme.palette.primary.main,
+        color: theme.palette.priceColor,
     },
     '.status': {
         fontSize: '1.4em',
@@ -49,15 +51,15 @@ const SlideshowInfo = styled('div')(({ theme }) => ({
     },
 }));
 
-const ItemsBase = styled('div', {
+const ItemNewArrival = styled('div', {
     name: 'items',
 })(({ theme }) => ({
     '.itemWrap': {
-        width: 'calc(100% / 4 - 30px)',
+        width: 'calc((100% - (30px * 3)) / 4)',
         height: '328px',
         float: 'left',
         borderRadius: '16px',
-        margin: '0 calc(30px * 4 / 3) 0 0',
+        marginRight: '30px',
         position: 'relative',
         overflow: 'hidden',
         '&:nth-of-type(4n)': {
@@ -72,7 +74,7 @@ const ItemsBase = styled('div', {
     },
     '.item-content': {
         width: '100%',
-        color: theme.palette.border.light,
+        color: theme.palette.textColor,
         backgroundColor: '#2F3137',
         padding: '16px 24px',
         position: 'absolute',
@@ -87,7 +89,34 @@ const ItemsBase = styled('div', {
     },
     '.price': {
         fontWeight: 'bold',
-        color: theme.palette.primary.main,
+        color: theme.palette.priceColor,
+    },
+}));
+
+const ItemDocument = styled('div')(({ theme }) => ({
+    '.itemWrap': {
+        maxHeight: '238px',
+        color: theme.palette.textColor,
+        backgroundColor: theme.palette.card.main,
+        textDecoration: 'none',
+        borderRadius: '16px',
+        display: 'flex',
+        marginBottom: '30px',
+        overflow: 'hidden',
+        '&:hover': {
+            backgroundColor: theme.palette.card.light,
+        },
+    },
+    '.item-content': {
+        lineHeight: '1.8',
+        padding: '20px 40px',
+        flex: 1,
+    },
+    'h2': {
+        marginTop: 0,
+    },
+    'p': {
+        fontSize: '1.3em',
     },
 }));
 
@@ -137,11 +166,8 @@ const Home = ({ pageData }) => {
                 }
             </Slideshow>
 
-            <ItemsWrap
-                title="新品"
-                url="login"
-            >
-                <ItemsBase className="Model-clear-box">
+            <ItemsWrap title="新品" url="login">
+                <ItemNewArrival className="Model-clear-box">
                     {
                         pageData.newArrival.map(({ id, title, price, imgUrl }) => (
 
@@ -165,7 +191,35 @@ const Home = ({ pageData }) => {
 
                         ))
                     }
-                </ItemsBase>
+                </ItemNewArrival>
+            </ItemsWrap>
+
+            <ItemsWrap title="教學文件" url="login">
+                <ItemDocument>
+                    {
+                        pageData.document.map(({ id, title, description, imgUrl }) => (
+
+                            <Links
+                                key={id}
+                                url="login"
+                                target="_blank"
+                                className="itemWrap"
+                            >
+                                <div className="item-thumb">
+                                    <img
+                                        src={imgUrl}
+                                        alt={title}
+                                    />
+                                </div>
+                                <div className="item-content">
+                                    <h2>{title}</h2>
+                                    <p>{description}</p>
+                                </div>
+                            </Links>
+
+                        ))
+                    }
+                </ItemDocument>
             </ItemsWrap>
         </Fragment>
 

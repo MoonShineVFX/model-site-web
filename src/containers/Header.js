@@ -5,13 +5,16 @@ import Navbar from './Navbar';
 
 const AppBarBase = styled('header')(({ theme }) => ({
     maxHeight: '90px',
-    borderBottom: `1px solid ${theme.palette.border.main}`, // debug
     backgroundColor: theme.palette.bgColor,
     boxShadow: 'none',
 }));
 
 const HeaderBase = styled(Toolbar)(({ theme }) => ({
     padding: `${theme.spacing(3)} 0`,
+    [theme.breakpoints.up('sm')]: {
+        paddingLeft: 0,
+        paddingRight: 0,
+    },
 }));
 
 //

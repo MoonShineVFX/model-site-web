@@ -21,9 +21,9 @@ const NavMenuBase = styled('nav', {
 })(({ theme }) => ({
     marginLeft: '40px',
     'a': {
-        fontSize: '1em',
+        fontSize: '0.9em',
         textDecoration: 'none',
-        color: theme.palette.border.light,
+        color: theme.palette.textColor,
         margin: '20px',
         padding: theme.spacing(2),
         opacity: 1,

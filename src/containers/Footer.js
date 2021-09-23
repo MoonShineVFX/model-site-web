@@ -18,6 +18,7 @@ const socialMedia = [
 const FooterBase = styled('footer')(({ theme }) => ({
     textAlign: 'center',
     marginTop: '100px',
+    marginBottom: '40px',
     '*': {
         color: theme.palette.textColor,
     },

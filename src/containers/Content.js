@@ -1,27 +1,14 @@
 import { useContext } from 'react';
+import { GlobalContext } from '../context/global.state';;
 
-// Reducer
-import { GlobalContext } from '../context/global.state';
-// import { UserProvider } from '../context/users/users.state';
-
-const Content = ({ Component, pageProps }) => {
+const Content = ({ children }) => {
 
     // Context
     const {
         page,
     } = useContext(GlobalContext);
 
-    switch (page) {
-        case 'users':
-            return (
-                // <UserProvider>
-                    <Component {...pageProps} />
-                // </UserProvider>
-            );
-
-        default:
-            return <Component {...pageProps} />;
-    }
+    return children;
 
 };
 

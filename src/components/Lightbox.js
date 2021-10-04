@@ -12,7 +12,7 @@ import {
 import { Close as CloseIcon } from '@mui/icons-material';
 import { GlobalContext } from '../context/global.state';
 
-const DialogBase = styled(Dialog)(({ theme }) => ({
+const DialogLayout = styled(Dialog)(({ theme }) => ({
     '.MuiTypography-root': {
         fontWeight: 'bold',
     },
@@ -74,7 +74,7 @@ const Lightbox = (props) => {
 
         // type === 'confirm' ? ()
 
-        <DialogBase
+        <DialogLayout
             maxWidth="xs"
             open={visible}
             {
@@ -107,7 +107,7 @@ const Lightbox = (props) => {
                     {btnTextSubmit}
                 </Button>
             </DialogActions>
-        </DialogBase>
+        </DialogLayout>
 
     );
 

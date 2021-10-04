@@ -9,6 +9,7 @@ const ItemsTitle = styled('div')(() => ({
         flex: 1,
     },
     'h2': {
+        fontSize: '1.4em',
         fontWeight: 'normal',
         '& + div': {
             textAlign: 'right',

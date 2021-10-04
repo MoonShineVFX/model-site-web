@@ -16,7 +16,7 @@ const navMenus = [
     },
 ];
 
-const NavMenuBase = styled('nav', {
+const NavMenuLayout = styled('nav', {
     name: 'nav-menu-wrap',
 })(({ theme }) => ({
     marginLeft: '40px',
@@ -26,10 +26,10 @@ const NavMenuBase = styled('nav', {
         color: theme.palette.textColor,
         margin: '20px',
         padding: theme.spacing(2),
-        opacity: 1,
+        opacity: .8,
         transition: 'all .5s ease',
         '&:hover': {
-            opacity: .8,
+            opacity: 1,
         },
     },
 }));
@@ -37,7 +37,7 @@ const NavMenuBase = styled('nav', {
 //
 const Navbar = () => (
 
-    <NavMenuBase>
+    <NavMenuLayout>
         {
             navMenus.map(({ key, text }) => (
 
@@ -50,7 +50,7 @@ const Navbar = () => (
 
             ))
         }
-    </NavMenuBase>
+    </NavMenuLayout>
 
 );
 

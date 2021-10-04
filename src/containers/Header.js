@@ -3,13 +3,13 @@ import { Toolbar, Box } from '@mui/material';
 import { Links, ButtonLink } from '../components/Links';
 import Navbar from './Navbar';
 
-const AppBarBase = styled('header')(({ theme }) => ({
+const AppBarLayout = styled('header')(({ theme }) => ({
     maxHeight: '90px',
     backgroundColor: theme.palette.bgColor,
     boxShadow: 'none',
 }));
 
-const HeaderBase = styled(Toolbar)(({ theme }) => ({
+const HeaderLayout = styled(Toolbar)(({ theme }) => ({
     padding: `${theme.spacing(3)} 0`,
     [theme.breakpoints.up('sm')]: {
         paddingLeft: 0,
@@ -17,17 +17,24 @@ const HeaderBase = styled(Toolbar)(({ theme }) => ({
     },
 }));
 
+const LogoLayout = styled('div')(({ theme }) => ({
+    fontSize: '1.9em',
+    fontfamily : 'Roboto bold',
+    fontWeight: 'bold',
+    'a': {
+        color: theme.palette.priceColor, // 未來會是真的 logo
+        textDecoration: 'none',
+    },
+}));
+
 //
 const Header = () => (
 
-    <AppBarBase>
-        <HeaderBase className="Model-container">
-            <Links>
-                <img
-                    src="//fakeimg.pl/200x60/?text=MoonSin Market"
-                    alt="夢想模型"
-                />
-            </Links>
+    <AppBarLayout>
+        <HeaderLayout className="Model-container">
+            <LogoLayout>
+                <Links>Moonshine Market</Links>
+            </LogoLayout>
 
             <Box sx={{ flexGrow: 1 }}>
                 <Navbar />
@@ -39,8 +46,8 @@ const Header = () => (
                     text="登入"
                 />
             </Box>
-        </HeaderBase>
-    </AppBarBase>
+        </HeaderLayout>
+    </AppBarLayout>
 
 );
 

@@ -15,7 +15,7 @@ const socialMedia = [
     },
 ];
 
-const FooterBase = styled('footer')(({ theme }) => ({
+const FooterLayout = styled('footer')(({ theme }) => ({
     textAlign: 'center',
     marginTop: '100px',
     marginBottom: '40px',
@@ -36,7 +36,7 @@ const FooterBase = styled('footer')(({ theme }) => ({
 //
 const Footer = () => (
 
-    <FooterBase>
+    <FooterLayout>
         <section className="Model-container">
             <div>
                 {
@@ -61,7 +61,7 @@ const Footer = () => (
 
             <p>© 2021 All rights reserved. Moonshine</p>
         </section>
-    </FooterBase>
+    </FooterLayout>
 
 );
 

@@ -13,7 +13,8 @@ import Footer from '../src/containers/Footer';
 
 const styles = {
     body: {
-        fontFamily: '微軟正黑體, regular',
+        lineHeight: '1.6',
+        fontFamily: 'Arial, 文泉驛正黑, WenQuanYi Zen Hei, 儷黑 Pro, LiHei Pro, 微軟正黑體, Microsoft JhengHei',
         color: '#fff',
         backgroundColor: '#1F2023',
         margin: 0,
@@ -49,6 +50,10 @@ const styles = {
             clear: 'both',
         },
     },
+    '.price': {
+        fontWeight: 'bold',
+        fontFamily: 'Roboto',
+    },
 };
 
 //
@@ -59,7 +64,7 @@ const WebSite = ({ Component, pageProps }) => {
         <Fragment>
             <Head>
                 <title>模型平台</title>
-                <meta name="viewport" content="initial-scale=1, width=device-width" />
+                <meta name='viewport' content='initial-scale=1, width=device-width' />
             </Head>
 
             <ThemeProvider theme={theme}>
@@ -68,21 +73,20 @@ const WebSite = ({ Component, pageProps }) => {
                 <GlobalProvider>
                     <Header />
                     <Box
-                        component="main"
+                        component='main'
                         sx={{ display: 'flex' }}
                     >
                         <Box
-                            component="div"
-                            className="Model-container"
+                            component='div'
+                            className='Model-container'
                             sx={{
                                 paddingTop: '20px',
                                 paddingBottom: '20px',
                             }}
                         >
-                            <Content
-                                Component={Component}
-                                pageProps={pageProps}
-                            />
+                            <Content>
+                                <Component {...pageProps} />
+                            </Content>
                         </Box>
                     </Box>
                     <Footer />

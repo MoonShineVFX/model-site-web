@@ -3,7 +3,7 @@ import { styled } from '@mui/system';
 import { GlobalStyles } from '@mui/material';
 
 import { Links } from '../src/components/Links';
-import Slideshow from '../src/components/Slideshow';
+import SlideShow from '../src/components/SlideShow';
 import ItemsWrap from '../src/components/ItemsWrap';
 
 import { GlobalContext } from '../src/context/global.state';
@@ -12,12 +12,30 @@ import util from '../src/utils/model';
 const { priceWithCommas } = util;
 
 const styles = {
-    section: {
+    'main > div > *': {
         marginBottom: '80px',
+    },
+    'span.slideshow-control-arrows': {
+        position: 'absolute',
+        bottom: '24px',
+        right: '24px',
+        '.MuiButton-root': {
+            width: '34px',
+            height: '34px',
+            minHeight: 'initial',
+            position: 'initial',
+            transform: 'initial',
+            '&:first-of-type': {
+                marginRight: '16px',
+            },
+        },
+        'svg': {
+            fontSize: '1em',
+        },
     },
 };
 
-const SlideshowWrap = styled('div')(({ theme }) => ({
+const SlideShowItemLayout = styled('div')(({ theme }) => ({
     '.inner': {
         maxHeight: '420px',
         borderRadius: theme.borderRadius,
@@ -27,31 +45,33 @@ const SlideshowWrap = styled('div')(({ theme }) => ({
             flex: 1,
         },
     },
-}));
-
-const SlideshowInfo = styled('div')(({ theme }) => ({
-    backgroundColor: '#2F3137',
-    padding: '40px',
-    position: 'relative',
-    'h1': {
-        fontSize: '2.1em',
-        margin: '0 0 8px',
-    },
     '.price': {
-        fontSize: '1.4em',
         color: theme.palette.priceColor,
     },
+}));
+
+const SlideshowInfoLayout = styled('div')(({ theme }) => ({
+    backgroundColor: theme.palette.card.main,
+    padding: '40px',
+    position: 'relative',
     '.status': {
-        fontSize: '1.4em',
-        border: `1px solid ${theme.palette.border.light}`,
-        borderRadius: theme.borderRadius,
-        padding: '12px 80px',
-        position: 'absolute',
-        bottom: '60px',
+        fontSize: '0.9em',
+        fontWeight: 'bold',
+        color: theme.palette.textColor,
+    },
+    '.title': {
+        margin: '16px 0 20px',
+    },
+    '.description': {
+        marginBottom: '30px',
+        display: '-webkit-box',
+        WebkitLineClamp: 5,
+        WebkitBoxOrient: 'vertical',
+        overflow: 'hidden',
     },
 }));
 
-const ItemNewArrival = styled('div', {
+const ItemNewArrivalLayout = styled('div', {
     name: 'items',
 })(({ theme }) => ({
     '.itemWrap': {
@@ -75,11 +95,11 @@ const ItemNewArrival = styled('div', {
     '.item-content': {
         width: '100%',
         color: theme.palette.textColor,
-        backgroundColor: '#2F3137',
+        backgroundColor: '#000',
         padding: '16px 24px',
         position: 'absolute',
         bottom: 0,
-        opacity: .8,
+        opacity: .85,
         '*': {
             fontSize: '1.2em',
         },
@@ -93,7 +113,7 @@ const ItemNewArrival = styled('div', {
     },
 }));
 
-const ItemDocument = styled('div')(({ theme }) => ({
+const ItemDocumentLayout = styled('div')(({ theme }) => ({
     '.itemWrap': {
         maxHeight: '238px',
         color: theme.palette.textColor,
@@ -132,42 +152,41 @@ const Home = ({ pageData }) => {
         <Fragment>
             <GlobalStyles styles={styles} />
 
-            <Slideshow data={pageData.banner}>
+            <SlideShow data={pageData.banner}>
                 {
                     pageData.banner.map(({
                         id,
                         title,
+                        description,
                         price,
                         imgUrl,
                         status,
                     }, idx) => (
 
-                        <SlideshowWrap
+                        <SlideShowItemLayout
                             key={id}
                             className={(idx === slideshowActive) ? 'active' : 'hide'}
                         >
                             <div className="inner">
-                                <Links
-                                    url="login"
-                                    target="_blank"
-                                >
+                                <Links url="login" target="_blank">
                                     <img src={imgUrl} alt={title} />
                                 </Links>
 
-                                <SlideshowInfo>
-                                    <h1>{title}</h1>
+                                <SlideshowInfoLayout>
+                                    <span className="status">{status}</span>
+                                    <h2 className="title">{title}</h2>
+                                    <p className="description" title={description}>{description}</p>
                                     <div className="price">{util.priceWithCommas(price)}</div>
-                                    <span className="Model-x-align status">{status}</span>
-                                </SlideshowInfo>
+                                </SlideshowInfoLayout>
                             </div>
-                        </SlideshowWrap>
+                        </SlideShowItemLayout>
 
                     ))
                 }
-            </Slideshow>
+            </SlideShow>
 
             <ItemsWrap title="新品" url="login">
-                <ItemNewArrival className="Model-clear-box">
+                <ItemNewArrivalLayout className="Model-clear-box">
                     {
                         pageData.newArrival.map(({ id, title, price, imgUrl }) => (
 
@@ -191,11 +210,11 @@ const Home = ({ pageData }) => {
 
                         ))
                     }
-                </ItemNewArrival>
+                </ItemNewArrivalLayout>
             </ItemsWrap>
 
             <ItemsWrap title="教學文件" url="login">
-                <ItemDocument>
+                <ItemDocumentLayout>
                     {
                         pageData.document.map(({ id, title, description, imgUrl }) => (
 
@@ -219,7 +238,7 @@ const Home = ({ pageData }) => {
 
                         ))
                     }
-                </ItemDocument>
+                </ItemDocumentLayout>
             </ItemsWrap>
         </Fragment>
 

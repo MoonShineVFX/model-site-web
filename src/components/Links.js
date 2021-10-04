@@ -9,10 +9,11 @@ const style = {
     },
 };
 
-const ButtonBase = styled(Button)(({ theme }) => ({
+const ButtonLayout = styled(Button)(({ theme }) => ({
     minHeight: 'auto',
     lineHeight: 1,
     '&.default': {
+        fontSize: '0.9em',
         color: theme.palette.textColor,
         backgroundColor: theme.palette.primary.main,
         padding: theme.spacing(4, 9),
@@ -49,11 +50,11 @@ const ButtonLink = ({ url, text, type }) => (
         url={url}
         style={style.alink}
     >
-        <ButtonBase
+        <ButtonLayout
             className={(type === 'third') ? 'third' : 'default'}
         >
             {text}
-        </ButtonBase>
+        </ButtonLayout>
     </Links>
 
 );

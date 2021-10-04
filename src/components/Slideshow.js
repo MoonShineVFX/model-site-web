@@ -6,7 +6,7 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
 import FontIcon from './FontIcon';
 import { GlobalContext } from '../context/global.state';
 
-const SlideshowBase = styled('section')(() => ({
+const SlideshowLayout = styled('section')(() => ({
     width: '100%',
     position: 'relative',
 }));
@@ -44,9 +44,7 @@ const Dots = styled('span', {
 }));
 
 // 箭頭
-const Arrows = styled('span', {
-    name: 'slideshow-control-arrows',
-})(({ theme }) => ({
+const Arrows = styled('span')(({ theme }) => ({
     '.MuiButton-root': {
         minWidth: 'auto',
         width: '60px',
@@ -59,7 +57,7 @@ const Arrows = styled('span', {
         '&:hover': {
             backgroundColor: theme.palette.secondary.main,
         },
-        '&:first-child': {
+        '&:first-of-type': {
             left: '20px',
         },
         '& + .MuiButton-root': {
@@ -101,7 +99,7 @@ const Slideshow = ({ data, showDot, children }) => {
 
     return (
 
-        <SlideshowBase>
+        <SlideshowLayout>
             <SlideshowContainer>{children}</SlideshowContainer>
 
             {
@@ -115,7 +113,7 @@ const Slideshow = ({ data, showDot, children }) => {
                     </Dots>
             }
 
-            <Arrows>
+            <Arrows className="slideshow-control-arrows">
                 <Button
                     className="Model-y-align"
                     onClick={handleArrowLeft}
@@ -129,7 +127,7 @@ const Slideshow = ({ data, showDot, children }) => {
                     <FontIcon icon={faChevronRight} />
                 </Button>
             </Arrows>
-        </SlideshowBase>
+        </SlideshowLayout>
 
     );
 

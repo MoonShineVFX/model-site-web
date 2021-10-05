@@ -28,8 +28,8 @@ const util = {
                 }
 
                 return {
-                    url: `/api${url}`,
-                    // url: `${url}`,
+                    // url: `/api${url}`,
+                    url: `/json/${url}`,
                     method,
                 };
 
@@ -110,6 +110,13 @@ const util = {
         return (price < 0) ? `-$${priceFormat.replace(/-/g, '')}` : `NT$ ${priceFormat} 元`;
 
     },
+
+    /**
+     * @author Betty
+     * @param {string} value - 字串或元件
+     * @return {string}
+     */
+    renderWithoutValue: (value) => value ? value : '--',
 
 };
 

@@ -1,5 +1,4 @@
-import { Fragment, useEffect } from 'react';
-import Head from 'next/head';
+import { Fragment } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { GlobalStyles, Box } from '@mui/material';
 
@@ -7,6 +6,7 @@ import { GlobalStyles, Box } from '@mui/material';
 import { GlobalProvider } from '../src/context/global.state';
 
 import theme from '../src/utils/theme';
+import HeadTag from '../src/containers/HeadTag';
 import Header from '../src/containers/Header';
 import Content from '../src/containers/Content';
 import Footer from '../src/containers/Footer';
@@ -62,10 +62,7 @@ const WebSite = ({ Component, pageProps }) => {
     return (
 
         <Fragment>
-            <Head>
-                <title>模型平台</title>
-                <meta name='viewport' content='initial-scale=1, width=device-width' />
-            </Head>
+            <HeadTag />
 
             <ThemeProvider theme={theme}>
                 <GlobalStyles styles={styles} />
@@ -73,12 +70,12 @@ const WebSite = ({ Component, pageProps }) => {
                 <GlobalProvider>
                     <Header />
                     <Box
-                        component='main'
+                        component="main"
                         sx={{ display: 'flex' }}
                     >
                         <Box
-                            component='div'
-                            className='Model-container'
+                            component="div"
+                            className="Model-container"
                             sx={{
                                 paddingTop: '20px',
                                 paddingBottom: '20px',

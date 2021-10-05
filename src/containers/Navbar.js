@@ -3,7 +3,7 @@ import { Links } from '../components/Links';
 
 const navMenus = [
     {
-        key: 'store',
+        key: 'product/list',
         text: '商店',
     },
     {

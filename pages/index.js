@@ -2,6 +2,7 @@ import React, { Fragment, useContext } from 'react';
 import { styled } from '@mui/system';
 import { GlobalStyles } from '@mui/material';
 
+import HeadTag from '../src/containers/HeadTag';
 import { Links } from '../src/components/Links';
 import SlideShow from '../src/components/SlideShow';
 import ItemsWrap from '../src/components/ItemsWrap';
@@ -148,17 +149,21 @@ const Home = ({ pageData }) => {
 
     // console.log('pageData:', pageData);
 
+    // Style
+    const homeStyles = <GlobalStyles styles={styles} />;
+
     // Context
     const { slideshowActive } = useContext(GlobalContext);
 
     return (
 
         <Fragment>
-            <GlobalStyles styles={styles} />
+            {homeStyles}
+            <HeadTag title={pageData.title} />
 
-            <SlideShow data={pageData.banner}>
+            <SlideShow data={pageData.data.banner}>
                 {
-                    pageData.banner.map(({
+                    pageData.data.banner.map(({
                         id,
                         title,
                         description,
@@ -192,7 +197,7 @@ const Home = ({ pageData }) => {
             <ItemsWrap title="新品" url="login">
                 <ItemNewArrivalLayout className="Model-clear-box">
                     {
-                        pageData.newArrival.map(({ id, title, price, imgUrl }) => (
+                        pageData.data.newArrival.map(({ id, title, price, imgUrl }) => (
 
                             <Links
                                 key={id}
@@ -220,7 +225,7 @@ const Home = ({ pageData }) => {
             <ItemsWrap title="教學文件" url="login">
                 <ItemDocumentLayout>
                     {
-                        pageData.document.map(({ id, title, description, imgUrl }) => (
+                        pageData.data.document.map(({ id, title, description, imgUrl }) => (
 
                             <Links
                                 key={id}
@@ -255,7 +260,7 @@ export async function getStaticProps () {
     // const res = await util.serviceServer('/json/home/home.json');
     // const { data } = res;
 
-    const res = await fetch('http://localhost:1006/json/home/home.json');
+    const res = await fetch('http://localhost:1006/json/home.json');
     const data = await res.json();
 
     if (!data.result) {
@@ -270,7 +275,12 @@ export async function getStaticProps () {
     }
 
     return {
-        props: { pageData: data.data },
+        props: {
+            pageData: {
+                title: '首頁',
+                data: data.data,
+            },
+        },
     };
 
 };

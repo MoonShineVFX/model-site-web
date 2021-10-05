@@ -1,0 +1,41 @@
+{
+    "result": 1,
+    "message": "",
+    "errors": [],
+    "data": {
+        "category": {
+            "all": "全部",
+            "new": "新品",
+            "sale": "特價",
+            "free": "免費"
+        },
+        "product": [
+            {
+                "id": "11111",
+                "title": "標題-1",
+                "price": 1000,
+                "imgUrl": "//fakeimg.pl/840x420",
+                "tag": []
+            },
+            {
+                "id": "22222",
+                "title": "標題-2",
+                "price": 1000,
+                "imgUrl": "//fakeimg.pl/840x420",
+                "tag": [
+                    "1546004",
+                    "1546008"
+                ]
+            },
+            {
+                "id": "33333",
+                "title": "標題-3",
+                "price": 1000,
+                "imgUrl": "//fakeimg.pl/840x420",
+                "tag": [
+                    "1546012"
+                ]
+            }
+        ]
+    }
+}

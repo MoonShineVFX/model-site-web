@@ -1,12 +1,16 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { GlobalContext } from '../context/global.state';;
 
 const Content = ({ children }) => {
 
     // Context
-    const {
-        page,
-    } = useContext(GlobalContext);
+    const { getGlobalData } = useContext(GlobalContext);
+
+    useEffect(() => {
+
+        getGlobalData();
+
+    }, []);
 
     return children;
 

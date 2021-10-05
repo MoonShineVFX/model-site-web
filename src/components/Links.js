@@ -13,7 +13,6 @@ const ButtonLayout = styled(Button)(({ theme }) => ({
     minHeight: 'auto',
     lineHeight: 1,
     '&.default': {
-        fontSize: '0.9em',
         color: theme.palette.textColor,
         backgroundColor: theme.palette.primary.main,
         padding: theme.spacing(4, 9),
@@ -22,7 +21,6 @@ const ButtonLayout = styled(Button)(({ theme }) => ({
         },
     },
     '&.third': {
-        fontSize: '1em',
         color: theme.palette.border.dark,
         border: `1px solid ${theme.palette.border.dark}`,
         borderRadius: 0,

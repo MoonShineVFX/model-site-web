@@ -94,20 +94,24 @@ const ItemNewArrivalLayout = styled('div', {
     },
     '.item-content': {
         width: '100%',
+        lineHeight: '1.3',
         color: theme.palette.textColor,
         backgroundColor: '#000',
-        padding: '16px 24px',
+        padding: '20px 24px',
         position: 'absolute',
         bottom: 0,
         opacity: .85,
         '*': {
             fontSize: '1.2em',
         },
-        'h4': {
+        '.title': {
+            fontSize: '1em',
+            fontWeight: 'normal',
             margin: '0 0 4px',
         },
     },
     '.price': {
+        fontSize: '0.9em',
         fontWeight: 'bold',
         color: theme.palette.priceColor,
     },
@@ -203,7 +207,7 @@ const Home = ({ pageData }) => {
                                     />
                                 </div>
                                 <div className="item-content">
-                                    <h4>{title}</h4>
+                                    <h5 className="title">{title}</h5>
                                     <span className="price">{priceWithCommas(price)}</span>
                                 </div>
                             </Links>

@@ -14,7 +14,7 @@ const button = {
         styleOverrides: {
             root: {
                 minHeight: '40px',
-                fontSize: '0.9em',
+                fontSize: '1em',
                 borderRadius: '30px',
             },
         },

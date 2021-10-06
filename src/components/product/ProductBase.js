@@ -1,101 +1,27 @@
 import React, { Fragment, useContext, useState } from 'react';
 import { useRouter } from 'next/router';
-import { styled } from '@mui/system';
 import {
-    GlobalStyles,
     Grid,
     List,
-    ListItemButton,
     ListItemText,
     ListItemIcon,
     Tabs,
     Tab,
 } from '@mui/material';
+
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import {
+    GridLayout,
+    ListTitleLayout,
+    ListItemLayout,
+    ItemWrapLayout,
+} from './productLayout';
 
 import HeadTag from '../../containers/HeadTag';
 import FontIcon from '../../components/FontIcon';
-
+import Item from '../../components/Item';
+import Paginations from '../../components/Paginations';
 import { GlobalContext } from '../../context/global.state';
-import util from '../../utils/model';
-
-const { priceWithCommas } = util;
-
-const styles = {};
-
-const GridLayout = styled(Grid)(({ theme }) => ({
-    paddingTop: '60px',
-    '.MuiGrid-root': {
-        '&.productList': {
-            paddingTop: 0,
-        },
-        '&.tagsList': {
-            paddingTop: '118px',
-        },
-    },
-    '.productList': {
-        '.MuiButtonBase-root': {
-            fontSize: '1em',
-            color: theme.palette.textColor,
-            opacity: 0.6,
-            '&:hover': {
-                opacity: 1,
-            },
-        },
-        '.Mui-selected': {
-            opacity: 1,
-        },
-        '.MuiTabs-indicator': {
-            backgroundColor: 'transparent',
-        },
-    },
-    '.tab-menu': {
-        marginBottom: '70px',
-        '.MuiTabs-flexContainer': {
-            justifyContent: 'center',
-        },
-    },
-    '.tab-panel': {
-        // border: '1px solid'
-    },
-}))
-
-const ListTitleLayout = styled('h5')(({ theme }) => ({
-    fontSize: '0.9em',
-    margin: 0,
-    '&:after': {
-        content: '""',
-        display: 'block',
-        width: '100%',
-        height: '1px',
-        backgroundColor: theme.palette.textColor,
-        marginTop: '12px',
-        marginBottom: '12px',
-        opacity: 0.16,
-    },
-}));
-
-const ListItemLayout = styled(ListItemButton)(({ theme }) => ({
-    marginBottom: '10px',
-    '&.Mui-selected': {
-        backgroundColor: theme.palette.primary.main,
-        borderRadius: '3px',
-    },
-    '&:hover&.Mui-selected': {
-        backgroundColor: theme.palette.primary.main,
-        opacity: 0.8,
-    },
-    '.MuiListItemText-root': {
-        margin: 0,
-    },
-    'span': {
-        fontSize: '0.9em',
-    },
-    '.checked': {
-        minWidth: 'auto',
-        color: theme.palette.textColor,
-    },
-}));
 
 //
 const TabPanel = ({ value, index, children, ...other }) => (
@@ -114,12 +40,9 @@ const ProductBase = ({ pageData }) => {
 
     // console.log('pageData:', pageData);
 
-    // Style
-    const productStyle = <GlobalStyles styles={styles} />;
-
     // Router
     const router = useRouter();
-    console.log('query:', router.query)
+    // console.log('query:', router.query)
 
     // Context
     const { tag } = useContext(GlobalContext);
@@ -140,7 +63,7 @@ const ProductBase = ({ pageData }) => {
     // Click TabMenu
     const handleClickTabMenu = (key) => {
 
-        console.log('key:', key);
+        // console.log('key:', key);
         router.push({
             pathname: '/product/list',
             query: {
@@ -154,7 +77,6 @@ const ProductBase = ({ pageData }) => {
     return (
 
         <Fragment>
-            {/* {productStyle} */}
             <HeadTag title={pageData.title} />
 
             <GridLayout
@@ -227,12 +149,36 @@ const ProductBase = ({ pageData }) => {
                                     value={value}
                                     index={idx}
                                 >
-                                    product-{key}
+                                    <ItemWrapLayout>
+                                        {
+                                            pageData.data.product.map(({
+                                                id,
+                                                title,
+                                                price,
+                                                imgUrl,
+                                            }) => (
+
+                                                <Item
+                                                    key={id}
+                                                    title={title}
+                                                    price={price}
+                                                    imgUrl={imgUrl}
+                                                    url={`product/${id}`}
+                                                    target="_blank"
+                                                />
+
+                                            ))
+                                        }
+                                    </ItemWrapLayout>
                                 </TabPanel>
 
                             ))
                         }
                     </div>
+
+                    <Paginations
+                        length={pageData.data.product.length}
+                    />
                 </Grid>
             </GridLayout>
         </Fragment>

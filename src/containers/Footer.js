@@ -28,7 +28,6 @@ const FooterLayout = styled('footer')(({ theme }) => ({
         padding: theme.spacing(1),
     },
     'p': {
-        fontSize: '0.9em',
         marginTop: theme.spacing(5),
     },
 }));

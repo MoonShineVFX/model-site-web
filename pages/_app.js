@@ -14,6 +14,7 @@ import Footer from '../src/containers/Footer';
 const styles = {
     body: {
         lineHeight: '1.6',
+        fontSize: '1em',
         fontFamily: 'Arial, 文泉驛正黑, WenQuanYi Zen Hei, 儷黑 Pro, LiHei Pro, 微軟正黑體, Microsoft JhengHei',
         color: '#fff',
         backgroundColor: '#1F2023',

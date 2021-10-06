@@ -6,13 +6,13 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
 import FontIcon from './FontIcon';
 import { GlobalContext } from '../context/global.state';
 
-const SlideshowLayout = styled('section')(() => ({
+const SlideShowLayout = styled('section')(() => ({
     width: '100%',
     position: 'relative',
 }));
 
 // 容器
-const SlideshowContainer = styled('div', {
+const SlideShowContainer = styled('div', {
     name: 'slideshow-container',
 })(() => ({
     '.hide': {
@@ -69,7 +69,7 @@ const Arrows = styled('span')(({ theme }) => ({
     },
 }));
 
-const Slideshow = ({ data, showDot, children }) => {
+const SlideShow = ({ data, showDot, children, ...rest }) => {
 
     // Context
     const {
@@ -99,8 +99,8 @@ const Slideshow = ({ data, showDot, children }) => {
 
     return (
 
-        <SlideshowLayout>
-            <SlideshowContainer>{children}</SlideshowContainer>
+        <SlideShowLayout {...rest}>
+            <SlideShowContainer>{children}</SlideShowContainer>
 
             {
                 showDot &&
@@ -127,20 +127,20 @@ const Slideshow = ({ data, showDot, children }) => {
                     <FontIcon icon={faChevronRight} />
                 </Button>
             </Arrows>
-        </SlideshowLayout>
+        </SlideShowLayout>
 
     );
 
 };
 
-Slideshow.defaultProps = {
+SlideShow.defaultProps = {
     data: [],
     showDot: false,
 };
 
-Slideshow.propTypes = {
+SlideShow.propTypes = {
     data: PropTypes.array,
     showDot: PropTypes.bool,
 };
 
-export default Slideshow;
+export default SlideShow;

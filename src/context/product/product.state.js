@@ -31,6 +31,18 @@ const ProductProvider = ({ children }) => {
 
     const { Provider } = ProductContext;
 
+    // 列表
+    const productList = (reqData) => {
+
+        Service.productList(reqData)
+            .then((resData) => {
+
+                productDispatch({ type: 'product_list', payload: { resData, action: true } });
+
+            });
+
+    };
+
     // 新增
     const productCreate = (reqData) => {
 
@@ -75,6 +87,7 @@ const ProductProvider = ({ children }) => {
             action,
             lists,
 
+            productList,
             productCreate,
 
             // Dispatch

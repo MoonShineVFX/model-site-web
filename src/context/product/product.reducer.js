@@ -1,9 +1,10 @@
-const newsReducer = (state, { type, payload }) => {
+const productReducer = (state, { type, payload }) => {
 
     switch (type) {
-        case 'news_list':
+        case 'product_list':
             return {
                 ...state,
+                action: payload.action,
                 lists: payload.lists,
             };
 
@@ -31,4 +32,4 @@ const newsReducer = (state, { type, payload }) => {
 
 };
 
-export { newsReducer };
+export { productReducer };

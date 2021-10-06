@@ -1,15 +1,20 @@
-import util from './model';
+import model from './model';
 
 const Service = {
     // common
-    common: (reqData) => util.serviceProxy({
+    common: (reqData) => model.serviceProxy({
         url: '/common.json',
         method: 'get',
     }, reqData),
 
-    storeList: (reqData) => util.serviceProxy('/store/storeList', reqData),
-    userList: (reqData) => util.serviceProxy('/user/userList', reqData),
-    updateAuthority: (reqData) => util.serviceProxy('/user/updateAuthority', reqData),
+    // 商品
+    productList: ({ page, type, tag }) => model.serviceProxy({
+        method: 'get',
+        url: `/product/list.json?page=${page}&type=${type}${tag ? `&tag=${tag}` : ''}`,
+    }),
+
+    userList: (reqData) => model.serviceProxy('/user/userList', reqData),
+    updateAuthority: (reqData) => model.serviceProxy('/user/updateAuthority', reqData),
 };
 
 export default Service;

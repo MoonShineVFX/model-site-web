@@ -3,8 +3,10 @@ import { Pagination } from '@mui/material';
 import { styled } from '@mui/system';
 
 const PaginationLayout = styled(Pagination)(({ theme }) => ({
-    justifyContent: 'center',
     marginTop: '100px',
+    '.MuiPagination-ul': {
+        justifyContent: 'center',
+    },
     '.MuiPaginationItem-root': {
         color: theme.palette.textColor,
         opacity: 0.6,
@@ -15,6 +17,7 @@ const Paginations = ({
     length,
     perPage,
     currPage,
+    onChange,
     ...rest
 }) => (
 
@@ -22,6 +25,7 @@ const Paginations = ({
         page={currPage}
         count={Math.ceil(length / perPage)}
         size="large"
+        onChange={onChange}
         {...rest}
     />
 

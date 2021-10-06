@@ -29,7 +29,7 @@ const util = {
 
                 return {
                     // url: `/api${url}`,
-                    url: `/json/${url}`,
+                    url: `/json${url}`,
                     method,
                 };
 

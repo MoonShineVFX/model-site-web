@@ -56,42 +56,39 @@ const ProductListBase = ({ pageData }) => {
 
     // Router
     const router = useRouter();
-    // console.log('router:', router.query)
 
     // Context
     const { tag } = useContext(GlobalContext);
-    const {
-        lists,
-        productList,
-    } = useContext(ProductContext);
+    const { productList } = useContext(ProductContext);
 
     // State
     const [value, setValue] = useState('all');
-    const [selectedTag, setSelectedTag] = useState(arrangeTags(router.query.tag));
+    const [selectedTag, setSelectedTag] = useState({});
 
     useEffect(() => {
 
         if (!router.query.type) return;
         setValue(router.query.type);
-        // setSelectedTag(arrangeTags(router.query.tag));
+        setSelectedTag(arrangeTags(router.query.tag ?? ''));
 
     }, [router]);
 
     // 選擇標籤
     const handleSelectedTag = (id) => {
 
-        // console.log('id:', id);
-        setSelectedTag({
+        // 另外用物件暫存選取行為，若丟到 state 會有非同步問題
+        let obj = {};
+        obj = {
             ...selectedTag,
             [id]: !selectedTag[id],
-        });
+        };
 
-        // Betty: 待解
+        setSelectedTag(obj);
         router.push({
             pathname: '/product/list',
             query: {
                 ...router.query,
-                tag: Object.keys(selectedTag).filter((key) => selectedTag[key]).join(','),
+                tag: Object.keys(obj).filter((key) => obj[key]).join(','),
             },
         });
 
@@ -111,8 +108,6 @@ const ProductListBase = ({ pageData }) => {
             },
         });
 
-        // console.log('router:', router.query)
-
         // Betty: 點即時本身就會觸發 get，似乎不用再另外送，需要真實串才知道
         // productList({
         //     ...router.query,
@@ -131,9 +126,6 @@ const ProductListBase = ({ pageData }) => {
         });
 
     };
-
-    // console.log('router', router.query)
-    console.log('selectedTag', selectedTag)
 
     return (
 
@@ -246,7 +238,6 @@ const ProductListBase = ({ pageData }) => {
                                 </div>
 
                                 <Paginations
-                                    // length={100}
                                     length={pageData.data.product.length}
                                     currPage={+router.query.page}
                                     onChange={handleChangePage}

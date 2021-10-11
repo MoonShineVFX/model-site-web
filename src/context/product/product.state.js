@@ -2,7 +2,7 @@ import { createContext, useContext, useReducer } from 'react';
 import { productReducer } from './product.reducer';
 // import Prompt from '../../components/Prompt';
 import { GlobalContext } from '../global.state';
-import Service from '../../utils/model.service';
+import Service from '../../utils/util.service';
 
 // Init
 const initState = {

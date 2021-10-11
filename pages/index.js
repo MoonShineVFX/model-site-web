@@ -13,7 +13,7 @@ import { Links } from '../src/components/Links';
 import ItemsWrap from '../src/components/ItemsWrap';
 
 import { GlobalContext } from '../src/context/global.state';
-import util from '../src/utils/model';
+import util from '../src/utils/util';
 
 const { priceWithCommas } = util;
 

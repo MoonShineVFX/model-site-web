@@ -17,7 +17,7 @@ const ButtonLayout = styled(Button)(({ theme }) => ({
         backgroundColor: theme.palette.primary.main,
         padding: theme.spacing(4, 9),
         '&:hover, &:focus': {
-            backgroundColor: theme.palette.primary.light,
+            backgroundColor: theme.palette.priceColor,
         },
     },
     '&.third': {

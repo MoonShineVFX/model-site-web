@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useState, useCallback } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import {
     Grid,
@@ -23,6 +23,7 @@ import Item from '../Item';
 import Paginations from '../Paginations';
 import { GlobalContext } from '../../context/global.state';
 import { ProductContext } from '../../context/product/product.state';
+import useQuery from '../../utils/useQuery';
 
 // 整理 URL 標籤格式
 const arrangeTags = (string) => {
@@ -56,6 +57,7 @@ const ProductListBase = ({ pageData }) => {
 
     // Router
     const router = useRouter();
+    const query = useQuery();
 
     // Context
     const { tag } = useContext(GlobalContext);
@@ -67,11 +69,13 @@ const ProductListBase = ({ pageData }) => {
 
     useEffect(() => {
 
-        if (!router.query.type) return;
-        setValue(router.query.type);
-        setSelectedTag(arrangeTags(router.query.tag ?? ''));
+        if (!query.type) return;
+        setValue(query.type);
 
-    }, [router]);
+        // 沒有 tag 也不要丟空值
+        if (query.tag) setSelectedTag(arrangeTags(query.tag));
+
+    }, []);
 
     // 選擇標籤
     const handleSelectedTag = (id) => {
@@ -83,13 +87,12 @@ const ProductListBase = ({ pageData }) => {
             [id]: !selectedTag[id],
         };
 
+        let param = (Object.keys(obj).some((id) => obj[id])) ? { ...query, tag: Object.keys(obj).filter((key) => obj[key]).join(',') } : { page: query.page, type: query.type };
+
         setSelectedTag(obj);
         router.push({
-            pathname: '/product/list',
-            query: {
-                ...router.query,
-                tag: Object.keys(obj).filter((key) => obj[key]).join(','),
-            },
+            pathname: router.pathname,
+            query: { ...param },
         });
 
     };
@@ -100,8 +103,11 @@ const ProductListBase = ({ pageData }) => {
     // Click TabMenu
     const handleClickTabMenu = (key) => {
 
+        // Betty: 先切換 tab 再點商店，active 沒有被更新
+        console.log('key', key)
+
         router.push({
-            pathname: '/product/list',
+            pathname: router.pathname,
             query: {
                 ...router.query,
                 type: key,
@@ -121,11 +127,13 @@ const ProductListBase = ({ pageData }) => {
     const handleChangePage = (e, page) => {
 
         router.push({
-            pathname: '/product/list',
+            pathname: router.pathname,
             query: { ...router.query, page },
         });
 
     };
+
+    console.log('value:', value)
 
     return (
 
@@ -177,73 +185,67 @@ const ProductListBase = ({ pageData }) => {
                     component="figure"
                     className="productList"
                 >
-                    {
-                        // 預設 tab 為 all，當切換 tab 時，active 會跳動
-                        router.query.type &&
-                            <Fragment>
-                                <Tabs
-                                    aria-label="商品分類"
-                                    className="tab-menu"
-                                    value={value}
-                                    onChange={handleChangeTabMenu}
-                                >
-                                    {
-                                        Object.keys(pageData.data.category).map((key) => (
+                    <Tabs
+                        aria-label="商品分類"
+                        className="tab-menu"
+                        value={value}
+                        onChange={handleChangeTabMenu}
+                    >
+                        {
+                            Object.keys(pageData.data.category).map((key) => (
 
-                                            <Tab
-                                                key={key}
-                                                value={key}
-                                                label={pageData.data.category[key]}
-                                                onClick={() => handleClickTabMenu(key)}
-                                            />
-
-                                        ))
-                                    }
-                                </Tabs>
-
-                                <div className="tab-panel">
-                                    {
-                                        Object.keys(pageData.data.category).map((key, idx) => (
-
-                                            <TabPanel
-                                                key={key}
-                                                value={value}
-                                                indexKey={key}
-                                            >
-                                                <ItemWrapLayout>
-                                                    {
-                                                        pageData.data.product.map(({
-                                                            id,
-                                                            title,
-                                                            price,
-                                                            imgUrl,
-                                                        }) => (
-
-                                                            <Item
-                                                                key={id}
-                                                                title={title}
-                                                                price={price}
-                                                                imgUrl={imgUrl}
-                                                                url={`product/${id}`}
-                                                                target="_blank"
-                                                            />
-
-                                                        ))
-                                                    }
-                                                </ItemWrapLayout>
-                                            </TabPanel>
-
-                                        ))
-                                    }
-                                </div>
-
-                                <Paginations
-                                    length={pageData.data.product.length}
-                                    currPage={+router.query.page}
-                                    onChange={handleChangePage}
+                                <Tab
+                                    key={key}
+                                    value={key}
+                                    label={pageData.data.category[key]}
+                                    onClick={() => handleClickTabMenu(key)}
                                 />
-                            </Fragment>
-                    }
+
+                            ))
+                        }
+                    </Tabs>
+
+                    <div className="tab-panel">
+                        {
+                            Object.keys(pageData.data.category).map((key) => (
+
+                                <TabPanel
+                                    key={key}
+                                    value={value}
+                                    indexKey={key}
+                                >
+                                    <ItemWrapLayout>
+                                        {
+                                            pageData.data.product.map(({
+                                                id,
+                                                title,
+                                                price,
+                                                imgUrl,
+                                            }) => (
+
+                                                <Item
+                                                    key={id}
+                                                    title={title}
+                                                    price={price}
+                                                    imgUrl={imgUrl}
+                                                    url={`product/${id}`}
+                                                    target="_blank"
+                                                />
+
+                                            ))
+                                        }
+                                    </ItemWrapLayout>
+                                </TabPanel>
+
+                            ))
+                        }
+                    </div>
+
+                    <Paginations
+                        length={pageData.data.product.length}
+                        currPage={+query.page}
+                        onChange={handleChangePage}
+                    />
                 </Grid>
             </GridLayout>
         </Fragment>

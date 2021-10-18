@@ -1,6 +1,6 @@
 import React, { Fragment, useContext } from 'react';
-import { GlobalStyles } from '@mui/material';
 import {
+    homeStyles,
     SlideShowWrapLayout,
     SlideShowItemLayout,
     SlideshowInfoLayout,
@@ -17,18 +17,9 @@ import util from '../src/utils/util';
 
 const { priceWithCommas } = util;
 
-const styles = {
-    'main > div > *': {
-        marginBottom: '80px',
-    },
-};
-
 const Home = ({ pageData }) => {
 
     // console.log('pageData:', pageData);
-
-    // Style
-    const homeStyles = <GlobalStyles styles={styles} />;
 
     // Context
     const { slideshowActive } = useContext(GlobalContext);
@@ -144,10 +135,7 @@ export async function getStaticProps () {
     if (!data.result) {
 
         return {
-            redirect: {
-                destination: '/',
-                permanent: true,
-            },
+            notFound: true,
         };
 
     }

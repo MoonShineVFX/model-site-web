@@ -1,6 +1,10 @@
 import ProductListBase from '../../src/components/product/ProductListBase';
 import { ProductProvider } from '../../src/context/product/product.state';
+import utilConst from '../../src/utils/util.const';
 
+const { revalidate } = utilConst;
+
+//
 const ProductList = ({ pageData }) => (
 
     <ProductProvider>
@@ -20,31 +24,16 @@ export async function getServerSideProps ({ query }) {
     const res = await fetch(`http://localhost:1006/json/product/list.json?page=${page}&type=${type}${tag ? `&tag=${tag}` : ''}`);
     const data = await res.json();
 
-    // 阻擋 URL 未加 query string 的情境
-    if (!query.page && !query.type) {
-
-        return {
-            redirect: {
-                destination: '/product/list?page=1&type=all',
-                permanent: true,
-            },
-        };
-
-    }
-
     if (!data.result) {
 
         return {
-            redirect: {
-                destination: '/',
-                permanent: true,
-            },
+            notFound: true,
         };
 
     }
 
     return {
-         props: {
+        props: {
             pageData: {
                 title: '商店',
                 data: data.data,

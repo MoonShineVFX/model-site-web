@@ -1,7 +1,18 @@
+import { GlobalStyles } from '@mui/material';
 import { styled } from '@mui/system';
 import SlideShow from '../SlideShow';
 
-const SlideShowWrapLayout = styled(SlideShow)(({ theme }) => ({
+const styles = {
+    'main > div > *': {
+        marginBottom: '80px',
+    },
+};
+
+// Home Style
+const homeStyles = <GlobalStyles styles={styles} />;
+
+//
+const SlideShowWrapLayout = styled(SlideShow)({
     '.slideshow-control-arrows': {
         position: 'absolute',
         bottom: '24px',
@@ -20,8 +31,9 @@ const SlideShowWrapLayout = styled(SlideShow)(({ theme }) => ({
             fontSize: '1em',
         },
     },
-}));
+});
 
+//
 const SlideShowItemLayout = styled('div')(({ theme }) => ({
     '.inner': {
         lineHeight: '1.8',
@@ -39,6 +51,7 @@ const SlideShowItemLayout = styled('div')(({ theme }) => ({
     },
 }));
 
+//
 const SlideshowInfoLayout = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.card.main,
     padding: '30px 36px',
@@ -61,9 +74,8 @@ const SlideshowInfoLayout = styled('div')(({ theme }) => ({
     },
 }));
 
-const ItemNewArrivalLayout = styled('div', {
-    name: 'items',
-})(({ theme }) => ({
+//
+const ItemNewArrivalLayout = styled('div')(({ theme }) => ({
     '.itemWrap': {
         width: 'calc((100% - (30px * 3)) / 4)',
         height: '328px',
@@ -103,6 +115,7 @@ const ItemNewArrivalLayout = styled('div', {
     },
 }));
 
+//
 const ItemDocumentLayout = styled('div')(({ theme }) => ({
     '.itemWrap': {
         maxHeight: '238px',
@@ -113,6 +126,7 @@ const ItemDocumentLayout = styled('div')(({ theme }) => ({
         display: 'flex',
         marginBottom: '30px',
         overflow: 'hidden',
+        transition: 'all .3s ease',
         '&:hover': {
             backgroundColor: theme.palette.card.light,
         },
@@ -133,6 +147,7 @@ const ItemDocumentLayout = styled('div')(({ theme }) => ({
 }));
 
 export {
+    homeStyles,
     SlideShowWrapLayout,
     SlideShowItemLayout,
     SlideshowInfoLayout,

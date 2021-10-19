@@ -106,8 +106,13 @@ const SlideShow = ({ data, showDot, children, ...rest }) => {
                 showDot &&
                     <Dots className="Model-x-align">
                         {
-                            data.map((obj, idx) => (
-                                <span key={idx} className={(idx === slideshowActive) ? 'active' : 'hide'}></span>
+                            data.map((_, idx) => (
+
+                                <span
+                                    key={idx}
+                                    className={(idx === slideshowActive) ? 'active' : 'hide'}
+                                ></span>
+
                             ))
                         }
                     </Dots>

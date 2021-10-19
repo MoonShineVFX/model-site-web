@@ -1,6 +1,8 @@
 import { styled } from '@mui/system';
 import { Grid, ListItemButton } from '@mui/material';
+import { ItemNewArrivalLayout } from '../home/homeLayout';
 
+//
 const GridLayout = styled(Grid)(({ theme }) => ({
     paddingTop: '60px',
     '.MuiGrid-root': {
@@ -35,6 +37,7 @@ const GridLayout = styled(Grid)(({ theme }) => ({
     },
 }));
 
+//
 const ListTitleLayout = styled('h4')(({ theme }) => ({
     fontWeight: 'normal',
     margin: 0,
@@ -50,6 +53,7 @@ const ListTitleLayout = styled('h4')(({ theme }) => ({
     },
 }));
 
+//
 const ListItemLayout = styled(ListItemButton)(({ theme }) => ({
     marginBottom: '10px',
     opacity: .8,
@@ -75,6 +79,7 @@ const ListItemLayout = styled(ListItemButton)(({ theme }) => ({
     },
 }));
 
+//
 const ItemWrapLayout = styled('div')(({ theme }) => ({
     display: 'flex',
     flexWrap: 'wrap',
@@ -91,9 +96,16 @@ const ItemWrapLayout = styled('div')(({ theme }) => ({
     },
 }));
 
+/** Detail */
+//
+const ItemRelativeProductsLayout = styled(ItemNewArrivalLayout)({
+
+});
+
 export {
     GridLayout,
     ListTitleLayout,
     ListItemLayout,
     ItemWrapLayout,
+    ItemRelativeProductsLayout,
 };

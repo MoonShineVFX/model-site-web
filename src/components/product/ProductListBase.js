@@ -69,8 +69,8 @@ const ProductListBase = ({ pageData }) => {
 
     useEffect(() => {
 
-        if (!query.type) return;
-        setValue(query.type);
+        if (!query.cate) return;
+        setValue(query.cate);
 
         // 沒有 tag 也不要丟空值
         if (query.tag) setSelectedTag(arrangeTags(query.tag));
@@ -87,7 +87,7 @@ const ProductListBase = ({ pageData }) => {
             [id]: !selectedTag[id],
         };
 
-        let param = (Object.keys(obj).some((id) => obj[id])) ? { ...query, tag: Object.keys(obj).filter((key) => obj[key]).join(',') } : { page: query.page, type: query.type };
+        let param = (Object.keys(obj).some((id) => obj[id])) ? { ...query, tag: Object.keys(obj).filter((key) => obj[key]).join(',') } : { page: query.page, cate: query.cate };
 
         setSelectedTag(obj);
         router.push({
@@ -103,14 +103,11 @@ const ProductListBase = ({ pageData }) => {
     // Click TabMenu
     const handleClickTabMenu = (key) => {
 
-        // Betty: 先切換 tab 再點商店，active 沒有被更新
-        console.log('key', key)
-
         router.push({
             pathname: router.pathname,
             query: {
                 ...router.query,
-                type: key,
+                cate: key,
             },
         });
 
@@ -118,7 +115,7 @@ const ProductListBase = ({ pageData }) => {
         // productList({
         //     ...router.query,
         //     page: +router.query.page,
-        //     type: key,
+        //     cate: key,
         // });
 
     };
@@ -132,8 +129,6 @@ const ProductListBase = ({ pageData }) => {
         });
 
     };
-
-    console.log('value:', value)
 
     return (
 
@@ -188,7 +183,7 @@ const ProductListBase = ({ pageData }) => {
                     <Tabs
                         aria-label="商品分類"
                         className="tab-menu"
-                        value={value}
+                        value={(query.cate !== value) ? query.cate : value} // 當 active 已換成別的，再點回 menu 的商店要還原成 "全部"
                         onChange={handleChangeTabMenu}
                     >
                         {
@@ -229,7 +224,7 @@ const ProductListBase = ({ pageData }) => {
                                                     price={price}
                                                     imgUrl={imgUrl}
                                                     url={`product/${id}`}
-                                                    target="_blank"
+                                                    // target="_blank"
                                                 />
 
                                             ))

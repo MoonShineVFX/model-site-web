@@ -11,14 +11,14 @@
         },
         "product": [
             {
-                "id": "51654",
+                "id": 51654,
                 "title": "標題-1",
                 "price": 1000,
                 "imgUrl": "//fakeimg.pl/840x420",
                 "tag": []
             },
             {
-                "id": "51655",
+                "id": 51655,
                 "title": "標題-2",
                 "price": 1000,
                 "imgUrl": "//fakeimg.pl/840x420",
@@ -28,7 +28,7 @@
                 ]
             },
             {
-                "id": "51656",
+                "id": 51656,
                 "title": "標題-3",
                 "price": 1000,
                 "imgUrl": "//fakeimg.pl/840x420",
@@ -37,14 +37,14 @@
                 ]
             },
             {
-                "id": "51657",
+                "id": 51657,
                 "title": "標題-1",
                 "price": 1000,
                 "imgUrl": "//fakeimg.pl/840x420",
                 "tag": []
             },
             {
-                "id": "51658",
+                "id": 51658,
                 "title": "標題-2",
                 "price": 1000,
                 "imgUrl": "//fakeimg.pl/840x420",
@@ -54,7 +54,7 @@
                 ]
             },
             {
-                "id": "51659",
+                "id": 51659,
                 "title": "標題-3",
                 "price": 1000,
                 "imgUrl": "//fakeimg.pl/840x420",

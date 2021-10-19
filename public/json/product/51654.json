@@ -1,0 +1,93 @@
+{
+    "result": 1,
+    "message": "",
+    "errors": [],
+    "data": {
+        "title": "SciFi Cyborg Soldier",
+        "price": 1000,
+        "imgUrl": "//fakeimg.pl/1200x420",
+        "modelSum": 10,
+        "fileSize": 100000,
+        "perImgSize": "貼圖尺寸",
+        "tags": [
+            1546004,
+            1546007,
+            1546009
+        ],
+        "formats": [
+            {
+                "id": 451,
+                "label": "3ds Max",
+                "renderers": [
+                    {
+                        "id": 45111,
+                        "label": "renderer01"
+                    },
+                    {
+                        "id": 45112,
+                        "label": "renderer02"
+                    }
+                ]
+            },
+            {
+                "id": 452,
+                "label": "maya",
+                "renderers": [
+                    {
+                        "id": 45222,
+                        "label": "renderer01"
+                    }
+                ]
+            }
+        ],
+        "images": [
+            {
+                "id": 541254,
+                "url": "//fakeimg.pl/640x278"
+            },
+            {
+                "id": 541255,
+                "url": "//fakeimg.pl/640x278"
+            },
+            {
+                "id": 541256,
+                "url": "//fakeimg.pl/640x278"
+            },
+            {
+                "id": 541257,
+                "url": "//fakeimg.pl/640x278"
+            },
+            {
+                "id": 541258,
+                "url": "//fakeimg.pl/640x278"
+            },
+            {
+                "id": 541259,
+                "url": "//fakeimg.pl/640x278"
+            }
+        ],
+        "relativeProducts": [
+            {
+                "id": 154124,
+                "title": "標題",
+                "imgUrl": "//fakeimg.pl/640x278",
+                "price": 105500,
+                "status": "???"
+            },
+            {
+                "id": 154125,
+                "title": "標題",
+                "imgUrl": "//fakeimg.pl/640x278",
+                "price": 105500,
+                "status": "???"
+            },
+            {
+                "id": 154126,
+                "title": "標題",
+                "imgUrl": "//fakeimg.pl/640x278",
+                "price": 105500,
+                "status": "???"
+            }
+        ]
+    }
+}

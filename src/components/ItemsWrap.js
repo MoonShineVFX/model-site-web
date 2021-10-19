@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { styled } from '@mui/system';
 import { ButtonLink } from '../components/Links';
 
+//
 const ItemsTitle = styled('div')(() => ({
     display: 'flex',
     alignItems: 'center',
@@ -18,6 +19,7 @@ const ItemsTitle = styled('div')(() => ({
     },
 }));
 
+//
 const ItemsWrap = ({
     title,
     showMore,

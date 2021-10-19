@@ -5,6 +5,7 @@ import util from '../utils/util';
 
 const { priceWithCommas } = util;
 
+//
 const ItemLayout = styled(Links)(({ theme }) => ({
     color: theme.palette.textColor,
     textDecoration: 'none',
@@ -27,6 +28,7 @@ const ItemLayout = styled(Links)(({ theme }) => ({
     },
 }));
 
+//
 const Item = ({ title, price, imgUrl, ...rest }) => (
 
     <ItemLayout className="item" {...rest}>

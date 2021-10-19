@@ -1,8 +1,5 @@
 import ProductListBase from '../../src/components/product/ProductListBase';
 import { ProductProvider } from '../../src/context/product/product.state';
-import utilConst from '../../src/utils/util.const';
-
-const { revalidate } = utilConst;
 
 //
 const ProductList = ({ pageData }) => (

@@ -4,6 +4,7 @@
     "errors": [],
     "data": {
         "title": "SciFi Cyborg Soldier",
+        "description": "是一部於2004年上映的美國史詩戰爭電影，劇情改編自《伊里亞德》中的特洛伊戰爭，由沃爾夫岡·彼得森執導、大衛·班尼奧夫編劇。電影演出陣容網羅影壇一時之選。",
         "price": 1000,
         "imgUrl": "//fakeimg.pl/1200x420",
         "modelSum": 10,
@@ -43,7 +44,7 @@
         "images": [
             {
                 "id": 541254,
-                "url": "//fakeimg.pl/640x278"
+                "url": "//fakeimg.pl/1200x640"
             },
             {
                 "id": 541255,
@@ -55,14 +56,6 @@
             },
             {
                 "id": 541257,
-                "url": "//fakeimg.pl/640x278"
-            },
-            {
-                "id": 541258,
-                "url": "//fakeimg.pl/640x278"
-            },
-            {
-                "id": 541259,
                 "url": "//fakeimg.pl/640x278"
             }
         ],

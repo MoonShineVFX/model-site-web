@@ -1,21 +1,20 @@
 import React, { Fragment, useContext } from 'react';
+import { Grid } from '@mui/material';
 import {
     homeStyles,
     SlideShowWrapLayout,
     SlideShowItemLayout,
     SlideshowInfoLayout,
-    ItemNewArrivalLayout,
     ItemDocumentLayout,
 } from '../src/components/home/homeLayout';
 
 import HeadTag from '../src/containers/HeadTag';
 import { Links } from '../src/components/Links';
 import ItemsWrap from '../src/components/ItemsWrap';
+import Item from '../src/components/Item';
 
 import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
-
-const { priceWithCommas } = util;
 
 const Home = ({ pageData }) => {
 
@@ -63,32 +62,26 @@ const Home = ({ pageData }) => {
                 }
             </SlideShowWrapLayout>
 
-            <ItemsWrap title="新品" url="login">
-                <ItemNewArrivalLayout className="Model-clear-box">
+            <ItemsWrap title="新品" url="/product/list?page=1&cate=all">
+                <Grid container spacing="30px">
                     {
                         pageData.data.newArrival.map(({ id, title, price, imgUrl }) => (
 
-                            <Links
+                            <Grid
                                 key={id}
-                                url="login"
-                                target="_blank"
-                                className="itemWrap"
+                                item
+                                xs={12}
+                                md={3}
                             >
-                                <div className="item-thumb">
-                                    <img
-                                        src={imgUrl}
-                                        alt={title}
-                                    />
-                                </div>
-                                <div className="item-content">
-                                    <h4 className="title">{title}</h4>
-                                    <span className="price">{priceWithCommas(price)}</span>
-                                </div>
-                            </Links>
+                                <Item
+                                    url={`/product/${id}`}
+                                    data={{ title, price, imgUrl }}
+                                />
+                            </Grid>
 
                         ))
                     }
-                </ItemNewArrivalLayout>
+                </Grid>
             </ItemsWrap>
 
             <ItemsWrap title="教學文件" url="login">

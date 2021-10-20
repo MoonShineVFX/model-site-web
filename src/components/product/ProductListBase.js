@@ -60,7 +60,7 @@ const ProductListBase = ({ pageData }) => {
     const query = useQuery();
 
     // Context
-    const { tag } = useContext(GlobalContext);
+    const { tags } = useContext(GlobalContext);
     const { productList } = useContext(ProductContext);
 
     // State
@@ -151,7 +151,7 @@ const ProductListBase = ({ pageData }) => {
 
                     <List>
                         {
-                            tag.map(({ id, name }) => (
+                            tags.map(({ id, name }) => (
 
                                 <ListItemLayout
                                     key={id}
@@ -220,11 +220,9 @@ const ProductListBase = ({ pageData }) => {
 
                                                 <Item
                                                     key={id}
-                                                    title={title}
-                                                    price={price}
-                                                    imgUrl={imgUrl}
-                                                    url={`product/${id}`}
-                                                    // target="_blank"
+                                                    type="product"
+                                                    url={`/product/${id}`}
+                                                    data={{ title, price, imgUrl }}
                                                 />
 
                                             ))

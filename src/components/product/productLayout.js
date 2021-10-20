@@ -1,6 +1,6 @@
 import { styled } from '@mui/system';
 import { Grid, ListItemButton } from '@mui/material';
-import { ItemNewArrivalLayout } from '../home/homeLayout';
+import ItemsWrap from '../ItemsWrap';
 
 //
 const GridLayout = styled(Grid)(({ theme }) => ({
@@ -98,14 +98,85 @@ const ItemWrapLayout = styled('div')(({ theme }) => ({
 
 /** Detail */
 //
-const ItemRelativeProductsLayout = styled(ItemNewArrivalLayout)({
+const DetailWrapLayout = styled('section')(({ theme }) => ({
+    backgroundColor: theme.palette.card.main,
+    borderRadius: theme.borderRadius,
+    overflow: 'hidden',
+    '.detail-banner': {
+        height: '396px',
+    },
+}));
 
+//
+const DetailContentLayout = styled(Grid)(({ theme }) => ({
+    fontSize: '1.15em',
+    padding: '48px 60px',
+    'p': {
+        margin: '0 0 30px',
+    },
+    '.tag': {
+        fontSize: '0.8em',
+        backgroundColor: theme.palette.primary.main,
+        borderRadius: '3px',
+        marginRight: '16px',
+        padding: '6px 8px',
+    },
+    '.title': {
+        fontSize: '2em',
+        fontWeight: 'normal',
+        margin: '10px 0 20px',
+    },
+    '.description': {
+        lineHeight: '2',
+    },
+    '.label, .notice': {
+        opacity: '0.8',
+    },
+    '.notice': {
+        fontSize: '0.8em',
+    },
+    '.price': {
+        fontSize: '1.35em',
+        textAlign: 'center',
+        marginBottom: '20px',
+    },
+    '.model-button': {
+        width: '100%',
+    },
+}));
+
+//
+const SelectOptLayout = styled('select')(({ theme }) => ({
+    width: '100%',
+    fontSize: '1.15em',
+    color: 'rgba(255,255,255,.8)',
+    backgroundColor: theme.palette.card.main,
+    borderColor: theme.palette.secondary.main,
+    borderRadius: theme.borderRadius,
+    marginBottom: '20px',
+    padding: '16px 36px',
+}));
+
+//
+const DemoImageWrapLayout = styled(ItemsWrap)({
+    margin: '80px 0 100px',
 });
+
+//
+const DemoImageLayout = styled('div')(({ theme }) => ({
+    height: '317px',
+    borderRadius: theme.borderRadius,
+    cursor: 'pointer',
+}));
 
 export {
     GridLayout,
     ListTitleLayout,
     ListItemLayout,
     ItemWrapLayout,
-    ItemRelativeProductsLayout,
+    DetailWrapLayout,
+    DetailContentLayout,
+    SelectOptLayout,
+    DemoImageWrapLayout,
+    DemoImageLayout,
 };

@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { styled } from '@mui/system';
 import { Button } from '@mui/material';
 
+//
 const style = {
     alink: {
         textDecoration: 'none',
     },
 };
 
+//
 const ButtonLayout = styled(Button)(({ theme }) => ({
     minHeight: 'auto',
     lineHeight: 1,
@@ -17,7 +19,7 @@ const ButtonLayout = styled(Button)(({ theme }) => ({
         backgroundColor: theme.palette.primary.main,
         padding: theme.spacing(4, 9),
         '&:hover, &:focus': {
-            backgroundColor: theme.palette.priceColor,
+            backgroundColor: theme.palette.primary.light,
         },
     },
     '&.third': {
@@ -35,8 +37,8 @@ const ButtonLayout = styled(Button)(({ theme }) => ({
 //
 const Links = ({ url, children, ...rest }) => (
 
-    <Link href={`/${url}`}>
-        <a href={`/${url}`} {...rest}>{children}</a>
+    <Link href={url}>
+        <a href={url} {...rest}>{children}</a>
     </Link>
 
 );

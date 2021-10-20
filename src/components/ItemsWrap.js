@@ -25,9 +25,10 @@ const ItemsWrap = ({
     showMore,
     url,
     children,
+    ...rest
 }) => (
 
-    <section>
+    <section {...rest}>
         <ItemsTitle>
             <h2>{title}</h2>
             <div>

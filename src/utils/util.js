@@ -118,6 +118,18 @@ const util = {
      */
     renderWithoutValue: (value) => value ? value : '--',
 
+    /**
+     * @author Betty
+     * @param {object[]} tags - 標籤陣列
+     * @return {object} - id 當 key
+     */
+    mappingTags: (tags) => tags.reduce((acc, { id, name }) => {
+
+        acc[id] = name;
+        return acc;
+
+    }, {}),
+
 };
 
 export default util;

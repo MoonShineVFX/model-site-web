@@ -33,7 +33,7 @@ const Header = () => (
     <AppBarLayout>
         <HeaderLayout className="Model-container">
             <LogoLayout>
-                <Links>Moonshine Market</Links>
+                <Links url="/">Moonshine Market</Links>
             </LogoLayout>
 
             <Box sx={{ flexGrow: 1 }}>

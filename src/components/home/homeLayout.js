@@ -75,47 +75,6 @@ const SlideshowInfoLayout = styled('div')(({ theme }) => ({
 }));
 
 //
-const ItemNewArrivalLayout = styled('div')(({ theme }) => ({
-    '.itemWrap': {
-        width: 'calc((100% - (30px * 3)) / 4)',
-        height: '328px',
-        float: 'left',
-        borderRadius: '16px',
-        marginRight: '30px',
-        position: 'relative',
-        overflow: 'hidden',
-        '&:nth-of-type(4n)': {
-            marginRight: 0,
-        },
-    },
-    '.item-thumb': {
-        height: '100%',
-        'img': {
-            margin: '0 auto',
-        },
-    },
-    '.item-content': {
-        width: '100%',
-        lineHeight: '1.3',
-        color: theme.palette.textColor,
-        backgroundColor: '#000',
-        padding: '20px 24px',
-        position: 'absolute',
-        bottom: 0,
-        opacity: .85,
-        '.title': {
-            fontSize: '1.15em',
-            fontWeight: 'normal',
-            margin: '0 0 4px',
-        },
-    },
-    '.price': {
-        fontWeight: 'bold',
-        color: theme.palette.priceColor,
-    },
-}));
-
-//
 const ItemDocumentLayout = styled('div')(({ theme }) => ({
     '.itemWrap': {
         maxHeight: '238px',
@@ -151,6 +110,5 @@ export {
     SlideShowWrapLayout,
     SlideShowItemLayout,
     SlideshowInfoLayout,
-    ItemNewArrivalLayout,
     ItemDocumentLayout,
 };

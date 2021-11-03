@@ -37,13 +37,14 @@ const SlideShowWrapLayout = styled(SlideShow)({
 const SlideShowItemLayout = styled('div')(({ theme }) => ({
     '.inner': {
         lineHeight: '1.8',
-        maxHeight: '420px',
+        maxHeight: '386px',
         borderRadius: theme.borderRadius,
         display: 'flex',
         overflow: 'hidden',
-        '> *': {
-            flex: 1,
-        },
+    },
+    '.item': {
+        width: '840px',
+        height: '100%',
     },
     '.price': {
         fontSize: '1.15em',
@@ -53,6 +54,7 @@ const SlideShowItemLayout = styled('div')(({ theme }) => ({
 
 //
 const SlideshowInfoLayout = styled('div')(({ theme }) => ({
+    flex: '0 0 calc(100% - 840px)',
     backgroundColor: theme.palette.card.main,
     padding: '30px 36px',
     position: 'relative',
@@ -77,7 +79,6 @@ const SlideshowInfoLayout = styled('div')(({ theme }) => ({
 //
 const ItemDocumentLayout = styled('div')(({ theme }) => ({
     '.itemWrap': {
-        maxHeight: '238px',
         color: theme.palette.textColor,
         backgroundColor: theme.palette.card.main,
         textDecoration: 'none',
@@ -85,10 +86,13 @@ const ItemDocumentLayout = styled('div')(({ theme }) => ({
         display: 'flex',
         marginBottom: '30px',
         overflow: 'hidden',
-        transition: 'all .3s ease',
+        transition: 'all .5s ease',
         '&:hover': {
             backgroundColor: theme.palette.card.light,
         },
+    },
+    '.item-thumb': {
+        height: '206px',
     },
     '.item-content': {
         lineHeight: '1.8',

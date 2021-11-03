@@ -109,12 +109,15 @@ const ProductDetailBase = ({ pageData }) => {
             <HeadTag title={pageData.title} />
 
             <DetailWrapLayout>
-                <div
-                    className="Model-bg-img detail-banner"
-                    style={{
-                        backgroundImage: `url(${pageData.data.imgUrl})`,
-                    }}
-                />
+                <div className="detail-banner">
+                    <img
+                        src={pageData.data.imgUrl}
+                        alt={pageData.data.title}
+                        title={pageData.data.title}
+                        width="1200"
+                        height="396"
+                    />
+                </div>
                 <DetailContentLayout container>
                     <Grid item xs>
                         <div className="tags">
@@ -211,7 +214,7 @@ const ProductDetailBase = ({ pageData }) => {
                                 md={6}
                             >
                                 <DemoImageLayout
-                                    className="Model-bg-img Model-effect-brightness"
+                                    className="Model-effect-brightness"
                                     style={{
                                         backgroundImage: `url(${url})`
                                     }}

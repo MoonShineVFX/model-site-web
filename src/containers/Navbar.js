@@ -42,7 +42,7 @@ const Navbar = () => (
 
                 <Links
                     key={key}
-                    url={key}
+                    url={`/${key}`}
                 >
                     {text}
                 </Links>

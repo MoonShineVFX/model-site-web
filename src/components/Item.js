@@ -9,7 +9,6 @@ const { priceWithCommas } = util;
 const ItemLayout = styled(Links)(({ theme }) => ({
     color: theme.palette.textColor,
     textDecoration: 'none',
-    display: 'block',
     '.item-content': {
         padding: '16px 0',
     },
@@ -22,7 +21,7 @@ const ItemLayout = styled(Links)(({ theme }) => ({
         overflow: 'hidden',
         position: 'relative',
         '.item-thumb': {
-            height: '328px',
+            height: '336px',
         },
         '.item-content': {
             width: '100%',
@@ -37,7 +36,7 @@ const ItemLayout = styled(Links)(({ theme }) => ({
     '&.style-product': {
         marginBottom: '20px',
         '.item-thumb': {
-            height: '193px',
+            height: '186px',
             borderRadius: '10px',
             overflow: 'hidden',
         },
@@ -45,19 +44,29 @@ const ItemLayout = styled(Links)(({ theme }) => ({
 }));
 
 //
-const Item = ({ newPage, type, data: { title, price, imgUrl }, ...rest }) => (
+const Item = ({
+    newPage,
+    type,
+    url,
+    width,
+    height,
+    data: { title, price, imgUrl }
+}) => (
 
     <ItemLayout
-        {...rest}
-        className={`item style-${type} Model-effect-brightness`}
+        url={url}
         {...newPage && { target: '_blank'}}
+        className={`item style-${type} Model-effect-brightness`}
     >
-        <div
-            className="item-thumb Model-bg-img"
-            style={{
-                backgroundImage: `url(${imgUrl})`,
-            }}
-        />
+        <div className="item-thumb">
+            <img
+                src={imgUrl}
+                alt={title}
+                title={title}
+                width={width}
+                height={height}
+            />
+        </div>
         <div className="item-content">
             <h3 className="title">{title}</h3>
             <span className="price">{priceWithCommas(price)}</span>
@@ -67,7 +76,6 @@ const Item = ({ newPage, type, data: { title, price, imgUrl }, ...rest }) => (
 );
 
 Item.defaultProps = {
-    // Betty: 開發中先給 false
     newPage: false, // 另開分頁
     type: 'section',
 };
@@ -75,6 +83,9 @@ Item.defaultProps = {
 Item.propTypes = {
     newPage: PropTypes.bool,
     type: PropTypes.string, // section || product list
+    url: PropTypes.string.isRequired,
+    width: PropTypes.string,
+    height: PropTypes.string,
     data: PropTypes.shape({
         title: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,

@@ -22,7 +22,8 @@ const Paginations = ({
 }) => (
 
     <PaginationLayout
-        page={currPage}
+        className="paginations"
+        page={currPage || 1}
         count={Math.ceil(length / perPage)}
         size="large"
         onChange={onChange}

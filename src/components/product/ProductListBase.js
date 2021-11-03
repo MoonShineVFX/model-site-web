@@ -222,7 +222,10 @@ const ProductListBase = ({ pageData }) => {
                                                     key={id}
                                                     type="product"
                                                     url={`/product/${id}`}
+                                                    width="321"
+                                                    height="186"
                                                     data={{ title, price, imgUrl }}
+                                                    newPage
                                                 />
 
                                             ))

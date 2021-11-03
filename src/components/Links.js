@@ -35,10 +35,17 @@ const ButtonLayout = styled(Button)(({ theme }) => ({
 }));
 
 //
-const Links = ({ url, children, ...rest }) => (
+const Links = ({ url, newPage, className, children, ...rest }) => (
 
     <Link href={url}>
-        <a href={url} {...rest}>{children}</a>
+        <a
+            href={url}
+            className={className}
+            {...newPage && { target: '_blank'}}
+            {...rest}
+        >
+            {children}
+        </a>
     </Link>
 
 );
@@ -61,10 +68,13 @@ const ButtonLink = ({ url, text, type }) => (
 
 Links.defaultProps = {
     url: '',
+    newPage: false,
 };
 
 Links.propTypes = {
     url: PropTypes.string.isRequired,
+    newPage: PropTypes.bool,
+    className: PropTypes.string,
     children: PropTypes.any,
 };
 

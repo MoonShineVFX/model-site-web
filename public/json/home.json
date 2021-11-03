@@ -9,7 +9,7 @@
                 "title": "標題-1",
                 "description": "是一部於2004年上映的美國史詩戰爭電影，劇情改編自《伊里亞德》中的特洛伊戰爭，由沃爾夫岡·彼得森執導、大衛·班尼奧夫編劇。電影演出陣容網羅影壇一時之選。",
                 "price": 1000,
-                "imgUrl": "//fakeimg.pl/840x420",
+                "imgUrl": "//fakeimg.pl/840x386",
                 "status": "???"
             },
             {
@@ -17,7 +17,7 @@
                 "title": "標題-2",
                 "description": "是一部於2004年上映的美國史詩戰爭電影，劇情改編自《伊里亞德》中的特洛伊戰爭，由沃爾夫岡·彼得森執導、大衛·班尼奧夫編劇。電影演出陣容網羅影壇一時之選。",
                 "price": 1000,
-                "imgUrl": "//fakeimg.pl/840x420",
+                "imgUrl": "//fakeimg.pl/840x386",
                 "status": "???"
             },
             {
@@ -25,37 +25,37 @@
                 "title": "標題-3",
                 "description": "是一部於2004年上映的美國史詩戰爭電影，劇情改編自《伊里亞德》中的特洛伊戰爭，由沃爾夫岡·彼得森執導、大衛·班尼奧夫編劇。電影演出陣容網羅影壇一時之選。",
                 "price": 1000,
-                "imgUrl": "//fakeimg.pl/840x420",
+                "imgUrl": "//fakeimg.pl/840x386",
                 "status": "???"
             }
         ],
         "newArrival": [
             {
-                "id": "92813",
-                "title": "標題-92813",
+                "id": "51654",
+                "title": "標題-51654",
                 "price": 1000,
-                "imgUrl": "//fakeimg.pl/277x328",
+                "imgUrl": "//fakeimg.pl/277x336",
                 "status": "???"
             },
             {
                 "id": "92814",
                 "title": "標題-92814",
                 "price": 1000,
-                "imgUrl": "//fakeimg.pl/277x328",
+                "imgUrl": "//fakeimg.pl/277x336",
                 "status": "???"
             },
             {
                 "id": "92815",
                 "title": "標題-92815",
                 "price": 1000,
-                "imgUrl": "//fakeimg.pl/277x328",
+                "imgUrl": "//fakeimg.pl/277x336",
                 "status": "???"
             },
             {
                 "id": "92816",
                 "title": "標題-92816",
                 "price": 1000,
-                "imgUrl": "//fakeimg.pl/277x328",
+                "imgUrl": "//fakeimg.pl/277x336",
                 "status": "???"
             }
         ],
@@ -64,19 +64,19 @@
                 "id": "30723",
                 "title": "將素材模型匯入軟體的方法 - MAYA",
                 "description": "為因應後疫情時代下企業數位轉型的學習需求，YOTTA for Business線上企訓方案應運而生，為不同規模的企業組織提供多元化的優質線上課程",
-                "imgUrl": "//fakeimg.pl/380x238"
+                "imgUrl": "//fakeimg.pl/380x206"
             },
             {
                 "id": "30724",
                 "title": "將素材模型匯入軟體的方法 - MAYA",
                 "description": "為因應後疫情時代下企業數位轉型的學習需求，YOTTA for Business線上企訓方案應運而生，為不同規模的企業組織提供多元化的優質線上課程",
-                "imgUrl": "//fakeimg.pl/380x238"
+                "imgUrl": "//fakeimg.pl/380x206"
             },
             {
                 "id": "30725",
                 "title": "將素材模型匯入軟體的方法 - MAYA",
                 "description": "為因應後疫情時代下企業數位轉型的學習需求，YOTTA for Business線上企訓方案應運而生，為不同規模的企業組織提供多元化的優質線上課程",
-                "imgUrl": "//fakeimg.pl/380x238"
+                "imgUrl": "//fakeimg.pl/380x206"
             }
         ]
     }

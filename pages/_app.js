@@ -51,17 +51,17 @@ const styles = {
             clear: 'both',
         },
     },
-    '.Model-bg-img': {
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-    },
     '.Model-effect-brightness': {
         filter: 'brightness(0.9)',
-        transition: 'all .3s ease',
+        transition: 'all .5s ease',
         '&:hover': {
             filter: 'brightness(1.2)',
         },
+    },
+    'img': {
+        maxWidth: '100%',
+        maxHeight: '100%',
+        objectFit: 'cover',
     },
     'select': {
         outline: 'none',

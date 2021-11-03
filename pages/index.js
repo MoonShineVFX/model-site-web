@@ -45,8 +45,18 @@ const Home = ({ pageData }) => {
                             className={(idx === slideshowActive) ? 'active' : 'hide'}
                         >
                             <div className="inner">
-                                <Links url="login" target="_blank">
-                                    <img src={imgUrl} alt={title} />
+                                <Links
+                                    url="login"
+                                    className="item"
+                                    newPage
+                                >
+                                    <img
+                                        src={imgUrl}
+                                        alt={title}
+                                        title={title}
+                                        width="840"
+                                        height="386"
+                                    />
                                 </Links>
 
                                 <SlideshowInfoLayout>
@@ -74,8 +84,11 @@ const Home = ({ pageData }) => {
                                 md={3}
                             >
                                 <Item
+                                    width="277"
+                                    height="336"
                                     url={`/product/${id}`}
                                     data={{ title, price, imgUrl }}
+                                    newPage
                                 />
                             </Grid>
 
@@ -92,13 +105,16 @@ const Home = ({ pageData }) => {
                             <Links
                                 key={id}
                                 url="login"
-                                target="_blank"
                                 className="itemWrap"
+                                newPage
                             >
                                 <div className="item-thumb">
                                     <img
                                         src={imgUrl}
                                         alt={title}
+                                        title={title}
+                                        width="380"
+                                        height="206"
                                     />
                                 </div>
                                 <div className="item-content">

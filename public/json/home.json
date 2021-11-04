@@ -58,6 +58,26 @@
                 "imgUrl": "//fakeimg.pl/277x336",
                 "status": "???"
             }
+        ],
+        "tutorial": [
+            {
+                "id": "30723",
+                "title": "將素材模型匯入軟體的方法 - MAYA",
+                "description": "為因應後疫情時代下企業數位轉型的學習需求，YOTTA for Business線上企訓方案應運而生，為不同規模的企業組織提供多元化的優質線上課程",
+                "imgUrl": "//fakeimg.pl/380x206"
+            },
+            {
+                "id": "30724",
+                "title": "將素材模型匯入軟體的方法 - MAYA",
+                "description": "為因應後疫情時代下企業數位轉型的學習需求，YOTTA for Business線上企訓方案應運而生，為不同規模的企業組織提供多元化的優質線上課程",
+                "imgUrl": "//fakeimg.pl/380x206"
+            },
+            {
+                "id": "30725",
+                "title": "將素材模型匯入軟體的方法 - MAYA",
+                "description": "為因應後疫情時代下企業數位轉型的學習需求，YOTTA for Business線上企訓方案應運而生，為不同規模的企業組織提供多元化的優質線上課程",
+                "imgUrl": "//fakeimg.pl/380x206"
+            }
         ]
     }
 }

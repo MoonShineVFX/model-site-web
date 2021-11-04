@@ -77,7 +77,7 @@ const SlideshowInfoLayout = styled('div')(({ theme }) => ({
 }));
 
 //
-const ItemDocumentLayout = styled('div')(({ theme }) => ({
+const ItemTutorialLayout = styled('div')(({ theme }) => ({
     '.itemWrap': {
         color: theme.palette.textColor,
         backgroundColor: theme.palette.card.main,
@@ -114,5 +114,5 @@ export {
     SlideShowWrapLayout,
     SlideShowItemLayout,
     SlideshowInfoLayout,
-    ItemDocumentLayout,
+    ItemTutorialLayout,
 };

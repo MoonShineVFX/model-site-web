@@ -5,7 +5,7 @@ import {
     SlideShowWrapLayout,
     SlideShowItemLayout,
     SlideshowInfoLayout,
-    ItemDocumentLayout,
+    ItemTutorialLayout,
 } from '../src/components/home/homeLayout';
 
 import HeadTag from '../src/containers/HeadTag';
@@ -98,9 +98,9 @@ const Home = ({ pageData }) => {
             </ItemsWrap>
 
             <ItemsWrap title="教學文件" url="login">
-                <ItemDocumentLayout>
+                <ItemTutorialLayout>
                     {
-                        pageData.data.document.map(({ id, title, description, imgUrl }) => (
+                        pageData.data.tutorial.map(({ id, title, description, imgUrl }) => (
 
                             <Links
                                 key={id}
@@ -125,7 +125,7 @@ const Home = ({ pageData }) => {
 
                         ))
                     }
-                </ItemDocumentLayout>
+                </ItemTutorialLayout>
             </ItemsWrap>
         </Fragment>
 

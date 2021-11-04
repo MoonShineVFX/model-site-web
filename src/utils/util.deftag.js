@@ -13,7 +13,7 @@ const deftag = {
         support_software: '種 3D 軟體格式',
         support_render: '個以上算圖引擎支援',
     },
-    document: {
+    tutorial: {
         title: '網站使用文件',
     },
 };

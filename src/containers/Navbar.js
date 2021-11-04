@@ -11,7 +11,7 @@ const navMenus = [
         text: '關於',
     },
     {
-        key: 'document',
+        key: 'tutorial',
         text: '文件',
     },
 ];

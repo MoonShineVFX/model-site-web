@@ -8,24 +8,22 @@ import Item from '../src/components/Item';
 import util from '../src/utils/util';
 import deftag from '../src/utils/util.deftag';
 
-const { document } = deftag;
-
 //
-const DocumentTitleLayout = styled('h1')({
+const TitleLayout = styled('h1')({
     fontSize: '2.15em',
     textAlign: 'center',
     marginBottom: '120px',
 });
 
 //
-const DocumentWrapLayout = styled(Grid)({
+const ItemWrapLayout = styled(Grid)({
     '.item .item-thumb': {
         height: '161px',
     },
 });
 
 //
-const Document = ({ pageData }) => {
+const Tutorial = ({ pageData }) => {
 
     const { tutorial } = pageData.data;
 
@@ -34,9 +32,9 @@ const Document = ({ pageData }) => {
         <Fragment>
             <HeadTag title={pageData.title} />
 
-            <DocumentTitleLayout>{document.title}</DocumentTitleLayout>
+            <TitleLayout>{deftag.tutorial.title}</TitleLayout>
 
-            <DocumentWrapLayout
+            <ItemWrapLayout
                 container
                 rowSpacing="20px"
                 columnSpacing="36px"
@@ -63,21 +61,21 @@ const Document = ({ pageData }) => {
 
                     ))
                 }
-            </DocumentWrapLayout>
+            </ItemWrapLayout>
         </Fragment>
 
     );
 
 };
 
-export default Document;
+export default Tutorial;
 
 export async function getServerSideProps () {
 
     // const res = await util.serviceServer('/json/home/home.json');
     // const { data } = res;
 
-    const res = await fetch('http://localhost:1006/json/document.json');
+    const res = await fetch('http://localhost:1006/json/tutorial.json');
     const data = await res.json();
 
     if (!data.result) {

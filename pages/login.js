@@ -1,80 +1,45 @@
-import { Fragment, createRef } from 'react';
-import axios from 'axios';
-import { useForm } from 'react-hook-form';
+import { Fragment } from 'react';
+import GoogleLogin from 'react-google-login';
+import Buttons from '../src/components/Buttons';
+import deftag from '../src/utils/util.deftag';
 
-// import HeadSEO from '../src/containers/HeadSEO';
-// import LinkText from '../src/components/LinkText';
+const {
+    common: {
+        btn_login,
+        btn_submit,
+    },
+} = deftag;
 
 const Login = () => {
 
-    // Ref
-    const ref = createRef();
+    const handleGoogleCallback = (response) => {
 
-    //
-    const { register, handleSubmit } = useForm({
-        defaultValues: {
-            name: 'aaa123',
-        },
-    });
-
-    // Submit
-    const handleReqData = (reqData) => {
-
-        reqData = {
-            ...reqData,
-            'g-recaptcha-response': ref.current.getValue(),
-        };
-
-        axios({
-            method: 'POST',
-            url: 'https://fullbodyscan.msvfx.com/api/recaptcha_test',
-            data: {
-                'g-recaptcha-response': ref.current.getValue(),
-            },
-            withCredentials: true,
-        })
-        .then((res) => {
-
-            console.log('res:', res)
-
-        })
-        .catch( (error) => console.log(error));
+        console.log('response:', response);
 
     };
 
     return (
 
-        <Fragment>
-            {/* <HeadSEO title="登入" /> */}
+        <GoogleLogin
+            clientId="440366749945-ufbv6jl00nqq79ancj5ip414hk9cuqaa.apps.googleusercontent.com"
+            onSuccess={handleGoogleCallback}
+            onFailure={handleGoogleCallback}
+            isSignedIn={true}
+            cookiePolicy={'single_host_origin'}
+            // buttonText={btn_login} // 預設 google 按鈕
+            render={({ disabled, onClick }) => (
 
-            <form onSubmit={handleSubmit(handleReqData)}>
-                {/* <div>
-                    <label htmlFor="name">請輸入名字:</label>
-                    <input
-                        type="text"
-                        name="name"
-                        {...register('name')}
-                    />
-                </div> */}
+                <Buttons
+                    text={btn_login}
+                    disabled={disabled}
+                    onClick={onClick}
+                />
 
-                {/* <Button
-                    type="submit"
-                    variant="contained"
-                >
-                    送出
-                </Button> */}
-            </form>
-
-            {/* <LinkText /> */}
-        </Fragment>
+            )}
+        />
 
     );
 
 };
 
 export default Login;
-
-/**
- * google recaptcha
- * https://www.youtube.com/watch?v=vrbyaOoZ-4Q
- */

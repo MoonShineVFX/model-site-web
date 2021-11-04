@@ -1,21 +1,32 @@
 import { styled } from '@mui/system';
 import { Links } from '../components/Links';
+import deftag from '../utils/util.deftag';
 
+const {
+    common: {
+        menu_store,
+        menu_about,
+        menu_tutorial,
+    },
+} = deftag;
+
+//
 const navMenus = [
     {
         key: 'product/list?page=1&cate=all',
-        text: '商店',
+        text: menu_store,
     },
     {
         key: 'about',
-        text: '關於',
+        text: menu_about,
     },
     {
         key: 'tutorial',
-        text: '文件',
+        text: menu_tutorial,
     },
 ];
 
+//
 const NavMenuLayout = styled('nav', {
     name: 'nav-menu-wrap',
 })(({ theme }) => ({

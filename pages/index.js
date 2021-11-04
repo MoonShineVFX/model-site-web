@@ -15,6 +15,14 @@ import Item from '../src/components/Item';
 
 import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
+import deftag from '../src/utils/util.deftag';
+
+const {
+    home: {
+        section_title_new_arrival,
+        section_title_tutorial,
+    },
+} = deftag;
 
 const Home = ({ pageData }) => {
 
@@ -72,7 +80,7 @@ const Home = ({ pageData }) => {
                 }
             </SlideShowWrapLayout>
 
-            <ItemsWrap title="新品" url="/product/list?page=1&cate=all">
+            <ItemsWrap title={section_title_new_arrival} url="/product/list?page=1&cate=all">
                 <Grid container spacing="30px">
                     {
                         pageData.data.newArrival.map(({ id, title, price, imgUrl }) => (
@@ -97,7 +105,7 @@ const Home = ({ pageData }) => {
                 </Grid>
             </ItemsWrap>
 
-            <ItemsWrap title="教學文件" url="login">
+            <ItemsWrap title={section_title_tutorial} url="login">
                 <ItemTutorialLayout>
                     {
                         pageData.data.tutorial.map(({ id, title, description, imgUrl }) => (

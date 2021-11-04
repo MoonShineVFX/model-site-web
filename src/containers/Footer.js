@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { faInstagram, faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
 import { styled } from '@mui/system';
+import dayjs from 'dayjs';
 import FontIcon from '../components/FontIcon';
 
 // 串流平台
@@ -58,7 +59,7 @@ const Footer = () => (
                 }
             </div>
 
-            <p>© 2021 All rights reserved. Moonshine</p>
+            <p>© {dayjs().format('YYYY')} All rights reserved. Moonshine</p>
         </section>
     </FooterLayout>
 

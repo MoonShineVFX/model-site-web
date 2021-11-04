@@ -2,6 +2,9 @@ import { styled } from '@mui/system';
 import { Toolbar, Box } from '@mui/material';
 import { Links, ButtonLink } from '../components/Links';
 import Navbar from './Navbar';
+import deftag from '../utils/util.deftag';
+
+const { common: { btn_login, logo_text } } = deftag;
 
 const AppBarLayout = styled('header')(({ theme }) => ({
     maxHeight: '90px',
@@ -33,7 +36,7 @@ const Header = () => (
     <AppBarLayout>
         <HeaderLayout className="Model-container">
             <LogoLayout>
-                <Links url="/">Moonshine Market</Links>
+                <Links url="/">{logo_text}</Links>
             </LogoLayout>
 
             <Box sx={{ flexGrow: 1 }}>
@@ -43,7 +46,7 @@ const Header = () => (
             <Box sx={{ display: { xs: 'flex', md: 'flex' } }}>
                 <ButtonLink
                     url="login"
-                    text="登入"
+                    text={btn_login}
                 />
             </Box>
         </HeaderLayout>

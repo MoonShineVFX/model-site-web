@@ -1,6 +1,19 @@
 const deftag = {
-    common: {},
+    common: {
+        logo_text: 'Moonshine Market',
+        menu_store: '商店',
+        menu_about: '關於',
+        menu_tutorial: '文件',
+        btn_login: '登入',
+        btn_show_more: '顯示更多',
+    },
+    home: {
+        section_title_new_arrival: '新品',
+        section_title_tutorial: '教學文件',
+    },
     product: {
+        select_label: '標籤篩選',
+        product_category: '商品分類',
         detail_section_title1: '商品內容展示圖',
         detail_section_title2: '你可能會喜歡的',
         button_add_to_card: '加到購物車',

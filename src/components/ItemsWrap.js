@@ -1,6 +1,11 @@
 import PropTypes from 'prop-types';
 import { styled } from '@mui/system';
 import { ButtonLink } from '../components/Links';
+import deftag from '../utils/util.deftag';
+
+const {
+    common: { btn_show_more },
+} = deftag;
 
 //
 const ItemsTitle = styled('div')(() => ({
@@ -36,7 +41,7 @@ const ItemsWrap = ({
                     showMore &&
                         <ButtonLink
                             url={url}
-                            text="顯示更多"
+                            text={btn_show_more}
                             type="third"
                         />
                 }

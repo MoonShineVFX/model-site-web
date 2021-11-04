@@ -24,6 +24,14 @@ import Paginations from '../Paginations';
 import { GlobalContext } from '../../context/global.state';
 import { ProductContext } from '../../context/product/product.state';
 import useQuery from '../../utils/useQuery';
+import deftag from '../../utils/util.deftag';
+
+const {
+    product: {
+        select_label,
+        product_category,
+    },
+} = deftag;
 
 // 整理 URL 標籤格式
 const arrangeTags = (string) => {
@@ -147,7 +155,7 @@ const ProductListBase = ({ pageData }) => {
                     component="aside"
                     className="tagsList"
                 >
-                    <ListTitleLayout>標籤篩選</ListTitleLayout>
+                    <ListTitleLayout>{select_label}</ListTitleLayout>
 
                     <List>
                         {
@@ -181,7 +189,7 @@ const ProductListBase = ({ pageData }) => {
                     className="productList"
                 >
                     <Tabs
-                        aria-label="商品分類"
+                        aria-label={product_category}
                         className="tab-menu"
                         value={(query.cate !== value) ? query.cate : value} // 當 active 已換成別的，再點回 menu 的商店要還原成 "全部"
                         onChange={handleChangeTabMenu}

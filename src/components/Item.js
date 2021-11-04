@@ -69,7 +69,10 @@ const Item = ({
         </div>
         <div className="item-content">
             <h3 className="title">{title}</h3>
-            <span className="price">{priceWithCommas(price)}</span>
+            {
+                price &&
+                    <span className="price">{priceWithCommas(price)}</span>
+            }
         </div>
     </ItemLayout>
 
@@ -88,7 +91,7 @@ Item.propTypes = {
     height: PropTypes.string,
     data: PropTypes.shape({
         title: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
+        price: PropTypes.number,
         imgUrl: PropTypes.string.isRequired,
     }).isRequired,
 };

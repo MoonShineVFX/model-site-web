@@ -237,11 +237,15 @@ const ProductListBase = ({ pageData }) => {
                         }
                     </div>
 
-                    <Paginations
-                        length={pageData.data.product.length}
-                        currPage={+query.page}
-                        onChange={handleChangePage}
-                    />
+                    {
+                        (pageData.data.product.length > 40) &&
+                            <Paginations
+                                length={pageData.data.product.length}
+                                currPage={+query.page}
+                                onChange={handleChangePage}
+                            />
+
+                    }
                 </Grid>
             </GridLayout>
         </Fragment>

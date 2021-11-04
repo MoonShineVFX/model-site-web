@@ -118,6 +118,7 @@ const ProductDetailBase = ({ pageData }) => {
                         height="396"
                     />
                 </div>
+
                 <DetailContentLayout container>
                     <Grid item xs>
                         <div className="tags">
@@ -215,11 +216,16 @@ const ProductDetailBase = ({ pageData }) => {
                             >
                                 <DemoImageLayout
                                     className="Model-effect-brightness"
-                                    style={{
-                                        backgroundImage: `url(${url})`
-                                    }}
                                     onClick={() => handleClickImgEnlarge(url, id)}
-                                />
+                                >
+                                    <img
+                                        src={url}
+                                        alt={id}
+                                        title={id}
+                                        width="560"
+                                        height="317"
+                                    />
+                                </DemoImageLayout>
                             </Grid>
 
                         ))

@@ -28,6 +28,7 @@ export default createTheme({
         primary: {
             light: '#6281cc',
             main: '#45516e',
+            dark: '#282a2f',
         },
         secondary: {
             main: '#FFF',

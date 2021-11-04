@@ -133,7 +133,9 @@ const Home = ({ pageData }) => {
 
 };
 
-export async function getStaticProps () {
+export default Home;
+
+export async function getServerSideProps () {
 
     // const res = await util.serviceServer('/json/home/home.json');
     // const { data } = res;
@@ -159,5 +161,3 @@ export async function getStaticProps () {
     };
 
 };
-
-export default Home;

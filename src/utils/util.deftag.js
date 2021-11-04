@@ -8,6 +8,14 @@ const deftag = {
         detail_option_format: '軟體格式',
         detail_option_renderer: '算圖引擎',
     },
+    about: {
+        support_model: '套模型',
+        support_software: '種 3D 軟體格式',
+        support_render: '個以上算圖引擎支援',
+    },
+    document: {
+        title: '網站使用文件',
+    },
 };
 
 export default deftag;

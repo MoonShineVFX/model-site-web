@@ -122,7 +122,7 @@ const DetailContentLayout = styled(Grid)(({ theme }) => ({
         padding: '6px 8px',
     },
     '.title': {
-        fontSize: '2em',
+        fontSize: '2.1em',
         fontWeight: 'normal',
         margin: '10px 0 20px',
     },
@@ -133,10 +133,10 @@ const DetailContentLayout = styled(Grid)(({ theme }) => ({
         opacity: '0.8',
     },
     '.notice': {
-        fontSize: '0.8em',
+        fontSize: '0.9em',
     },
     '.price': {
-        fontSize: '1.35em',
+        fontSize: '1.45em',
         textAlign: 'center',
         marginBottom: '20px',
     },
@@ -148,7 +148,7 @@ const DetailContentLayout = styled(Grid)(({ theme }) => ({
 //
 const SelectOptLayout = styled('select')(({ theme }) => ({
     width: '100%',
-    fontSize: '1.15em',
+    fontSize: '1em',
     color: 'rgba(255,255,255,.8)',
     backgroundColor: theme.palette.card.main,
     borderColor: theme.palette.secondary.main,
@@ -166,6 +166,7 @@ const DemoImageWrapLayout = styled(ItemsWrap)({
 const DemoImageLayout = styled('div')(({ theme }) => ({
     height: '317px',
     borderRadius: theme.borderRadius,
+    overflow: 'hidden',
     cursor: 'pointer',
 }));
 

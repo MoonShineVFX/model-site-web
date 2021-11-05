@@ -1,18 +1,14 @@
-import { Fragment } from 'react';
 import GoogleLogin from 'react-google-login';
-import Buttons from '../src/components/Buttons';
-import deftag from '../src/utils/util.deftag';
+import Buttons from '../Buttons';
+import deftag from '../../utils/util.deftag';
 
 const {
-    common: {
-        btn_login,
-        btn_submit,
-    },
+    common: { text_login },
 } = deftag;
 
-const Login = () => {
+const SigninGoogle = () => {
 
-    const handleGoogleCallback = (response) => {
+    const handleCallback = (response) => {
 
         console.log('response:', response);
 
@@ -22,15 +18,15 @@ const Login = () => {
 
         <GoogleLogin
             clientId="440366749945-ufbv6jl00nqq79ancj5ip414hk9cuqaa.apps.googleusercontent.com"
-            onSuccess={handleGoogleCallback}
-            onFailure={handleGoogleCallback}
+            onSuccess={handleCallback}
+            onFailure={handleCallback}
             isSignedIn={true}
             cookiePolicy={'single_host_origin'}
-            // buttonText={btn_login} // 預設 google 按鈕
+            // buttonText={text_login} // 預設 google 按鈕
             render={({ disabled, onClick }) => (
 
                 <Buttons
-                    text={btn_login}
+                    text={text_login}
                     disabled={disabled}
                     onClick={onClick}
                 />
@@ -42,4 +38,4 @@ const Login = () => {
 
 };
 
-export default Login;
+export default SigninGoogle;

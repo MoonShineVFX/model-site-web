@@ -54,7 +54,7 @@ const Home = ({ pageData }) => {
                         >
                             <div className="inner">
                                 <Links
-                                    url="login"
+                                    url="signin"
                                     className="item"
                                     newPage
                                 >
@@ -105,14 +105,14 @@ const Home = ({ pageData }) => {
                 </Grid>
             </ItemsWrap>
 
-            <ItemsWrap title={section_title_tutorial} url="login">
+            <ItemsWrap title={section_title_tutorial} url="signin">
                 <ItemTutorialLayout>
                     {
                         pageData.data.tutorial.map(({ id, title, description, imgUrl }) => (
 
                             <Links
                                 key={id}
-                                url="login"
+                                url="signin"
                                 className="itemWrap"
                                 newPage
                             >

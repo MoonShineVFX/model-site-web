@@ -1,17 +1,22 @@
 import { styled } from '@mui/system';
 import { Toolbar, Box } from '@mui/material';
-import { Links, ButtonLink } from '../components/Links';
+import { ButtonLink } from '../components/Links';
+import Logo from '../components/Logo';
 import Navbar from './Navbar';
 import deftag from '../utils/util.deftag';
 
-const { common: { btn_login, logo_text } } = deftag;
+const {
+    common: { text_signin },
+} = deftag;
 
+//
 const AppBarLayout = styled('header')(({ theme }) => ({
     maxHeight: '90px',
     backgroundColor: theme.palette.bgColor,
     boxShadow: 'none',
 }));
 
+//
 const HeaderLayout = styled(Toolbar)(({ theme }) => ({
     padding: `${theme.spacing(3)} 0`,
     [theme.breakpoints.up('sm')]: {
@@ -20,24 +25,12 @@ const HeaderLayout = styled(Toolbar)(({ theme }) => ({
     },
 }));
 
-const LogoLayout = styled('div')(({ theme }) => ({
-    fontSize: '1.9em',
-    fontfamily : 'Roboto bold',
-    fontWeight: 'bold',
-    'a': {
-        color: theme.palette.priceColor, // 未來會是真的 logo
-        textDecoration: 'none',
-    },
-}));
-
 //
 const Header = () => (
 
     <AppBarLayout>
         <HeaderLayout className="Model-container">
-            <LogoLayout>
-                <Links url="/">{logo_text}</Links>
-            </LogoLayout>
+            <Logo />
 
             <Box sx={{ flexGrow: 1 }}>
                 <Navbar />
@@ -45,8 +38,8 @@ const Header = () => (
 
             <Box sx={{ display: { xs: 'flex', md: 'flex' } }}>
                 <ButtonLink
-                    url="login"
-                    text={btn_login}
+                    url="signin"
+                    text={text_signin}
                 />
             </Box>
         </HeaderLayout>

@@ -4,9 +4,9 @@ import deftag from '../utils/util.deftag';
 
 const {
     common: {
-        menu_store,
-        menu_about,
-        menu_tutorial,
+        text_menu_store,
+        text_menu_about,
+        text_menu_tutorial,
     },
 } = deftag;
 
@@ -14,15 +14,15 @@ const {
 const navMenus = [
     {
         key: 'product/list?page=1&cate=all',
-        text: menu_store,
+        text: text_menu_store,
     },
     {
         key: 'about',
-        text: menu_about,
+        text: text_menu_about,
     },
     {
         key: 'tutorial',
-        text: menu_tutorial,
+        text: text_menu_tutorial,
     },
 ];
 

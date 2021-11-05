@@ -137,6 +137,7 @@ const DetailContentLayout = styled(Grid)(({ theme }) => ({
     },
     '.price': {
         fontSize: '1.45em',
+        color: theme.palette.priceColor,
         textAlign: 'center',
         marginBottom: '20px',
     },

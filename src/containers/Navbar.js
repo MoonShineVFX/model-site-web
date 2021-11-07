@@ -1,5 +1,5 @@
 import { styled } from '@mui/system';
-import { Links } from '../components/Links';
+import Links from '../components/Links';
 import deftag from '../utils/util.deftag';
 
 const {

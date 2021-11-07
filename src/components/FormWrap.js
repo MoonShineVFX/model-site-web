@@ -1,11 +1,8 @@
 import PropTypes from 'prop-types';
-import Link from 'next/link';
 import { ErrorMessage } from '@hookform/error-message';
 import { styled } from '@mui/system';
 import Logo from './Logo';
 import deftag from '../utils/util.deftag';
-
-const { error: { error_required } } = deftag;
 
 //
 const FormWrapLayout = styled('div')(({ theme }) => ({
@@ -25,13 +22,38 @@ const FormWrapLayout = styled('div')(({ theme }) => ({
     },
     '.model-button': {
         width: '100%',
+        height: '70px',
         fontSize: '1.15em',
+        borderRadius: '40px',
+        '&.third': {
+            borderRadius: '40px',
+        },
     },
     '.form-row': {
-        // width: '100%',
-        // fontSize: '1.15em',
-        border: '1px solid',
-        marginBottom: '24px',
+        marginBottom: '30px',
+    },
+}));
+
+//
+const FormRowLayout = styled('div')(({ theme }) => ({
+    'input': {
+        width: '100%',
+        fontSize: '1.15em',
+        color: theme.palette.textColor,
+        backgroundColor: theme.palette.bgColor,
+        border: '0',
+        borderRadius: '40px',
+        padding: '20px 40px',
+        outline: '0',
+        '&::placeholder, &::-ms-input-placeholder': {
+            color: theme.palette.textColor,
+            opacity: '1',
+        },
+    },
+    '.error-mesg': {
+        fontSize: '0.8em',
+        marginTop: '8px',
+        paddingLeft: '40px',
     },
 }));
 
@@ -49,29 +71,56 @@ const FormWrap = ({ title, children, ...rest }) => (
 
 );
 
+//
+const FormRow = ({ name, errors, children, ...rest }) => (
+
+    <FormRowLayout
+        className="form-row"
+        {...rest}
+    >
+        {children}
+
+        {
+            errors &&
+                <FormErrorMesg
+                    name={name}
+                    errors={errors}
+                />
+        }
+    </FormRowLayout>
+
+);
+
 // 錯誤訊息
 const FormErrorMesg = ({ name, errors }) => (
 
     <ErrorMessage
         name={name}
         errors={errors}
-        message={error_required}
-        render={({ message }) => <div>{message}</div>}
+        message={deftag.error[`error_${errors[name]?.type}`]}
+        render={({ message }) => <p className="error-mesg">{message}</p>}
     />
 
 );
-
-// FormWrap.defaultProps = {
-//     url: '',
-//     newPage: false,
-// };
 
 FormWrap.propTypes = {
     title: PropTypes.string,
     children: PropTypes.any,
 };
 
+FormRow.propTypes = {
+    name: PropTypes.string.isRequired,
+    errors: PropTypes.object,
+    children: PropTypes.any,
+};
+
+FormErrorMesg.propTypes = {
+    name: PropTypes.string.isRequired,
+    errors: PropTypes.object.isRequired,
+};
+
 export {
     FormWrap as default,
+    FormRow,
     FormErrorMesg,
 };

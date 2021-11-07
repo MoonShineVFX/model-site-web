@@ -14,6 +14,7 @@ const deftag = {
     },
     memberSign: {
         text_nick_name: '暱稱',
+        text_real_name: '姓名',
         text_account_with_email: '電子信箱 / 帳號',
         text_enter_password: '輸入密碼',
         text_aggree_privacy: '我同意服務條款及隱私權條款',
@@ -25,6 +26,7 @@ const deftag = {
         text_reset_password: '重設密碼',
         text_new_password: '輸入新密碼',
         text_new_password_success: '你的登入密碼已設定成功',
+        text_signin_with_google: '使用 Google 帳號登入',
     },
     home: {
         section_title_new_arrival: '新品',
@@ -51,6 +53,7 @@ const deftag = {
     },
     error: {
         error_required: '此欄位為必填',
+        error_pattern: '格式有誤',
         error_password_different: '兩次輸入的密碼可能不同',
     },
 };

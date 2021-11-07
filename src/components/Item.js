@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { styled } from '@mui/system';
-import { Links } from './Links';
+import Links from './Links';
 import util from '../utils/util';
 
 const { priceWithCommas } = util;

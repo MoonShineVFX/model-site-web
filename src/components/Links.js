@@ -51,14 +51,15 @@ const Links = ({ url, newPage, className, children, ...rest }) => (
 );
 
 //
-const ButtonLink = ({ url, text, type }) => (
+const ButtonLink = ({ url, text, type, ...rest }) => (
 
     <Links
         url={url}
         style={style.alink}
+        {...rest}
     >
         <ButtonLayout
-            className={(type === 'third') ? 'third' : 'default'}
+            className={`${(type === 'third') ? 'third' : 'default'} model-button`}
         >
             {text}
         </ButtonLayout>
@@ -90,6 +91,6 @@ ButtonLink.propTypes = {
 };
 
 export {
-    Links,
+    Links as default,
     ButtonLink,
 };

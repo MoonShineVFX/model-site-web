@@ -1,22 +1,26 @@
 import { styled } from '@mui/system';
 import { ButtonLink } from '../Links';
 
-// 登入
-const SigninLayout = styled('section')(({ theme }) => ({
+// 外層 form
+const SignLayout = styled('section')(({ theme }) => ({
     marginTop: '80px',
     '.model-button': {
-        '&:not(.btn-register .model-button)': {
-            marginBottom: '30px',
-        },
+        marginBottom: '30px',
     },
 }));
 
-//
+// 導頁按鈕
+const BtnDirectLayout = styled(ButtonLink)(({ theme }) => ({
+    display: 'block',
+    borderTop: `1px dashed ${theme.palette.border.dark}`,
+    marginTop: '50px',
+    paddingTop: '50px',
+}));
+
+// 忘記密碼連結
 const ForgotPasswordLayout = styled('div')(({ theme }) => ({
     textAlign: 'center',
-    borderBottom: `1px dashed ${theme.palette.border.dark}`,
-    margin: '30px 0 50px',
-    paddingBottom: '40px',
+    margin: '30px 0 -20px',
     'a': {
         fontSize: '1.15em',
         textDecoration: 'underline',
@@ -25,13 +29,8 @@ const ForgotPasswordLayout = styled('div')(({ theme }) => ({
     },
 }));
 
-//
-const BtnRedirectLayout = styled(ButtonLink)({
-    display: 'block',
-});
-
 export {
-    SigninLayout,
-    BtnRedirectLayout,
+    SignLayout,
+    BtnDirectLayout,
     ForgotPasswordLayout,
 };

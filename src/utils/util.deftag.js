@@ -6,13 +6,13 @@ const deftag = {
         text_menu_tutorial: '文件',
         btn_submit: '確認送出',
         btn_show_more: '顯示更多',
+    },
+    memberSign: {
         text_signin: '登入',
         text_register: '註冊',
         text_forgot_password: '忘記密碼',
         text_confirm_password: '確認密碼',
         btn_return_to_signin: '回到登入頁',
-    },
-    memberSign: {
         text_nick_name: '暱稱',
         text_real_name: '姓名',
         text_account_with_email: '電子信箱 / 帳號',
@@ -27,6 +27,7 @@ const deftag = {
         text_new_password: '輸入新密碼',
         text_new_password_success: '你的登入密碼已設定成功',
         text_signin_with_google: '使用 Google 帳號登入',
+        text_email_sent: '已成功發送至你輸入的電子信箱',
     },
     home: {
         section_title_new_arrival: '新品',

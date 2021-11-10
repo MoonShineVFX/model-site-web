@@ -6,7 +6,7 @@ import Navbar from './Navbar';
 import deftag from '../utils/util.deftag';
 
 const {
-    common: { text_signin },
+    memberSign: { text_signin },
 } = deftag;
 
 //

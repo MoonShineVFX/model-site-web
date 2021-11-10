@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { useForm } from 'react-hook-form';
 import Buttons from '../src/components/Buttons';
+import Links from '../src/components/Links';
 import Checkbox from '../src/components/Checkbox';
 import FormWrap, { FormRow } from '../src/components/FormWrap';
 
@@ -15,6 +16,7 @@ import deftag from '../src/utils/util.deftag';
 
 const {
     memberSign: {
+        text_reset_password,
         text_register,
         text_confirm_password,
         btn_return_to_signin,
@@ -44,7 +46,8 @@ const Register = () => {
     return (
 
         <Fragment>
-            <HeadTag title={text_register} />
+            <HeadTag title={text_reset_password} />
+
             <SignLayout>
                 <FormWrap title={text_register}>
                     <form onSubmit={handleSubmit(handleReqData)}>

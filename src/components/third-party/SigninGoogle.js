@@ -25,7 +25,7 @@ const SigninGoogle = () => {
 
     const handleCallback = (response) => {
 
-        // console.log('response:', response);
+        console.log('response:', response);
 
     };
 
@@ -35,7 +35,7 @@ const SigninGoogle = () => {
             clientId="440366749945-ufbv6jl00nqq79ancj5ip414hk9cuqaa.apps.googleusercontent.com"
             onSuccess={handleCallback}
             onFailure={handleCallback}
-            isSignedIn={true}
+            // isSignedIn={true} // 已登入狀態
             cookiePolicy={'single_host_origin'}
             buttonText={text_signin_with_google} // 預設 google 按鈕
         />

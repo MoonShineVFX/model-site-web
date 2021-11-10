@@ -29,7 +29,7 @@ const FormWrapLayout = styled('div')(({ theme }) => ({
             borderRadius: '40px',
         },
     },
-    '.form-row': {
+    '.form-row:not(.form-row-btns)': {
         marginBottom: '30px',
     },
 }));
@@ -55,6 +55,12 @@ const FormRowLayout = styled('div')(({ theme }) => ({
         marginTop: '8px',
         paddingLeft: '40px',
     },
+}));
+
+//
+const SuccessMesgLayout = styled('p')(({ theme }) => ({
+    fontSize: '1.15em',
+    textAlign: 'center',
 }));
 
 //
@@ -103,6 +109,13 @@ const FormErrorMesg = ({ name, errors }) => (
 
 );
 
+// 成功訊息
+const FormSuccessMesg = ({ mesg }) => (
+
+    <SuccessMesgLayout>{mesg}</SuccessMesgLayout>
+
+);
+
 FormWrap.propTypes = {
     title: PropTypes.string,
     children: PropTypes.any,
@@ -123,4 +136,5 @@ export {
     FormWrap as default,
     FormRow,
     FormErrorMesg,
+    FormSuccessMesg,
 };

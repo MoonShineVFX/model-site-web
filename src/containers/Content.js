@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { GlobalContext } from '../context/global.state';;
+import { GlobalContext } from '../context/global.state';
 
 const Content = ({ children }) => {
 

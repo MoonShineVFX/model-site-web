@@ -77,7 +77,6 @@ const ForgotPassword = () => {
                                         url="/signin"
                                         text={btn_return_to_signin}
                                     />
-
                                 </div>
                             </form>
 

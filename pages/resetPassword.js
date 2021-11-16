@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import Buttons from '../src/components/Buttons';
 import Links from '../src/components/Links';
@@ -8,23 +8,23 @@ import FormWrap, { FormRow } from '../src/components/FormWrap';
 import HeadTag from '../src/containers/HeadTag';
 import {
     SignLayout,
-    BtnDirectLayout,
-    ForgotPasswordLayout,
 } from '../src/components/member/memberSignLayout';
 
 import deftag from '../src/utils/util.deftag';
 
 const {
+    common: {
+        btn_submit,
+    },
     memberSign: {
         text_reset_password,
-        text_register,
         text_confirm_password,
-        btn_return_to_signin,
-        text_nick_name,
-        text_real_name,
-        text_account_with_email,
-        text_enter_password,
-        text_aggree_privacy,
+        text_new_password,
+    },
+    error: {
+        error_password_different,
+        error_password_at_least_eight,
+        error_pattern,
     },
 } = deftag;
 
@@ -35,8 +35,14 @@ const Register = () => {
         handleSubmit,
         register,
         formState: { errors },
+        watch,
     } = useForm();
 
+    // useRef
+    const password = useRef({});
+    password.current = watch('password', '');
+
+    // 送資料
     const handleReqData = (reqData) => {
 
         console.log('reqData:', reqData)
@@ -49,41 +55,8 @@ const Register = () => {
             <HeadTag title={text_reset_password} />
 
             <SignLayout>
-                <FormWrap title={text_register}>
+                <FormWrap title={text_reset_password}>
                     <form onSubmit={handleSubmit(handleReqData)}>
-                        <FormRow
-                            name="nickName"
-                            errors={errors}
-                        >
-                            <input
-                                type="text"
-                                name="nickName"
-                                placeholder={text_nick_name}
-                                {...register('nickName', { required: true })}
-                            />
-                        </FormRow>
-
-                        <FormRow name="realName">
-                            <input
-                                type="text"
-                                name="realName"
-                                placeholder={text_real_name}
-                                {...register('realName')}
-                            />
-                        </FormRow>
-
-                        <FormRow
-                            name="email"
-                            errors={errors}
-                        >
-                            <input
-                                type="text"
-                                name="email"
-                                placeholder={text_account_with_email}
-                                {...register('email', { required: true })}
-                            />
-                        </FormRow>
-
                         <FormRow
                             name="password"
                             errors={errors}
@@ -91,12 +64,17 @@ const Register = () => {
                             <input
                                 type="password"
                                 name="password"
-                                placeholder={text_enter_password}
+                                placeholder={text_new_password}
                                 {...register('password', {
                                     required: true,
-                                    // minLength: 8,
-                                    // maxLength: 20,
-                                    pattern: /^(?=.*\d)[0-9a-zA-Z!\u0022#$%&'()*+,./:;<=>?@[\]\^_`{|}~-]{8,}$/g,
+                                    minLength: {
+                                        value: 8,
+                                        message: error_password_at_least_eight,
+                                    },
+                                    pattern: {
+                                        value: /^(?=.*\d)[0-9a-zA-Z!\u0022#$%&'()*+,./:;<=>?@[\]\^_`{|}~-]{8,}$/g,
+                                        message: error_pattern,
+                                    },
                                 })}
                             />
                         </FormRow>
@@ -109,33 +87,18 @@ const Register = () => {
                                 type="password"
                                 name="confirm_password"
                                 placeholder={text_confirm_password}
-                                {...register('confirm_password', { required: true })}
+                                {...register('confirm_password', {
+                                    required: true,
+                                    validate: (value) => (value === password.current) || error_password_different,
+                                })}
                             />
                         </FormRow>
-
-                        <div className="form-row">
-                            <Checkbox
-                                name="aggree"
-                                register={register('aggree')}
-                            >
-                                {text_aggree_privacy}
-                            </Checkbox>
-                        </div>
 
                         <div className="form-row form-row-btns">
                             <Buttons
                                 type="submit"
-                                text={text_register}
+                                text={btn_submit}
                             />
-
-                            <ForgotPasswordLayout />
-
-                            <BtnDirectLayout
-                                type="third"
-                                url="/signin"
-                                text={btn_return_to_signin}
-                            />
-
                         </div>
                     </form>
                 </FormWrap>

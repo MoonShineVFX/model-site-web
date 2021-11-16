@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import Buttons from '../src/components/Buttons';
 import Checkbox from '../src/components/Checkbox';
@@ -24,6 +24,11 @@ const {
         text_enter_password,
         text_aggree_privacy,
     },
+    error: {
+        error_password_at_least_eight,
+        error_password_different,
+        error_pattern,
+    },
 } = deftag;
 
 const Register = () => {
@@ -33,8 +38,14 @@ const Register = () => {
         handleSubmit,
         register,
         formState: { errors },
+        watch,
     } = useForm();
 
+    // useRef
+    const password = useRef({});
+    password.current = watch('password', '');
+
+    // 送資料
     const handleReqData = (reqData) => {
 
         console.log('reqData:', reqData)
@@ -91,9 +102,14 @@ const Register = () => {
                                 placeholder={text_enter_password}
                                 {...register('password', {
                                     required: true,
-                                    // minLength: 8,
-                                    // maxLength: 20,
-                                    pattern: /^(?=.*\d)[0-9a-zA-Z!\u0022#$%&'()*+,./:;<=>?@[\]\^_`{|}~-]{8,}$/g,
+                                    minLength: {
+                                        value: 8,
+                                        message: error_password_at_least_eight,
+                                    },
+                                    pattern: {
+                                        value: /^(?=.*\d)[0-9a-zA-Z!\u0022#$%&'()*+,./:;<=>?@[\]\^_`{|}~-]{8,}$/g,
+                                        message: error_pattern,
+                                    },
                                 })}
                             />
                         </FormRow>
@@ -106,7 +122,10 @@ const Register = () => {
                                 type="password"
                                 name="confirm_password"
                                 placeholder={text_confirm_password}
-                                {...register('confirm_password', { required: true })}
+                                {...register('confirm_password', {
+                                    required: true,
+                                    validate: (value) => (value === password.current) || error_password_different,
+                                })}
                             />
                         </FormRow>
 
@@ -132,7 +151,6 @@ const Register = () => {
                                 url="/signin"
                                 text={btn_return_to_signin}
                             />
-
                         </div>
                     </form>
                 </FormWrap>

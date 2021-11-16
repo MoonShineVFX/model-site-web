@@ -56,6 +56,7 @@ const deftag = {
         error_required: '此欄位為必填',
         error_pattern: '格式有誤',
         error_password_different: '兩次輸入的密碼可能不同',
+        error_password_at_least_eight: '至少 8 碼',
     },
 };
 

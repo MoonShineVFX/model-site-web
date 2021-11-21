@@ -29,8 +29,19 @@ const ForgotPasswordLayout = styled('div')(({ theme }) => ({
     },
 }));
 
+// 重設密碼
+const ResetPasswordSuccessLayout = styled('div')(({ theme }) => ({
+    'p': {
+        margin: '100px 0 0',
+    },
+    'a': {
+        borderTop: '0',
+    },
+}));
+
 export {
     SignLayout,
     BtnDirectLayout,
     ForgotPasswordLayout,
+    ResetPasswordSuccessLayout,
 };

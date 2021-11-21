@@ -4,11 +4,7 @@ import Buttons from '../src/components/Buttons';
 import FormWrap, { FormRow, FormSuccessMesg } from '../src/components/FormWrap';
 
 import HeadTag from '../src/containers/HeadTag';
-import {
-    SignLayout,
-    BtnDirectLayout,
-} from '../src/components/member/memberSignLayout';
-
+import { SignLayout, BtnDirectLayout } from '../src/components/member/memberSignLayout';
 import deftag from '../src/utils/util.deftag';
 
 const {

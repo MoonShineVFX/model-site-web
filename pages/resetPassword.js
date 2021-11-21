@@ -1,15 +1,10 @@
-import { Fragment, useRef } from 'react';
+import { Fragment, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Buttons from '../src/components/Buttons';
-import Links from '../src/components/Links';
-import Checkbox from '../src/components/Checkbox';
-import FormWrap, { FormRow } from '../src/components/FormWrap';
+import FormWrap, { FormRow, FormSuccessMesg } from '../src/components/FormWrap';
 
 import HeadTag from '../src/containers/HeadTag';
-import {
-    SignLayout,
-} from '../src/components/member/memberSignLayout';
-
+import { SignLayout, BtnDirectLayout, ResetPasswordSuccessLayout } from '../src/components/member/memberSignLayout';
 import deftag from '../src/utils/util.deftag';
 
 const {
@@ -20,6 +15,8 @@ const {
         text_reset_password,
         text_confirm_password,
         text_new_password,
+        text_new_password_success,
+        btn_return_to_signin,
     },
     error: {
         error_password_different,
@@ -42,10 +39,14 @@ const Register = () => {
     const password = useRef({});
     password.current = watch('password', '');
 
+    // State
+    const [success, setSuccess] = useState(true);
+
     // 送資料
     const handleReqData = (reqData) => {
 
         console.log('reqData:', reqData)
+        setSuccess(true);
 
     };
 
@@ -55,52 +56,74 @@ const Register = () => {
             <HeadTag title={text_reset_password} />
 
             <SignLayout>
-                <FormWrap title={text_reset_password}>
-                    <form onSubmit={handleSubmit(handleReqData)}>
-                        <FormRow
-                            name="password"
-                            errors={errors}
-                        >
-                            <input
-                                type="password"
-                                name="password"
-                                placeholder={text_new_password}
-                                {...register('password', {
-                                    required: true,
-                                    minLength: {
-                                        value: 8,
-                                        message: error_password_at_least_eight,
-                                    },
-                                    pattern: {
-                                        value: /^(?=.*\d)[0-9a-zA-Z!\u0022#$%&'()*+,./:;<=>?@[\]\^_`{|}~-]{8,}$/g,
-                                        message: error_pattern,
-                                    },
-                                })}
-                            />
-                        </FormRow>
+                <FormWrap
+                    {...!success && { title: text_reset_password }}
+                >
+                    {
+                        success ? (
 
-                        <FormRow
-                            name="confirm_password"
-                            errors={errors}
-                        >
-                            <input
-                                type="password"
-                                name="confirm_password"
-                                placeholder={text_confirm_password}
-                                {...register('confirm_password', {
-                                    required: true,
-                                    validate: (value) => (value === password.current) || error_password_different,
-                                })}
-                            />
-                        </FormRow>
+                            <ResetPasswordSuccessLayout>
+                                <FormSuccessMesg mesg={text_new_password_success} />
 
-                        <div className="form-row form-row-btns">
-                            <Buttons
-                                type="submit"
-                                text={btn_submit}
-                            />
-                        </div>
-                    </form>
+                                <div className="form-row form-row-btns">
+                                    <BtnDirectLayout
+                                        url="/signin"
+                                        text={btn_return_to_signin}
+                                        className="reset-pawd-success"
+                                    />
+                                </div>
+                            </ResetPasswordSuccessLayout>
+
+                        ) : (
+
+                            <form onSubmit={handleSubmit(handleReqData)}>
+                                <FormRow
+                                    name="password"
+                                    errors={errors}
+                                >
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        placeholder={text_new_password}
+                                        {...register('password', {
+                                            required: true,
+                                            minLength: {
+                                                value: 8,
+                                                message: error_password_at_least_eight,
+                                            },
+                                            pattern: {
+                                                value: /^(?=.*\d)[0-9a-zA-Z!\u0022#$%&'()*+,./:;<=>?@[\]\^_`{|}~-]{8,}$/g,
+                                                message: error_pattern,
+                                            },
+                                        })}
+                                    />
+                                </FormRow>
+
+                                <FormRow
+                                    name="confirm_password"
+                                    errors={errors}
+                                >
+                                    <input
+                                        type="password"
+                                        name="confirm_password"
+                                        placeholder={text_confirm_password}
+                                        {...register('confirm_password', {
+                                            required: true,
+                                            validate: (value) => (value === password.current) || error_password_different,
+                                        })}
+                                    />
+                                </FormRow>
+
+                                <div className="form-row form-row-btns">
+                                    <Buttons
+                                        type="submit"
+                                        text={btn_submit}
+                                    />
+                                </div>
+                            </form>
+
+                        )
+                    }
                 </FormWrap>
             </SignLayout>
         </Fragment>

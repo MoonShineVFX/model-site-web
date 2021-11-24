@@ -1,15 +1,20 @@
-import { useEffect } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { styled } from '@mui/system';
 import { Toolbar, Box } from '@mui/material';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { ButtonLink } from '../components/Links';
+import Buttons from '../components/Buttons';
 import Logo from '../components/Logo';
 import FontIcon from '../components/FontIcon';
+import Cart from '../components/product/Cart';
 import Navbar from './Navbar';
+
+import { GlobalContext } from '../context/global.state';
 import deftag from '../utils/util.deftag';
 
 const {
     memberSign: { text_signin },
+    member: { my_account },
 } = deftag;
 
 //
@@ -41,11 +46,28 @@ const ShoppingCartLayout = styled('div')(({ theme }) => ({
 //
 const Header = () => {
 
-    // useEffect(() => {
+    // Context
+    const {
+        visible,
+        currEvent,
+        logged,
+        lightboxDispatch,
+    } = useContext(GlobalContext);
 
-    //     localStorage.getItem('cartItem');
+    // State
+    const [items, setItems] = useState({});
 
-    // }, []);
+    useEffect(() => {
+
+        setItems(JSON.parse(localStorage.getItem('cartItem')));
+
+    }, []);
+
+    const handleClickBox = (type = 'myAccount') => {
+
+        lightboxDispatch({ type: 'SHOW', currEvent: type });
+
+    };
 
     return (
 
@@ -60,16 +82,38 @@ const Header = () => {
                 <Box sx={{
                     display: { xs: 'flex', md: 'flex' },
                     alignItems: 'center',
+                    position: 'relative',
                 }}>
-                    <ShoppingCartLayout>
+                    <ShoppingCartLayout
+                        onClick={() => handleClickBox('cartList')}
+                    >
                         <FontIcon icon={faShoppingCart} />
-                        <span className="count">({0})</span>
+                        <span className="count">({Object.entries(items).length})</span>
                     </ShoppingCartLayout>
 
-                    <ButtonLink
-                        url="signin"
-                        text={text_signin}
-                    />
+                    {
+                        logged ? (
+
+                            <Buttons
+                                text={my_account}
+                                onClick={handleClickBox}
+                            />
+
+                        ) : (
+
+                            <ButtonLink
+                                url="/signin"
+                                text={text_signin}
+                            />
+
+                        )
+                    }
+
+                    {
+                        // 購物車
+                        visible &&
+                            ((currEvent === 'cartList') ? <Cart /> : 'my account')
+                    }
                 </Box>
             </HeaderLayout>
         </AppBarLayout>

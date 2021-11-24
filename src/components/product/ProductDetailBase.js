@@ -24,6 +24,7 @@ import {
 import { GlobalContext } from '../../context/global.state';
 import { ProductContext } from '../../context/product/product.state';
 import util from '../../utils/util';
+import useQuery from '../../utils/useQuery';
 import deftag from '../../utils/util.deftag';
 
 const { priceWithCommas, mappingTags } = util;
@@ -56,9 +57,13 @@ const ProductDetailBase = ({ pageData }) => {
 
     // console.log('pageData:', pageData);
 
+    // Router
+    const query = useQuery();
+
     // Context
     const {
         visible,
+        currEvent,
         tags,
         formStorageData,
         formStorageDispatch,
@@ -73,7 +78,7 @@ const ProductDetailBase = ({ pageData }) => {
 
     useEffect(() => {
 
-        document.body.style.overflow = visible ? 'hidden' : '';
+        document.body.style.overflow = (visible && currEvent === 'viewImg') ? 'hidden' : '';
 
     });
 
@@ -99,7 +104,18 @@ const ProductDetailBase = ({ pageData }) => {
     // 加入購物車
     const handleAddToCart = () => {
 
-        console.log('add to cart');
+        // 未登入狀態用 localStorage 存
+        let cartItems = JSON.parse(localStorage.getItem('cartItem'));
+        let item = {
+            ...cartItems,
+            [query.id]: {
+                title: pageData.data.title,
+                imgUrl: pageData.data.imgUrl,
+                price: pageData.data.price,
+            },
+        };
+
+        localStorage.setItem('cartItem', JSON.stringify(item));
 
     };
 
@@ -259,7 +275,7 @@ const ProductDetailBase = ({ pageData }) => {
             </ItemsWrap>
 
             {
-                visible &&
+                (visible && currEvent === 'viewImg') &&
                     <ImageEnlarge
                         id={formStorageData.id}
                         imgUrl={formStorageData.imgUrl}
@@ -272,3 +288,8 @@ const ProductDetailBase = ({ pageData }) => {
 };
 
 export default ProductDetailBase;
+
+/**
+ * 加入購物車
+ * https://stackoverflow.com/questions/65523588/react-cart-with-context-and-localstorage
+ */

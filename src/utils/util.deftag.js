@@ -7,6 +7,10 @@ const deftag = {
         btn_submit: '確認送出',
         btn_show_more: '顯示更多',
     },
+    header: {
+        text_cart_title: '購物車品項',
+        text_go_to_checkout: '前往結帳',
+    },
     memberSign: {
         text_signin: '登入',
         text_register: '註冊',
@@ -43,7 +47,11 @@ const deftag = {
         detail_option_format: '軟體格式',
         detail_option_renderer: '算圖引擎',
     },
-    member: {},
+    member: {
+        my_account: '我的帳號',
+        text_member_center: '會員中心',
+        text_logout: '登出',
+    },
     about: {
         support_model: '套模型',
         support_software: '種 3D 軟體格式',

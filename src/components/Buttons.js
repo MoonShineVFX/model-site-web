@@ -8,7 +8,7 @@ const ButtonLayout = styled(Button)(({ theme }) => ({
     color: theme.palette.secondary.main,
     backgroundColor: theme.palette.primary.main,
     display: 'block',
-    padding: '14px 40px',
+    padding: '10px 18px',
     '&:hover': {
         backgroundColor: theme.palette.primary.light,
     },

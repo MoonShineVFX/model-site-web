@@ -26,6 +26,7 @@ import { ProductContext } from '../../context/product/product.state';
 import util from '../../utils/util';
 import useQuery from '../../utils/useQuery';
 import deftag from '../../utils/util.deftag';
+import useLocalStorage from '../../utils/useLocalStorage';
 
 const { priceWithCommas, mappingTags } = util;
 
@@ -67,6 +68,7 @@ const ProductDetailBase = ({ pageData }) => {
         tags,
         formStorageData,
         formStorageDispatch,
+        globalDispatch,
         lightboxDispatch,
     } = useContext(GlobalContext);
 
@@ -75,6 +77,7 @@ const ProductDetailBase = ({ pageData }) => {
     // State
     const [selectedFormat, setSelectedFormat] = useState(null);
     const [selectedRender, setSelectedRender] = useState(null);
+    const [cartItem, setCartItem] = useLocalStorage('cartItem', {}); // 未登入狀態用 localStorage 存
 
     useEffect(() => {
 
@@ -104,10 +107,8 @@ const ProductDetailBase = ({ pageData }) => {
     // 加入購物車
     const handleAddToCart = () => {
 
-        // 未登入狀態用 localStorage 存
-        let cartItems = JSON.parse(localStorage.getItem('cartItem'));
         let item = {
-            ...cartItems,
+            ...cartItem,
             [query.id]: {
                 title: pageData.data.title,
                 imgUrl: pageData.data.imgUrl,
@@ -115,7 +116,12 @@ const ProductDetailBase = ({ pageData }) => {
             },
         };
 
-        localStorage.setItem('cartItem', JSON.stringify(item));
+        setCartItem(item);
+
+        globalDispatch({
+            type: 'add_cart',
+            payload: Object.entries(item).length,
+        });
 
     };
 
@@ -288,8 +294,3 @@ const ProductDetailBase = ({ pageData }) => {
 };
 
 export default ProductDetailBase;
-
-/**
- * 加入購物車
- * https://stackoverflow.com/questions/65523588/react-cart-with-context-and-localstorage
- */

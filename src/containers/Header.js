@@ -10,6 +10,7 @@ import Cart from '../components/product/Cart';
 import Navbar from './Navbar';
 
 import { GlobalContext } from '../context/global.state';
+import useLocalStorage from '../utils/useLocalStorage';
 import deftag from '../utils/util.deftag';
 
 const {
@@ -48,26 +49,38 @@ const Header = () => {
 
     // Context
     const {
-        visible,
-        currEvent,
         logged,
-        lightboxDispatch,
+        cartCount,
+        globalDispatch,
     } = useContext(GlobalContext);
 
     // State
-    const [items, setItems] = useState({});
+    const [cartItem, setCartItem] = useLocalStorage('cartItem');
+    const [isActive, setIsActive] = useState({});
+    const [target, setTarget] = useState('');
 
     useEffect(() => {
 
-        setItems(JSON.parse(localStorage.getItem('cartItem')));
+        globalDispatch({
+            type: 'add_cart',
+            payload: Object.entries(cartItem || {}).length,
+        });
 
-    }, []);
+    }, [cartItem, globalDispatch]);
 
-    const handleClickBox = (type = 'myAccount') => {
+    const handleClickBox = (type) => {
 
-        lightboxDispatch({ type: 'SHOW', currEvent: type });
+        console.log('type:', type)
+
+        setTarget(type);
+        setIsActive({
+            ...isActive,
+            [type]: !isActive[type],
+        });
 
     };
+
+    console.log('isActive:', isActive)
 
     return (
 
@@ -88,7 +101,7 @@ const Header = () => {
                         onClick={() => handleClickBox('cartList')}
                     >
                         <FontIcon icon={faShoppingCart} />
-                        <span className="count">({Object.entries(items).length})</span>
+                        <span className="count">({cartCount})</span>
                     </ShoppingCartLayout>
 
                     {
@@ -96,7 +109,7 @@ const Header = () => {
 
                             <Buttons
                                 text={my_account}
-                                onClick={handleClickBox}
+                                onClick={() => handleClickBox('myAccount')}
                             />
 
                         ) : (
@@ -111,8 +124,8 @@ const Header = () => {
 
                     {
                         // 購物車
-                        visible &&
-                            ((currEvent === 'cartList') ? <Cart /> : 'my account')
+                        isActive[target] &&
+                            ((target === 'cartList') ? <Cart /> : 'my account')
                     }
                 </Box>
             </HeaderLayout>

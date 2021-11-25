@@ -10,6 +10,7 @@ const deftag = {
     header: {
         text_cart_title: '購物車品項',
         text_go_to_checkout: '前往結帳',
+        text_empty_cart: '購物車是空的...',
     },
     memberSign: {
         text_signin: '登入',

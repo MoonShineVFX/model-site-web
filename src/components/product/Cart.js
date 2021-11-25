@@ -1,17 +1,19 @@
-import { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { Grid, Hidden } from '@mui/material';
+import { useEffect, useState, useContext } from 'react';
 import { styled } from '@mui/system';
 import Box from '../Box';
 import Links from '../Links';
-import Item from '../Item';
+import { GlobalContext } from '../../context/global.state';
 import util from '../../utils/util';
 import deftag from '../../utils/util.deftag';
 
 const { priceWithCommas } = util;
 
 const {
-    header: { text_cart_title, text_go_to_checkout },
+    header: {
+        text_cart_title,
+        text_go_to_checkout,
+        text_empty_cart,
+    },
 } = deftag;
 
 //
@@ -69,12 +71,15 @@ const ItemWrapLayout = styled(Links)(({ theme }) => ({
 //
 const Cart = () => {
 
+    // Context
+    const { logged } = useContext(GlobalContext);
+
     // State
     const [items, setItems] = useState({});
 
     useEffect(() => {
 
-        setItems(JSON.parse(localStorage.getItem('cartItem')));
+        setItems(localStorage.getItem('cartItem') ? JSON.parse(localStorage.getItem('cartItem')) : {});
 
     }, []);
 
@@ -84,47 +89,42 @@ const Cart = () => {
             <h4 className="title">{text_cart_title}</h4>
             <div className="items">
                 {
-                    Object.keys(items).map((id) => (
+                    Object.entries(items).length ? (
 
-                        <ItemWrapLayout
-                            key={id}
-                            url={`/product/${id}`}
-                            newPage
-                        >
-                            <div className="thumb">
-                                <img
-                                    src={items[id].imgUrl}
-                                    alt={items[id].title}
-                                    title={items[id].title}
-                                    width="100"
-                                    height="63"
-                                />
-                            </div>
-                            <div className="content">
-                                <h4 className="title">{items[id].title}</h4>
-                                <span className="price">{priceWithCommas(items[id].price)}</span>
-                            </div>
-                        </ItemWrapLayout>
+                        Object.keys(items).map((id) => (
 
-                    ))
+                            <ItemWrapLayout
+                                key={id}
+                                url={`/product/${id}`}
+                                newPage
+                            >
+                                <div className="thumb">
+                                    <img
+                                        src={items[id].imgUrl}
+                                        alt={items[id].title}
+                                        title={items[id].title}
+                                        width="100"
+                                        height="63"
+                                    />
+                                </div>
+                                <div className="content">
+                                    <h4 className="title">{items[id].title}</h4>
+                                    <span className="price">{priceWithCommas(items[id].price)}</span>
+                                </div>
+                            </ItemWrapLayout>
+
+                        ))
+
+                    ) : text_empty_cart
                 }
             </div>
             <div className="goToOrder">
-                <Links url="/order">{text_go_to_checkout}</Links>
+                <Links url={`/${logged ? 'order' : 'signin'}`}>{text_go_to_checkout}</Links>
             </div>
         </CartLayout>
 
     );
 
 };
-
-// Cart.defaultProps = {
-//     redirect: true,
-// };
-
-// Cart.propTypes = {
-//     redirect: PropTypes.bool,
-//     children: PropTypes.any,
-// };
 
 export default Cart;

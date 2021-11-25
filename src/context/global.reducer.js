@@ -20,12 +20,17 @@ const globalReducer = (state, { type, payload }) => {
                 tags: payload.tags,
                 user: payload.other,
                 logged: !!payload.other.userId,
+                // logged: false, // Test
+            };
+
+        case 'add_cart':
+            return {
+                ...state,
+                cartCount: payload,
             };
 
         default:
-            return {
-                ...state,
-            };
+            return { ...state };
     }
 
 };

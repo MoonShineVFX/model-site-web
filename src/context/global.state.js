@@ -13,6 +13,7 @@ const globalInitState = {
     tags: [],
     slideshowActive: 0,
     logged: false,
+    cartCount: 0,
 };
 
 // Form values
@@ -40,6 +41,7 @@ const GlobalProvider = ({ children }) => {
         tags,
         slideshowActive,
         logged,
+        cartCount,
     } = globalState;
 
     const { formStorageData } = formStorageState;
@@ -73,6 +75,7 @@ const GlobalProvider = ({ children }) => {
             tags,
             slideshowActive,
             logged,
+            cartCount,
             getGlobalData,
 
             // Form 表單暫存

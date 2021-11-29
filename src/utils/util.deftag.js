@@ -52,6 +52,7 @@ const deftag = {
         my_account: '我的帳號',
         text_member_center: '會員中心',
         text_logout: '登出',
+        text_order_title: '商品購買',
     },
     about: {
         support_model: '套模型',

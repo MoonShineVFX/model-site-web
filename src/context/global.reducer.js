@@ -1,6 +1,9 @@
 // Global
 const globalReducer = (state, { type, payload }) => {
 
+    // console.log('state:', state.targetBox)
+    // console.log('payload:', payload)
+
     switch (type) {
         case 'page':
             return {
@@ -27,6 +30,15 @@ const globalReducer = (state, { type, payload }) => {
             return {
                 ...state,
                 cartCount: payload,
+            };
+
+        case 'target_box':
+            return {
+                ...state,
+                targetBox: {
+                    ...state.targetBox,
+                    [payload]: !state.targetBox[payload],
+                },
             };
 
         default:

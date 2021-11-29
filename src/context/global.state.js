@@ -14,6 +14,10 @@ const globalInitState = {
     slideshowActive: 0,
     logged: false,
     cartCount: 0,
+    targetBox: {
+        myAccount: false, // 我的帳號
+        cartList: false, // 購物車
+    },
 };
 
 // Form values
@@ -42,6 +46,7 @@ const GlobalProvider = ({ children }) => {
         slideshowActive,
         logged,
         cartCount,
+        targetBox,
     } = globalState;
 
     const { formStorageData } = formStorageState;
@@ -76,6 +81,7 @@ const GlobalProvider = ({ children }) => {
             slideshowActive,
             logged,
             cartCount,
+            targetBox,
             getGlobalData,
 
             // Form 表單暫存

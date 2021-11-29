@@ -51,12 +51,12 @@ const Header = () => {
     const {
         logged,
         cartCount,
+        targetBox,
         globalDispatch,
     } = useContext(GlobalContext);
 
     // State
     const [cartItem, setCartItem] = useLocalStorage('cartItem');
-    const [isActive, setIsActive] = useState({});
     const [target, setTarget] = useState('');
 
     useEffect(() => {
@@ -70,17 +70,13 @@ const Header = () => {
 
     const handleClickBox = (type) => {
 
-        console.log('type:', type)
-
         setTarget(type);
-        setIsActive({
-            ...isActive,
-            [type]: !isActive[type],
+        globalDispatch({
+            type: 'target_box',
+            payload: type,
         });
 
     };
-
-    console.log('isActive:', isActive)
 
     return (
 
@@ -124,7 +120,7 @@ const Header = () => {
 
                     {
                         // 購物車
-                        isActive[target] &&
+                        targetBox[target] &&
                             ((target === 'cartList') ? <Cart /> : 'my account')
                     }
                 </Box>

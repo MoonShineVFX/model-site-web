@@ -110,9 +110,9 @@ const ProductDetailBase = ({ pageData }) => {
         let item = {
             ...cartItem,
             [query.id]: {
-                title: pageData.data.title,
-                imgUrl: pageData.data.imgUrl,
-                price: pageData.data.price,
+                title: pageData.title,
+                imgUrl: pageData.imgUrl,
+                price: pageData.price,
             },
         };
 
@@ -133,9 +133,9 @@ const ProductDetailBase = ({ pageData }) => {
             <DetailWrapLayout>
                 <div className="detail-banner">
                     <img
-                        src={pageData.data.imgUrl}
-                        alt={pageData.data.title}
-                        title={pageData.data.title}
+                        src={pageData.imgUrl}
+                        alt={pageData.title}
+                        title={pageData.title}
                         width="1200"
                         height="396"
                     />
@@ -144,7 +144,7 @@ const ProductDetailBase = ({ pageData }) => {
                 <DetailContentLayout container>
                     <Grid item xs>
                         <div className="tags">
-                            {pageData.data.tags.map((id) => (
+                            {pageData.tags.map((id) => (
 
                                 <span
                                     key={id}
@@ -155,19 +155,19 @@ const ProductDetailBase = ({ pageData }) => {
 
                             ))}
                         </div>
-                        <h1 className="title">{pageData.data.title}</h1>
-                        <p className="description">{pageData.data.description}</p>
+                        <h1 className="title">{pageData.title}</h1>
+                        <p className="description">{pageData.description}</p>
                         <div>
                             <div className="label">模型數量</div>
-                            <p>{pageData.data.modelSum}</p>
+                            <p>{pageData.modelSum}</p>
                         </div>
                         <div>
                             <div className="label">檔案大小</div>
-                            <p>{pageData.data.fileSize}</p>
+                            <p>{pageData.fileSize}</p>
                         </div>
                         <div>
                             <div className="label">貼圖尺寸</div>
-                            <p>{pageData.data.perImgSize}</p>
+                            <p>{pageData.perImgSize}</p>
                         </div>
                     </Grid>
 
@@ -183,7 +183,7 @@ const ProductDetailBase = ({ pageData }) => {
                             <SelectOptLayout name="formats" onChange={handleSelected}>
                                 <option value="">{detail_option_format}</option>
                                 {
-                                    (pageData.data.formats).map(({ id, label }) => (
+                                    (pageData.formats).map(({ id, label }) => (
 
                                         <option
                                             key={id}
@@ -200,7 +200,7 @@ const ProductDetailBase = ({ pageData }) => {
                                 <option value="">{detail_option_renderer}</option>
                                 {
                                     // 有選取第一層才印第二層
-                                    selectedFormat && arrangeRenderOpts(pageData.data.formats)[selectedFormat].renderers.map(({ id, label }) => (
+                                    selectedFormat && arrangeRenderOpts(pageData.formats)[selectedFormat].renderers.map(({ id, label }) => (
 
                                         <option key={id} value={id}>{label}</option>
 
@@ -209,7 +209,7 @@ const ProductDetailBase = ({ pageData }) => {
                             </SelectOptLayout>
                         </div>
                         <p className="notice">{notice_message}</p>
-                        <h2 className="price">{priceWithCommas(pageData.data.price)}</h2>
+                        <h2 className="price">{priceWithCommas(pageData.price)}</h2>
                         <Buttons
                             text={button_add_to_card}
                             onClick={handleAddToCart}
@@ -228,7 +228,7 @@ const ProductDetailBase = ({ pageData }) => {
                     columnSpacing="80px"
                 >
                     {
-                        pageData.data.images.map(({ id, url }) => (
+                        pageData.images.map(({ id, url }) => (
 
                             <Grid
                                 key={id}
@@ -261,7 +261,7 @@ const ProductDetailBase = ({ pageData }) => {
             >
                 <Grid container spacing="30px">
                     {
-                        pageData.data.relativeProducts.map(({ id, title, price, imgUrl }) => (
+                        pageData.relativeProducts.map(({ id, title, price, imgUrl }) => (
 
                             <Grid
                                 key={id}

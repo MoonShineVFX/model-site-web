@@ -19,6 +19,7 @@ import deftag from '../src/utils/util.deftag';
 
 const {
     home: {
+        page_title,
         section_title_new_arrival,
         section_title_tutorial,
     },
@@ -35,11 +36,11 @@ const Home = ({ pageData }) => {
 
         <Fragment>
             {homeStyles}
-            <HeadTag title={pageData.title} />
+            <HeadTag title={page_title} />
 
-            <SlideShowWrapLayout data={pageData.data.banner}>
+            <SlideShowWrapLayout data={pageData.banner}>
                 {
-                    pageData.data.banner.map(({
+                    pageData.banner.map(({
                         id,
                         title,
                         description,
@@ -83,7 +84,7 @@ const Home = ({ pageData }) => {
             <ItemsWrap title={section_title_new_arrival} url="/product/list?page=1&cate=all">
                 <Grid container spacing="30px">
                     {
-                        pageData.data.newArrival.map(({ id, title, price, imgUrl }) => (
+                        pageData.newArrival.map(({ id, title, price, imgUrl }) => (
 
                             <Grid
                                 key={id}
@@ -108,7 +109,7 @@ const Home = ({ pageData }) => {
             <ItemsWrap title={section_title_tutorial} url="signin">
                 <ItemTutorialLayout>
                     {
-                        pageData.data.tutorial.map(({ id, title, description, imgUrl }) => (
+                        pageData.tutorial.map(({ id, title, description, imgUrl }) => (
 
                             <Links
                                 key={id}
@@ -161,10 +162,7 @@ export async function getServerSideProps () {
 
     return {
         props: {
-            pageData: {
-                title: '首頁',
-                data: data.data,
-            },
+            pageData: data.data,
         },
     };
 

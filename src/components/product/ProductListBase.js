@@ -28,6 +28,7 @@ import deftag from '../../utils/util.deftag';
 
 const {
     product: {
+        page_title,
         select_label,
         product_category,
     },
@@ -141,7 +142,7 @@ const ProductListBase = ({ pageData }) => {
     return (
 
         <Fragment>
-            <HeadTag title={pageData.title} />
+            <HeadTag title={page_title} />
 
             <GridLayout
                 container
@@ -195,12 +196,12 @@ const ProductListBase = ({ pageData }) => {
                         onChange={handleChangeTabMenu}
                     >
                         {
-                            Object.keys(pageData.data.category).map((key) => (
+                            Object.keys(pageData.category).map((key) => (
 
                                 <Tab
                                     key={key}
                                     value={key}
-                                    label={pageData.data.category[key]}
+                                    label={pageData.category[key]}
                                     onClick={() => handleClickTabMenu(key)}
                                 />
 
@@ -210,7 +211,7 @@ const ProductListBase = ({ pageData }) => {
 
                     <div className="tab-panel">
                         {
-                            Object.keys(pageData.data.category).map((key) => (
+                            Object.keys(pageData.category).map((key) => (
 
                                 <TabPanel
                                     key={key}
@@ -219,7 +220,7 @@ const ProductListBase = ({ pageData }) => {
                                 >
                                     <ItemWrapLayout>
                                         {
-                                            pageData.data.product.map(({
+                                            pageData.product.map(({
                                                 id,
                                                 title,
                                                 price,
@@ -246,9 +247,9 @@ const ProductListBase = ({ pageData }) => {
                     </div>
 
                     {
-                        (pageData.data.product.length > 40) &&
+                        (pageData.product.length > 40) &&
                             <Paginations
-                                length={pageData.data.product.length}
+                                length={pageData.product.length}
                                 currPage={+query.page}
                                 onChange={handleChangePage}
                             />

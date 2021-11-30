@@ -8,6 +8,8 @@ import Item from '../src/components/Item';
 import util from '../src/utils/util';
 import deftag from '../src/utils/util.deftag';
 
+const { tutorial: { page_title } } = deftag;
+
 //
 const TitleLayout = styled('h1')({
     fontSize: '2.15em',
@@ -23,50 +25,43 @@ const ItemWrapLayout = styled(Grid)({
 });
 
 //
-const Tutorial = ({ pageData }) => {
+const Tutorial = ({ pageData }) => (
 
-    const { tutorial } = pageData.data;
+    <Fragment>
+        <HeadTag title={page_title} />
+        <TitleLayout>{page_title}</TitleLayout>
 
-    return (
+        <ItemWrapLayout
+            container
+            rowSpacing="20px"
+            columnSpacing="36px"
+            component="section"
+        >
+            {
+                pageData.tutorial.map(({ id, title, imgUrl, link }) => (
 
-        <Fragment>
-            <HeadTag title={pageData.title} />
+                    <Grid
+                        key={id}
+                        item
+                        xs={12}
+                        md={3}
+                    >
+                        <Item
+                            type="product"
+                            url={link}
+                            width="273"
+                            height="161"
+                            data={{ title, imgUrl }}
+                            newPage
+                        />
+                    </Grid>
 
-            <TitleLayout>{deftag.tutorial.title}</TitleLayout>
+                ))
+            }
+        </ItemWrapLayout>
+    </Fragment>
 
-            <ItemWrapLayout
-                container
-                rowSpacing="20px"
-                columnSpacing="36px"
-                component="section"
-            >
-                {
-                    tutorial.map(({ id, title, imgUrl, link }) => (
-
-                        <Grid
-                            key={id}
-                            item
-                            xs={12}
-                            md={3}
-                        >
-                            <Item
-                                type="product"
-                                url={link}
-                                width="273"
-                                height="161"
-                                data={{ title, imgUrl }}
-                                newPage
-                            />
-                        </Grid>
-
-                    ))
-                }
-            </ItemWrapLayout>
-        </Fragment>
-
-    );
-
-};
+);
 
 export default Tutorial;
 
@@ -88,10 +83,7 @@ export async function getServerSideProps () {
 
     return {
         props: {
-            pageData: {
-                title: '文件',
-                data: data.data,
-            },
+            pageData: data.data,
         },
     };
 

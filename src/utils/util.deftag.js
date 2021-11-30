@@ -35,10 +35,12 @@ const deftag = {
         text_email_sent: '已成功發送至你輸入的電子信箱',
     },
     home: {
+        page_title: '首頁',
         section_title_new_arrival: '新品',
         section_title_tutorial: '教學文件',
     },
     product: {
+        page_title: '商店',
         select_label: '標籤篩選',
         product_category: '商品分類',
         detail_section_title1: '商品內容展示圖',
@@ -52,15 +54,22 @@ const deftag = {
         my_account: '我的帳號',
         text_member_center: '會員中心',
         text_logout: '登出',
+    },
+    order: {
         text_order_title: '商品購買',
+        btn_confirm_order: '送出訂單',
+        section_title: '商品確認',
+        text_title_format: '軟體格式：',
+        text_title_render: '算圖引擎：',
     },
     about: {
+        page_title: '關於我們',
         support_model: '套模型',
         support_software: '種 3D 軟體格式',
         support_render: '個以上算圖引擎支援',
     },
     tutorial: {
-        title: '網站使用文件',
+        page_title: '網站使用文件',
     },
     error: {
         error_required: '此欄位為必填',

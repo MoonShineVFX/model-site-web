@@ -59,12 +59,12 @@ const SupportLayout = styled(Grid)(({ theme }) => ({
 //
 const About = ({ pageData }) => {
 
-    const { title, description, imgUrl, support } = pageData.data;
+    const { title, description, imgUrl, support } = pageData;
 
     return (
 
         <Fragment>
-            <HeadTag title={pageData.title} />
+            <HeadTag title={about.page_title} />
 
             <BannerLayout>
                 <div className="thumb">
@@ -125,10 +125,7 @@ export async function getServerSideProps () {
 
     return {
         props: {
-            pageData: {
-                title: '關於我們',
-                data: data.data,
-            },
+            pageData: data.data,
         },
     };
 

@@ -33,10 +33,7 @@ export async function getServerSideProps ({ params }) {
 
     return {
         props: {
-            pageData: {
-                title: data.data.title,
-                data: data.data,
-            },
+            pageData: data.data,
         },
     };
 

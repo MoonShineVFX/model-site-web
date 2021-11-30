@@ -31,10 +31,7 @@ export async function getServerSideProps ({ query }) {
 
     return {
         props: {
-            pageData: {
-                title: '商店',
-                data: data.data,
-            },
+            pageData: data.data,
         },
     };
 

@@ -45,12 +45,15 @@ const SectionLayout = styled('section')(({ theme }) => ({
 const CartListLayout = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.card.main,
     borderRadius: theme.borderRadius,
+    padding: '40px 30px',
 }));
 
 // 商品
 const ItemLayout = styled(Links)(({ theme }) => ({
     color: theme.palette.textColor,
     textDecoration: 'none',
+    display: 'flex',
+    marginBottom: '30px',
     '.item-action span': {
         color: '#ce5151',
         padding: '4px',
@@ -180,3 +183,8 @@ export async function getServerSideProps () {
     };
 
 };
+
+/**
+ * window 找不到的解法
+ * https://dev.to/vvo/how-to-solve-window-is-not-defined-errors-in-react-and-next-js-5f97
+ */

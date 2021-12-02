@@ -71,6 +71,12 @@ const styles = {
         fontWeight: 'bold',
         fontFamily: 'Roboto',
     },
+    '.web-line-clamp': {
+        display: '-webkit-box',
+        WebkitLineClamp: theme.lineClamp(),
+        WebkitBoxOrient: 'vertical',
+        overflow: 'hidden',
+    },
 };
 
 //

@@ -61,6 +61,7 @@ const deftag = {
         section_title: '商品確認',
         text_title_format: '軟體格式：',
         text_title_render: '算圖引擎：',
+        text_notice: '送出訂單後會離開此頁面。'
     },
     about: {
         page_title: '關於我們',

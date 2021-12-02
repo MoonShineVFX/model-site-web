@@ -20,6 +20,7 @@ const {
         section_title,
         text_title_format,
         text_title_render,
+        text_notice,
     },
 } = deftag;
 
@@ -30,16 +31,31 @@ const TitleLayout = styled('h1')({
 });
 
 //
-const SectionLayout = styled('section')(({ theme }) => ({
+const SectionLayout = styled('section')({
     maxWidth: '760px',
     margin: '0 auto',
-    '.title': {
+    '.title-large': {
         fontSize: '1.25em',
         fontWeight: 'normal',
         marginBottom: '30px',
-        opacity: 0.8,
+        opacity: '0.8',
     },
-}));
+    '.btn-action': {
+        textAlign: 'center',
+        'p': {
+            marginTop: '20px',
+            opacity: '0.6',
+        },
+    },
+    '.model-button': {
+        width: '100%',
+        maxWidth: '480px',
+        fontSize: '1.25em',
+        borderRadius: '40px',
+        margin: '40px auto 0',
+        padding: '22px 10px',
+    },
+});
 
 // 購物車
 const CartListLayout = styled('div')(({ theme }) => ({
@@ -54,9 +70,41 @@ const ItemLayout = styled(Links)(({ theme }) => ({
     textDecoration: 'none',
     display: 'flex',
     marginBottom: '30px',
-    '.item-action span': {
-        color: '#ce5151',
-        padding: '4px',
+    '.item-cell': {
+        display: 'flex',
+        '> *': {
+            flex: '1',
+        },
+        '&.right': {
+            alignItems: 'center',
+        },
+    },
+    '.thumb': {
+        maxWidth: '103px',
+        height: '66px',
+        borderRadius: '10px',
+        marginRight: '20px',
+        overflow: 'hidden',
+    },
+    '.info': {
+        width: 'calc(100% - 103px)',
+        fontSize: '0.9em',
+        '> *:not(.title)': {
+            opacity: '0.6',
+        },
+    },
+    '.title': {
+        fontSize: '1.2em',
+        margin: '0',
+        WebkitLineClamp: theme.lineClamp(1),
+    },
+    '.action': {
+        textAlign: 'right',
+        'span': {
+            fontSize: '1.2em',
+            color: '#ce5151',
+            padding: '4px',
+        },
     },
 }));
 
@@ -77,29 +125,46 @@ const Item = ({
         url={`/product/${id}`}
         newPage
     >
-        <div className="item-thumb">
-            <img
-                src={imgUrl}
-                alt={title}
-                title={title}
-                width="103"
-                height="66"
-            />
-        </div>
+        <Grid
+            container
+            alignItems="center"
+            columnSpacing="20px"
+        >
+            <Grid
+                item
+                xs={8}
+                className="item-cell"
+            >
+                <div className="thumb">
+                    <img
+                        src={imgUrl}
+                        alt={title}
+                        title={title}
+                        width="103"
+                        height="66"
+                    />
+                </div>
 
-        <div className="item-info">
-            <h3 className="title">{title}</h3>
-            <div>{`${text_title_format}${format}`}</div>
-            <div>{`${text_title_render}${render}`}</div>
-        </div>
+                <div className="info">
+                    <h4 className="web-line-clamp title" title={title}>{title}</h4>
+                    <div>{`${text_title_format}${format}`}</div>
+                    <div>{`${text_title_render}${render}`}</div>
+                </div>
+            </Grid>
 
-        <div className="item-price">{priceWithCommas(price)}</div>
-
-        <div className="item-action">
-            <span onClick={onClick}>
-                <FontIcon icon={faTimes} />
-            </span>
-        </div>
+            <Grid
+                item
+                xs={4}
+                className="item-cell right"
+            >
+                <div className="price">{priceWithCommas(price)}</div>
+                <div className="action">
+                    <span onClick={onClick}>
+                        <FontIcon icon={faTimes} />
+                    </span>
+                </div>
+            </Grid>
+        </Grid>
     </ItemLayout>
 
 );
@@ -131,7 +196,7 @@ const Order = ({ pageData }) => {
             <TitleLayout>{text_order_title}</TitleLayout>
 
             <SectionLayout>
-                <h3 className="title">{section_title}</h3>
+                <h3 className="title-large">{section_title}</h3>
 
                 <CartListLayout>
                     {
@@ -147,10 +212,14 @@ const Order = ({ pageData }) => {
                     }
                 </CartListLayout>
 
-                <Buttons
-                    text={btn_confirm_order}
-                    onClick={handleClickOrder}
-                />
+                <div className="btn-action">
+                    <Buttons
+                        text={btn_confirm_order}
+                        onClick={handleClickOrder}
+                    />
+
+                    <p>{text_notice}</p>
+                </div>
             </SectionLayout>
         </Fragment>
 

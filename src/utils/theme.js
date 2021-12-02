@@ -22,6 +22,7 @@ const button = {
 };
 
 export default createTheme({
+    lineClamp: (line = 2) => line,
     spacing: 4,
     borderRadius: '30px',
     palette: {

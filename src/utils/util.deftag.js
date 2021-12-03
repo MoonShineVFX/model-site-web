@@ -55,13 +55,13 @@ const deftag = {
         text_member_center: '會員中心',
         text_logout: '登出',
     },
-    order: {
+    cart: {
         text_order_title: '商品購買',
         btn_confirm_order: '送出訂單',
         section_title: '商品確認',
         text_title_format: '軟體格式：',
         text_title_render: '算圖引擎：',
-        text_notice: '送出訂單後會離開此頁面。'
+        text_notice: '送出訂單後將會離開此頁面。'
     },
     about: {
         page_title: '關於我們',

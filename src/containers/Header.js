@@ -6,7 +6,7 @@ import { ButtonLink } from '../components/Links';
 import Buttons from '../components/Buttons';
 import Logo from '../components/Logo';
 import FontIcon from '../components/FontIcon';
-import Cart from '../components/product/Cart';
+import Cart from '../components/member/Cart';
 import Navbar from './Navbar';
 
 import { GlobalContext } from '../context/global.state';

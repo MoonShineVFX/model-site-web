@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { styled } from '@mui/system';
 import HeadTag from '../src/containers/HeadTag';
+import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
 import deftag from '../src/utils/util.deftag';
 
@@ -60,6 +61,15 @@ const SupportLayout = styled(Grid)(({ theme }) => ({
 const About = ({ pageData }) => {
 
     const { title, description, imgUrl, support } = pageData;
+
+    // Context
+    const { globalDispatch } = useContext(GlobalContext);
+
+    useEffect(() => {
+
+        globalDispatch({ type: 'target_box', payload: '' });
+
+    }, []);
 
     return (
 

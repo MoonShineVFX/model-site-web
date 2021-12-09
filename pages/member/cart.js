@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
@@ -12,6 +12,7 @@ import {
     ItemLayout,
 } from '../../src/components/member/cartLayout';
 
+import { GlobalContext } from '../../src/context/global.state';
 import util from '../../src/utils/util';
 import deftag from '../../src/utils/util.deftag';
 
@@ -106,9 +107,18 @@ const Item = ({
 );
 
 //
-const Order = ({ pageData }) => {
+const Cart = ({ pageData }) => {
 
     // console.log('pageData:', pageData)
+
+    // Context
+    const { globalDispatch } = useContext(GlobalContext);
+
+    useEffect(() => {
+
+        globalDispatch({ type: 'target_box', payload: '' });
+
+    }, []);
 
     //
     const handleRemoveItem = (e) => {
@@ -175,7 +185,7 @@ const Order = ({ pageData }) => {
 
 };
 
-export default Order;
+export default Cart;
 
 export async function getServerSideProps () {
 
@@ -200,8 +210,3 @@ export async function getServerSideProps () {
     };
 
 };
-
-/**
- * window 找不到的解法
- * https://dev.to/vvo/how-to-solve-window-is-not-defined-errors-in-react-and-next-js-5f97
- */

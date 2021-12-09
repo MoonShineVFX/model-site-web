@@ -69,7 +69,7 @@ const ProductListBase = ({ pageData }) => {
     const query = useQuery();
 
     // Context
-    const { tags } = useContext(GlobalContext);
+    const { tags, globalDispatch } = useContext(GlobalContext);
     const { productList } = useContext(ProductContext);
 
     // State
@@ -83,6 +83,8 @@ const ProductListBase = ({ pageData }) => {
 
         // 沒有 tag 也不要丟空值
         if (query.tag) setSelectedTag(arrangeTags(query.tag));
+
+        globalDispatch({ type: 'target_box', payload: '' });
 
     }, []);
 

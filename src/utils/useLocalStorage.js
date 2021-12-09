@@ -41,6 +41,6 @@ export default function useLocalStorage (key, initVal) {
 }
 
 /**
- * 加入購物車
- * https://stackoverflow.com/questions/65523588/react-cart-with-context-and-localstorage
+ * window 找不到的解法
+ * https://dev.to/vvo/how-to-solve-window-is-not-defined-errors-in-react-and-next-js-5f97
  */

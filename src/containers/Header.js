@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useContext } from 'react';
 import { styled } from '@mui/system';
 import { Toolbar, Box } from '@mui/material';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
@@ -6,8 +6,9 @@ import { ButtonLink } from '../components/Links';
 import Buttons from '../components/Buttons';
 import Logo from '../components/Logo';
 import FontIcon from '../components/FontIcon';
-import Cart from '../components/member/Cart';
 import Navbar from './Navbar';
+import Cart from '../components/member/Cart';
+import MyAccount from '../components/member/MyAccount';
 
 import { GlobalContext } from '../context/global.state';
 import useLocalStorage from '../utils/useLocalStorage';
@@ -44,6 +45,22 @@ const ShoppingCartLayout = styled('div')(({ theme }) => ({
     },
 }));
 
+// 購物車 || 我的帳號
+const renderBoxComp = (type) => {
+
+    switch (type) {
+        case 'cartList':
+            return <Cart />;
+
+        case 'myAccount':
+            return <MyAccount />;
+
+        default:
+            return null;
+    }
+
+};
+
 //
 const Header = () => {
 
@@ -57,7 +74,6 @@ const Header = () => {
 
     // State
     const [cartItem, setCartItem] = useLocalStorage('cartItem');
-    const [target, setTarget] = useState('');
 
     useEffect(() => {
 
@@ -70,10 +86,9 @@ const Header = () => {
 
     const handleClickBox = (type) => {
 
-        setTarget(type);
         globalDispatch({
             type: 'target_box',
-            payload: type,
+            payload: (type !== targetBox) ? type : '',
         });
 
     };
@@ -118,11 +133,7 @@ const Header = () => {
                         )
                     }
 
-                    {
-                        // 購物車
-                        targetBox[target] &&
-                            ((target === 'cartList') ? <Cart /> : 'my account')
-                    }
+                    {renderBoxComp(targetBox)}
                 </Box>
             </HeaderLayout>
         </AppBarLayout>

@@ -35,10 +35,7 @@ const globalReducer = (state, { type, payload }) => {
         case 'target_box':
             return {
                 ...state,
-                targetBox: {
-                    ...state.targetBox,
-                    [payload]: !state.targetBox[payload],
-                },
+                targetBox: payload,
             };
 
         default:

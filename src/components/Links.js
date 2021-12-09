@@ -35,11 +35,12 @@ const ButtonLayout = styled(Button)(({ theme }) => ({
 }));
 
 //
-const Links = ({ url, newPage, className, children, ...rest }) => (
+const Links = ({ url, newPage, title, className, children, ...rest }) => (
 
     <Link href={url}>
         <a
             href={url}
+            title={title}
             className={className}
             {...newPage && { target: '_blank'}}
             {...rest}
@@ -75,6 +76,7 @@ Links.defaultProps = {
 Links.propTypes = {
     url: PropTypes.string.isRequired,
     newPage: PropTypes.bool,
+    title: PropTypes.string,
     className: PropTypes.string,
     children: PropTypes.any,
 };

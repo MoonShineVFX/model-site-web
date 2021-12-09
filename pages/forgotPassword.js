@@ -1,10 +1,11 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Buttons from '../src/components/Buttons';
 import FormWrap, { FormRow, FormSuccessMesg } from '../src/components/FormWrap';
 
 import HeadTag from '../src/containers/HeadTag';
 import { SignLayout, BtnDirectLayout } from '../src/components/member/memberSignLayout';
+import { GlobalContext } from '../src/context/global.state';
 import deftag from '../src/utils/util.deftag';
 
 const {
@@ -18,6 +19,15 @@ const {
 } = deftag;
 
 const ForgotPassword = () => {
+
+    // Context
+    const { globalDispatch } = useContext(GlobalContext);
+
+    useEffect(() => {
+
+        globalDispatch({ type: 'target_box', payload: '' });
+
+    }, []);
 
     // React Hook Form
     const {

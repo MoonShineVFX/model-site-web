@@ -14,10 +14,7 @@ const globalInitState = {
     slideshowActive: 0,
     logged: false,
     cartCount: 0,
-    targetBox: {
-        myAccount: false, // 我的帳號
-        cartList: false, // 購物車
-    },
+    targetBox: '',
 };
 
 // Form values

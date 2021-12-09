@@ -1,10 +1,18 @@
-import { Fragment, useRef, useState } from 'react';
+import {
+    Fragment,
+    useRef,
+    useContext,
+    useEffect,
+    useState,
+} from 'react';
+
 import { useForm } from 'react-hook-form';
 import Buttons from '../src/components/Buttons';
 import FormWrap, { FormRow, FormSuccessMesg } from '../src/components/FormWrap';
 
 import HeadTag from '../src/containers/HeadTag';
 import { SignLayout, BtnDirectLayout, ResetPasswordSuccessLayout } from '../src/components/member/memberSignLayout';
+import { GlobalContext } from '../src/context/global.state';
 import deftag from '../src/utils/util.deftag';
 
 const {
@@ -26,6 +34,15 @@ const {
 } = deftag;
 
 const Register = () => {
+
+    // Context
+    const { globalDispatch } = useContext(GlobalContext);
+
+    useEffect(() => {
+
+        globalDispatch({ type: 'target_box', payload: '' });
+
+    }, []);
 
     // React Hook Form
     const {

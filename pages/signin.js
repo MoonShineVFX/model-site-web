@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import SigninGoogle from '../src/components/third-party/SigninGoogle';
 import Buttons from '../src/components/Buttons';
@@ -12,6 +12,7 @@ import {
     ForgotPasswordLayout,
 } from '../src/components/member/memberSignLayout';
 
+import { GlobalContext } from '../src/context/global.state';
 import deftag from '../src/utils/util.deftag';
 
 const {
@@ -27,6 +28,15 @@ const {
 
 const Signin = () => {
 
+    // Context
+    const { globalDispatch } = useContext(GlobalContext);
+
+    useEffect(() => {
+
+        globalDispatch({ type: 'target_box', payload: '' });
+
+    }, []);
+
     // React Hook Form
     const {
         handleSubmit,
@@ -34,6 +44,7 @@ const Signin = () => {
         formState: { errors },
     } = useForm();
 
+    // 送資料
     const handleReqData = (reqData) => {
 
         console.log('reqData:', reqData)
@@ -86,7 +97,10 @@ const Signin = () => {
                             <SigninGoogle />
 
                             <ForgotPasswordLayout>
-                                <Links url="/forgotPassword">
+                                <Links
+                                    url="/forgotPassword"
+                                    title={text_forgot_password}
+                                >
                                     {text_forgot_password}
                                 </Links>
                             </ForgotPasswordLayout>

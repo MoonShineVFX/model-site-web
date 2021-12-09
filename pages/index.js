@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import {
     homeStyles,
@@ -30,7 +30,13 @@ const Home = ({ pageData }) => {
     // console.log('pageData:', pageData);
 
     // Context
-    const { slideshowActive } = useContext(GlobalContext);
+    const { slideshowActive, globalDispatch } = useContext(GlobalContext);
+
+    useEffect(() => {
+
+        globalDispatch({ type: 'target_box', payload: '' });
+
+    }, []);
 
     return (
 
@@ -57,6 +63,7 @@ const Home = ({ pageData }) => {
                                 <Links
                                     url="/signin"
                                     className="item"
+                                    title={title}
                                     newPage
                                 >
                                     <img
@@ -114,6 +121,7 @@ const Home = ({ pageData }) => {
                             <Links
                                 key={id}
                                 url="/signin"
+                                title={title}
                                 className="itemWrap"
                                 newPage
                             >

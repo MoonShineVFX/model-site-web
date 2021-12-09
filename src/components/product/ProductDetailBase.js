@@ -82,8 +82,9 @@ const ProductDetailBase = ({ pageData }) => {
     useEffect(() => {
 
         document.body.style.overflow = (visible && currEvent === 'viewImg') ? 'hidden' : '';
+        globalDispatch({ type: 'target_box', payload: '' });
 
-    });
+    }, []);
 
     // 軟體格式 + 算圖引擎
     const handleSelected = ({ target: { name, value } }) => {

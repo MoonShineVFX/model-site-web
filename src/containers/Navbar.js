@@ -54,6 +54,7 @@ const Navbar = () => (
                 <Links
                     key={key}
                     url={`/${key}`}
+                    title={text}
                 >
                     {text}
                 </Links>

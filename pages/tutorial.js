@@ -1,10 +1,11 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { styled } from '@mui/system';
 
 import HeadTag from '../src/containers/HeadTag';
 import Item from '../src/components/Item';
 
+import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
 import deftag from '../src/utils/util.deftag';
 
@@ -25,43 +26,56 @@ const ItemWrapLayout = styled(Grid)({
 });
 
 //
-const Tutorial = ({ pageData }) => (
+const Tutorial = ({ pageData }) => {
 
-    <Fragment>
-        <HeadTag title={page_title} />
-        <TitleLayout>{page_title}</TitleLayout>
+    // Context
+    const { globalDispatch } = useContext(GlobalContext);
 
-        <ItemWrapLayout
-            container
-            rowSpacing="20px"
-            columnSpacing="36px"
-            component="section"
-        >
-            {
-                pageData.tutorial.map(({ id, title, imgUrl, link }) => (
+    useEffect(() => {
 
-                    <Grid
-                        key={id}
-                        item
-                        xs={12}
-                        md={3}
-                    >
-                        <Item
-                            type="product"
-                            url={link}
-                            width="273"
-                            height="161"
-                            data={{ title, imgUrl }}
-                            newPage
-                        />
-                    </Grid>
+        globalDispatch({ type: 'target_box', payload: '' });
 
-                ))
-            }
-        </ItemWrapLayout>
-    </Fragment>
+    }, []);
 
-);
+    return (
+
+        <Fragment>
+            <HeadTag title={page_title} />
+            <TitleLayout>{page_title}</TitleLayout>
+
+            <ItemWrapLayout
+                container
+                rowSpacing="20px"
+                columnSpacing="36px"
+                component="section"
+            >
+                {
+                    pageData.tutorial.map(({ id, title, imgUrl, link }) => (
+
+                        <Grid
+                            key={id}
+                            item
+                            xs={12}
+                            md={3}
+                        >
+                            <Item
+                                type="product"
+                                url={link}
+                                width="273"
+                                height="161"
+                                data={{ title, imgUrl }}
+                                newPage
+                            />
+                        </Grid>
+
+                    ))
+                }
+            </ItemWrapLayout>
+        </Fragment>
+
+    );
+
+};
 
 export default Tutorial;
 

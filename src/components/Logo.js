@@ -28,6 +28,7 @@ const Logo = ({ redirect, ...rest }) => (
         <Links
             {...redirect && { url: '/' }}
             className={`logo-text ${redirect ? '' : 'pure-text'}`}
+            title="Moonshine Logo"
         >
             {text_logo}
         </Links>

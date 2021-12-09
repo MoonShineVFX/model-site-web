@@ -119,7 +119,12 @@ const Cart = () => {
                 }
             </div>
             <div className="goToOrder">
-                <Links url={`/${logged ? 'member/cart' : 'signin'}`}>{text_go_to_checkout}</Links>
+                <Links
+                    url={`/${logged ? 'member/cart' : 'signin'}`}
+                    title={text_go_to_checkout}
+                >
+                    {text_go_to_checkout}
+                </Links>
             </div>
         </CartLayout>
 

@@ -57,7 +57,7 @@ const Register = () => {
     password.current = watch('password', '');
 
     // State
-    const [success, setSuccess] = useState(true);
+    const [success, setSuccess] = useState(false);
 
     // 送資料
     const handleReqData = (reqData) => {

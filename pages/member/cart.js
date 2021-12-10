@@ -192,7 +192,7 @@ export async function getServerSideProps () {
     // const res = await util.serviceServer('/json/home/home.json');
     // const { data } = res;
 
-    const res = await fetch('http://localhost:1006/json/product/cart.json');
+    const res = await fetch('http://localhost:1006/json/member/cart.json');
     const data = await res.json();
 
     if (!data.result) {

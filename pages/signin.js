@@ -98,7 +98,7 @@ const Signin = () => {
 
                             <ForgotPasswordLayout>
                                 <Links
-                                    url="/forgotPassword"
+                                    url="/forgot_password"
                                     title={text_forgot_password}
                                 >
                                     {text_forgot_password}

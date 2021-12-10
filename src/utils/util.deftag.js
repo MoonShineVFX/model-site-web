@@ -54,6 +54,9 @@ const deftag = {
         my_account: '我的帳號',
         text_member_center: '會員中心',
         text_logout: '登出',
+        text_my_product: '我的模型庫',
+        text_order_record: '訂單記錄',
+        text_account_setting: '修改會員資料',
     },
     cart: {
         text_order_title: '商品購買',

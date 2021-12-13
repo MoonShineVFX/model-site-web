@@ -6,6 +6,7 @@ const deftag = {
         text_menu_tutorial: '文件',
         btn_submit: '確認送出',
         btn_show_more: '顯示更多',
+        text_item_unit: '項',
     },
     header: {
         text_cart_title: '購物車品項',
@@ -57,6 +58,17 @@ const deftag = {
         text_my_product: '我的模型庫',
         text_order_record: '訂單記錄',
         text_account_setting: '修改會員資料',
+    },
+    orderRecord: {
+        text_status_wait: '等待付款',
+        text_status_success: '交易成功',
+        text_status_fail: '交易失敗',
+        text_status_cancel: '取消交易',
+        text_order_number: '訂單編號',
+        text_order_date: '訂單日期',
+        text_order_status: '訂單狀態',
+        text_order_name: '訂單內容',
+        text_order_total_price: '總額',
     },
     cart: {
         text_order_title: '商品購買',

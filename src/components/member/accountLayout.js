@@ -1,5 +1,5 @@
 import { styled } from '@mui/system';
-import { Tabs, Tab } from '@mui/material';
+import { Tabs, Tab, Popover } from '@mui/material';
 import Links from '../Links';
 
 // Tab
@@ -9,7 +9,6 @@ const TabWrapLayout = styled('section')(({ theme }) => ({
     },
     '.tab-menu': {
         // border: '1px solid #FFF',
-        justifyContent: 'center',
         'button': {
             fontSize: '1em',
             color: theme.palette.textColor,
@@ -21,6 +20,9 @@ const TabWrapLayout = styled('section')(({ theme }) => ({
             },
         },
     },
+    '.MuiTabs-flexContainer': {
+        justifyContent: 'center',
+    },
     '.second-title': {
         margin: '80px 0',
     },
@@ -28,33 +30,54 @@ const TabWrapLayout = styled('section')(({ theme }) => ({
 
 //
 const TabPanelLayout = styled('div')({
-    maxWidth: '900px',
+    maxWidth: '1000px',
     margin: 'auto',
-    border: '1px solid #FFF',
 });
 
 // 我的模型庫
-const OrderRecordLayout = styled('div')(({ theme }) => ({
-    // minWidth: '150px',
-    // top: '60px',
-    // right: '30px',
-    // '.menu-item': {
-    //     lineHeight: '1',
-    //     color: theme.palette.textColor,
-    //     textDecoration: 'none',
-    //     display: 'block',
-    //     padding: '20px 30px',
-    //     ':not(:last-child)': {
-    //         borderBottom: `1px solid ${theme.palette.bgColor}`,
-    //     },
-    // },
-}));
 
 // 訂單紀錄
+const OrderRecordLayout = styled('div')(({ theme }) => ({
+    border: `1px solid ${theme.palette.border.dark}`,
+    '.row-head': {
+
+    },
+    '.item-row': {
+        display: 'flex',
+        '&:not(:last-child)': {
+            borderBottom: `1px solid ${theme.palette.border.dark}`,
+        },
+        '&:not(.row-head) .cell-name': {
+            textDecoration: 'underline',
+        },
+    },
+    '.item-cell': {
+        flex: '1',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '16px 20px',
+        '&:not(:last-child)': {
+            borderRight: `1px solid ${theme.palette.border.dark}`,
+        },
+        '&.cell-160': {
+            maxWidth: '160px',
+        },
+    },
+}));
+
+// Popover
+const PopoverLayout = styled(Popover)(({ theme }) => ({
+    '.MuiPaper-root': {
+        padding: '10px',
+    },
+}));
+
 // 修改會員資料
 
 export {
     TabWrapLayout,
     TabPanelLayout,
     OrderRecordLayout,
+    PopoverLayout,
 };

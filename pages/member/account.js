@@ -76,7 +76,7 @@ const Account = ({ pageData }) => {
     return (
 
         <Fragment>
-            <HeadTag title={`${text_member_center}-${types[type]}`} />
+            <HeadTag title={`${text_member_center}-${types[type].title}`} />
             <TitleLayout>{text_member_center}</TitleLayout>
 
             <TabWrapLayout>

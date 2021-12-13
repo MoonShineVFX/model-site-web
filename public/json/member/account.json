@@ -7,30 +7,38 @@
             {
                 "id": 51654,
                 "orderNumber": "MSI-12456144",
-                "title": "未來科技系列 以及其它 1 項",
+                "name": "未來科技系列 以及其它 未來科技系列 以及其它",
+                "date": "2021-10-01T09:19:00",
                 "price": 1000,
-                "status": "paid"
+                "status": "wait",
+                "totalItems": 1
             },
             {
                 "id": 92814,
                 "orderNumber": "MSI-12456145",
-                "title": "未來科技系列 以及其它 1 項",
+                "name": "未來科技系列 以及其它",
+                "date": "2021-10-01T09:19:00",
                 "price": 1000,
-                "status": "paid"
+                "status": "success",
+                "totalItems": 2
             },
             {
                 "id": 92815,
                 "orderNumber": "MSI-12456146",
-                "title": "未來科技系列 以及其它 1 項",
+                "name": "未來科技系列 以及其它",
+                "date": "2021-10-01T09:19:00",
                 "price": 1000,
-                "status": "paid"
+                "status": "fail",
+                "totalItems": 3
             },
             {
                 "id": 92816,
                 "orderNumber": "MSI-12456147",
-                "title": "未來科技系列 以及其它 1 項",
+                "name": "未來科技系列 以及其它",
+                "date": "2021-10-01T09:19:00",
                 "price": 1000,
-                "status": "paid"
+                "status": "cancel",
+                "totalItems": 4
             }
         ]
     }

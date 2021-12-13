@@ -12,7 +12,7 @@ const {
 
 // 菜單
 const menus = {
-    myAccount: text_member_center,
+    account: text_member_center,
     logout: text_logout,
 };
 

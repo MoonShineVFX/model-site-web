@@ -47,8 +47,9 @@ const OrderRecordLayout = styled('div')(({ theme }) => ({
         '&:not(:last-child)': {
             borderBottom: `1px solid ${theme.palette.border.dark}`,
         },
-        '&:not(.row-head) .cell-name': {
+        '&:not(.row-head) .cell-quantity': {
             textDecoration: 'underline',
+            cursor: 'pointer',
         },
     },
     '.item-cell': {
@@ -60,8 +61,11 @@ const OrderRecordLayout = styled('div')(({ theme }) => ({
         '&:not(:last-child)': {
             borderRight: `1px solid ${theme.palette.border.dark}`,
         },
-        '&.cell-160': {
-            maxWidth: '160px',
+        '&.cell-80': {
+            maxWidth: '80px',
+        },
+        '&.cell-140': {
+            maxWidth: '140px',
         },
     },
 }));

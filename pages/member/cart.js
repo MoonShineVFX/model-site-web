@@ -23,8 +23,6 @@ const {
         text_order_title,
         btn_confirm_order,
         section_title,
-        text_title_format,
-        text_title_render,
         text_notice,
     },
 } = deftag;
@@ -62,8 +60,6 @@ const Item = ({
         title,
         price,
         imgUrl,
-        format,
-        render,
     },
 }) => (
 
@@ -86,8 +82,6 @@ const Item = ({
 
                     <div className="info">
                         <h4 className="web-line-clamp title" title={title}>{title}</h4>
-                        <div>{`${text_title_format}${format}`}</div>
-                        <div>{`${text_title_render}${render}`}</div>
                     </div>
                 </Fragment>
             )}

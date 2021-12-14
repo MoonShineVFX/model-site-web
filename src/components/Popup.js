@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useContext } from 'react';
 import { Popover } from '@mui/material';
 import { styled } from '@mui/system';
+import { GlobalContext } from '../context/global.state';
 
 //
 const PopupLayout = styled(Popover)(({ theme }) => ({
@@ -13,21 +13,24 @@ const PopupLayout = styled(Popover)(({ theme }) => ({
 //
 const Popup = ({ children, ...rest }) => {
 
-    // State
-    const [anchorEl, setAnchorEl] = useState(null);
+    // Context
+    const { targetPopup, globalDispatch } = useContext(GlobalContext);
+
+    // 關閉 popover
+    const handleClose = () => globalDispatch({ type: 'target_popup', payload: null });
 
     return (
 
         <PopupLayout
-            {...rest}
-            id={!!anchorEl ? 'simple-popover' : undefined}
-            open={!!anchorEl}
-            anchorEl={anchorEl}
-            // onClose={handleClose}
+            id={!!targetPopup ? 'simple-popover' : undefined}
+            open={!!targetPopup}
+            anchorEl={targetPopup}
+            onClose={handleClose}
             anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'center',
             }}
+            {...rest}
         >
             {children}
         </PopupLayout>
@@ -35,14 +38,5 @@ const Popup = ({ children, ...rest }) => {
     );
 
 };
-
-// Popup.defaultProps = {
-//     redirect: true,
-// };
-
-// Popup.propTypes = {
-//     redirect: PropTypes.bool,
-//     children: PropTypes.any,
-// };
 
 export default Popup;

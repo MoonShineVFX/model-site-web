@@ -68,14 +68,17 @@ const deftag = {
         text_order_date: '訂單日期',
         text_order_status: '訂單狀態',
         text_order_name: '訂單內容',
+        text_order_quantity: '數量',
         text_order_total_price: '總額',
+        text_order_payment: '付款方式',
+        text_order_invoice: '發票編號',
+        text_payment_credit: '信用卡',
+        text_payment_webATM: '網路 ATM',
     },
     cart: {
         text_order_title: '商品購買',
         btn_confirm_order: '送出訂單',
         section_title: '商品確認',
-        text_title_format: '軟體格式：',
-        text_title_render: '算圖引擎：',
         text_notice: '送出訂單後將會離開此頁面。'
     },
     about: {

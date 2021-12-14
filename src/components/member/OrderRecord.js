@@ -1,12 +1,14 @@
 import { Fragment, useContext, useState } from 'react';
-import { Popover } from '@mui/material';
+import Popup from '../Popup';
+import Links from '../Links';
 import {
     OrderRecordLayout,
-    PopoverLayout,
 } from '../member/accountLayout';
+
+import { GlobalContext } from '../../context/global.state';
 import util from '../../utils/util';
 import deftag from '../../utils/util.deftag';
-import { GlobalContext } from '../../context/global.state';
+import Service from '../../utils/util.service';
 
 const { priceWithCommas, dateFormat } = util;
 const {
@@ -17,21 +19,31 @@ const {
 // 表格欄位樣板
 const renderItemCell = ({
     className,
-    data: { col1, col2, col3, col4, col5 },
+    data: {
+        number,
+        date,
+        status,
+        quantity,
+        price,
+        payment,
+        invoice,
+    },
     onClick,
 }) => (
 
     <div className={`item-row ${className ? className : ''}`}>
-        <span className="item-cell">{col1}</span>
-        <span className="item-cell cell-160">{col2}</span>
-        <span className="item-cell cell-160">{col3}</span>
+        <span className="item-cell">{number}</span>
+        <span className="item-cell cell-140">{date}</span>
+        <span className="item-cell cell-140">{status}</span>
         <span
-            className="item-cell cell-name"
+            className="item-cell cell-80 cell-quantity"
             onClick={onClick}
         >
-            <span className="web-line-clamp">{col4}</span>
+            {quantity}
         </span>
-        <span className="item-cell cell-160">{col5}</span>
+        <span className="item-cell cell-140">{price}</span>
+        <span className="item-cell cell-140">{payment}</span>
+        <span className="item-cell cell-140">{invoice}</span>
     </div>
 
 );
@@ -41,21 +53,24 @@ const Item = ({
     data: {
         orderNumber,
         date,
-        name,
         price,
         status,
         totalItems,
+        payment,
+        invoice,
     },
     onClick,
 }) => (
 
     renderItemCell({
         data: {
-            col1: orderNumber,
-            col2: dateFormat(date),
-            col3: orderRecord[`text_status_${status}`],
-            col4: `${name} x ${totalItems} ${text_item_unit}`,
-            col5: priceWithCommas(price),
+            number: orderNumber,
+            date: dateFormat(date),
+            status: orderRecord[`text_status_${status}`],
+            quantity: `${totalItems}${text_item_unit}`,
+            price: priceWithCommas(price),
+            payment: orderRecord[`text_payment_${payment}`],
+            invoice,
         },
         onClick,
     })
@@ -67,26 +82,24 @@ const OrderRecord = ({ data }) => {
 
     // Context
     const {
-        formStorageData,
-        formStorageDispatch,
+        globalDispatch,
     } = useContext(GlobalContext);
 
     // State
-    const [anchorEl, setAnchorEl] = useState(null);
+    const [items, setItems] = useState([]);
 
     // 取得詳細品項
-    const handleClickOrderName = ({ currentTarget }, { id, orderNumber }) => {
+    const handleItems = ({ currentTarget }, { id, orderNumber }) => {
 
-        setAnchorEl(currentTarget);
-        formStorageDispatch({
-            type: 'COLLECT',
-            payload: { id, orderNumber },
-        });
+        Service.orderItems({ id })
+            .then(({ list }) => {
+
+                globalDispatch({ type: 'target_popup', payload: currentTarget });
+                setItems(list);
+
+            });
 
     };
-
-    // 關閉 popover
-    const handleClose = () => setAnchorEl(null);
 
     return (
 
@@ -96,11 +109,13 @@ const OrderRecord = ({ data }) => {
                     renderItemCell({
                         className: 'row-head',
                         data: {
-                            col1: orderRecord.text_order_number,
-                            col2: orderRecord.text_order_date,
-                            col3: orderRecord.text_order_status,
-                            col4: orderRecord.text_order_name,
-                            col5: orderRecord.text_order_total_price,
+                            number: orderRecord.text_order_number,
+                            date: orderRecord.text_order_date,
+                            status: orderRecord.text_order_status,
+                            quantity: orderRecord.text_order_quantity,
+                            price: orderRecord.text_order_total_price,
+                            payment: orderRecord.text_order_payment,
+                            invoice: orderRecord.text_order_invoice,
                         },
                     })
                 }
@@ -111,25 +126,28 @@ const OrderRecord = ({ data }) => {
                         <Item
                             key={obj.id}
                             data={obj}
-                            onClick={(e) => handleClickOrderName(e, obj)}
+                            onClick={(e) => handleItems(e, obj)}
                         />
 
                     ))
                 }
             </OrderRecordLayout>
 
-            <PopoverLayout
-                id={!!anchorEl ? 'simple-popover' : undefined}
-                open={!!anchorEl}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'center',
-                }}
-            >
-                {formStorageData.id} - {formStorageData.orderNumber}
-            </PopoverLayout>
+            <Popup>
+                {
+                    items.map(({ id, title, price, imgUrl }) => (
+
+                        <Links
+                            key={id}
+                            url={`/product/${id}`}
+                            title={title}
+                        >
+                            {title}
+                        </Links>
+
+                    ))
+                }
+            </Popup>
         </Fragment>
 
     );

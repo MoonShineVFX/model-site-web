@@ -38,6 +38,12 @@ const globalReducer = (state, { type, payload }) => {
                 targetBox: payload,
             };
 
+        case 'target_popup':
+            return {
+                ...state,
+                targetPopup: payload,
+            };
+
         default:
             return { ...state };
     }

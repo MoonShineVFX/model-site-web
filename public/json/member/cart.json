@@ -8,17 +8,13 @@
                 "id": 51654,
                 "title": "SciFi Cyborg Soldier-1",
                 "price": 3000,
-                "imgUrl": "//fakeimg.pl/1200x396",
-                "format": "3ds Max",
-                "render": "Native"
+                "imgUrl": "//fakeimg.pl/1200x396"
             },
             {
                 "id": 51655,
                 "title": "SciFi Cyborg Soldier-2",
                 "price": 3000,
-                "imgUrl": "//fakeimg.pl/1200x396",
-                "format": "3ds Max",
-                "render": "Native"
+                "imgUrl": "//fakeimg.pl/1200x396"
             }
         ],
         "amount": 6000

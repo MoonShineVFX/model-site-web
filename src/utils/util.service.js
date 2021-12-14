@@ -13,8 +13,11 @@ const Service = {
         url: `/product/list.json?page=${page}&type=${type}${tag ? `&tag=${tag}` : ''}`,
     }),
 
-    userList: (reqData) => util.serviceProxy('/user/userList', reqData),
-    updateAuthority: (reqData) => util.serviceProxy('/user/updateAuthority', reqData),
+    // 訂單詳細
+    orderItems: (reqData) => util.serviceProxy({
+        method: 'get',
+        url: '/member/cart.json',
+    }, reqData),
 };
 
 export default Service;

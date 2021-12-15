@@ -1,8 +1,8 @@
 import { Fragment, useContext, useState } from 'react';
-import Popup from '../Popup';
 import Links from '../Links';
 import {
     OrderRecordLayout,
+    PopoverLayout,
 } from '../member/accountLayout';
 
 import { GlobalContext } from '../../context/global.state';
@@ -133,21 +133,23 @@ const OrderRecord = ({ data }) => {
                 }
             </OrderRecordLayout>
 
-            <Popup>
+            <PopoverLayout>
                 {
-                    items.map(({ id, title, price, imgUrl }) => (
+                    items.map(({ id, title, price }) => (
 
                         <Links
                             key={id}
                             url={`/product/${id}`}
                             title={title}
+                            className="item"
                         >
-                            {title}
+                            <span className="title">{title}</span>
+                            <span className="price">{priceWithCommas(price)}</span>
                         </Links>
 
                     ))
                 }
-            </Popup>
+            </PopoverLayout>
         </Fragment>
 
     );

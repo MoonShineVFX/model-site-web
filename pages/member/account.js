@@ -11,16 +11,18 @@ import { TitleLayout } from '../../src/components/member/cartLayout';
 import { TabWrapLayout, TabPanelLayout } from '../../src/components/member/accountLayout';
 
 import OrderRecord from '../../src/components/member/OrderRecord';
+import MyAccount from '../../src/components/member/MyAccount';
 
 import { GlobalContext } from '../../src/context/global.state';
 import deftag from '../../src/utils/util.deftag';
+import Service from '../../src/utils/util.service';
 
 const {
     member: {
         text_member_center,
         text_my_product,
         text_order_record,
-        text_account_setting,
+        text_account_edit,
     },
 } = deftag;
 
@@ -42,6 +44,20 @@ const Account = ({ pageData }) => {
 
     // console.log('pageData:', pageData)
 
+    // Context
+    const { globalDispatch } = useContext(GlobalContext);
+
+    // State
+    const [type, setType] = useState('product');
+    const [orderRecordList, setOrderRecordList] = useState([]);
+    const [profile, setProfile] = useState({});
+
+    useEffect(() => {
+
+        globalDispatch({ type: 'target_box', payload: '' });
+
+    }, []);
+
     // 所有 type
     const types = {
         product: {
@@ -50,28 +66,34 @@ const Account = ({ pageData }) => {
         },
         order: {
             title: text_order_record,
-            component: <OrderRecord data={pageData.orderRecord} />,
+            component: <OrderRecord data={orderRecordList} />,
         },
-        setting: {
-            title: text_account_setting,
-            component: '會員資料',
+        account: {
+            title: text_account_edit,
+            component: <MyAccount data={profile} />,
         },
     };
 
-    // Context
-    const { globalDispatch } = useContext(GlobalContext);
-
-    // State
-    const [type, setType] = useState('order');
-
-    useEffect(() => {
-
-        globalDispatch({ type: 'target_box', payload: '' });
-
-    }, []);
-
     // Change TabMenu
-    const handleChangeTabMenu = (e, newValue) => setType(newValue);
+    const handleChangeTabMenu = (e, newValue) => {
+
+        console.log('newValue:', newValue)
+
+        const key = (newValue === 'order') ? 'orderRecord' : 'myAccount';
+        setType(newValue);
+
+        if (newValue !== 'product' && (!orderRecordList.length || !Object.entries(profile).length)) {
+
+            Service[key]().then((data) => {
+
+                if (newValue === 'order') setOrderRecordList(data.list);
+                else setProfile(data);
+
+            });
+
+        }
+
+    };
 
     return (
 
@@ -129,7 +151,7 @@ export async function getServerSideProps () {
     // const res = await util.serviceServer('/json/home/home.json');
     // const { data } = res;
 
-    const res = await fetch('http://localhost:1006/json/member/account.json');
+    const res = await fetch('http://localhost:1006/json/member/my_product.json');
     const data = await res.json();
 
     if (!data.result) {

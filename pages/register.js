@@ -25,7 +25,7 @@ const {
         text_register,
         text_confirm_password,
         btn_return_to_signin,
-        text_nick_name,
+        text_nickname,
         text_real_name,
         text_account_with_email,
         text_enter_password,
@@ -76,14 +76,14 @@ const Register = () => {
                 <FormWrap title={text_register}>
                     <form onSubmit={handleSubmit(handleReqData)}>
                         <FormRow
-                            name="nickName"
+                            name="nickname"
                             errors={errors}
                         >
                             <input
                                 type="text"
-                                name="nickName"
-                                placeholder={text_nick_name}
-                                {...register('nickName', { required: true })}
+                                name="nickname"
+                                placeholder={text_nickname}
+                                {...register('nickname', { required: true })}
                             />
                         </FormRow>
 

@@ -18,7 +18,8 @@ const util = {
         const CONFIG = () => {
 
                 let url = '';
-                let method = 'post';
+                let method = 'get';
+                // let method = 'post';
 
                 if (typeof service === 'string') url = service;
                 else {

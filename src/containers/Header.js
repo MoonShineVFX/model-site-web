@@ -8,7 +8,7 @@ import Logo from '../components/Logo';
 import FontIcon from '../components/FontIcon';
 import Navbar from './Navbar';
 import Cart from '../components/member/Cart';
-import MyAccount from '../components/member/MyAccount';
+import MyAccountBox from '../components/member/MyAccountBox';
 
 import { GlobalContext } from '../context/global.state';
 import useLocalStorage from '../utils/useLocalStorage';
@@ -53,7 +53,7 @@ const renderBoxComp = (type) => {
             return <Cart />;
 
         case 'myAccount':
-            return <MyAccount />;
+            return <MyAccountBox />;
 
         default:
             return null;

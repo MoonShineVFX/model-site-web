@@ -19,7 +19,7 @@ const deftag = {
         text_forgot_password: '忘記密碼',
         text_confirm_password: '確認密碼',
         btn_return_to_signin: '回到登入頁',
-        text_nick_name: '暱稱',
+        text_nickname: '暱稱',
         text_real_name: '姓名',
         text_account_with_email: '電子信箱 / 帳號',
         text_enter_password: '輸入密碼',
@@ -57,7 +57,7 @@ const deftag = {
         text_logout: '登出',
         text_my_product: '我的模型庫',
         text_order_record: '訂單記錄',
-        text_account_setting: '修改會員資料',
+        text_account_edit: '修改會員資料',
     },
     orderRecord: {
         text_status_wait: '等待付款',

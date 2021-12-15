@@ -1,5 +1,6 @@
 import { styled } from '@mui/system';
 import { Tabs, Tab, Popover } from '@mui/material';
+import Popup from '../Popup';
 import Links from '../Links';
 
 // Tab
@@ -8,7 +9,6 @@ const TabWrapLayout = styled('section')(({ theme }) => ({
         display: 'none',
     },
     '.tab-menu': {
-        // border: '1px solid #FFF',
         'button': {
             fontSize: '1em',
             color: theme.palette.textColor,
@@ -24,6 +24,7 @@ const TabWrapLayout = styled('section')(({ theme }) => ({
         justifyContent: 'center',
     },
     '.second-title': {
+        fontWeight: 'normal',
         margin: '80px 0',
     },
 }));
@@ -71,9 +72,28 @@ const OrderRecordLayout = styled('div')(({ theme }) => ({
 }));
 
 // Popover
-const PopoverLayout = styled(Popover)(({ theme }) => ({
+const PopoverLayout = styled(Popup)(({ theme }) => ({
     '.MuiPaper-root': {
-        padding: '10px',
+        padding: '0 16px',
+    },
+    '.item': {
+        color: theme.palette.secondary.contrastText,
+        textDecoration: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        padding: '16px 20px',
+        '&:not(:last-child)': {
+            borderBottom: `1px solid ${theme.palette.border.dark}`,
+        },
+    },
+    '.title': {
+        maxWidth: '200px',
+        width: '100%',
+    },
+    '.price': {
+        fontWeight: 'normal',
+        flex: '0 0 calc(100% - 200px - 20px)',
+        marginLeft: '20px',
     },
 }));
 

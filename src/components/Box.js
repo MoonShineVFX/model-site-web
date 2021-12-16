@@ -20,13 +20,8 @@ const Box = ({ children, ...rest }) => (
 
 );
 
-// Box.defaultProps = {
-//     redirect: true,
-// };
-
-// Box.propTypes = {
-//     redirect: PropTypes.bool,
-//     children: PropTypes.any,
-// };
+Box.propTypes = {
+    children: PropTypes.any,
+};
 
 export default Box;

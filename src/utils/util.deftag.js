@@ -5,6 +5,7 @@ const deftag = {
         text_menu_about: '關於',
         text_menu_tutorial: '文件',
         btn_submit: '確認送出',
+        btn_update_submit: '修改',
         btn_show_more: '顯示更多',
         text_item_unit: '項',
     },

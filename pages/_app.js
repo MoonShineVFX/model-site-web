@@ -77,6 +77,17 @@ const styles = {
         WebkitBoxOrient: 'vertical',
         overflow: 'hidden',
     },
+    '.Model-form-button': {
+        '.model-button': {
+            width: '100%',
+            height: '70px',
+            fontSize: '1.15em',
+            borderRadius: '40px',
+            '&.third': {
+                borderRadius: '40px',
+            },
+        },
+    },
 };
 
 //

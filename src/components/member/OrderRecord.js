@@ -32,16 +32,16 @@ const renderItemCell = ({
 }) => (
 
     <div className={`item-row ${className ? className : ''}`}>
-        <span className="item-cell">{number}</span>
-        <span className="item-cell cell-140">{date}</span>
-        <span className="item-cell cell-140">{status}</span>
         <span
-            className="item-cell cell-80 cell-quantity"
+            className="item-cell cell-orderNumber"
             onClick={onClick}
         >
-            {quantity}
+            {number}
         </span>
+        <span className="item-cell cell-140">{date}</span>
+        <span className="item-cell cell-80">{quantity}</span>
         <span className="item-cell cell-140">{price}</span>
+        <span className="item-cell cell-140">{status}</span>
         <span className="item-cell cell-140">{payment}</span>
         <span className="item-cell cell-140">{invoice}</span>
     </div>
@@ -157,3 +157,8 @@ const OrderRecord = ({ data }) => {
 };
 
 export default OrderRecord;
+
+/**
+ * flex table
+ * https://designlink.work/flex-table/
+ */

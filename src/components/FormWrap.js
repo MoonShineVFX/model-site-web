@@ -20,15 +20,6 @@ const FormWrapLayout = styled('div')(({ theme }) => ({
         margin: '16px 0 36px',
         opacity: '0.6',
     },
-    '.model-button': {
-        width: '100%',
-        height: '70px',
-        fontSize: '1.15em',
-        borderRadius: '40px',
-        '&.third': {
-            borderRadius: '40px',
-        },
-    },
     '.form-row:not(.form-row-btns)': {
         marginBottom: '30px',
     },
@@ -66,7 +57,7 @@ const SuccessMesgLayout = styled('p')(({ theme }) => ({
 //
 const FormWrap = ({ title, children, ...rest }) => (
 
-    <FormWrapLayout className="formWrap" {...rest}>
+    <FormWrapLayout className="Model-form-button formWrap" {...rest}>
         <div className="form-top">
             <Logo redirect={false} />
             <h3 className="title">{title}</h3>

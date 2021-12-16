@@ -2,12 +2,12 @@ import { styled } from '@mui/system';
 import { ButtonLink } from '../Links';
 
 // 外層 form
-const SignLayout = styled('section')(({ theme }) => ({
+const SignLayout = styled('section')({
     marginTop: '80px',
     '.model-button': {
         marginBottom: '30px',
     },
-}));
+});
 
 // 導頁按鈕
 const BtnDirectLayout = styled(ButtonLink)(({ theme }) => ({

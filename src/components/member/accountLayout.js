@@ -2,6 +2,7 @@ import { styled } from '@mui/system';
 import { Tabs, Tab, Popover } from '@mui/material';
 import Popup from '../Popup';
 import Links from '../Links';
+import Box from '../Box';
 
 // Tab
 const TabWrapLayout = styled('section')(({ theme }) => ({
@@ -24,6 +25,7 @@ const TabWrapLayout = styled('section')(({ theme }) => ({
         justifyContent: 'center',
     },
     '.second-title': {
+        fontSize: '1.9em',
         fontWeight: 'normal',
         margin: '80px 0',
     },
@@ -48,7 +50,7 @@ const OrderRecordLayout = styled('div')(({ theme }) => ({
         '&:not(:last-child)': {
             borderBottom: `1px solid ${theme.palette.border.dark}`,
         },
-        '&:not(.row-head) .cell-quantity': {
+        '&:not(.row-head) .cell-orderNumber': {
             textDecoration: 'underline',
             cursor: 'pointer',
         },
@@ -98,10 +100,35 @@ const PopoverLayout = styled(Popup)(({ theme }) => ({
 }));
 
 // 修改會員資料
+const BoxWrapLayout = styled(Box)(({ theme }) => ({
+    maxWidth: '560px',
+    fontSize: '1.25em',
+    backgroundColor: theme.palette.card.main,
+    borderRadius: theme.borderRadius,
+    margin: 'auto',
+    padding: '50px 40px',
+    position: 'relative',
+    top: 'initial',
+    '.row': {
+        lineHeight: '1.4',
+        '&:not(:last-child)': {
+            marginBottom: '50px',
+        },
+    },
+    '.title': {
+        fontWeight: 'normal',
+        margin: '0 0 16px',
+        opacity: '0.65',
+    },
+    '.form-row:not(.Model-form-button)': {
+        marginBottom: '30px',
+    },
+}));
 
 export {
     TabWrapLayout,
     TabPanelLayout,
     OrderRecordLayout,
     PopoverLayout,
+    BoxWrapLayout,
 };

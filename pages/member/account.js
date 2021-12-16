@@ -77,8 +77,6 @@ const Account = ({ pageData }) => {
     // Change TabMenu
     const handleChangeTabMenu = (e, newValue) => {
 
-        console.log('newValue:', newValue)
-
         const key = (newValue === 'order') ? 'orderRecord' : 'myAccount';
         setType(newValue);
 

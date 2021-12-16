@@ -2,13 +2,13 @@ import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Buttons from '../Buttons';
 import { FormRow } from '../FormWrap';
-import { BtnDirectLayout } from '../member/memberSignLayout';
+import { BtnDirectLayout } from './memberSignLayout';
 import { BoxWrapLayout } from './accountLayout';
 
 import { GlobalContext } from '../../context/global.state';
 import util from '../../utils/util';
-import Service from '../../utils/util.service';
 import deftag from '../../utils/util.deftag';
+import Service from '../../utils/util.service';
 
 const {
     common: { btn_update_submit },
@@ -20,7 +20,7 @@ const {
 } = deftag;
 
 //
-const MyAccount = ({ data }) => {
+const MyProduct = ({ data }) => {
 
     // console.log('data:', data)
 
@@ -79,4 +79,4 @@ const MyAccount = ({ data }) => {
 
 };
 
-export default MyAccount;
+export default MyProduct;

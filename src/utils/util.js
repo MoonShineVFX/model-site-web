@@ -139,6 +139,24 @@ const util = {
      */
     dateFormat: (date) => dayjs(date).format('YYYY/MM/DD'),
 
+    /**
+     * @author Betty
+     * @param {number} bytes
+     * @return {number} - 小數兩位
+     */
+    formatBytes: (bytes, decimals = 2) => {
+
+        if (bytes === 0) return '0 Bytes';
+
+        const k = 1024;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ['Bytes', 'K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+        return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))}${sizes[i]}`;
+
+    },
+
 };
 
 export default util;

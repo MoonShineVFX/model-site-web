@@ -2,8 +2,12 @@ import PropTypes from 'prop-types';
 import { styled } from '@mui/system';
 import Links from './Links';
 import util from '../utils/util';
+import deftag from '../utils/util.deftag';
 
-const { priceWithCommas } = util;
+const { priceWithCommas, formatBytes } = util;
+const {
+    product: { text_file_size },
+} = deftag;
 
 //
 const ItemLayout = styled(Links)(({ theme }) => ({
@@ -41,6 +45,9 @@ const ItemLayout = styled(Links)(({ theme }) => ({
             overflow: 'hidden',
         },
     },
+    '.file-size': {
+        opacity: '0.6',
+    },
 }));
 
 //
@@ -50,13 +57,15 @@ const Item = ({
     url,
     width,
     height,
-    data: { title, price, imgUrl }
+    data: { title, price, imgUrl, fileSize },
+    children,
 }) => (
 
     <ItemLayout
         url={url}
         {...newPage && { target: '_blank'}}
         className={`item style-${type} Model-effect-brightness`}
+        title={title}
     >
         <div className="item-thumb">
             <img
@@ -73,7 +82,12 @@ const Item = ({
                 price &&
                     <span className="price">{priceWithCommas(price)}</span>
             }
+            {
+                fileSize &&
+                    <span className="file-size">{text_file_size} {formatBytes(fileSize)}</span>
+            }
         </div>
+        {children && children}
     </ItemLayout>
 
 );
@@ -94,6 +108,7 @@ Item.propTypes = {
         price: PropTypes.number,
         imgUrl: PropTypes.string.isRequired,
     }).isRequired,
+    children: PropTypes.any,
 };
 
 export default Item;

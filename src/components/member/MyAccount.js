@@ -1,14 +1,11 @@
-import { useContext, useState } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Buttons from '../Buttons';
 import { FormRow } from '../FormWrap';
 import { BtnDirectLayout } from '../member/memberSignLayout';
 import { BoxWrapLayout } from './accountLayout';
-
-import { GlobalContext } from '../../context/global.state';
-import util from '../../utils/util';
-import Service from '../../utils/util.service';
 import deftag from '../../utils/util.deftag';
+import Service from '../../utils/util.service';
 
 const {
     common: { btn_update_submit },
@@ -22,13 +19,18 @@ const {
 //
 const MyAccount = ({ data }) => {
 
-    // console.log('data:', data)
-
     // React Hook Form
     const {
         handleSubmit,
         register,
+        setValue,
     } = useForm();
+
+    useEffect(() => {
+
+        if (data) setValue('nickname', data.nickname);
+
+    }, [data, setValue]);
 
     // 送資料
     const handleReqData = (reqData) => {
@@ -54,7 +56,6 @@ const MyAccount = ({ data }) => {
                             type="text"
                             name="nickname"
                             placeholder={text_nickname}
-                            defaultValue={data.nickname}
                             {...register('nickname')}
                         />
                     </FormRow>

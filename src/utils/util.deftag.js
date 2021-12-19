@@ -51,6 +51,8 @@ const deftag = {
         notice_message: '格式僅為第一次選擇，購買後，仍可以在使用者後台下載其他格式檔案',
         detail_option_format: '軟體格式',
         detail_option_renderer: '算圖引擎',
+        text_file_size: '檔案大小:',
+        text_download: '下載',
     },
     member: {
         my_account: '我的帳號',

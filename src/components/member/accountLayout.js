@@ -3,6 +3,7 @@ import { Tabs, Tab, Popover } from '@mui/material';
 import Popup from '../Popup';
 import Links from '../Links';
 import Box from '../Box';
+import { ItemWrapLayout } from '../product/productLayout';
 
 // Tab
 const TabWrapLayout = styled('section')(({ theme }) => ({
@@ -33,11 +34,44 @@ const TabWrapLayout = styled('section')(({ theme }) => ({
 
 //
 const TabPanelLayout = styled('div')({
-    maxWidth: '1000px',
     margin: 'auto',
+    '&:not(.panel-product)': {
+        maxWidth: '1000px',
+    },
 });
 
 // 我的模型庫
+const MyProductItemLayout = styled(ItemWrapLayout)(({ theme }) => ({
+    margin: '0 -24px 0',
+    '.item.style-product': {
+        flex: '0 0 calc(100% / 4)',
+        marginBottom: '40px',
+        padding: '0 24px',
+        '.item-thumb': {
+            height: '153px',
+            borderRadius: '0',
+        },
+    },
+    '.downloadWrap': {
+        padding: '0 20px 0',
+    },
+    'select': {
+        fontSize: '0.8em',
+        color: theme.palette.textColor,
+        backgroundColor: 'transparent',
+        border: '0',
+        borderBottom: `1px solid ${theme.palette.border.dark}`,
+        padding: '4px',
+        opacity: '0.8',
+    },
+    '.model-button': {
+        width: '100%',
+        borderRadius: '0',
+        marginTop: '24px',
+        paddingTop: '4px',
+        paddingBottom: '4px',
+    },
+}));
 
 // 訂單紀錄
 const OrderRecordLayout = styled('div')(({ theme }) => ({
@@ -128,6 +162,7 @@ const BoxWrapLayout = styled(Box)(({ theme }) => ({
 export {
     TabWrapLayout,
     TabPanelLayout,
+    MyProductItemLayout,
     OrderRecordLayout,
     PopoverLayout,
     BoxWrapLayout,

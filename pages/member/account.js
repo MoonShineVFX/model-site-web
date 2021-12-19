@@ -16,6 +16,7 @@ import MyAccount from '../../src/components/member/MyAccount';
 import { GlobalContext } from '../../src/context/global.state';
 import deftag from '../../src/utils/util.deftag';
 import Service from '../../src/utils/util.service';
+import MyProduct from '../../src/components/member/MyProduct';
 
 const {
     member: {
@@ -62,7 +63,7 @@ const Account = ({ pageData }) => {
     const types = {
         product: {
             title: text_my_product,
-            component: '我的模型庫',
+            component: <MyProduct data={pageData.list} />,
         },
         order: {
             title: text_order_record,
@@ -120,7 +121,7 @@ const Account = ({ pageData }) => {
 
                 <h1 className="second-title">{types[type].title}</h1>
 
-                <TabPanelLayout className="tab-panel">
+                <TabPanelLayout className={`tab-panel panel-${type}`}>
                     {
                         Object.keys(types).map((key) => (
 

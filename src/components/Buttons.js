@@ -21,10 +21,6 @@ const ButtonLayout = styled(Button)(({ theme }) => ({
             verticalAlign: 'middle',
         },
     },
-    '&.Mui-disabled': {
-        color: '#A6A6A6',
-        backgroundColor: '#CCC',
-    },
 }));
 
 //

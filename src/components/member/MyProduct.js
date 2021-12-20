@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { useRouter } from 'next/router';
-import Buttons from '../Buttons';
 import Links, { ButtonLink } from '../Links';
 import { MyProductItemLayout, ItemLayout } from './accountLayout';
 import util from '../../utils/util';
@@ -79,10 +77,9 @@ const Item = ({
             </div>
 
             <ButtonLink
-                url={selected[id]?.renderers ? download : '#'}
+                url={selected[id]?.renderers ? download : ''}
                 text={text_download}
-                title={text_download}
-                className={selected[id]?.renderers ? '' : 'disabled'}
+                className={`btn-download ${selected[id]?.renderers ? '' : 'disabled'}`}
                 newPage
             />
         </div>
@@ -94,9 +91,6 @@ const Item = ({
 const MyProduct = ({ data }) => {
 
     // console.log('data:', data)
-
-    // Router
-    const router = useRouter();
 
     // State
     const [selected, setSelected] = useState({});
@@ -115,10 +109,6 @@ const MyProduct = ({ data }) => {
 
         setSelected({ ...storage });
 
-        // console.log('storage:', storage);
-        // console.log('name:', name);
-        // console.log('selected:', selected);
-
         if (name === 'renderers') {
 
             Service.donwloadLink({
@@ -131,8 +121,6 @@ const MyProduct = ({ data }) => {
         }
 
     };
-
-    console.log('selected:', selected)
 
     return (
 

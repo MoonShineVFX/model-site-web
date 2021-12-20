@@ -1,7 +1,5 @@
 import { styled } from '@mui/system';
-import { Tabs, Tab, Popover } from '@mui/material';
 import Popup from '../Popup';
-import Links from '../Links';
 import Box from '../Box';
 import { ItemWrapLayout } from '../product/productLayout';
 
@@ -104,7 +102,7 @@ const ItemLayout = styled('div')(({ theme }) => ({
     },
     '.options': {
         display: 'flex',
-        margin: '0 -8px',
+        margin: '0 -8px 20px',
         '> *': {
             flex: '1',
         },
@@ -118,6 +116,21 @@ const ItemLayout = styled('div')(({ theme }) => ({
         margin: '0 8px',
         padding: '12px 2px',
         opacity: '0.8',
+    },
+    '.btn-download': {
+        display: 'block',
+    },
+    '.model-button.default': {
+        marginTop: '0',
+        padding: '10px',
+    },
+    '.disabled': {
+        pointerEvents: 'none',
+        cursor: 'default',
+        '.model-button': {
+            color: '#A6A6A6',
+            backgroundColor: '#CCC',
+        },
     },
 }));
 

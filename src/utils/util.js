@@ -157,6 +157,21 @@ const util = {
 
     },
 
+    /**
+     * @author Betty
+     * @param {object[]} data
+     * @return {object}
+     */
+    arrangeRenderOpts: (data) => data.reduce((acc, curr) => {
+
+        const key = curr.id;
+        acc[key] = acc[key] || {};
+        acc[key].label = curr.label;
+        acc[key].renderers = curr.renderers;
+        return acc;
+
+    }, {}),
+
 };
 
 export default util;

@@ -28,7 +28,11 @@ import useQuery from '../../utils/useQuery';
 import deftag from '../../utils/util.deftag';
 import useLocalStorage from '../../utils/useLocalStorage';
 
-const { priceWithCommas, mappingTags } = util;
+const {
+    priceWithCommas,
+    mappingTags,
+    arrangeRenderOpts,
+} = util;
 
 // deftag
 const {
@@ -41,17 +45,6 @@ const {
         detail_option_renderer,
     },
 } = deftag;
-
-//
-const arrangeRenderOpts = (data) => data.reduce((acc, curr) => {
-
-    const key = curr.id;
-    acc[key] = acc[key] || {};
-    acc[key].label = curr.label;
-    acc[key].renderers = curr.renderers;
-    return acc;
-
-}, {});
 
 //
 const ProductDetailBase = ({ pageData }) => {
@@ -186,12 +179,7 @@ const ProductDetailBase = ({ pageData }) => {
                                 {
                                     (pageData.formats).map(({ id, label }) => (
 
-                                        <option
-                                            key={id}
-                                            value={id}
-                                        >
-                                            {label}
-                                        </option>
+                                        <option key={id} value={id}>{label}</option>
 
                                     ))
                                 }

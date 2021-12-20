@@ -55,13 +55,21 @@ const MyProductItemLayout = styled(ItemWrapLayout)(({ theme }) => ({
     '.downloadWrap': {
         padding: '0 20px 0',
     },
+    '.options': {
+        display: 'flex',
+        margin: '0 -8px',
+        '> *': {
+            flex: '1',
+        },
+    },
     'select': {
-        fontSize: '0.8em',
+        fontSize: '0.9em',
         color: theme.palette.textColor,
-        backgroundColor: 'transparent',
+        backgroundColor: theme.palette.bgColor,
         border: '0',
         borderBottom: `1px solid ${theme.palette.border.dark}`,
-        padding: '4px',
+        margin: '0 8px',
+        padding: '12px 2px',
         opacity: '0.8',
     },
     '.model-button': {
@@ -70,6 +78,46 @@ const MyProductItemLayout = styled(ItemWrapLayout)(({ theme }) => ({
         marginTop: '24px',
         paddingTop: '4px',
         paddingBottom: '4px',
+        position: 'relative',
+        zIndex: '1',
+    },
+}));
+
+// 項目
+const ItemLayout = styled('div')(({ theme }) => ({
+    lineHeight: '1.4',
+    flex: '0 0 calc(100% / 4 - 48px)',
+    margin: '0 24px 80px',
+    cursor: 'default',
+    '.item-content': {
+        marginBottom: '20px',
+    },
+    '.title': {
+        fontWeight: 'normal',
+        marginBottom: '8px',
+    },
+    '.file-size': {
+        opacity: '0.6',
+    },
+    '.downloadWrap': {
+        padding: '0 20px 0',
+    },
+    '.options': {
+        display: 'flex',
+        margin: '0 -8px',
+        '> *': {
+            flex: '1',
+        },
+    },
+    'select': {
+        fontSize: '0.9em',
+        color: theme.palette.textColor,
+        backgroundColor: theme.palette.bgColor,
+        border: '0',
+        borderBottom: `1px solid ${theme.palette.border.dark}`,
+        margin: '0 8px',
+        padding: '12px 2px',
+        opacity: '0.8',
     },
 }));
 
@@ -163,6 +211,7 @@ export {
     TabWrapLayout,
     TabPanelLayout,
     MyProductItemLayout,
+    ItemLayout,
     OrderRecordLayout,
     PopoverLayout,
     BoxWrapLayout,

@@ -24,6 +24,9 @@ const Service = {
 
     // 我的資料
     myAccount: (reqData) => util.serviceProxy('/member/my_account.json', reqData),
+
+    // 取得下載連結
+    donwloadLink: (reqData) => util.serviceProxy('/member/downloadLink.json', reqData),
 };
 
 export default Service;

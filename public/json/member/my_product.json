@@ -11,16 +11,26 @@
                 "fileSize": 34359738368,
                 "formats": [
                     {
-                        "id": 11111,
+                        "id": 451,
                         "label": "3ds Max",
                         "renderers": [
                             {
-                                "id": 22222,
+                                "id": 45111,
                                 "label": "renderer01"
                             },
                             {
-                                "id": 333333,
+                                "id": 45112,
                                 "label": "renderer02"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 452,
+                        "label": "maya",
+                        "renderers": [
+                            {
+                                "id": 45222,
+                                "label": "renderer01"
                             }
                         ]
                     }
@@ -33,16 +43,12 @@
                 "fileSize": 34359738368,
                 "formats": [
                     {
-                        "id": 11111,
-                        "label": "3ds Max",
+                        "id": 452,
+                        "label": "maya",
                         "renderers": [
                             {
-                                "id": 22222,
+                                "id": 45222,
                                 "label": "renderer01"
-                            },
-                            {
-                                "id": 333333,
-                                "label": "renderer02"
                             }
                         ]
                     }
@@ -55,16 +61,12 @@
                 "fileSize": 34359738368,
                 "formats": [
                     {
-                        "id": 11111,
-                        "label": "3ds Max",
+                        "id": 452,
+                        "label": "maya",
                         "renderers": [
                             {
-                                "id": 22222,
+                                "id": 45222,
                                 "label": "renderer01"
-                            },
-                            {
-                                "id": 333333,
-                                "label": "renderer02"
                             }
                         ]
                     }
@@ -77,12 +79,48 @@
                 "fileSize": 34359738368,
                 "formats": [
                     {
-                        "id": 11111,
-                        "label": "3ds Max",
+                        "id": 452,
+                        "label": "maya",
                         "renderers": [
                             {
-                                "id": 22222,
-                                "label": "renderer"
+                                "id": 45222,
+                                "label": "renderer01"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": 545815,
+                "title": "SciFi Cyborg Soldier-4",
+                "imgUrl": "//fakeimg.pl/264x153",
+                "fileSize": 34359738368,
+                "formats": [
+                    {
+                        "id": 452,
+                        "label": "maya",
+                        "renderers": [
+                            {
+                                "id": 45222,
+                                "label": "renderer01"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": 545816,
+                "title": "SciFi Cyborg Soldier-4",
+                "imgUrl": "//fakeimg.pl/264x153",
+                "fileSize": 34359738368,
+                "formats": [
+                    {
+                        "id": 452,
+                        "label": "maya",
+                        "renderers": [
+                            {
+                                "id": 45222,
+                                "label": "renderer01"
                             }
                         ]
                     }

@@ -1,43 +1,138 @@
-import { useContext, useState } from 'react';
-
-import Item from '../Item';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 import Buttons from '../Buttons';
-import { MyProductItemLayout } from './accountLayout';
-
-import { GlobalContext } from '../../context/global.state';
+import Links, { ButtonLink } from '../Links';
+import { MyProductItemLayout, ItemLayout } from './accountLayout';
 import util from '../../utils/util';
 import deftag from '../../utils/util.deftag';
 import Service from '../../utils/util.service';
 
+const { formatBytes, arrangeRenderOpts } = util;
 const {
     product: {
+        text_file_size,
         text_download,
         detail_option_format,
         detail_option_renderer,
     },
 } = deftag;
 
+// 項目
+const Item = ({
+    data: {
+        id, title, imgUrl, fileSize, formats,
+    },
+    selected,
+    download,
+    handleSelected,
+}) => (
+
+    <ItemLayout>
+        <Links
+            url={`/product/${id}`}
+            title={title}
+            className="item-thumb"
+            newPage
+        >
+            <img
+                src={imgUrl}
+                alt={title}
+                title={title}
+                width="264"
+                height="153"
+            />
+        </Links>
+        <div className="item-content">
+            <h3 className="title">{title}</h3>
+            <span className="file-size">{text_file_size} {formatBytes(fileSize)}</span>
+        </div>
+        <div className="downloadWrap">
+            <div className="options" onClick={(e) => e.preventDefault()}>
+                <select
+                    name="formats"
+                    onChange={(e) => handleSelected(e, id)}
+                >
+                    <option value="">{detail_option_format}</option>
+                    {
+                        formats.map(({ id, label }) => (
+
+                            <option key={id} value={id}>{label}</option>
+
+                        ))
+                    }
+                </select>
+
+                <select
+                    name="renderers"
+                    onChange={(e) => handleSelected(e, id)}
+                >
+                    <option value="">{detail_option_renderer}</option>
+                    {
+                        // 有選取第一層才印第二層
+                        arrangeRenderOpts(formats)[selected[id]?.formats]?.renderers.map((obj) => (
+
+                            <option key={obj.id} value={obj.id}>{obj.label}</option>
+
+                        ))
+                    }
+                </select>
+            </div>
+
+            <ButtonLink
+                url={selected[id]?.renderers ? download : '#'}
+                text={text_download}
+                title={text_download}
+                className={selected[id]?.renderers ? '' : 'disabled'}
+                newPage
+            />
+        </div>
+    </ItemLayout>
+
+);
+
 //
 const MyProduct = ({ data }) => {
 
-    console.log('data:', data)
+    // console.log('data:', data)
 
-    // 下拉選單
-    const handleChangeOpt = (e, type = 'format') => {
+    // Router
+    const router = useRouter();
 
-        e.stopPropagation();
-        console.log('e:', e.target);
-        console.log('type:', type);
+    // State
+    const [selected, setSelected] = useState({});
+    const [download, setDownload] = useState('');
+
+    // 軟體格式 + 算圖引擎
+    const handleSelected = ({ target: { name, value } }, id) => {
+
+        // 暫存
+        const storage = {
+            [id]: {
+                ...selected[id],
+                [name]: value,
+            },
+        };
+
+        setSelected({ ...storage });
+
+        // console.log('storage:', storage);
+        // console.log('name:', name);
+        // console.log('selected:', selected);
+
+        if (name === 'renderers') {
+
+            Service.donwloadLink({
+                id,
+                formats: +storage.formats,
+                renderers: +storage.renderers,
+            })
+            .then(({ url }) => setDownload(url));
+
+        }
 
     };
 
-    // 下載按鈕
-    const handleDownload = (e) => {
-
-        e.preventDefault();
-        console.log('download btn');
-
-    };
+    console.log('selected:', selected)
 
     return (
 
@@ -47,42 +142,11 @@ const MyProduct = ({ data }) => {
 
                     <Item
                         key={obj.id}
-                        type="product"
-                        url={`/product/${obj.id}`}
-                        width="264"
-                        height="153"
                         data={obj}
-                        newPage
-                    >
-                        <div className="downloadWrap">
-                            <div className="options">
-                                <select
-                                    name="formats"
-                                    onChange={handleChangeOpt}
-                                >
-                                    <option value="">{detail_option_format}</option>
-                                    {obj.formats.map(({ id, label, renderers }) => (
-
-                                        <option key={id} value={id}>{label}</option>
-
-                                    ))}
-                                </select>
-
-                                <select
-                                    name="renderers"
-                                    onChange={(e) => handleChangeOpt(e, 'render')}
-                                >
-                                    <option value="">{detail_option_renderer}</option>
-                                </select>
-                            </div>
-
-                            <Buttons
-                                // disabled
-                                text={text_download}
-                                onClick={handleDownload}
-                            />
-                        </div>
-                    </Item>
+                        selected={selected}
+                        download={download}
+                        handleSelected={handleSelected}
+                    />
 
                 ))
             }

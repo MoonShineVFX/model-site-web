@@ -21,6 +21,10 @@ const ButtonLayout = styled(Button)(({ theme }) => ({
             verticalAlign: 'middle',
         },
     },
+    '&.Mui-disabled': {
+        color: '#A6A6A6',
+        backgroundColor: '#CCC',
+    },
 }));
 
 //
@@ -29,17 +33,11 @@ const Buttons = ({ text, children, ...rest }) => (
     <ButtonLayout
         {...rest}
         className="model-button"
-        // endIcon={<ArrowForwardIosIcon />}
     >
         {text ? text : children}
     </ButtonLayout>
 
 );
-
-Buttons.defaultProps = {
-    // text: '更多消息',
-    // outline: true,
-};
 
 Buttons.propTypes = {
     text: PropTypes.string,

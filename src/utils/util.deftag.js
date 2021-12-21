@@ -24,7 +24,7 @@ const deftag = {
         text_real_name: '姓名',
         text_account_with_email: '電子信箱 / 帳號',
         text_enter_password: '輸入密碼',
-        text_aggree_privacy: '我同意服務條款及隱私權條款',
+        text_agree_privacy: '我同意服務條款及隱私權條款',
         text_signin_title: '帳號登入',
         text_account: '帳號',
         text_password: '密碼',

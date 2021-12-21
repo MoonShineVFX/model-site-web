@@ -22,7 +22,7 @@ const globalReducer = (state, { type, payload }) => {
                 ...state,
                 tags: payload.tags,
                 user: payload.other,
-                logged: !!payload.other.userId,
+                // logged: !!payload.other.userId,
                 // logged: false, // Test
             };
 

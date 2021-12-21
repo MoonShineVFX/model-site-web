@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react';
+import Cookie from 'js-cookie';
 import { GlobalContext } from '../context/global.state';
 
 const Content = ({ children }) => {
@@ -8,6 +9,7 @@ const Content = ({ children }) => {
 
     useEffect(() => {
 
+        if (!Cookie.get('token')) return;
         getGlobalData();
 
     }, []);

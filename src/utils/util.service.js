@@ -7,6 +7,9 @@ const Service = {
         method: 'get',
     }, reqData),
 
+    // 未登入
+    register: (reqData) => util.serviceProxy('/register', reqData),
+
     // 商品
     productList: ({ page, type, tag }) => util.serviceProxy({
         method: 'get',

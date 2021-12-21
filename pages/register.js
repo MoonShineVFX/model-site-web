@@ -3,6 +3,7 @@ import {
     useRef,
     useContext,
     useEffect,
+    useState,
 } from 'react';
 
 import { useForm } from 'react-hook-form';
@@ -19,6 +20,7 @@ import {
 
 import { GlobalContext } from '../src/context/global.state';
 import deftag from '../src/utils/util.deftag';
+import Service from '../src/utils/util.service';
 
 const {
     memberSign: {
@@ -29,7 +31,7 @@ const {
         text_real_name,
         text_account_with_email,
         text_enter_password,
-        text_aggree_privacy,
+        text_agree_privacy,
     },
     error: {
         error_password_at_least_eight,
@@ -61,10 +63,18 @@ const Register = () => {
     const password = useRef({});
     password.current = watch('password', '');
 
+    // State
+    const [disabled, setDisabled] = useState(true);
+
+    // 我同意 checkbox
+    const handleAgree = () => setDisabled(!disabled);
+
     // 送資料
     const handleReqData = (reqData) => {
 
-        console.log('reqData:', reqData)
+        delete reqData.confirm_password;
+        // console.log('reqData:', reqData)
+        Service.register(reqData);
 
     };
 
@@ -147,10 +157,10 @@ const Register = () => {
 
                         <div className="form-row">
                             <Checkbox
-                                name="aggree"
-                                register={register('aggree')}
+                                name="agree"
+                                onChange={handleAgree}
                             >
-                                {text_aggree_privacy}
+                                {text_agree_privacy}
                             </Checkbox>
                         </div>
 
@@ -158,6 +168,7 @@ const Register = () => {
                             <Buttons
                                 type="submit"
                                 text={text_register}
+                                disabled={disabled}
                             />
 
                             <ForgotPasswordLayout />

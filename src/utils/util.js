@@ -1,5 +1,6 @@
 import axios from 'axios';
 import dayjs from 'dayjs';
+import Cookies from 'js-cookie';
 
 const util = {
     /**
@@ -18,8 +19,8 @@ const util = {
         const CONFIG = () => {
 
                 let url = '';
-                let method = 'get';
-                // let method = 'post';
+                // let method = 'get';
+                let method = 'post';
 
                 if (typeof service === 'string') url = service;
                 else {
@@ -30,8 +31,7 @@ const util = {
                 }
 
                 return {
-                    // url: `/api${url}`,
-                    url: `/json${url}`,
+                    url: (process.env.NODE_ENV === 'development') ? `https://${process.env.HOST}/api${url}` : `/api${url}`,
                     method,
                 };
 
@@ -45,39 +45,36 @@ const util = {
         // 回傳 promise
         return new Promise((resolve, reject) => {
 
-            axios[CONFIG().method](CONFIG().url, reqData, { withCredentials: true, ...option })
-                .then(
-                    // result: 1
-                    ({ data }) => {
+            const authHeader = {
+                headers: {
+                    Authorization: `Bearer ${Cookies.get('token')}`,
+                },
+            };
 
-                        // localhost 才有此情境
-                        // if (!data.result && (process.env.NODE_ENV !== 'production')) {
+            axios[CONFIG().method](CONFIG().url, reqData, {
+                ...option,
+                ...(Cookies.get()?.token) && { ...authHeader },
+            })
+            .then(
+                // result: 1
+                ({ data }) => {
 
-                        //     reject(showErrorMesg('請先登入'));
+                    resolve(data.data);
 
-                        // }
+                },
+                // result: 0
+                ({ response }) => {
 
-                        resolve(data.data);
+                    const {
+                        data: { errors },
+                    } = response;
 
-                    },
-                    // result: 0
-                    ({ response }) => {
+                    reject(showErrorMesg(
+                        Object.keys(errors).map((key) => `${key}: ${errors[key]}`)
+                    ));
 
-                        const {
-                            // status,
-                            data: { message },
-                        } = response;
-
-                        reject(showErrorMesg(message));
-
-                        // reject(showErrorMesg(message, () => {
-
-                        //     window.location = `/error`;
-
-                        // }));
-
-                    },
-                )
+                },
+            )
 
         });
 

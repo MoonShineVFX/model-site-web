@@ -1,4 +1,7 @@
 module.exports = {
+    env: {
+        HOST: 'backend-52mayiffyq-de.a.run.app',
+    },
     async redirects () {
         return [
             {

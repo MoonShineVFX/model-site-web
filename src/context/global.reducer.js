@@ -22,8 +22,7 @@ const globalReducer = (state, { type, payload }) => {
                 ...state,
                 tags: payload.tags,
                 user: payload.other,
-                // logged: !!payload.other.userId,
-                // logged: false, // Test
+                logged: !!payload.other.userId,
             };
 
         case 'add_cart':

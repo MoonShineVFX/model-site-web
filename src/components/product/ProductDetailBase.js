@@ -23,10 +23,11 @@ import {
 
 import { GlobalContext } from '../../context/global.state';
 import { ProductContext } from '../../context/product/product.state';
-import util from '../../utils/util';
 import useQuery from '../../utils/useQuery';
-import deftag from '../../utils/util.deftag';
 import useLocalStorage from '../../utils/useLocalStorage';
+import util from '../../utils/util';
+import deftag from '../../utils/util.deftag';
+import Service from '../../utils/util.service';
 
 const {
     priceWithCommas,
@@ -110,12 +111,16 @@ const ProductDetailBase = ({ pageData }) => {
             },
         };
 
-        setCartItem(item);
+        Service.cartAdd({ productId: pageData.id })
+            .then(() => {
 
-        globalDispatch({
-            type: 'add_cart',
-            payload: Object.entries(item).length,
-        });
+                setCartItem(item);
+                globalDispatch({
+                    type: 'add_cart',
+                    payload: Object.entries(item).length,
+                });
+
+            });
 
     };
 

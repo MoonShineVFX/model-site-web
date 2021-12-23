@@ -2,12 +2,12 @@ import util from './util';
 
 const Service = {
     // common
-    common: (reqData) => util.serviceProxy({
-        url: '/common.json',
-        method: 'get',
-    }, reqData),
+    common: (reqData) => util.serviceProxy('/common', reqData),
 
     // 未登入
+    signin: ({ reqData, headers }) => util.serviceProxy('/login', reqData, {
+        headers: { ...headers },
+    }),
     register: (reqData) => util.serviceProxy('/register', reqData),
 
     // 商品
@@ -15,6 +15,9 @@ const Service = {
         method: 'get',
         url: `/product/list.json?page=${page}&type=${type}${tag ? `&tag=${tag}` : ''}`,
     }),
+
+    // 購物車
+    cartAdd: (reqData) => util.serviceProxy('/cart_product_add', reqData),
 
     // 訂單記錄
     orderRecord: (reqData) => util.serviceProxy('/member/order_record.json', reqData),

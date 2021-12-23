@@ -181,13 +181,29 @@ const Cart = ({ pageData }) => {
 
 export default Cart;
 
-export async function getServerSideProps () {
+export async function getServerSideProps ({ req }) {
 
-    // const res = await util.serviceServer('/json/home/home.json');
-    // const { data } = res;
+    // 沒有 cookie(token) 導登入頁
+    if (!req.cookies.token) {
 
-    const res = await fetch('http://localhost:1006/json/member/cart.json');
-    const data = await res.json();
+        return {
+            redirect: {
+                destination: '/signin',
+                permanent: false,
+            },
+        };
+
+    }
+
+    const resData = await util.serviceServer({
+        url: '/cart_products',
+        cookie: req.cookies,
+    });
+
+    const { data } = resData;
+
+    // const resData = await fetch('http://localhost:1006/json/member/cart.json');
+    // const data = await resData.json();
 
     if (!data.result) {
 

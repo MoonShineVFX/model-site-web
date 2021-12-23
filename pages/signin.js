@@ -1,4 +1,5 @@
 import { Fragment, useContext, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import SigninGoogle from '../src/components/third-party/SigninGoogle';
 import Buttons from '../src/components/Buttons';
@@ -14,6 +15,7 @@ import {
 
 import { GlobalContext } from '../src/context/global.state';
 import deftag from '../src/utils/util.deftag';
+import Service from '../src/utils/util.service';
 
 const {
     memberSign: {
@@ -27,6 +29,9 @@ const {
 } = deftag;
 
 const Signin = () => {
+
+    // Router
+    const router = useRouter();
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
@@ -47,7 +52,9 @@ const Signin = () => {
     // 送資料
     const handleReqData = (reqData) => {
 
-        console.log('reqData:', reqData)
+        let auth = btoa(`${reqData.email}:${reqData.password}`);
+        Service.signin({ headers: { Authorization: `Basic ${auth}`} })
+            .then(() => router.push('/'));
 
     };
 

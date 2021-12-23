@@ -19,7 +19,6 @@ const util = {
         const CONFIG = () => {
 
                 let url = '';
-                // let method = 'get';
                 let method = 'post';
 
                 if (typeof service === 'string') url = service;
@@ -38,7 +37,7 @@ const util = {
             },
             showErrorMesg = (message, callback) => {
 
-                console.log(message || '出了些狀況，請找研發');
+                alert(message || '出了些狀況，請找研發');
 
             };
 
@@ -80,9 +79,15 @@ const util = {
 
     },
 
-    serviceServer: (url, reqData = {}) => {
+    serviceServer: ({ method = 'post', url, cookie }, reqData = {}) => {
 
-        return axios.post(`http://localhost:1006/${url}`, reqData);
+        return axios({
+            url: `https://${process.env.HOST}/api${url}`,
+            method,
+            ...cookie && {
+                headers: { Cookie: `sessionid=${cookie.sessionid}` },
+            },
+        });
 
     },
 

@@ -5,7 +5,7 @@ import {
     useEffect,
     useState,
 } from 'react';
-
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import Buttons from '../src/components/Buttons';
 import Checkbox from '../src/components/Checkbox';
@@ -42,6 +42,9 @@ const {
 
 const Register = () => {
 
+    // Router
+    const router = useRouter();
+
     // Context
     const { globalDispatch } = useContext(GlobalContext);
 
@@ -74,7 +77,8 @@ const Register = () => {
 
         delete reqData.confirm_password;
         // console.log('reqData:', reqData)
-        Service.register(reqData);
+        Service.register(reqData)
+            .then(() => router.push('/'));
 
     };
 

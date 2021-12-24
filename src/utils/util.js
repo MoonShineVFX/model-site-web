@@ -79,14 +79,12 @@ const util = {
 
     },
 
-    serviceServer: ({ method = 'post', url, cookie }, reqData = {}) => {
+    serviceServer: ({ method = 'post', url, headers }, reqData = {}) => {
 
         return axios({
             url: `https://${process.env.HOST}/api${url}`,
             method,
-            ...cookie && {
-                headers: { Cookie: `sessionid=${cookie.sessionid}` },
-            },
+            ...headers && { headers: { ...headers } }, // 有傳 headers 才送
         });
 
     },

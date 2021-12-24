@@ -31,7 +31,7 @@ const SectionLayout = styled('section')({
         fontSize: '1.25em',
         borderRadius: '40px',
         margin: '40px auto 0',
-        padding: '22px 10px',
+        padding: '16px 10px',
     },
     '.right': {
         '> *:nth-of-type(2)': {

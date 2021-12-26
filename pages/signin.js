@@ -26,6 +26,10 @@ const {
         text_account_with_email,
         text_password,
     },
+    error: {
+        error_password_at_least_eight,
+        error_pattern,
+    },
 } = deftag;
 
 const Signin = () => {
@@ -88,9 +92,14 @@ const Signin = () => {
                                 placeholder={text_password}
                                 {...register('password', {
                                     required: true,
-                                    // minLength: 8,
-                                    // maxLength: 20,
-                                    pattern: /^(?=.*\d)[0-9a-zA-Z!\u0022#$%&'()*+,./:;<=>?@[\]\^_`{|}~-]{8,}$/g,
+                                    minLength: {
+                                        value: 8,
+                                        message: error_password_at_least_eight,
+                                    },
+                                    pattern: {
+                                        value: /^(?=.*\d)[0-9a-zA-Z!\u0022#$%&'()*+,./:;<=>?@[\]\^_`{|}~-]{8,}$/g,
+                                        message: error_pattern,
+                                    },
                                 })}
                             />
                         </FormRow>

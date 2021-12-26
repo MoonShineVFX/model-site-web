@@ -30,7 +30,6 @@ const DialogLayout = styled(Dialog)(({ theme }) => ({
 
 // confirm
 // alert
-// form
 
 // 關閉按鈕
 const CloseButton = ({ onClick }) => (
@@ -88,9 +87,7 @@ const Lightbox = (props) => {
                 {(type !== 'confirm') && <CloseButton onClick={handleClose} />}
             </DialogTitle>
 
-            <DialogContent dividers>
-                {children}
-            </DialogContent>
+            <DialogContent dividers>{children}</DialogContent>
 
             <DialogActions>
                 <Button

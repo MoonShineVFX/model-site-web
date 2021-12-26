@@ -76,7 +76,6 @@ const Register = () => {
     const handleReqData = (reqData) => {
 
         delete reqData.confirm_password;
-        // console.log('reqData:', reqData)
         Service.register(reqData)
             .then(() => router.push('/'));
 

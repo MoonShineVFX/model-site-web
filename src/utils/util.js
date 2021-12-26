@@ -37,7 +37,7 @@ const util = {
             },
             showErrorMesg = (message, callback) => {
 
-                alert(message || '出了些狀況，請找研發');
+                alert(message || '出了些狀況');
 
             };
 

@@ -4,11 +4,13 @@ const Service = {
     // common
     common: (reqData) => util.serviceProxy('/common', reqData),
 
-    // 未登入
+    // 未登入 (註冊、登入、忘記密碼、重設密碼)
     signin: ({ reqData, headers }) => util.serviceProxy('/login', reqData, {
         headers: { ...headers },
     }),
     register: (reqData) => util.serviceProxy('/register', reqData),
+    forgotPassword: (reqData) => util.serviceProxy('/forget_password', reqData),
+    resetPassword: (reqData) => util.serviceProxy('/reset_password', reqData),
 
     // 商品
     productList: ({ page, type, tag }) => util.serviceProxy({

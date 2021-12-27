@@ -10,13 +10,14 @@ import HeadTag from '../../src/containers/HeadTag';
 import { TitleLayout } from '../../src/components/member/cartLayout';
 import { TabWrapLayout, TabPanelLayout } from '../../src/components/member/accountLayout';
 
+import MyProduct from '../../src/components/member/MyProduct';
 import OrderRecord from '../../src/components/member/OrderRecord';
 import MyAccount from '../../src/components/member/MyAccount';
 
 import { GlobalContext } from '../../src/context/global.state';
+import util from '../../src/utils/util';
 import deftag from '../../src/utils/util.deftag';
 import Service from '../../src/utils/util.service';
-import MyProduct from '../../src/components/member/MyProduct';
 
 const {
     member: {
@@ -145,13 +146,25 @@ const Account = ({ pageData }) => {
 
 export default Account;
 
-export async function getServerSideProps () {
+export async function getServerSideProps ({ req }) {
 
-    // const res = await util.serviceServer('/json/home/home.json');
-    // const { data } = res;
+    // 沒有 cookie(token) 導登入頁
+    if (!req.cookies.token) {
 
-    const res = await fetch('http://localhost:1006/json/member/my_product.json');
-    const data = await res.json();
+        return {
+            redirect: {
+                destination: '/signin',
+                permanent: false,
+            },
+        };
+
+    }
+
+    // const resData = await util.serviceServer('/orders');
+    // const { data } = resData;
+
+    const resData = await fetch('http://localhost:1006/json/member/my_product.json');
+    const data = await resData.json();
 
     if (!data.result) {
 

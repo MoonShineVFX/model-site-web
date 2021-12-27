@@ -6,7 +6,7 @@
         "list": [
             {
                 "id": 51654,
-                "orderNumber": "MSI-12456144",
+                "orderNumber": "MSM20211224000001",
                 "date": "2021-10-01T09:19:00",
                 "price": 1000,
                 "status": "wait",
@@ -16,7 +16,7 @@
             },
             {
                 "id": 92814,
-                "orderNumber": "MSI-12456145",
+                "orderNumber": "MSM20211224000001",
                 "date": "2021-10-01T09:19:00",
                 "price": 1000,
                 "status": "success",
@@ -26,7 +26,7 @@
             },
             {
                 "id": 92815,
-                "orderNumber": "MSI-12456146",
+                "orderNumber": "MSM20211224000001",
                 "date": "2021-10-01T09:19:00",
                 "price": 1000,
                 "status": "fail",
@@ -36,7 +36,7 @@
             },
             {
                 "id": 92816,
-                "orderNumber": "MSI-12456147",
+                "orderNumber": "MSM20211224000001",
                 "date": "2021-10-01T09:19:00",
                 "price": 1000,
                 "status": "cancel",

@@ -25,7 +25,7 @@ const Service = {
     order: (reqData) => util.serviceProxy('/order_create', reqData),
 
     // 訂單記錄
-    orderRecord: (reqData) => util.serviceProxy('/member/order_record.json', reqData),
+    orderRecord: (reqData) => util.serviceProxy('/orders', reqData),
 
     // 訂單詳細
     orderItems: (reqData) => util.serviceProxy({

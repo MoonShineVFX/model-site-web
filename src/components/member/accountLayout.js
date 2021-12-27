@@ -145,10 +145,6 @@ const OrderRecordLayout = styled('div')(({ theme }) => ({
         '&:not(:last-child)': {
             borderBottom: `1px solid ${theme.palette.border.dark}`,
         },
-        '&:not(.row-head) .cell-orderNumber': {
-            textDecoration: 'underline',
-            cursor: 'pointer',
-        },
     },
     '.item-cell': {
         flex: '1',
@@ -165,6 +161,9 @@ const OrderRecordLayout = styled('div')(({ theme }) => ({
         '&.cell-140': {
             maxWidth: '140px',
         },
+    },
+    '.cell-orderNumber': {
+        color: theme.palette.textColor,
     },
 }));
 

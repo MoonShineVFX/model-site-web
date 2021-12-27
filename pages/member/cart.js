@@ -6,7 +6,6 @@ import React, {
     useRef,
 } from 'react';
 
-import { useForm } from 'react-hook-form';
 import { Grid } from '@mui/material';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
@@ -32,37 +31,9 @@ const {
         btn_confirm_order,
         section_title,
         text_notice,
+        text_empty_cart,
     },
 } = deftag;
-
-// 假 form
-const Form = ({ data, ref}) => {
-
-    // console.log('ref:', ref)
-
-    return (
-
-        <form
-            name="Newebpay"
-            method="POST"
-            action="https://core.newebpay.com/MPG/mpg_gateway"
-            ref={ref}
-        >
-            {
-                Object.keys(data).map((key) => (
-
-                    <input
-                        key={key}
-                        type="hidden"
-                        name={key}
-                        value={data[key]}
-                    />
-
-                ))
-            }
-        </form>
-    );
-};
 
 // 商品欄位
 const TableGrid = ({ colLeft, colRight }) => (
@@ -149,7 +120,6 @@ const Cart = ({ pageData }) => {
     const formRef = useRef(null);
 
     // State
-    const [visible, setVisible] = useState(false);
     const [fields, setFields] = useState({});
 
     useEffect(() => {
@@ -166,32 +136,13 @@ const Cart = ({ pageData }) => {
 
     };
 
-    // 按鈕送出訂單
-    const btnOrder = () => {};
-
     // 送出訂單
     const handleClickOrder = () => {
 
-        // console.log('order:', pageData.list.flatMap(({ id }) => id));
-
-        // Fake
-        const resData = {
-            "MerchantID": "ID",
-            "TradeInfo": "wuLCsERCcUsAmNxjQKB7VBSa3Q3JyaU23+9JDohJgjTKjwfESsJW1HnAN1OgKmSY5klzSVqVt6AatcCH0tnJpcUoSsh0z4tyH0uOvpkKqB71iVMqdBT55ZiM8yjlxs4Fveq/P4auiiLV2wSv4cnd8NqhJxLJkQMTy1fYA/xJ5YkZxSmCUy+yqf5IxT/cSXGKKDUoLZ8z9FxfGteL7N7EBQgUbcpQgC1LNYpnsdi7OBWAGJEL7g944cTCIoKYrDQPhuTegXKcyOPnDzBNN+iYN5lnMcFUxe8VbpSgCuu9fA4uh+2eizPg1FHvyF3lc18XFBb2ICMp+n6erV5gYz4gJtcM89+FwRIaFPLHOvo4VGdLJYJ57alaFyB5Vd2QBJIx681maKB50Pr56NKc9sxqsClAWqzMKSDV/SPOCo48hYBRQB61cbmkaIcOdrad06Ztxza6r95Wp3qRY4119S4JfUUMK/jISPG1glA6dbRZT89veYGcrnsJ2IAIXKEThUhiMFcvOU8/bD6gsULIEGRpH+NEEupRbT7ozItu3SDB0Tg=",
-            "TradeSha": "5D912961AB1F1FE17F816BF609DF0737ADE694BBC2FCA325232F1E6EFE457E9C",
-            "Version": "1.6"
-        };
-
-        setVisible(true);
-        setFields({ ...resData });
-        formRef.current.submit();
-
-        return;
         Service.order({ cartIds: pageData.list.flatMap(({ id }) => id) })
             .then((resData) => {
 
                 console.log('resData:', resData);
-                setVisible(true);
                 setFields({ ...resData });
                 formRef.current.submit();
 
@@ -209,30 +160,38 @@ const Cart = ({ pageData }) => {
                 <h3 className="title-large">{section_title}</h3>
 
                 <CartLayout>
-                    <div className="items">
-                        {
-                            pageData.list.map((data) => (
+                    {
+                        pageData.list.length ? (
 
-                                <Item
-                                    key={data.id}
-                                    data={data}
-                                    onClick={handleRemoveItem}
-                                />
+                            <Fragment>
+                                <div className="items">
+                                    {
+                                        pageData.list.map((data) => (
 
-                            ))
-                        }
-                    </div>
+                                            <Item
+                                                key={data.id}
+                                                data={data}
+                                                onClick={handleRemoveItem}
+                                            />
 
-                    <div className="amount">
-                        <TableGrid
-                            colRight={(
-                                <Fragment>
-                                    <span>總額</span>
-                                    <span className="price">{priceWithCommas(pageData.amount)}</span>
-                                </Fragment>
-                            )}
-                        />
-                    </div>
+                                        ))
+                                    }
+                                </div>
+
+                                <div className="amount">
+                                    <TableGrid
+                                        colRight={(
+                                            <Fragment>
+                                                <span>總額</span>
+                                                <span className="price">{priceWithCommas(pageData.amount)}</span>
+                                            </Fragment>
+                                        )}
+                                    />
+                                </div>
+                            </Fragment>
+
+                        ) : text_empty_cart
+                    }
                 </CartLayout>
 
                 <div className="btn-action">
@@ -244,32 +203,27 @@ const Cart = ({ pageData }) => {
                 </div>
             </SectionLayout>
 
-            {/* <form
-                name="Newebpay"
-                method="POST"
-                action="https://core.newebpay.com/MPG/mpg_gateway"
-                ref={formRef}
-            >
-                {
-                    Object.keys(fields).map((key) => (
-
-                        <input
-                            key={key}
-                            type="hidden"
-                            name={key}
-                            value={fields[key]}
-                        />
-
-                    ))
-                }
-            </form> */}
-
             {
-                visible &&
-                    <Form
-                        data={fields}
+                !!Object.keys(fields).length &&
+                    <form
+                        name="Newebpay"
+                        method="POST"
+                        action="https://ccore.newebpay.com/MPG/mpg_gateway"
                         ref={formRef}
-                    />
+                    >
+                        {
+                            Object.keys(fields).map((key) => (
+
+                                <input
+                                    key={key}
+                                    type="hidden"
+                                    name={key}
+                                    value={fields[key]}
+                                />
+
+                            ))
+                        }
+                    </form>
             }
         </Fragment>
 

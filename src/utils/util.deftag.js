@@ -63,7 +63,7 @@ const deftag = {
         text_account_edit: '修改會員資料',
     },
     orderRecord: {
-        text_status_wait: '等待付款',
+        text_status_unpaid: '等待付款',
         text_status_success: '交易成功',
         text_status_fail: '交易失敗',
         text_status_cancel: '取消交易',
@@ -82,7 +82,8 @@ const deftag = {
         text_order_title: '商品購買',
         btn_confirm_order: '送出訂單',
         section_title: '商品確認',
-        text_notice: '送出訂單後將會離開此頁面。'
+        text_notice: '送出訂單後將會離開此頁面。',
+        text_empty_cart: '購物車是空的...',
     },
     about: {
         page_title: '關於我們',

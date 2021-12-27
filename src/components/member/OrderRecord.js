@@ -28,16 +28,21 @@ const renderItemCell = ({
         payment,
         invoice,
     },
-    onClick,
 }) => (
 
     <div className={`item-row ${className ? className : ''}`}>
-        <span
-            className="item-cell cell-orderNumber"
-            onClick={onClick}
-        >
-            {number}
-        </span>
+        {
+            className ? <span className="item-cell">{number}</span> : (
+
+                <Links
+                    url={`/order/${number}`}
+                    className="item-cell cell-orderNumber"
+                >
+                    {number}
+                </Links>
+
+            )
+        }
         <span className="item-cell cell-140">{date}</span>
         <span className="item-cell cell-80">{quantity}</span>
         <span className="item-cell cell-140">{price}</span>
@@ -52,27 +57,25 @@ const renderItemCell = ({
 const Item = ({
     data: {
         orderNumber,
-        date,
+        createdAt,
         price,
         status,
         totalItems,
-        payment,
+        paidBy,
         invoice,
     },
-    onClick,
 }) => (
 
     renderItemCell({
         data: {
             number: orderNumber,
-            date: dateFormat(date),
+            date: dateFormat(createdAt),
             status: orderRecord[`text_status_${status}`],
             quantity: `${totalItems}${text_item_unit}`,
             price: priceWithCommas(price),
-            payment: orderRecord[`text_payment_${payment}`],
+            payment: orderRecord[`text_payment_${paidBy}`],
             invoice,
         },
-        onClick,
     })
 
 );

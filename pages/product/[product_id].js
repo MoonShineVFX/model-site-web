@@ -14,9 +14,11 @@ export default ProductDetail;
 
 export async function getServerSideProps ({ params }) {
 
+    console.log('params:', params)
+
     const res = await util.serviceServer({
         method: 'get',
-        url: `/web_products/${+params.id}`,
+        url: `/web_products/${+params.product_id}`,
     });
 
     const { data } = res;

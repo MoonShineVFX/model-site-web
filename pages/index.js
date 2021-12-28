@@ -44,9 +44,9 @@ const Home = ({ pageData }) => {
             {homeStyles}
             <HeadTag title={page_title} />
 
-            <SlideShowWrapLayout data={pageData.banner}>
+            <SlideShowWrapLayout data={pageData.banners}>
                 {
-                    pageData.banner.map(({
+                    pageData.banners.map(({
                         id,
                         title,
                         description,
@@ -91,7 +91,7 @@ const Home = ({ pageData }) => {
             <ItemsWrap title={section_title_new_arrival} url="/product/list?page=1&cate=all">
                 <Grid container spacing="30px">
                     {
-                        pageData.newArrival.map(({ id, title, price, imgUrl }) => (
+                        pageData.newArrivals.map(({ id, title, price, imgUrl }) => (
 
                             <Grid
                                 key={id}
@@ -116,7 +116,7 @@ const Home = ({ pageData }) => {
             <ItemsWrap title={section_title_tutorial} url="signin">
                 <ItemTutorialLayout>
                     {
-                        pageData.tutorial.map(({ id, title, description, imgUrl }) => (
+                        pageData.tutorials.map(({ id, title, description, imgUrl }) => (
 
                             <Links
                                 key={id}
@@ -154,7 +154,7 @@ export default Home;
 
 export async function getServerSideProps () {
 
-    // const res = await util.serviceServer('/json/home/home.json');
+    // const res = await util.serviceServer({ url: '/index' });
     // const { data } = res;
 
     const res = await fetch('http://localhost:1006/json/home.json');

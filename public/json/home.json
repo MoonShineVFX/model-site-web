@@ -3,7 +3,7 @@
     "message": "",
     "errors": [],
     "data": {
-        "banner": [
+        "banners": [
             {
                 "id": 11111,
                 "title": "標題-1",
@@ -29,7 +29,7 @@
                 "status": "???"
             }
         ],
-        "newArrival": [
+        "newArrivals": [
             {
                 "id": 51654,
                 "title": "標題-51654",
@@ -59,7 +59,7 @@
                 "status": "???"
             }
         ],
-        "tutorial": [
+        "tutorials": [
             {
                 "id": 30723,
                 "title": "將素材模型匯入軟體的方法 - MAYA",

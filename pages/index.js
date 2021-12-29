@@ -154,11 +154,11 @@ export default Home;
 
 export async function getServerSideProps () {
 
-    // const res = await util.serviceServer({ url: '/index' });
-    // const { data } = res;
+    // const resData = await util.serviceServer({ url: '/index' });
+    // const { data } = resData;
 
-    const res = await fetch('http://localhost:1006/json/home.json');
-    const data = await res.json();
+    const resData = await fetch('http://localhost:1006/json/home.json');
+    const data = await resData.json();
 
     if (!data.result) {
 

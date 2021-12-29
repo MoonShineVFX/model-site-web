@@ -1,10 +1,6 @@
-import { Fragment, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import Links from '../Links';
-import {
-    OrderRecordLayout,
-    PopoverLayout,
-} from '../member/accountLayout';
-
+import { OrderRecordLayout } from '../order/orderLayout';
 import { GlobalContext } from '../../context/global.state';
 import util from '../../utils/util';
 import deftag from '../../utils/util.deftag';
@@ -21,11 +17,12 @@ const renderItemCell = ({
     className,
     data: {
         number,
-        date,
+        createAt,
         status,
         quantity,
         price,
         payment,
+        paidAt,
         invoice,
     },
 }) => (
@@ -43,11 +40,12 @@ const renderItemCell = ({
 
             )
         }
-        <span className="item-cell cell-140">{date}</span>
+        <span className="item-cell cell-160">{createAt}</span>
         <span className="item-cell cell-80">{quantity}</span>
         <span className="item-cell cell-140">{price}</span>
         <span className="item-cell cell-140">{status}</span>
         <span className="item-cell cell-140">{payment}</span>
+        <span className="item-cell cell-160">{paidAt}</span>
         <span className="item-cell cell-140">{invoice}</span>
     </div>
 
@@ -62,6 +60,7 @@ const Item = ({
         status,
         totalItems,
         paidBy,
+        paidAt,
         invoice,
     },
 }) => (
@@ -69,11 +68,12 @@ const Item = ({
     renderItemCell({
         data: {
             number: orderNumber,
-            date: dateFormat(createdAt),
+            createAt: dateFormat(createdAt),
             status: orderRecord[`text_status_${status}`],
             quantity: `${totalItems}${text_item_unit}`,
             price: priceWithCommas(price),
             payment: orderRecord[`text_payment_${paidBy}`],
+            paidAt: dateFormat(paidAt),
             invoice,
         },
     })
@@ -106,62 +106,38 @@ const OrderRecord = ({ data }) => {
 
     return (
 
-        <Fragment>
-            <OrderRecordLayout>
-                {
-                    renderItemCell({
-                        className: 'row-head',
-                        data: {
-                            number: orderRecord.text_order_number,
-                            date: orderRecord.text_order_date,
-                            status: orderRecord.text_order_status,
-                            quantity: orderRecord.text_order_quantity,
-                            price: orderRecord.text_order_total_price,
-                            payment: orderRecord.text_order_payment,
-                            invoice: orderRecord.text_order_invoice,
-                        },
-                    })
-                }
+        <OrderRecordLayout>
+            {
+                renderItemCell({
+                    className: 'row-head',
+                    data: {
+                        number: orderRecord.text_order_number,
+                        createAt: orderRecord.text_order_create_at,
+                        status: orderRecord.text_order_status,
+                        quantity: orderRecord.text_order_quantity,
+                        price: orderRecord.text_order_total_price,
+                        payment: orderRecord.text_order_payment,
+                        paidAt: orderRecord.text_order_paid_at,
+                        invoice: orderRecord.text_order_invoice,
+                    },
+                })
+            }
 
-                {
-                    data.map((obj) => (
+            {
+                data.map((obj) => (
 
-                        <Item
-                            key={obj.id}
-                            data={obj}
-                            onClick={(e) => handleItems(e, obj)}
-                        />
+                    <Item
+                        key={obj.id}
+                        data={obj}
+                        onClick={(e) => handleItems(e, obj)}
+                    />
 
-                    ))
-                }
-            </OrderRecordLayout>
-
-            <PopoverLayout>
-                {
-                    items.map(({ id, title, price }) => (
-
-                        <Links
-                            key={id}
-                            url={`/product/${id}`}
-                            title={title}
-                            className="item"
-                        >
-                            <span className="title">{title}</span>
-                            <span className="price">{priceWithCommas(price)}</span>
-                        </Links>
-
-                    ))
-                }
-            </PopoverLayout>
-        </Fragment>
+                ))
+            }
+        </OrderRecordLayout>
 
     );
 
 };
 
 export default OrderRecord;
-
-/**
- * flex table
- * https://designlink.work/flex-table/
- */

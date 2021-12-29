@@ -1,5 +1,4 @@
 import { styled } from '@mui/system';
-import Popup from '../Popup';
 import Box from '../Box';
 import { ItemWrapLayout } from '../product/productLayout';
 
@@ -33,9 +32,9 @@ const TabWrapLayout = styled('section')(({ theme }) => ({
 //
 const TabPanelLayout = styled('div')({
     margin: 'auto',
-    '&:not(.panel-product)': {
-        maxWidth: '1000px',
-    },
+    // '&:not(.panel-product)': {
+    //     maxWidth: '1000px',
+    // },
 });
 
 // 我的模型庫
@@ -135,63 +134,7 @@ const ItemLayout = styled('div')(({ theme }) => ({
 }));
 
 // 訂單紀錄
-const OrderRecordLayout = styled('div')(({ theme }) => ({
-    border: `1px solid ${theme.palette.border.dark}`,
-    '.row-head': {
-
-    },
-    '.item-row': {
-        display: 'flex',
-        '&:not(:last-child)': {
-            borderBottom: `1px solid ${theme.palette.border.dark}`,
-        },
-    },
-    '.item-cell': {
-        flex: '1',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '16px 20px',
-        '&:not(:last-child)': {
-            borderRight: `1px solid ${theme.palette.border.dark}`,
-        },
-        '&.cell-80': {
-            maxWidth: '80px',
-        },
-        '&.cell-140': {
-            maxWidth: '140px',
-        },
-    },
-    '.cell-orderNumber': {
-        color: theme.palette.textColor,
-    },
-}));
-
-// Popover
-const PopoverLayout = styled(Popup)(({ theme }) => ({
-    '.MuiPaper-root': {
-        padding: '0 16px',
-    },
-    '.item': {
-        color: theme.palette.secondary.contrastText,
-        textDecoration: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        padding: '16px 20px',
-        '&:not(:last-child)': {
-            borderBottom: `1px solid ${theme.palette.border.dark}`,
-        },
-    },
-    '.title': {
-        maxWidth: '200px',
-        width: '100%',
-    },
-    '.price': {
-        fontWeight: 'normal',
-        flex: '0 0 calc(100% - 200px - 20px)',
-        marginLeft: '20px',
-    },
-}));
+// order/orderLayout.js
 
 // 修改會員資料
 const BoxWrapLayout = styled(Box)(({ theme }) => ({
@@ -224,7 +167,5 @@ export {
     TabPanelLayout,
     MyProductItemLayout,
     ItemLayout,
-    OrderRecordLayout,
-    PopoverLayout,
     BoxWrapLayout,
 };

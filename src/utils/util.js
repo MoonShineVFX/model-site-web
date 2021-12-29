@@ -137,7 +137,7 @@ const util = {
      * @param {string} date - 時間
      * @return {string} - yyyy.mm.dd (dd)
      */
-    dateFormat: (date) => dayjs(date).format('YYYY/MM/DD'),
+    dateFormat: (date) => date ? dayjs(date).format('YYYY/MM/DD hh:mm') : '--',
 
     /**
      * @author Betty

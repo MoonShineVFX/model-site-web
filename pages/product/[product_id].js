@@ -16,12 +16,12 @@ export async function getServerSideProps ({ params }) {
 
     console.log('params:', params)
 
-    const res = await util.serviceServer({
+    const resData = await util.serviceServer({
         method: 'get',
         url: `/web_products/${+params.product_id}`,
     });
 
-    const { data } = res;
+    const { data } = resData;
 
     // const res = await fetch('http://localhost:1006/json/product/51654.json');
     // const data = await res.json();

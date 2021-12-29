@@ -257,9 +257,6 @@ export async function getServerSideProps ({ req }) {
 
     const { data } = resData;
 
-    // const resData = await fetch('http://localhost:1006/json/member/cart.json');
-    // const data = await resData.json();
-
     if (!data.result) {
 
         return {
@@ -275,8 +272,3 @@ export async function getServerSideProps ({ req }) {
     };
 
 };
-
-/**
- * trigger form submit
- * https://github.com/react-hook-form/react-hook-form/issues/566
- */

@@ -60,7 +60,20 @@ const SupportLayout = styled(Grid)(({ theme }) => ({
 //
 const About = ({ pageData }) => {
 
-    const { title, description, imgUrl, support } = pageData;
+    const {
+        title,
+        description,
+        imgUrl,
+        supportModels,
+        supportFormats,
+        supportRenders,
+    } = pageData;
+
+    const support = {
+        supportModels,
+        supportFormats,
+        supportRenders,
+    };
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
@@ -119,11 +132,11 @@ export default About;
 
 export async function getServerSideProps () {
 
-    // const res = await util.serviceServer('/json/home/home.json');
-    // const { data } = res;
+    // const resData = await util.serviceServer({ url: '/about_us' });
+    // const { data } = resData;
 
-    const res = await fetch('http://localhost:1006/json/about.json');
-    const data = await res.json();
+    const resData = await fetch('http://localhost:1006/json/about.json');
+    const data = await resData.json();
 
     if (!data.result) {
 

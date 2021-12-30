@@ -5,7 +5,6 @@ import SigninGoogle from '../src/components/third-party/SigninGoogle';
 import Buttons from '../src/components/Buttons';
 import Links from '../src/components/Links';
 import FormWrap, { FormRow } from '../src/components/FormWrap';
-
 import HeadTag from '../src/containers/HeadTag';
 import {
     SignLayout,
@@ -138,3 +137,23 @@ const Signin = () => {
 };
 
 export default Signin;
+
+export async function getServerSideProps ({ req }) {
+
+    // 有 cookie(token) 導首頁
+    if (!!req.cookies.token) {
+
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+        };
+
+    }
+
+    return {
+        props: {},
+    };
+
+};

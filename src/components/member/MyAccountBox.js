@@ -1,4 +1,6 @@
 import { styled } from '@mui/system';
+import { useRouter } from 'next/router';
+import Cookies from 'js-cookie';
 import Box from '../Box';
 import Links from '../Links';
 import deftag from '../../utils/util.deftag';
@@ -36,11 +38,15 @@ const MyAccountLayout = styled(Box)(({ theme }) => ({
 //
 const MyAccount = () => {
 
+    // Router
+    const router = useRouter();
+
     // 登出行為
     const handleClickMenu = (e) => {
 
         e.preventDefault();
-        console.log('logout')
+        Cookies.remove('token');
+        router.push('/');
 
     };
 

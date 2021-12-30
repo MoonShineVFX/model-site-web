@@ -50,7 +50,7 @@ const Tutorial = ({ pageData }) => {
                 component="section"
             >
                 {
-                    pageData.tutorial.map(({ id, title, imgUrl, link }) => (
+                    pageData.list.map(({ id, title, imgUrl, link }) => (
 
                         <Grid
                             key={id}
@@ -81,11 +81,11 @@ export default Tutorial;
 
 export async function getServerSideProps () {
 
-    // const res = await util.serviceServer('/json/home/home.json');
-    // const { data } = res;
+    // const resData = await util.serviceServer({ url: '/tutorials' });
+    // const { data } = resData;
 
-    const res = await fetch('http://localhost:1006/json/tutorial.json');
-    const data = await res.json();
+    const resData = await fetch('http://localhost:1006/json/tutorial.json');
+    const data = await resData.json();
 
     if (!data.result) {
 

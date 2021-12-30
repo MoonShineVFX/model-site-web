@@ -142,9 +142,9 @@ const Cart = ({ pageData }) => {
         Service.order({ cartIds: pageData.list.flatMap(({ id }) => id) })
             .then((resData) => {
 
-                console.log('resData:', resData);
                 setFields({ ...resData });
                 formRef.current.submit();
+                localStorage.removeItem('cartItem'); // 清除暫存購物車
 
             });
 
@@ -254,6 +254,8 @@ export async function getServerSideProps ({ req }) {
             Authorization: `Bearer ${req.cookies.token}`,
         },
     });
+
+    console.log('resData:', resData)
 
     const { data } = resData;
 

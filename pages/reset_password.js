@@ -150,3 +150,23 @@ const Register = () => {
 };
 
 export default Register;
+
+export async function getServerSideProps ({ req }) {
+
+    // 有 cookie(token) 導首頁
+    if (!!req.cookies.token) {
+
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+        };
+
+    }
+
+    return {
+        props: {},
+    };
+
+};

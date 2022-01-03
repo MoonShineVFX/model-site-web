@@ -6,7 +6,7 @@ on:
       - dev
 
 env:
-  PROJECT_ID: ms-model-lib
+  PROJECT_ID: ms-model-libya
   SERVICE_NAME: frontend-web
 
 jobs:

@@ -1,6 +1,6 @@
 import { GlobalStyles } from '@mui/material';
 import { styled } from '@mui/system';
-import SlideShow from '../SlideShow';
+import SlideShow from '../Slideshow';
 
 const styles = {
     'main > div > *': {

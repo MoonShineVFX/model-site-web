@@ -157,9 +157,6 @@ export async function getServerSideProps () {
     const resData = await util.serviceServer({ url: '/index' });
     const { data } = resData;
 
-    // const resData = await fetch('http://localhost:1006/json/home.json');
-    // const data = await resData.json();
-
     if (!data.result) {
 
         return {

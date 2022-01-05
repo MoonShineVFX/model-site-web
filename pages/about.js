@@ -132,11 +132,8 @@ export default About;
 
 export async function getServerSideProps () {
 
-    // const resData = await util.serviceServer({ url: '/about_us' });
-    // const { data } = resData;
-
-    const resData = await fetch('http://localhost:1006/json/about.json');
-    const data = await resData.json();
+    const resData = await util.serviceServer({ url: '/about_us' });
+    const { data } = resData;
 
     if (!data.result) {
 

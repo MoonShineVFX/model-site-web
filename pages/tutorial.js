@@ -81,11 +81,8 @@ export default Tutorial;
 
 export async function getServerSideProps () {
 
-    // const resData = await util.serviceServer({ url: '/tutorials' });
-    // const { data } = resData;
-
-    const resData = await fetch('http://localhost:1006/json/tutorial.json');
-    const data = await resData.json();
+    const resData = await util.serviceServer({ url: '/tutorials' });
+    const { data } = resData;
 
     if (!data.result) {
 

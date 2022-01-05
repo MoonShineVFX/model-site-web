@@ -160,11 +160,8 @@ export async function getServerSideProps ({ req }) {
 
     }
 
-    // const resData = await util.serviceServer('/orders');
-    // const { data } = resData;
-
-    const resData = await fetch('http://localhost:1006/json/member/my_product.json');
-    const data = await resData.json();
+    const resData = await util.serviceServer({ url: 'my_products' });
+    const { data } = resData;
 
     if (!data.result) {
 

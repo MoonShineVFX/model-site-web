@@ -79,7 +79,7 @@ const util = {
 
     },
 
-    serviceServer: ({ method = 'post', url, headers }, reqData = {}) => {
+    serviceServer: ({ method = 'post', url, headers }) => {
 
         return axios({
             url: `https://${process.env.HOST}/api${url}`,

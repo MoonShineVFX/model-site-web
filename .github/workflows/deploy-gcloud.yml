@@ -21,7 +21,7 @@ jobs:
         if: github.ref == 'refs/heads/dev'
         run: |
           echo "SERVICE_NAME=$SERVICE_NAME-dev" >> $GITHUB_ENV
-          echo "HOST=$HOST-dev" >> $GITHUB_ENV
+          echo "HOST=market-dev.moonshine.tw" >> $GITHUB_ENV
       - name: Override next.js env
         run: |
           echo "NEXT_PUBLIC_HOST=$HOST" >> .env.local

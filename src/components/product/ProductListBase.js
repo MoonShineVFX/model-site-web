@@ -198,12 +198,12 @@ const ProductListBase = ({ pageData }) => {
                         onChange={handleChangeTabMenu}
                     >
                         {
-                            Object.keys(pageData.category).map((key) => (
+                            Object.keys(pageData.categories).map((key) => (
 
                                 <Tab
                                     key={key}
                                     value={key}
-                                    label={pageData.category[key]}
+                                    label={pageData.categories[key]}
                                     onClick={() => handleClickTabMenu(key)}
                                 />
 
@@ -213,7 +213,7 @@ const ProductListBase = ({ pageData }) => {
 
                     <div className="tab-panel">
                         {
-                            Object.keys(pageData.category).map((key) => (
+                            Object.keys(pageData.categories).map((key) => (
 
                                 <TabPanel
                                     key={key}
@@ -222,12 +222,7 @@ const ProductListBase = ({ pageData }) => {
                                 >
                                     <ItemWrapLayout>
                                         {
-                                            pageData.product.map(({
-                                                id,
-                                                title,
-                                                price,
-                                                imgUrl,
-                                            }) => (
+                                            pageData.products.map(({ id, title, price, imgUrl }) => (
 
                                                 <Item
                                                     key={id}
@@ -249,9 +244,9 @@ const ProductListBase = ({ pageData }) => {
                     </div>
 
                     {
-                        (pageData.product.length > 40) &&
+                        (pageData.products.length > 40) &&
                             <Paginations
-                                length={pageData.product.length}
+                                length={pageData.products.length}
                                 currPage={+query.page}
                                 onChange={handleChangePage}
                             />

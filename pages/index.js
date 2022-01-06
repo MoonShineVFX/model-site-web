@@ -88,7 +88,7 @@ const Home = ({ pageData }) => {
                 }
             </SlideShowWrapLayout>
 
-            <ItemsWrap title={section_title_new_arrival} url="/product/list?page=1&cate=all">
+            <ItemsWrap title={section_title_new_arrival} url="/product/list?page=1&type=all">
                 <Grid container spacing="30px">
                     {
                         pageData.newArrivals.map(({ id, title, price, imgUrl }) => (

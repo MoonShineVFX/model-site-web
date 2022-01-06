@@ -182,7 +182,7 @@ const ProductDetailBase = ({ pageData }) => {
                             <SelectOptLayout name="formats" onChange={handleSelected}>
                                 <option value="">{detail_option_format}</option>
                                 {
-                                    (pageData.formats).map(({ id, label }) => (
+                                    (pageData.models).map(({ id, label }) => (
 
                                         <option key={id} value={id}>{label}</option>
 
@@ -194,7 +194,7 @@ const ProductDetailBase = ({ pageData }) => {
                                 <option value="">{detail_option_renderer}</option>
                                 {
                                     // 有選取第一層才印第二層
-                                    selectedFormat && arrangeRenderOpts(pageData.formats)[selectedFormat].renderers.map(({ id, label }) => (
+                                    selectedFormat && arrangeRenderOpts(pageData.models)[selectedFormat].renderers.map(({ id, label }) => (
 
                                         <option key={id} value={id}>{label}</option>
 
@@ -222,7 +222,7 @@ const ProductDetailBase = ({ pageData }) => {
                     columnSpacing="80px"
                 >
                     {
-                        pageData.images.map(({ id, url }) => (
+                        pageData.previews.map(({ id, url }) => (
 
                             <Grid
                                 key={id}

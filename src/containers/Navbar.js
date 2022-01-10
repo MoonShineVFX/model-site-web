@@ -13,7 +13,7 @@ const {
 //
 const navMenus = [
     {
-        key: 'product/list?page=1&type=all',
+        key: 'product/list?page=1',
         text: text_menu_store,
     },
     {

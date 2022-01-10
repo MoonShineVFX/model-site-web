@@ -5,14 +5,6 @@ import ItemsWrap from '../ItemsWrap';
 //
 const GridLayout = styled(Grid)(({ theme }) => ({
     paddingTop: '60px',
-    '.MuiGrid-root': {
-        '&.productList': {
-            paddingTop: 0,
-        },
-        '&.tagsList': {
-            paddingTop: '118px',
-        },
-    },
     '.productList': {
         '.MuiButtonBase-root': {
             fontSize: '1.15em',

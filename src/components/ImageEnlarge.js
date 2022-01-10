@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/system';
 import { IconButton } from '@mui/material';
@@ -28,6 +28,7 @@ const ImageEnlargeLayout = styled('div')(({ theme }) => ({
         },
     },
     '.img-wrap': {
+        height: '90vh',
         textAlign: 'center',
         display: 'inline-block',
         position: 'relative',
@@ -75,8 +76,25 @@ const ImageEnlarge = ({ id, imgUrl }) => {
     // Context
     const { visible, lightboxDispatch } = useContext(GlobalContext);
 
+    useEffect(() => {
+
+        document.addEventListener('keydown', escFunction);
+
+        return () => {
+            document.removeEventListener('keydown', escFunction);
+        };
+
+    }, []);
+
     // Close
     const handleClose = () => lightboxDispatch({ type: 'HIDE' });
+
+    // esc
+    const escFunction = useCallback((e) => {
+
+        if (e.keyCode === 27) handleClose();
+
+    }, []);
 
     return (
 

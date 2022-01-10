@@ -43,6 +43,7 @@ const deftag = {
     },
     product: {
         page_title: '商店',
+        text_filter_no_product: '找不到商品',
         select_label: '標籤篩選',
         product_category: '商品分類',
         detail_section_title1: '商品內容展示圖',

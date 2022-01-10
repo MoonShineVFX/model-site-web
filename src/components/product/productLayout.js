@@ -28,6 +28,9 @@ const GridLayout = styled(Grid)(({ theme }) => ({
         '.MuiTabs-indicator': {
             backgroundColor: 'transparent',
         },
+        '.no-product': {
+            textAlign: 'center',
+        },
     },
     '.tab-menu': {
         marginBottom: '70px',

@@ -17,7 +17,7 @@ export async function getServerSideProps ({ query }) {
 
     const resData = await util.serviceServer({
         method: 'get',
-        url: `/products?page=${query.page}&type=${query.type}${query.tag ? `&tag=${query.tag}` : ''}`,
+        url: `/products?page=${query.page}&type=${query.type}${query.tags ? `&tags=${query.tags}` : ''}`,
     });
 
     const { data } = resData;

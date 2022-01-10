@@ -22,7 +22,6 @@ import FontIcon from '../FontIcon';
 import Item from '../Item';
 import Paginations from '../Paginations';
 import { GlobalContext } from '../../context/global.state';
-import { ProductContext } from '../../context/product/product.state';
 import useQuery from '../../utils/useQuery';
 import deftag from '../../utils/util.deftag';
 
@@ -31,6 +30,7 @@ const {
         page_title,
         select_label,
         product_category,
+        text_filter_no_product,
     },
 } = deftag;
 
@@ -69,8 +69,7 @@ const ProductListBase = ({ pageData }) => {
     const query = useQuery();
 
     // Context
-    const { tags, globalDispatch } = useContext(GlobalContext);
-    const { productList } = useContext(ProductContext);
+    const { tags: tagsOpt, globalDispatch } = useContext(GlobalContext);
 
     // State
     const [value, setValue] = useState('all');
@@ -78,11 +77,11 @@ const ProductListBase = ({ pageData }) => {
 
     useEffect(() => {
 
-        if (!query.cate) return;
-        setValue(query.cate);
+        if (!query.type) return;
+        setValue(query.type);
 
         // 沒有 tag 也不要丟空值
-        if (query.tag) setSelectedTag(arrangeTags(query.tag));
+        if (query.tags) setSelectedTag(arrangeTags(query.tags));
 
         globalDispatch({ type: 'target_box', payload: '' });
 
@@ -98,7 +97,7 @@ const ProductListBase = ({ pageData }) => {
             [id]: !selectedTag[id],
         };
 
-        let param = (Object.keys(obj).some((id) => obj[id])) ? { ...query, tag: Object.keys(obj).filter((key) => obj[key]).join(',') } : { page: query.page, cate: query.cate };
+        let param = (Object.keys(obj).some((id) => obj[id])) ? { ...query, tags: Object.keys(obj).filter((key) => obj[key]).join(',') } : { page: query.page, cate: query.type };
 
         setSelectedTag(obj);
         router.push({
@@ -118,7 +117,7 @@ const ProductListBase = ({ pageData }) => {
             pathname: router.pathname,
             query: {
                 ...router.query,
-                cate: key,
+                type: key,
             },
         });
 
@@ -126,7 +125,7 @@ const ProductListBase = ({ pageData }) => {
         // productList({
         //     ...router.query,
         //     page: +router.query.page,
-        //     cate: key,
+        //     type: key,
         // });
 
     };
@@ -162,7 +161,7 @@ const ProductListBase = ({ pageData }) => {
 
                     <List>
                         {
-                            tags.map(({ id, name }) => (
+                            tagsOpt.map(({ id, name }) => (
 
                                 <ListItemLayout
                                     key={id}
@@ -194,7 +193,7 @@ const ProductListBase = ({ pageData }) => {
                     <Tabs
                         aria-label={product_category}
                         className="tab-menu"
-                        value={(query.cate !== value) ? query.cate : value} // 當 active 已換成別的，再點回 menu 的商店要還原成 "全部"
+                        value={(query.type !== value) ? query.type : value} // 當 active 已換成別的，再點回 menu 的商店要還原成 "全部"
                         onChange={handleChangeTabMenu}
                     >
                         {
@@ -220,23 +219,29 @@ const ProductListBase = ({ pageData }) => {
                                     value={value}
                                     indexKey={key}
                                 >
-                                    <ItemWrapLayout>
-                                        {
-                                            pageData.products.map(({ id, title, price, imgUrl }) => (
+                                    {
+                                        pageData.products.length ? (
 
-                                                <Item
-                                                    key={id}
-                                                    type="product"
-                                                    url={`/product/${id}`}
-                                                    width="321"
-                                                    height="186"
-                                                    data={{ title, price, imgUrl }}
-                                                    newPage
-                                                />
+                                            <ItemWrapLayout>
+                                                {
+                                                    pageData.products.map(({ id, title, price, imgUrl }) => (
 
-                                            ))
-                                        }
-                                    </ItemWrapLayout>
+                                                        <Item
+                                                            key={id}
+                                                            type="product"
+                                                            url={`/product/${id}`}
+                                                            width="321"
+                                                            height="186"
+                                                            data={{ title, price, imgUrl }}
+                                                            newPage
+                                                        />
+
+                                                    ))
+                                                }
+                                            </ItemWrapLayout>
+
+                                        ) : <h2 className="no-product">{text_filter_no_product}</h2>
+                                    }
                                 </TabPanel>
 
                             ))

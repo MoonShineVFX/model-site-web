@@ -160,7 +160,7 @@ const ProductListBase = ({ pageData }) => {
                                             url={`/product/${id}`}
                                             width="321"
                                             height="186"
-                                            data={{ title, price, imgUrl: '//fakeimg.pl/321x186' }}
+                                            data={{ title, price, imgUrl }}
                                             newPage
                                         />
 

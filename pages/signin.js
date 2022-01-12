@@ -95,10 +95,10 @@ const Signin = () => {
                                         value: 8,
                                         message: error_password_at_least_eight,
                                     },
-                                    pattern: {
-                                        value: /^(?=.*\d)[0-9a-zA-Z!\u0022#$%&'()*+,./:;<=>?@[\]\^_`{|}~-]{8,}$/g,
-                                        message: error_pattern,
-                                    },
+                                    // pattern: {
+                                    //     value: /^(?=.*\d)[0-9a-zA-Z!\u0022#$%&'()*+,./:;<=>?@[\]\^_`{|}~-]{8,}$/g,
+                                    //     message: error_pattern,
+                                    // },
                                 })}
                             />
                         </FormRow>

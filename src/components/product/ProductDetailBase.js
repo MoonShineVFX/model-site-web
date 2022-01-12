@@ -1,10 +1,4 @@
-import {
-    Fragment,
-    useContext,
-    useEffect,
-    useState,
-} from 'react';
-
+import { Fragment, useContext, useEffect } from 'react';
 import { Grid } from '@mui/material';
 
 import HeadTag from '../../containers/HeadTag';
@@ -16,7 +10,7 @@ import ImageEnlarge from '../ImageEnlarge';
 import {
     DetailWrapLayout,
     DetailContentLayout,
-    SelectOptLayout,
+    FormatAndRenderLayout,
     DemoImageWrapLayout,
     DemoImageLayout,
 } from './productLayout';
@@ -32,7 +26,7 @@ import Service from '../../utils/util.service';
 const {
     priceWithCommas,
     mappingTags,
-    arrangeRenderOpts,
+    arrangeFormatAndRender,
 } = util;
 
 // deftag
@@ -42,8 +36,10 @@ const {
         detail_section_title2,
         button_add_to_card,
         notice_message,
-        detail_option_format,
         detail_option_renderer,
+        text_model_sum,
+        text_file_size,
+        text_per_image_size,
     },
 } = deftag;
 
@@ -69,8 +65,6 @@ const ProductDetailBase = ({ pageData }) => {
     const { productList } = useContext(ProductContext);
 
     // State
-    const [selectedFormat, setSelectedFormat] = useState(null);
-    const [selectedRender, setSelectedRender] = useState(null);
     const [cartItem, setCartItem] = useLocalStorage('cartItem', {}); // 未登入狀態用 localStorage 存
 
     useEffect(() => {
@@ -79,14 +73,6 @@ const ProductDetailBase = ({ pageData }) => {
         globalDispatch({ type: 'target_box', payload: '' });
 
     }, []);
-
-    // 軟體格式 + 算圖引擎
-    const handleSelected = ({ target: { name, value } }) => {
-
-        if (name === 'formats') setSelectedFormat(value);
-        else setSelectedRender(value);
-
-    };
 
     // 點圖放大
     const handleClickImgEnlarge = (url, id) => {
@@ -106,7 +92,7 @@ const ProductDetailBase = ({ pageData }) => {
             ...cartItem,
             [query.id]: {
                 title: pageData.title,
-                imgUrl: pageData.imgUrl,
+                imgUrl: pageData.thumb,
                 price: pageData.price,
             },
         };
@@ -157,17 +143,27 @@ const ProductDetailBase = ({ pageData }) => {
                         <h1 className="title">{pageData.title}</h1>
                         <p className="description">{pageData.description}</p>
                         <div>
-                            <div className="label">模型數量</div>
-                            <p>{pageData.modelSum}</p>
+                            <div className="label">軟體格式與算圖引擎</div>
+                            <FormatAndRenderLayout>
+                                {
+                                    Object.keys(arrangeFormatAndRender(pageData.models)).map((id) => (
+
+                                        <li
+                                            key={id}
+                                            className="item"
+                                        >
+                                            <h4 className="title">{arrangeFormatAndRender(pageData.models)[id].name}</h4>
+                                            <span className="renders">
+                                                <span>{detail_option_renderer}: </span>
+                                                {arrangeFormatAndRender(pageData.models)[id].renders.map(({ rendererName }) => rendererName).join('、')}
+                                            </span>
+                                        </li>
+
+                                    ))
+                                }
+                            </FormatAndRenderLayout>
                         </div>
-                        <div>
-                            <div className="label">檔案大小</div>
-                            <p>{pageData.fileSize}</p>
-                        </div>
-                        <div>
-                            <div className="label">貼圖尺寸</div>
-                            <p>{pageData.perImgSize}</p>
-                        </div>
+                        <p className="notice">{notice_message}</p>
                     </Grid>
 
                     <Grid
@@ -178,36 +174,25 @@ const ProductDetailBase = ({ pageData }) => {
                             marginLeft: '80px',
                         }}
                     >
-                        <div className="select-opts">
-                            <SelectOptLayout name="formats" onChange={handleSelected}>
-                                <option value="">{detail_option_format}</option>
-                                {
-                                    (pageData.models).map(({ id, label }) => (
-
-                                        <option key={id} value={id}>{label}</option>
-
-                                    ))
-                                }
-                            </SelectOptLayout>
-
-                            <SelectOptLayout name="renders" onChange={handleSelected}>
-                                <option value="">{detail_option_renderer}</option>
-                                {
-                                    // 有選取第一層才印第二層
-                                    selectedFormat && arrangeRenderOpts(pageData.models)[selectedFormat].renderers.map(({ id, label }) => (
-
-                                        <option key={id} value={id}>{label}</option>
-
-                                    ))
-                                }
-                            </SelectOptLayout>
-                        </div>
-                        <p className="notice">{notice_message}</p>
                         <h2 className="price">{priceWithCommas(pageData.price)}</h2>
                         <Buttons
                             text={button_add_to_card}
                             onClick={handleAddToCart}
                         />
+                        <div className="other-info">
+                            <div>
+                                <div className="label">{text_model_sum}</div>
+                                <p>{pageData.modelSum}</p>
+                            </div>
+                            <div>
+                                <div className="label">{text_file_size}</div>
+                                <p>{pageData.fileSize}</p>
+                            </div>
+                            <div>
+                                <div className="label">{text_per_image_size}</div>
+                                <p>{pageData.perImgSize}</p>
+                            </div>
+                        </div>
                     </Grid>
                 </DetailContentLayout>
             </DetailWrapLayout>
@@ -255,10 +240,10 @@ const ProductDetailBase = ({ pageData }) => {
             >
                 <Grid container spacing="30px">
                     {
-                        pageData.relativeProducts.map(({ id, title, price, imgUrl }) => (
+                        pageData.relativeProducts.map(({ id, title, price, imgUrl }, idx) => (
 
                             <Grid
-                                key={id}
+                                key={idx}
                                 item
                                 xs={12}
                                 md={3}

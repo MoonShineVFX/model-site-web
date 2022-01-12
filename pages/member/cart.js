@@ -129,10 +129,11 @@ const Cart = ({ pageData }) => {
     }, []);
 
     // 刪除商品
-    const handleRemoveItem = (e) => {
+    const handleRemoveItem = (e, id) => {
 
         e.preventDefault();
-        console.log('remove');
+        // Service.cartRemove({ productId: id })
+        //     .then(() => {});
 
     };
 
@@ -171,7 +172,7 @@ const Cart = ({ pageData }) => {
                                             <Item
                                                 key={data.id}
                                                 data={data}
-                                                onClick={handleRemoveItem}
+                                                onClick={(e) => handleRemoveItem(e, data.id)}
                                             />
 
                                         ))
@@ -254,8 +255,6 @@ export async function getServerSideProps ({ req }) {
             Authorization: `Bearer ${req.cookies.token}`,
         },
     });
-
-    console.log('resData:', resData)
 
     const { data } = resData;
 

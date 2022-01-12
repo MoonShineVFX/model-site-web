@@ -20,6 +20,7 @@ const Service = {
 
     // 購物車
     cartAdd: (reqData) => util.serviceProxy('/cart_product_add', reqData),
+    cartRemove: (reqData) => util.serviceProxy('/cart_product_remove', reqData),
 
     // 付款
     order: (reqData) => util.serviceProxy('/order_create', reqData),

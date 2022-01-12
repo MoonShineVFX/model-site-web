@@ -5,7 +5,7 @@ import util from '../../utils/util';
 import deftag from '../../utils/util.deftag';
 import Service from '../../utils/util.service';
 
-const { formatBytes, arrangeRenderOpts } = util;
+const { formatBytes, arrangeFormatAndRender } = util;
 const {
     product: {
         text_file_size,
@@ -42,7 +42,7 @@ const Item = ({
         </Links>
         <div className="item-content">
             <h3 className="title">{title}</h3>
-            <span className="file-size">{text_file_size} {formatBytes(fileSize)}</span>
+            <span className="file-size">{text_file_size}: {formatBytes(fileSize)}</span>
         </div>
         <div className="downloadWrap">
             <div className="options" onClick={(e) => e.preventDefault()}>
@@ -67,7 +67,7 @@ const Item = ({
                     <option value="">{detail_option_renderer}</option>
                     {
                         // 有選取第一層才印第二層
-                        arrangeRenderOpts(formats)[selected[id]?.formats]?.renderers.map((obj) => (
+                        arrangeFormatAndRender(formats)[selected[id]?.formats]?.renderers.map((obj) => (
 
                             <option key={obj.id} value={obj.id}>{obj.label}</option>
 

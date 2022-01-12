@@ -159,15 +159,16 @@ const util = {
 
     /**
      * @author Betty
-     * @param {object[]} data
+     * @param {object[]} array
      * @return {object}
      */
-    arrangeRenderOpts: (data) => data.reduce((acc, curr) => {
+    arrangeFormatAndRender: (array) => array.reduce((acc, curr) => {
 
-        const key = curr.id;
-        acc[key] = acc[key] || {};
-        acc[key].label = curr.label;
-        acc[key].renderers = curr.renderers;
+        let { formatId, formatName, rendererId, rendererName } = curr;
+        acc[formatId] = acc[formatId] || {};
+        acc[formatId].name = formatName;
+        acc[formatId].renders = acc[formatId].renders || [];
+        acc[formatId].renders.push({ rendererId, rendererName });
         return acc;
 
     }, {}),

@@ -160,7 +160,13 @@ export async function getServerSideProps ({ req }) {
 
     }
 
-    const resData = await util.serviceServer({ url: 'my_products' });
+    const resData = await util.serviceServer({
+        url: '/my_products',
+        headers: {
+            Authorization: `Bearer ${req.cookies.token}`,
+        },
+    });
+
     const { data } = resData;
 
     if (!data.result) {

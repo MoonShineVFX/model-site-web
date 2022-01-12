@@ -92,7 +92,6 @@ const ItemWrapLayout = styled('div')(({ theme }) => ({
 }));
 
 /** Detail */
-//
 const DetailWrapLayout = styled('section')(({ theme }) => ({
     backgroundColor: theme.palette.card.main,
     borderRadius: theme.borderRadius,
@@ -128,7 +127,8 @@ const DetailContentLayout = styled(Grid)(({ theme }) => ({
         opacity: '0.8',
     },
     '.notice': {
-        fontSize: '0.9em',
+        fontSize: '0.85em',
+        marginBottom: '0',
     },
     '.price': {
         fontSize: '1.45em',
@@ -139,18 +139,28 @@ const DetailContentLayout = styled(Grid)(({ theme }) => ({
     '.model-button': {
         width: '100%',
     },
+    '.other-info': {
+        marginTop: '40px',
+        'p': {
+            marginBottom: '20px',
+        },
+    },
 }));
 
 //
-const SelectOptLayout = styled('select')(({ theme }) => ({
-    width: '100%',
-    fontSize: '1em',
-    color: 'rgba(255,255,255,.8)',
-    backgroundColor: theme.palette.card.main,
-    borderColor: theme.palette.secondary.main,
-    borderRadius: theme.borderRadius,
-    marginBottom: '20px',
-    padding: '16px 36px',
+const FormatAndRenderLayout = styled('ul')(({ theme }) => ({
+    margin: '0',
+    paddingInlineStart: '20px',
+    '.item': {
+        margin: '10px 0',
+        '.title': {
+            fontSize: '1em',
+            margin: '0',
+        },
+    },
+    '.renders': {
+        fontSize: '0.9em',
+    },
 }));
 
 //
@@ -173,7 +183,7 @@ export {
     ItemWrapLayout,
     DetailWrapLayout,
     DetailContentLayout,
-    SelectOptLayout,
+    FormatAndRenderLayout,
     DemoImageWrapLayout,
     DemoImageLayout,
 };

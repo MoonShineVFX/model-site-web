@@ -27,8 +27,6 @@ const {
 
 const Home = ({ pageData }) => {
 
-    // console.log('pageData:', pageData);
-
     // Context
     const { slideshowActive, globalDispatch } = useContext(GlobalContext);
 

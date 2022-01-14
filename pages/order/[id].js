@@ -25,8 +25,6 @@ const {
 
 const OrderDetail = ({ pageData }) => {
 
-    // console.log('pageData:', pageData)
-
     // Context
     const { globalDispatch } = useContext(GlobalContext);
 

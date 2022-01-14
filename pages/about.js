@@ -70,9 +70,9 @@ const About = ({ pageData }) => {
     } = pageData;
 
     const support = {
-        supportModels,
-        supportFormats,
-        supportRenders,
+        model: supportModels,
+        software: supportFormats,
+        render: supportRenders,
     };
 
     // Context

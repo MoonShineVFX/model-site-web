@@ -44,8 +44,6 @@ const TabPanel = ({ value, indexKey, children, ...other }) => (
 //
 const Account = ({ pageData }) => {
 
-    // console.log('pageData:', pageData)
-
     // Context
     const { globalDispatch } = useContext(GlobalContext);
 

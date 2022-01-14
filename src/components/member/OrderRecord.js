@@ -81,63 +81,37 @@ const Item = ({
 );
 
 //
-const OrderRecord = ({ data }) => {
+const OrderRecord = ({ data }) => (
 
-    // Context
-    const {
-        globalDispatch,
-    } = useContext(GlobalContext);
+    <OrderRecordLayout>
+        {
+            renderItemCell({
+                className: 'row-head',
+                data: {
+                    number: orderRecord.text_order_number,
+                    createAt: orderRecord.text_order_create_at,
+                    status: orderRecord.text_order_status,
+                    quantity: orderRecord.text_order_quantity,
+                    price: orderRecord.text_order_total_price,
+                    payment: orderRecord.text_order_payment,
+                    paidAt: orderRecord.text_order_paid_at,
+                    invoice: orderRecord.text_order_invoice,
+                },
+            })
+        }
 
-    // State
-    const [items, setItems] = useState([]);
+        {
+            data.map((obj) => (
 
-    // 取得詳細品項
-    const handleItems = ({ currentTarget }, { id, orderNumber }) => {
+                <Item
+                    key={obj.id}
+                    data={obj}
+                />
 
-        Service.orderItems({ id })
-            .then(({ list }) => {
+            ))
+        }
+    </OrderRecordLayout>
 
-                globalDispatch({ type: 'target_popup', payload: currentTarget });
-                setItems(list);
-
-            });
-
-    };
-
-    return (
-
-        <OrderRecordLayout>
-            {
-                renderItemCell({
-                    className: 'row-head',
-                    data: {
-                        number: orderRecord.text_order_number,
-                        createAt: orderRecord.text_order_create_at,
-                        status: orderRecord.text_order_status,
-                        quantity: orderRecord.text_order_quantity,
-                        price: orderRecord.text_order_total_price,
-                        payment: orderRecord.text_order_payment,
-                        paidAt: orderRecord.text_order_paid_at,
-                        invoice: orderRecord.text_order_invoice,
-                    },
-                })
-            }
-
-            {
-                data.map((obj) => (
-
-                    <Item
-                        key={obj.id}
-                        data={obj}
-                        onClick={(e) => handleItems(e, obj)}
-                    />
-
-                ))
-            }
-        </OrderRecordLayout>
-
-    );
-
-};
+);
 
 export default OrderRecord;

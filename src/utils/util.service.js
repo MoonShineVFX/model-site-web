@@ -12,12 +12,6 @@ const Service = {
     forgotPassword: (reqData) => util.serviceProxy('/forget_password', reqData),
     resetPassword: (reqData) => util.serviceProxy('/reset_password', reqData),
 
-    // 商品
-    productList: ({ page, type, tag }) => util.serviceProxy({
-        method: 'get',
-        url: `/product/list.json?page=${page}&type=${type}${tag ? `&tag=${tag}` : ''}`,
-    }),
-
     // 購物車
     cartAdd: (reqData) => util.serviceProxy('/cart_product_add', reqData),
     cartRemove: (reqData) => util.serviceProxy('/cart_product_remove', reqData),
@@ -28,17 +22,11 @@ const Service = {
     // 訂單記錄
     orderRecord: (reqData) => util.serviceProxy('/orders', reqData),
 
-    // 訂單詳細
-    orderItems: (reqData) => util.serviceProxy({
-        method: 'get',
-        url: '/member/cart.json',
-    }, reqData),
-
     // 我的資料
-    myAccount: (reqData) => util.serviceProxy('/member/my_account.json', reqData),
+    myAccount: (reqData) => util.serviceProxy('/???', reqData),
 
     // 取得下載連結
-    donwloadLink: (reqData) => util.serviceProxy('/member/downloadLink.json', reqData),
+    donwloadLink: (reqData) => util.serviceProxy('/???', reqData),
 };
 
 export default Service;

@@ -46,8 +46,6 @@ const arrangeTags = (string) => {
 
 const ProductListBase = ({ pageData }) => {
 
-    // console.log('pageData:', pageData);
-
     // Router
     const router = useRouter();
     const query = useQuery();

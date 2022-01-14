@@ -1,9 +1,6 @@
 // Global
 const globalReducer = (state, { type, payload }) => {
 
-    // console.log('state:', state.targetBox)
-    // console.log('payload:', payload)
-
     switch (type) {
         case 'page':
             return {

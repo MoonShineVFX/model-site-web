@@ -53,11 +53,9 @@ const CartLayout = styled('div')(({ theme }) => ({
     padding: '40px 30px',
     '.item-cell': {
         display: 'flex',
+        alignItems: 'center',
         '> *': {
             flex: '1',
-        },
-        '&.right': {
-            alignItems: 'center',
         },
     },
 }));

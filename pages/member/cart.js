@@ -40,7 +40,6 @@ const TableGrid = ({ colLeft, colRight }) => (
 
     <Grid
         container
-        alignContent="center"
         columnSpacing="20px"
     >
         <Grid
@@ -65,6 +64,7 @@ const Item = ({
     onClick,
     data: {
         id,
+        productId,
         title,
         price,
         imgUrl,
@@ -72,7 +72,7 @@ const Item = ({
 }) => (
 
     <ItemLayout
-        url={`/product/${id}`}
+        url={`/product/${productId}`}
         newPage
     >
         <TableGrid
@@ -111,8 +111,6 @@ const Item = ({
 //
 const Cart = ({ pageData }) => {
 
-    // console.log('pageData:', pageData)
-
     // Context
     const { globalDispatch } = useContext(GlobalContext);
 
@@ -121,6 +119,8 @@ const Cart = ({ pageData }) => {
 
     // State
     const [fields, setFields] = useState({});
+    const [list, setList] = useState(pageData.list);
+    const [amount, setAmount] = useState(pageData.amount);
 
     useEffect(() => {
 
@@ -132,8 +132,13 @@ const Cart = ({ pageData }) => {
     const handleRemoveItem = (e, id) => {
 
         e.preventDefault();
-        // Service.cartRemove({ productId: id })
-        //     .then(() => {});
+        Service.cartRemove({ productId: id })
+            .then(({ list, amount }) => {
+
+                setList(list);
+                setAmount(amount);
+
+            });
 
     };
 
@@ -162,17 +167,17 @@ const Cart = ({ pageData }) => {
 
                 <CartLayout>
                     {
-                        pageData.list.length ? (
+                        list.length ? (
 
                             <Fragment>
                                 <div className="items">
                                     {
-                                        pageData.list.map((data) => (
+                                        list.map((data) => (
 
                                             <Item
                                                 key={data.id}
                                                 data={data}
-                                                onClick={(e) => handleRemoveItem(e, data.id)}
+                                                onClick={(e) => handleRemoveItem(e, data.productId)}
                                             />
 
                                         ))
@@ -184,7 +189,7 @@ const Cart = ({ pageData }) => {
                                         colRight={(
                                             <Fragment>
                                                 <span>總額</span>
-                                                <span className="price">{priceWithCommas(pageData.amount)}</span>
+                                                <span className="price">{priceWithCommas(amount)}</span>
                                             </Fragment>
                                         )}
                                     />

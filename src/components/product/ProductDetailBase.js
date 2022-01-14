@@ -46,8 +46,6 @@ const {
 //
 const ProductDetailBase = ({ pageData }) => {
 
-    // console.log('pageData:', pageData);
-
     // Router
     const query = useQuery();
 

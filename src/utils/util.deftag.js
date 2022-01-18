@@ -97,6 +97,11 @@ const deftag = {
     tutorial: {
         page_title: '網站使用文件',
     },
+    paymentResult: {
+        page_title: '付款結果',
+        text_message: '資訊將在10分鐘後更新',
+        text_direct_to_order_detail: '查看訂單詳細',
+    },
     error: {
         error_required: '此欄位為必填',
         error_pattern: '格式有誤',

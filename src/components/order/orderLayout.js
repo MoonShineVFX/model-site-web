@@ -33,8 +33,9 @@ const OrderRecordLayout = styled('div')(({ theme }) => ({
             maxWidth: '180px',
         },
     },
-    '.cell-orderNumber': {
+    '.orderNumber': {
         color: theme.palette.textColor,
+        display: 'inline-block',
     },
 }));
 

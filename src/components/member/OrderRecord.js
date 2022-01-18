@@ -28,18 +28,12 @@ const renderItemCell = ({
 }) => (
 
     <div className={`item-row ${className ? className : ''}`}>
-        {
-            className ? <span className="item-cell">{number}</span> : (
-
-                <Links
-                    url={`/order/${number}`}
-                    className="item-cell cell-orderNumber"
-                >
-                    {number}
-                </Links>
-
-            )
-        }
+        <span className="item-cell">
+            {
+                className ? number :
+                    <Links url={`/order/${number}`} className="orderNumber">{number}</Links>
+            }
+        </span>
         <span className="item-cell cell-160">{createAt}</span>
         <span className="item-cell cell-80">{quantity}</span>
         <span className="item-cell cell-140">{price}</span>

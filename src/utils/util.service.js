@@ -23,7 +23,8 @@ const Service = {
     orderRecord: (reqData) => util.serviceProxy('/orders', reqData),
 
     // 我的資料
-    myAccount: (reqData) => util.serviceProxy('/???', reqData),
+    myAccount: (reqData) => util.serviceProxy('/my_account', reqData),
+    updateMyAccount: (reqData) => util.serviceProxy('/account_update', reqData),
 
     // 取得下載連結
     donwloadLink: (reqData) => util.serviceProxy('/???', reqData),

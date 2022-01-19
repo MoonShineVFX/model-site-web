@@ -11,7 +11,12 @@ import Buttons from '../src/components/Buttons';
 import FormWrap, { FormRow, FormSuccessMesg } from '../src/components/FormWrap';
 
 import HeadTag from '../src/containers/HeadTag';
-import { SignLayout, BtnDirectLayout, ResetPasswordSuccessLayout } from '../src/components/member/memberSignLayout';
+import {
+    SignLayout,
+    BtnDirectLayout,
+    ResetPasswordSuccessLayout,
+} from '../src/components/member/memberSignLayout';
+
 import { GlobalContext } from '../src/context/global.state';
 import deftag from '../src/utils/util.deftag';
 
@@ -33,7 +38,7 @@ const {
     },
 } = deftag;
 
-const Register = () => {
+const ResetPassword = () => {
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
@@ -149,24 +154,4 @@ const Register = () => {
 
 };
 
-export default Register;
-
-export async function getServerSideProps ({ req }) {
-
-    // 有 cookie(token) 導首頁
-    if (!!req.cookies.token) {
-
-        return {
-            redirect: {
-                destination: '/',
-                permanent: false,
-            },
-        };
-
-    }
-
-    return {
-        props: {},
-    };
-
-};
+export default ResetPassword;

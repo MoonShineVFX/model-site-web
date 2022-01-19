@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Buttons from '../Buttons';
 import { FormRow } from '../FormWrap';
@@ -20,22 +19,13 @@ const {
 const MyAccount = ({ data }) => {
 
     // React Hook Form
-    const {
-        handleSubmit,
-        register,
-        setValue,
-    } = useForm();
-
-    useEffect(() => {
-
-        if (data) setValue('nickname', data.nickname);
-
-    }, [data, setValue]);
+    const { handleSubmit, register } = useForm();
 
     // 送資料
     const handleReqData = (reqData) => {
 
-        console.log('reqData:', reqData)
+        Service.updateMyAccount(reqData)
+            .then(() => alert('更新成功'));
 
     };
 
@@ -56,6 +46,7 @@ const MyAccount = ({ data }) => {
                             type="text"
                             name="nickname"
                             placeholder={text_nickname}
+                            defaultValue={data.nickname}
                             {...register('nickname')}
                         />
                     </FormRow>

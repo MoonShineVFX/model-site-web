@@ -109,7 +109,7 @@ const Signin = () => {
                                 text={text_signin}
                             />
 
-                            <SigninGoogle />
+                            {/* <SigninGoogle /> */}
 
                             <ForgotPasswordLayout>
                                 <Links

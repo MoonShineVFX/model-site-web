@@ -69,25 +69,3 @@ const PaymentResult = () => {
 };
 
 export default PaymentResult;
-
-// export async function getServerSideProps ({ req, params, query }) {
-
-//     // 沒有 cookie(token) 導登入頁
-//     if (!req.cookies.token) {
-
-//         return {
-//             redirect: {
-//                 destination: '/signin',
-//                 permanent: false,
-//             },
-//         };
-
-//     }
-
-//     return {
-//         props: {
-//             pageData: {},
-//         },
-//     };
-
-// }

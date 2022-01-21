@@ -71,7 +71,6 @@ const ItemWrapLayout = styled(Links)(({ theme }) => ({
         borderRadius: '10px',
         marginRight: '20px',
         overflow: 'hidden',
-        border: '1px solid',
     },
     '.content': {
         flex: '0 0 calc(100% - 160px - 20px)',

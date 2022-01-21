@@ -48,9 +48,8 @@ const Home = ({ pageData }) => {
                         id,
                         title,
                         description,
-                        price,
                         imgUrl,
-                        status,
+                        link,
                     }, idx) => (
 
                         <SlideShowItemLayout
@@ -59,7 +58,7 @@ const Home = ({ pageData }) => {
                         >
                             <div className="inner">
                                 <Links
-                                    url="/signin"
+                                    url={link}
                                     className="item"
                                     title={title}
                                     newPage
@@ -74,10 +73,7 @@ const Home = ({ pageData }) => {
                                 </Links>
 
                                 <SlideshowInfoLayout>
-                                    <span className="status">{status}</span>
-                                    <h2 className="title">{title}</h2>
-                                    <p className="description" title={description}>{description}</p>
-                                    <div className="price">{util.priceWithCommas(price)}</div>
+                                    <div dangerouslySetInnerHTML={{ __html: description }} />
                                 </SlideshowInfoLayout>
                             </div>
                         </SlideShowItemLayout>

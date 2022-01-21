@@ -58,22 +58,6 @@ const SlideshowInfoLayout = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.card.main,
     padding: '30px 36px',
     position: 'relative',
-    '.status': {
-        fontWeight: 'bold',
-        color: theme.palette.textColor,
-    },
-    '.title': {
-        fontWeight: 'normal',
-        margin: '16px 0 20px',
-    },
-    '.description': {
-        fontSize: '1.15em',
-        marginBottom: '30px',
-        display: '-webkit-box',
-        WebkitLineClamp: 5,
-        WebkitBoxOrient: 'vertical',
-        overflow: 'hidden',
-    },
 }));
 
 //

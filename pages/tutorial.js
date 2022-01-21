@@ -20,7 +20,7 @@ const TitleLayout = styled('h1')({
 
 //
 const ItemWrapLayout = styled(Grid)({
-    '.item .item-thumb': {
+    '.item.style-product .item-thumb': {
         height: '161px',
     },
 });

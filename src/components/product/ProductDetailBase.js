@@ -36,6 +36,7 @@ const {
         detail_section_title2,
         button_add_to_card,
         notice_message,
+        detail_format_and_render,
         detail_option_renderer,
         text_model_sum,
         text_file_size,
@@ -141,7 +142,7 @@ const ProductDetailBase = ({ pageData }) => {
                         <h1 className="title">{pageData.title}</h1>
                         <p className="description">{pageData.description}</p>
                         <div>
-                            <div className="label">軟體格式與算圖引擎</div>
+                            <div className="label">{detail_format_and_render}</div>
                             <FormatAndRenderLayout>
                                 {
                                     Object.keys(arrangeFormatAndRender(pageData.models)).map((id) => (

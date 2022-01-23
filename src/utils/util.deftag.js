@@ -50,6 +50,8 @@ const deftag = {
         detail_section_title2: '你可能會喜歡的',
         button_add_to_card: '加到購物車',
         notice_message: '購買後，可以在我的模型庫下載其他檔案格式',
+        detail_format_and_render: '軟體格式與算圖引擎',
+        detail_option_format: '軟體格式',
         detail_option_renderer: '算圖引擎',
         text_file_size: '檔案大小',
         text_download: '下載',

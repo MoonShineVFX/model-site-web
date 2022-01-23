@@ -1,4 +1,5 @@
 import React, { Fragment, useContext, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { styled } from '@mui/system';
 import HeadTag from '../src/containers/HeadTag';
 import { ButtonLink } from '../src/components/Links';
@@ -36,6 +37,9 @@ const ResultLayout = styled(CartLayout)(({ theme }) => ({
 //
 const PaymentResult = () => {
 
+    // Router
+    const router = useRouter();
+
     // Context
     const { globalDispatch } = useContext(GlobalContext);
 
@@ -56,7 +60,7 @@ const PaymentResult = () => {
                     <p>{text_message}</p>
 
                     <ButtonLink
-                        url={`/order/MSM20220112000001`}
+                        url={`/order/${router.query.no}`}
                         className="btn-orderDetail"
                         text={text_direct_to_order_detail}
                     />

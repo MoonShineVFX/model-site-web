@@ -1,12 +1,13 @@
 import { useContext } from 'react';
 import { styled } from '@mui/system';
-import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import Box from '../Box';
 import Links from '../Links';
 import { GlobalContext } from '../../context/global.state';
+import util from '../../utils/util';
 import deftag from '../../utils/util.deftag';
 
+const { redirectTo } = util;
 const {
     member: {
         text_member_center,
@@ -40,9 +41,6 @@ const MyAccountLayout = styled(Box)(({ theme }) => ({
 //
 const MyAccount = () => {
 
-    // Router
-    const router = useRouter();
-
     // Context
     const { globalDispatch } = useContext(GlobalContext);
 
@@ -52,8 +50,7 @@ const MyAccount = () => {
         e.preventDefault();
         Cookies.remove('token');
         globalDispatch({ type: 'target_box', payload: '' });
-        router.push('/');
-        router.reload();
+        redirectTo();
 
     };
 
@@ -65,7 +62,7 @@ const MyAccount = () => {
 
                     <Links
                         key={key}
-                        url={(key === 'logout') ? '#' : `/member${key}`}
+                        url={(key === 'logout') ? '#' : `/member/${key}`}
                         title={menus[key]}
                         className="menu-item"
                         {...(key === 'logout') && { onClick: handleClickMenu }}

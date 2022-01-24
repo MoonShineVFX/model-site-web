@@ -13,9 +13,11 @@ import {
 } from '../src/components/member/memberSignLayout';
 
 import { GlobalContext } from '../src/context/global.state';
+import util from '../src/utils/util';
 import deftag from '../src/utils/util.deftag';
 import Service from '../src/utils/util.service';
 
+const { redirectTo } = util;
 const {
     memberSign: {
         text_signin,
@@ -57,7 +59,7 @@ const Signin = () => {
 
         let auth = btoa(`${reqData.email}:${reqData.password}`);
         Service.signin({ headers: { Authorization: `Basic ${auth}`} })
-            .then(() => router.push('/'));
+            .then(redirectTo);
 
     };
 

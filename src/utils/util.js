@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Router from 'next/router';
 import dayjs from 'dayjs';
 import Cookies from 'js-cookie';
 
@@ -172,6 +173,17 @@ const util = {
         return acc;
 
     }, {}),
+
+    /**
+     * @author Betty
+     * @param {string} url
+     */
+    redirectTo: (url = '/') => {
+
+        Router.push(url);
+        Router.reload();
+
+    },
 
 };
 

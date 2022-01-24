@@ -18,39 +18,46 @@ const {
 // 項目
 const Item = ({
     data: {
-        id, title, imgUrl, fileSize, models,
+        id,
+        title,
+        imgUrl,
+        fileSize,
+        models,
     },
-    // selected,
-    // download,
-    // handleSelected,
 }) => {
 
     const options = arrangeFormatAndRender(models);
 
     // State
+    const [format, setFormat] = useState('');
     const [selected, setSelected] = useState({});
     const [download, setDownload] = useState('');
 
     // 軟體格式 + 算圖引擎
     const handleSelected = ({ target: { name, value } }, id) => {
 
-        // 暫存
+        // 暫存給畫面用
         const storage = {
             [id]: {
                 ...selected[id],
-                [name]: value,
+                [name]: +value,
             },
         };
 
         setSelected({ ...storage });
+        if (name === 'formats') {
 
-        return;
+            setFormat(value);
+            storage[id].renderers = 0;
+
+        }
+
         if (name === 'renderers') {
 
             Service.donwloadLink({
                 id,
-                formats: +storage.formats,
-                renderers: +storage.renderers,
+                formats: storage[id].formats,
+                renderers: storage[id].renderers,
             })
             .then(({ url }) => setDownload(url));
 
@@ -83,7 +90,7 @@ const Item = ({
                 <div className="options" onClick={(e) => e.preventDefault()}>
                     <select
                         name="formats"
-                        // onChange={(e) => handleSelected(e, id)}
+                        onChange={(e) => handleSelected(e, id)}
                     >
                         <option value="">{detail_option_format}</option>
                         {
@@ -102,25 +109,26 @@ const Item = ({
 
                     <select
                         name="renderers"
-                        // onChange={(e) => handleSelected(e, id)}
+                        onChange={(e) => handleSelected(e, id)}
+                        value={selected[id]?.renderers}
                     >
                         <option value="">{detail_option_renderer}</option>
                         {
-                            // arrangeFormatAndRender(models)[selected[id]?.formats]?.renderers.map((obj) => (
+                            options[format]?.renders.map(({ rendererId, rendererName }) => (
 
-                            //     <option key={obj.id} value={obj.id}>{obj.label}</option>
+                                <option key={rendererId} value={rendererId}>{rendererName}</option>
 
-                            // ))
+                            ))
                         }
                     </select>
                 </div>
 
-                {/* <ButtonLink
+                <ButtonLink
                     url={selected[id]?.renderers ? download : ''}
                     text={text_download}
                     className={`btn-download ${selected[id]?.renderers ? '' : 'disabled'}`}
                     newPage
-                /> */}
+                />
             </div>
         </ItemLayout>
 
@@ -129,60 +137,21 @@ const Item = ({
 };
 
 //
-const MyProduct = ({ data }) => {
+const MyProduct = ({ data }) => (
 
-    // console.log('data:', data)
+    <MyProductItemLayout>
+        {
+            data.map((obj) => (
 
-    // State
-    const [selected, setSelected] = useState({});
-    const [download, setDownload] = useState('');
+                <Item
+                    key={obj.id}
+                    data={obj}
+                />
 
-    // 軟體格式 + 算圖引擎
-    const handleSelected = ({ target: { name, value } }, id) => {
-
-        // 暫存
-        const storage = {
-            [id]: {
-                ...selected[id],
-                [name]: value,
-            },
-        };
-
-        setSelected({ ...storage });
-
-        if (name === 'renderers') {
-
-            Service.donwloadLink({
-                id,
-                formats: +storage.formats,
-                renderers: +storage.renderers,
-            })
-            .then(({ url }) => setDownload(url));
-
+            ))
         }
+    </MyProductItemLayout>
 
-    };
-
-    return (
-
-        <MyProductItemLayout>
-            {
-                data.map((obj) => (
-
-                    <Item
-                        key={obj.id}
-                        data={obj}
-                        // selected={selected}
-                        // download={download}
-                        // handleSelected={handleSelected}
-                    />
-
-                ))
-            }
-        </MyProductItemLayout>
-
-    );
-
-};
+);
 
 export default MyProduct;

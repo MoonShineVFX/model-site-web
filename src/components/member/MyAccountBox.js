@@ -1,8 +1,10 @@
+import { useContext } from 'react';
 import { styled } from '@mui/system';
 import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import Box from '../Box';
 import Links from '../Links';
+import { GlobalContext } from '../../context/global.state';
 import deftag from '../../utils/util.deftag';
 
 const {
@@ -41,12 +43,17 @@ const MyAccount = () => {
     // Router
     const router = useRouter();
 
+    // Context
+    const { globalDispatch } = useContext(GlobalContext);
+
     // 登出行為
     const handleClickMenu = (e) => {
 
         e.preventDefault();
         Cookies.remove('token');
+        globalDispatch({ type: 'target_box', payload: '' });
         router.push('/');
+        router.reload();
 
     };
 
@@ -58,7 +65,7 @@ const MyAccount = () => {
 
                     <Links
                         key={key}
-                        url={`/member/${key}`}
+                        url={(key === 'logout') ? '#' : `/member${key}`}
                         title={menus[key]}
                         className="menu-item"
                         {...(key === 'logout') && { onClick: handleClickMenu }}

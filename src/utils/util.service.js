@@ -27,7 +27,7 @@ const Service = {
     updateMyAccount: (reqData) => util.serviceProxy('/account_update', reqData),
 
     // 取得下載連結
-    donwloadLink: (reqData) => util.serviceProxy('/???', reqData),
+    donwloadLink: (reqData) => util.serviceProxy('/model_download_link', reqData),
 };
 
 export default Service;

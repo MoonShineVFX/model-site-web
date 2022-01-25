@@ -165,8 +165,9 @@ const util = {
      */
     arrangeFormatAndRender: (array) => array.reduce((acc, curr) => {
 
-        let { formatId, formatName, rendererId, rendererName } = curr;
+        let { formatId, formatName, rendererId, rendererName, id } = curr;
         acc[formatId] = acc[formatId] || {};
+        acc[formatId].id = id;
         acc[formatId].name = formatName;
         acc[formatId].renders = acc[formatId].renders || [];
         acc[formatId].renders.push({ rendererId, rendererName });

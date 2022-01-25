@@ -34,30 +34,30 @@ const Item = ({
     const [download, setDownload] = useState('');
 
     // 軟體格式 + 算圖引擎
-    const handleSelected = ({ target: { name, value } }, id) => {
+    const handleSelected = ({ target: { name, value } }, productId) => {
 
         // 暫存給畫面用
         const storage = {
-            [id]: {
-                ...selected[id],
+            [productId]: {
+                ...selected[productId],
                 [name]: +value,
             },
         };
 
         setSelected({ ...storage });
-        if (name === 'formats') {
+        if (name === 'formatId') {
 
             setFormat(value);
-            storage[id].renderers = 0;
+            storage[productId].rendererId = 0;
 
         }
 
-        if (name === 'renderers') {
+        if (name === 'rendererId') {
 
             Service.donwloadLink({
-                id,
-                formats: storage[id].formats,
-                renderers: storage[id].renderers,
+                productId,
+                formatId: storage[productId].formatId,
+                rendererId: storage[productId].rendererId,
             })
             .then(({ url }) => setDownload(url));
 
@@ -89,18 +89,18 @@ const Item = ({
             <div className="downloadWrap">
                 <div className="options" onClick={(e) => e.preventDefault()}>
                     <select
-                        name="formats"
+                        name="formatId"
                         onChange={(e) => handleSelected(e, id)}
                     >
                         <option value="">{detail_option_format}</option>
                         {
-                            Object.keys(options).map((id) => (
+                            Object.keys(options).map((formatId) => (
 
                                 <option
-                                    key={id}
-                                    value={id}
+                                    key={formatId}
+                                    value={formatId}
                                 >
-                                    {options[id].name}
+                                    {options[formatId].name}
                                 </option>
 
                             ))
@@ -108,9 +108,9 @@ const Item = ({
                     </select>
 
                     <select
-                        name="renderers"
+                        name="rendererId"
                         onChange={(e) => handleSelected(e, id)}
-                        value={selected[id]?.renderers}
+                        value={selected[id]?.rendererId}
                     >
                         <option value="">{detail_option_renderer}</option>
                         {
@@ -124,9 +124,9 @@ const Item = ({
                 </div>
 
                 <ButtonLink
-                    url={selected[id]?.renderers ? download : ''}
+                    url={selected[id]?.rendererId ? download : ''}
                     text={text_download}
-                    className={`btn-download ${selected[id]?.renderers ? '' : 'disabled'}`}
+                    className={`btn-download ${selected[id]?.rendererId ? '' : 'disabled'}`}
                     newPage
                 />
             </div>

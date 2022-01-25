@@ -79,8 +79,8 @@ const deftag = {
         text_order_total_price: '總額',
         text_order_payment: '付款方式',
         text_order_invoice: '發票編號',
-        text_payment_credit: '信用卡',
-        text_payment_webATM: '網路 ATM',
+        text_payment_CREDIT: '信用卡',
+        text_payment_VACC: 'ATM 轉帳',
         text_order_detail_title: '訂單明細',
     },
     cart: {

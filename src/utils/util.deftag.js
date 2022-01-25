@@ -101,7 +101,7 @@ const deftag = {
     },
     paymentResult: {
         page_title: '付款結果',
-        text_message: '資訊將在10分鐘後更新',
+        text_message: '資訊將在3分鐘後更新',
         text_direct_to_order_detail: '查看訂單詳細',
     },
     error: {

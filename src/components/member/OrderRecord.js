@@ -1,12 +1,9 @@
-import { useContext, useState } from 'react';
 import Links from '../Links';
 import { OrderRecordLayout } from '../order/orderLayout';
-import { GlobalContext } from '../../context/global.state';
 import util from '../../utils/util';
 import deftag from '../../utils/util.deftag';
-import Service from '../../utils/util.service';
 
-const { priceWithCommas, dateFormat } = util;
+const { priceWithCommas, dateFormat, renderWithoutValue } = util;
 const {
     common: { text_item_unit },
     orderRecord,
@@ -31,16 +28,22 @@ const renderItemCell = ({
         <span className="item-cell">
             {
                 className ? number :
-                    <Links url={`/order/${number}`} className="orderNumber">{number}</Links>
+                    <Links
+                        url={`/order/${number}`}
+                        className="orderNumber"
+                        newPage
+                    >
+                        {number}
+                    </Links>
             }
         </span>
         <span className="item-cell cell-160">{createAt}</span>
         <span className="item-cell cell-80">{quantity}</span>
         <span className="item-cell cell-140">{price}</span>
         <span className="item-cell cell-140">{status}</span>
-        <span className="item-cell cell-140">{payment}</span>
+        <span className="item-cell cell-140">{renderWithoutValue(payment)}</span>
         <span className="item-cell cell-160">{paidAt}</span>
-        <span className="item-cell cell-140">{invoice}</span>
+        <span className="item-cell cell-140">{renderWithoutValue(invoice)}</span>
     </div>
 
 );

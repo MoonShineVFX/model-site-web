@@ -107,14 +107,14 @@ const Home = ({ pageData }) => {
                 </Grid>
             </ItemsWrap>
 
-            <ItemsWrap title={section_title_tutorial} url="signin">
+            <ItemsWrap title={section_title_tutorial} url="/tutorial">
                 <ItemTutorialLayout>
                     {
-                        pageData.tutorials.map(({ id, title, description, imgUrl }) => (
+                        pageData.tutorials.map(({ id, title, description, imgUrl, link }) => (
 
                             <Links
                                 key={id}
-                                url="/signin"
+                                url={link}
                                 title={title}
                                 className="itemWrap"
                                 newPage

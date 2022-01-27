@@ -5,7 +5,7 @@ import {
     useEffect,
     useState,
 } from 'react';
-import { useRouter } from 'next/router';
+
 import { useForm } from 'react-hook-form';
 import Buttons from '../src/components/Buttons';
 import Checkbox from '../src/components/Checkbox';
@@ -19,8 +19,11 @@ import {
 } from '../src/components/member/memberSignLayout';
 
 import { GlobalContext } from '../src/context/global.state';
+import util from '../src/utils/util';
 import deftag from '../src/utils/util.deftag';
 import Service from '../src/utils/util.service';
+
+const { redirectTo } = util;
 
 const {
     memberSign: {
@@ -41,9 +44,6 @@ const {
 } = deftag;
 
 const Register = () => {
-
-    // Router
-    const router = useRouter();
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
@@ -77,7 +77,7 @@ const Register = () => {
 
         delete reqData.confirm_password;
         Service.register(reqData)
-            .then(() => router.push('/'));
+            .then(redirectTo);
 
     };
 

@@ -28,6 +28,9 @@ const Service = {
 
     // 取得下載連結
     donwloadLink: (reqData) => util.serviceProxy('/model_download_link', reqData),
+
+    // 其他
+    privacy: (reqData) => util.serviceProxy('/???', reqData),
 };
 
 export default Service;

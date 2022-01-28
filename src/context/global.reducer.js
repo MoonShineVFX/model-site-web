@@ -40,6 +40,12 @@ const globalReducer = (state, { type, payload }) => {
                 targetPopup: payload,
             };
 
+        case 'snackbar':
+            return {
+                ...state,
+                snackbar: payload,
+            };
+
         default:
             return { ...state };
     }

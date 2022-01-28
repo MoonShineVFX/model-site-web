@@ -42,7 +42,10 @@ const Links = ({ url, newPage, title, className, children, ...rest }) => (
             href={url}
             title={title}
             className={className}
-            {...newPage && { target: '_blank'}}
+            {...newPage && {
+                target: '_blank',
+                rel: 'noreferrer noopener',
+            }}
             {...rest}
         >
             {children}

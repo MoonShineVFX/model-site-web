@@ -14,6 +14,9 @@ const deftag = {
         text_go_to_checkout: '前往結帳',
         text_empty_cart: '購物車是空的...',
     },
+    footer: {
+        text_privacy_link: '隱私權政策',
+    },
     memberSign: {
         text_signin: '登入',
         text_register: '註冊',
@@ -35,6 +38,7 @@ const deftag = {
         text_new_password_success: '你的登入密碼已設定成功',
         text_signin_with_google: '使用 Google 帳號登入',
         text_email_sent: '已成功發送至你輸入的電子信箱',
+        text_register_success: '註冊成功',
     },
     home: {
         page_title: '首頁',
@@ -103,6 +107,9 @@ const deftag = {
         page_title: '付款結果',
         text_message: '資訊將在3分鐘後更新',
         text_direct_to_order_detail: '查看訂單詳細',
+    },
+    privacy: {
+        page_title: '會員條款與隱私權政策',
     },
     error: {
         error_required: '此欄位為必填',

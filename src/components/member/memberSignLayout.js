@@ -1,5 +1,5 @@
 import { styled } from '@mui/system';
-import { ButtonLink } from '../Links';
+import Links, { ButtonLink } from '../Links';
 
 // 外層 form
 const SignLayout = styled('section')({
@@ -15,6 +15,12 @@ const BtnDirectLayout = styled(ButtonLink)(({ theme }) => ({
     borderTop: `1px dashed ${theme.palette.border.dark}`,
     marginTop: '50px',
     paddingTop: '50px',
+}));
+
+// 註冊頁
+const AggreeLayout = styled(Links)(({ theme }) => ({
+    color: theme.palette.textColor,
+    display: 'inline-block',
 }));
 
 // 忘記密碼連結
@@ -42,6 +48,7 @@ const ResetPasswordSuccessLayout = styled('div')(({ theme }) => ({
 export {
     SignLayout,
     BtnDirectLayout,
+    AggreeLayout,
     ForgotPasswordLayout,
     ResetPasswordSuccessLayout,
 };

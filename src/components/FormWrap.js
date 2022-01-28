@@ -27,6 +27,18 @@ const FormWrapLayout = styled('div')(({ theme }) => ({
 
 //
 const FormRowLayout = styled('div')(({ theme }) => ({
+    '&.row-password': {
+        position: 'relative',
+        'span': {
+            padding: '4px 8px',
+            position: 'absolute',
+            right: '20px',
+            cursor: 'pointer',
+        },
+        'svg': {
+            verticalAlign: 'middle',
+        },
+    },
     'input': {
         width: '100%',
         fontSize: '1.15em',
@@ -69,10 +81,10 @@ const FormWrap = ({ title, children, ...rest }) => (
 );
 
 //
-const FormRow = ({ name, errors, children, ...rest }) => (
+const FormRow = ({ name, className, errors, children, ...rest }) => (
 
     <FormRowLayout
-        className="form-row"
+        className={`form-row ${className}`}
         {...rest}
     >
         {children}
@@ -114,6 +126,7 @@ FormWrap.propTypes = {
 
 FormRow.propTypes = {
     name: PropTypes.string.isRequired,
+    className: PropTypes.string,
     errors: PropTypes.object,
     children: PropTypes.any,
 };

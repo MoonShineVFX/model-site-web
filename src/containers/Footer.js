@@ -1,8 +1,13 @@
-import Link from 'next/link';
 import { faInstagram, faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
 import { styled } from '@mui/system';
 import dayjs from 'dayjs';
+import Links from '../components/Links';
 import FontIcon from '../components/FontIcon';
+import deftag from '../utils/util.deftag';
+
+const {
+    footer: { text_privacy_link },
+} = deftag;
 
 // 串流平台
 const socialMedia = [
@@ -23,10 +28,17 @@ const FooterLayout = styled('footer')(({ theme }) => ({
     '*': {
         color: theme.palette.textColor,
     },
-    'a': {
+    '.social-item': {
         fontSize: '1.8em',
         margin: theme.spacing(0, 3),
         padding: theme.spacing(1),
+    },
+    '.privacy-link': {
+        textDecoration: 'none',
+        marginTop: '10px',
+        '&:hover': {
+            textDecoration: 'underline',
+        },
     },
     'p': {
         marginTop: theme.spacing(5),
@@ -42,22 +54,26 @@ const Footer = () => (
                 {
                     socialMedia.map(({ url, icon }, idx) => (
 
-                        <Link
+                        <Links
                             key={idx}
-                            href={url}
+                            url={url}
+                            newPage
+                            className="social-item"
                         >
-                            <a
-                                href={url}
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                <FontIcon icon={icon} />
-                            </a>
-                        </Link>
+                            <FontIcon icon={icon} />
+                        </Links>
 
                     ))
                 }
             </div>
+
+            <Links
+                url="/privacy"
+                newPage
+                className="privacy-link"
+            >
+                {text_privacy_link}
+            </Links>
 
             <p>© {dayjs().format('YYYY')} All rights reserved. Moonshine</p>
         </section>

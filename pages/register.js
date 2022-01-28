@@ -7,14 +7,19 @@ import {
 } from 'react';
 
 import { useForm } from 'react-hook-form';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
 import Buttons from '../src/components/Buttons';
 import Checkbox from '../src/components/Checkbox';
 import FormWrap, { FormRow } from '../src/components/FormWrap';
+import Snackbars from '../src/components/Snackbars';
+import FontIcon from '../src/components/FontIcon';
 
 import HeadTag from '../src/containers/HeadTag';
 import {
     SignLayout,
     BtnDirectLayout,
+    AggreeLayout,
     ForgotPasswordLayout,
 } from '../src/components/member/memberSignLayout';
 
@@ -35,6 +40,7 @@ const {
         text_account_with_email,
         text_enter_password,
         text_agree_privacy,
+        text_register_success,
     },
     error: {
         error_password_at_least_eight,
@@ -43,10 +49,21 @@ const {
     },
 } = deftag;
 
+const config = {
+    false: {
+        type: 'password',
+        icon: faEye,
+    },
+    true: {
+        type: 'text',
+        icon: faEyeSlash,
+    },
+};
+
 const Register = () => {
 
     // Context
-    const { globalDispatch } = useContext(GlobalContext);
+    const { snackbar, globalDispatch } = useContext(GlobalContext);
 
     useEffect(() => {
 
@@ -68,18 +85,35 @@ const Register = () => {
 
     // State
     const [disabled, setDisabled] = useState(true);
+    const [toggle, setToggle] = useState({});
+    const [show, setShow] = useState(false);
+
+    // 顯示/隱藏密碼
+    const handleToggle = (type) => {
+
+        setToggle({
+            ...toggle,
+            [type]: show,
+        });
+
+        setShow(!show);
+
+    };
 
     // 我同意 checkbox
     const handleAgree = () => setDisabled(!disabled);
 
     // 送資料
-    const handleReqData = (reqData) => {
+    const handleReqData = async (reqData) => {
 
         delete reqData.confirm_password;
         Service.register(reqData)
+            .then(globalDispatch({ type: 'snackbar', payload: true }))
             .then(redirectTo);
 
     };
+
+    console.log('toggle:', toggle)
 
     return (
 
@@ -124,9 +158,10 @@ const Register = () => {
                         <FormRow
                             name="password"
                             errors={errors}
+                            className="row-password"
                         >
                             <input
-                                type="password"
+                                type={config[show].type}
                                 name="password"
                                 placeholder={text_enter_password}
                                 {...register('password', {
@@ -141,14 +176,22 @@ const Register = () => {
                                     },
                                 })}
                             />
+
+                            <span
+                                className="Model-y-align"
+                                onClick={() => handleToggle('password')}
+                            >
+                                <FontIcon icon={config[show].icon} />
+                            </span>
                         </FormRow>
 
                         <FormRow
                             name="confirm_password"
                             errors={errors}
+                            className="row-password"
                         >
                             <input
-                                type="password"
+                                type={config[show].type}
                                 name="confirm_password"
                                 placeholder={text_confirm_password}
                                 {...register('confirm_password', {
@@ -156,6 +199,13 @@ const Register = () => {
                                     validate: (value) => (value === password.current) || error_password_different,
                                 })}
                             />
+
+                            <span
+                                className="Model-y-align"
+                                onClick={() => handleToggle('confirm')}
+                            >
+                                <FontIcon icon={config[show].icon} />
+                            </span>
                         </FormRow>
 
                         <div className="form-row">
@@ -163,7 +213,7 @@ const Register = () => {
                                 name="agree"
                                 onChange={handleAgree}
                             >
-                                {text_agree_privacy}
+                                <AggreeLayout url="/privacy" newPage>{text_agree_privacy}</AggreeLayout>
                             </Checkbox>
                         </div>
 
@@ -185,6 +235,10 @@ const Register = () => {
                     </form>
                 </FormWrap>
             </SignLayout>
+
+            {
+                snackbar && <Snackbars message={text_register_success} />
+            }
         </Fragment>
 
     );

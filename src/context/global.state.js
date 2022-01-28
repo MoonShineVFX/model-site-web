@@ -16,6 +16,7 @@ const globalInitState = {
     cartCount: 0,
     targetBox: '',
     targetPopup: null,
+    snackbar: false,
 };
 
 // Form values
@@ -46,6 +47,7 @@ const GlobalProvider = ({ children }) => {
         cartCount,
         targetBox,
         targetPopup,
+        snackbar,
     } = globalState;
 
     const { formStorageData } = formStorageState;
@@ -82,6 +84,7 @@ const GlobalProvider = ({ children }) => {
             cartCount,
             targetBox,
             targetPopup,
+            snackbar,
             getGlobalData,
 
             // Form 表單暫存

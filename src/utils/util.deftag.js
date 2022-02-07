@@ -8,6 +8,8 @@ const deftag = {
         btn_update_submit: '修改',
         btn_show_more: '顯示更多',
         text_item_unit: '項',
+        btn_lightbox_cancel: '取消',
+        btn_lightbox_submit: '確認',
     },
     header: {
         text_cart_title: '購物車品項',
@@ -38,7 +40,7 @@ const deftag = {
         text_new_password_success: '你的登入密碼已設定成功',
         text_signin_with_google: '使用 Google 帳號登入',
         text_email_sent: '已成功發送至你輸入的電子信箱',
-        text_register_success: '註冊成功',
+        text_register_success: '註冊成功，將離開此頁面。',
     },
     home: {
         page_title: '首頁',

@@ -11,6 +11,9 @@ import {
 } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
 import { GlobalContext } from '../context/global.state';
+import deftag from '../utils/util.deftag';
+
+const { common: { btn_lightbox_cancel, btn_lightbox_submit } } = deftag;
 
 const DialogLayout = styled(Dialog)(({ theme }) => ({
     '.MuiTypography-root': {
@@ -27,9 +30,6 @@ const DialogLayout = styled(Dialog)(({ theme }) => ({
         fontSize: '15px',
     },
 }));
-
-// confirm
-// alert
 
 // 關閉按鈕
 const CloseButton = ({ onClick }) => (
@@ -53,75 +53,90 @@ const Lightbox = (props) => {
 
     const {
         type,
-        title,
-        children,
         btnTextCancel,
         btnTextSubmit,
         onClick,
+        children,
     } = props;
 
     // Context
-    const {
-        visible,
-        lightboxDispatch,
-    } = useContext(GlobalContext);
+    const { visible, lightboxDispatch } = useContext(GlobalContext);
 
     // Close
     const handleClose = () => lightboxDispatch({ type: 'HIDE' });
 
     return (
 
-        // type === 'confirm' ? ()
+        (type === 'confirm' || type === 'success' || type === 'error') ? (
 
-        <DialogLayout
-            maxWidth="xs"
-            open={visible}
-            {
-                ...type && (type !== 'confirm') && {
-                    onClose: handleClose
-                }
-            }
-        >
-            <DialogTitle>
-                {title}
-                {(type !== 'confirm') && <CloseButton onClick={handleClose} />}
-            </DialogTitle>
+            <DialogLayout
+                maxWidth="xs"
+                open={visible}
+            >
+                <DialogContent>{children}</DialogContent>
 
-            <DialogContent>{children}</DialogContent>
+                <DialogActions>
+                    {
+                        (type === 'confirm') &&
+                            <Button
+                                autoFocus
+                                onClick={handleClose}
+                            >
+                                {btnTextCancel || btn_lightbox_cancel}
+                            </Button>
+                    }
 
-            <DialogActions>
-                <Button
-                    autoFocus
-                    onClick={handleClose}
-                >
-                    {btnTextCancel}
-                </Button>
+                    <Button
+                        type="submit"
+                        onClick={onClick}
+                    >
+                        {btnTextSubmit || btn_lightbox_submit}
+                    </Button>
+                </DialogActions>
+            </DialogLayout>
 
-                <Button
-                    type="submit"
-                    {...type && (type === 'confirm') && { onClick }}
-                >
-                    {btnTextSubmit}
-                </Button>
-            </DialogActions>
-        </DialogLayout>
+        ) : (
+
+            <DialogLayout
+                maxWidth="xs"
+                open={visible}
+                onClose={handleClose}
+            >
+                <DialogTitle>
+                    <CloseButton onClick={handleClose} />
+                </DialogTitle>
+
+                <DialogContent>{children}</DialogContent>
+
+                <DialogActions>
+                    <Button
+                        autoFocus
+                        onClick={handleClose}
+                    >
+                        {btnTextCancel || btn_lightbox_cancel}
+                    </Button>
+
+                    <Button
+                        type="submit"
+                        onClick={onClick}
+                    >
+                        {btnTextSubmit || btn_lightbox_submit}
+                    </Button>
+                </DialogActions>
+            </DialogLayout>
+
+        )
 
     );
 
 };
 
-Lightbox.defaultProps = {
-    title: '確認要更新?',
-    btnTextCancel: '取消',
-    btnTextSubmit: '確認',
-};
-
 Lightbox.propTypes = {
-    type: PropTypes.string,
-    title: PropTypes.string,
+    type: PropTypes.oneOf(['confirm', 'success', 'error', 'info', 'warning']),
     btnTextCancel: PropTypes.string,
     btnTextSubmit: PropTypes.string,
     onClick: PropTypes.func,
+    children: PropTypes.any,
 };
 
 export default Lightbox;

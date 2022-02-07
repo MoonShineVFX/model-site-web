@@ -77,7 +77,7 @@ const lightboxReducer = (state, { type, currEvent }) => {
 
     switch (type) {
         case 'SHOW':
-            return { visible: true, currEvent };
+            return { visible: true, currEvent: currEvent || '' };
 
         case 'HIDE':
             return { visible: false, currEvent: '' };

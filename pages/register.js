@@ -226,9 +226,7 @@ const Register = () => {
             {
                 visible &&
                     <Lightbox
-                        type="confirm"
-                        title=""
-                        btnTextCancel=""
+                        type="success"
                         onClick={redirectTo}
                     >
                         {text_register_success}

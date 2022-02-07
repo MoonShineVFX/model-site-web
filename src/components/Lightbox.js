@@ -87,7 +87,7 @@ const Lightbox = (props) => {
                 {(type !== 'confirm') && <CloseButton onClick={handleClose} />}
             </DialogTitle>
 
-            <DialogContent dividers>{children}</DialogContent>
+            <DialogContent>{children}</DialogContent>
 
             <DialogActions>
                 <Button

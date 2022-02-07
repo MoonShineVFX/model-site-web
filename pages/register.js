@@ -7,13 +7,12 @@ import {
 } from 'react';
 
 import { useForm } from 'react-hook-form';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 import Buttons from '../src/components/Buttons';
 import Checkbox from '../src/components/Checkbox';
 import FormWrap, { FormRow } from '../src/components/FormWrap';
-import Snackbars from '../src/components/Snackbars';
 import FontIcon from '../src/components/FontIcon';
+import Lightbox from '../src/components/Lightbox';
 
 import HeadTag from '../src/containers/HeadTag';
 import {
@@ -25,10 +24,12 @@ import {
 
 import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
+import utilConst from '../src/utils/util.const';
 import deftag from '../src/utils/util.deftag';
 import Service from '../src/utils/util.service';
 
 const { redirectTo } = util;
+const { paswdConfig } = utilConst;
 
 const {
     memberSign: {
@@ -49,21 +50,10 @@ const {
     },
 } = deftag;
 
-const config = {
-    false: {
-        type: 'password',
-        icon: faEye,
-    },
-    true: {
-        type: 'text',
-        icon: faEyeSlash,
-    },
-};
-
 const Register = () => {
 
     // Context
-    const { snackbar, globalDispatch } = useContext(GlobalContext);
+    const { visible, globalDispatch, lightboxDispatch } = useContext(GlobalContext);
 
     useEffect(() => {
 
@@ -85,18 +75,18 @@ const Register = () => {
 
     // State
     const [disabled, setDisabled] = useState(true);
-    const [toggle, setToggle] = useState({});
-    const [show, setShow] = useState(false);
+    const [toggle, setToggle] = useState({
+        password: false,
+        confirm: false,
+    });
 
     // 顯示/隱藏密碼
     const handleToggle = (type) => {
 
         setToggle({
             ...toggle,
-            [type]: show,
+            [type]: !toggle[type],
         });
-
-        setShow(!show);
 
     };
 
@@ -108,12 +98,9 @@ const Register = () => {
 
         delete reqData.confirm_password;
         Service.register(reqData)
-            .then(globalDispatch({ type: 'snackbar', payload: true }))
-            .then(redirectTo);
+            .then(lightboxDispatch({ type: 'SHOW' }));
 
     };
-
-    console.log('toggle:', toggle)
 
     return (
 
@@ -161,7 +148,7 @@ const Register = () => {
                             className="row-password"
                         >
                             <input
-                                type={config[show].type}
+                                type={paswdConfig[toggle.password].type}
                                 name="password"
                                 placeholder={text_enter_password}
                                 {...register('password', {
@@ -181,7 +168,7 @@ const Register = () => {
                                 className="Model-y-align"
                                 onClick={() => handleToggle('password')}
                             >
-                                <FontIcon icon={config[show].icon} />
+                                <FontIcon icon={paswdConfig[toggle.password].icon} />
                             </span>
                         </FormRow>
 
@@ -191,7 +178,7 @@ const Register = () => {
                             className="row-password"
                         >
                             <input
-                                type={config[show].type}
+                                type={paswdConfig[toggle.confirm].type}
                                 name="confirm_password"
                                 placeholder={text_confirm_password}
                                 {...register('confirm_password', {
@@ -204,7 +191,7 @@ const Register = () => {
                                 className="Model-y-align"
                                 onClick={() => handleToggle('confirm')}
                             >
-                                <FontIcon icon={config[show].icon} />
+                                <FontIcon icon={paswdConfig[toggle.confirm].icon} />
                             </span>
                         </FormRow>
 
@@ -237,7 +224,15 @@ const Register = () => {
             </SignLayout>
 
             {
-                snackbar && <Snackbars message={text_register_success} />
+                visible &&
+                    <Lightbox
+                        type="confirm"
+                        title=""
+                        btnTextCancel=""
+                        onClick={redirectTo}
+                    >
+                        {text_register_success}
+                    </Lightbox>
             }
         </Fragment>
 

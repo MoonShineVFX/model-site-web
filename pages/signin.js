@@ -1,8 +1,9 @@
-import { Fragment, useContext, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+
 import SigninGoogle from '../src/components/third-party/SigninGoogle';
 import Buttons from '../src/components/Buttons';
+import FontIcon from '../src/components/FontIcon';
 import Links from '../src/components/Links';
 import FormWrap, { FormRow } from '../src/components/FormWrap';
 import HeadTag from '../src/containers/HeadTag';
@@ -14,10 +15,12 @@ import {
 
 import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
+import utilConst from '../src/utils/util.const';
 import deftag from '../src/utils/util.deftag';
 import Service from '../src/utils/util.service';
 
 const { redirectTo } = util;
+const { paswdConfig } = utilConst;
 const {
     memberSign: {
         text_signin,
@@ -35,9 +38,6 @@ const {
 
 const Signin = () => {
 
-    // Router
-    const router = useRouter();
-
     // Context
     const { globalDispatch } = useContext(GlobalContext);
 
@@ -53,6 +53,22 @@ const Signin = () => {
         register,
         formState: { errors },
     } = useForm();
+
+    // State
+    const [toggle, setToggle] = useState({
+        password: false,
+        confirm: false,
+    });
+
+    // 顯示/隱藏密碼
+    const handleToggle = (type) => {
+
+        setToggle({
+            ...toggle,
+            [type]: !toggle[type],
+        });
+
+    };
 
     // 送資料
     const handleReqData = (reqData) => {
@@ -86,9 +102,10 @@ const Signin = () => {
                         <FormRow
                             name="password"
                             errors={errors}
+                            className="row-password"
                         >
                             <input
-                                type="password"
+                                type={paswdConfig[toggle.password].type}
                                 name="password"
                                 placeholder={text_password}
                                 {...register('password', {
@@ -97,12 +114,19 @@ const Signin = () => {
                                         value: 8,
                                         message: error_password_at_least_eight,
                                     },
-                                    // pattern: {
-                                    //     value: /^(?=.*\d)[0-9a-zA-Z!\u0022#$%&'()*+,./:;<=>?@[\]\^_`{|}~-]{8,}$/g,
-                                    //     message: error_pattern,
-                                    // },
+                                    pattern: {
+                                        value: /^(?=.*\d)[0-9a-zA-Z!\u0022#$%&'()*+,./:;<=>?@[\]\^_`{|}~-]{8,}$/g,
+                                        message: error_pattern,
+                                    },
                                 })}
                             />
+
+                            <span
+                                className="Model-y-align"
+                                onClick={() => handleToggle('password')}
+                            >
+                                <FontIcon icon={paswdConfig[toggle.password].icon} />
+                            </span>
                         </FormRow>
 
                         <div className="form-row form-row-btns">

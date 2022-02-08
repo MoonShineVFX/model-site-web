@@ -1,5 +1,6 @@
-import { useEffect, useState, useContext } from 'react';
+import { useContext } from 'react';
 import { styled } from '@mui/system';
+import useLocalStorage from '../../utils/useLocalStorage';
 import Box from '../Box';
 import Links from '../Links';
 import { GlobalContext } from '../../context/global.state';
@@ -75,13 +76,7 @@ const Cart = () => {
     const { logged } = useContext(GlobalContext);
 
     // State
-    const [items, setItems] = useState({});
-
-    useEffect(() => {
-
-        setItems(localStorage.getItem('cartItem') ? JSON.parse(localStorage.getItem('cartItem')) : {});
-
-    }, []);
+    const [cartItem, setCartItem] = useLocalStorage('cartItem');
 
     return (
 
@@ -89,9 +84,9 @@ const Cart = () => {
             <h4 className="title">{text_cart_title}</h4>
             <div className="items">
                 {
-                    Object.entries(items).length ? (
+                    Object.entries(cartItem).length ? (
 
-                        Object.keys(items).map((id) => (
+                        Object.keys(cartItem).map((id) => (
 
                             <ItemWrapLayout
                                 key={id}
@@ -100,16 +95,16 @@ const Cart = () => {
                             >
                                 <div className="thumb">
                                     <img
-                                        src={items[id].imgUrl}
-                                        alt={items[id].title}
-                                        title={items[id].title}
+                                        src={cartItem[id].imgUrl}
+                                        alt={cartItem[id].title}
+                                        title={cartItem[id].title}
                                         width="100"
                                         height="63"
                                     />
                                 </div>
                                 <div className="content">
-                                    <h4 className="title">{items[id].title}</h4>
-                                    <span className="price">{priceWithCommas(items[id].price)}</span>
+                                    <h4 className="title">{cartItem[id].title}</h4>
+                                    <span className="price">{priceWithCommas(cartItem[id].price)}</span>
                                 </div>
                             </ItemWrapLayout>
 

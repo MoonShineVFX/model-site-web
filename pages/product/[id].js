@@ -29,6 +29,18 @@ export async function getServerSideProps ({ params }) {
 
     }
 
+    // 下架商品導回列表頁
+    if (!data.data.isActive) {
+
+        return {
+            redirect: {
+                destination: '/product/list?page=1&type=all',
+                permanent: false,
+            },
+        };
+
+    }
+
     return {
         props: {
             pageData: data.data,

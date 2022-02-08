@@ -16,7 +16,6 @@ import {
 } from './productLayout';
 
 import { GlobalContext } from '../../context/global.state';
-import { ProductContext } from '../../context/product/product.state';
 import useQuery from '../../utils/useQuery';
 import useLocalStorage from '../../utils/useLocalStorage';
 import util from '../../utils/util';
@@ -61,10 +60,8 @@ const ProductDetailBase = ({ pageData }) => {
         lightboxDispatch,
     } = useContext(GlobalContext);
 
-    const { productList } = useContext(ProductContext);
-
     // State
-    const [cartItem, setCartItem] = useLocalStorage('cartItem', {}); // 未登入狀態用 localStorage 存
+    const [cartItem, setCartItem] = useLocalStorage('cartItem'); // 未登入狀態用 localStorage 存
 
     useEffect(() => {
 

@@ -19,6 +19,7 @@ import {
     ItemLayout,
 } from '../../src/components/member/cartLayout';
 
+import useLocalStorage from '../../src/utils/useLocalStorage';
 import { GlobalContext } from '../../src/context/global.state';
 import util from '../../src/utils/util';
 import deftag from '../../src/utils/util.deftag';
@@ -118,6 +119,7 @@ const Cart = ({ pageData }) => {
     const formRef = useRef(null);
 
     // State
+    const [cartItem, setCartItem] = useLocalStorage('cartItem');
     const [fields, setFields] = useState({});
     const [list, setList] = useState(pageData.list);
     const [amount, setAmount] = useState(pageData.amount);
@@ -132,6 +134,14 @@ const Cart = ({ pageData }) => {
     const handleRemoveItem = (e, id) => {
 
         e.preventDefault();
+
+        let item = cartItem;
+        delete item[id];
+        setCartItem(item);
+
+        console.log('cartItem:', cartItem)
+
+        return;
         Service.cartRemove({ productId: id })
             .then(({ list, amount }) => {
 

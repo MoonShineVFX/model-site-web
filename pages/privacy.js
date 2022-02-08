@@ -40,11 +40,8 @@ export default Privacy;
 
 export async function getServerSideProps () {
 
-    // const resData = await util.serviceServer({ url: '/privacy' });
-    // const { data } = resData;
-
-    const resData = await fetch('http://localhost:1006/json/privacy.json');
-    const data = await resData.json();
+    const resData = await util.serviceServer({ url: '/privacy' });
+    const { data } = resData;
 
     if (!data.result) {
 

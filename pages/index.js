@@ -42,45 +42,48 @@ const Home = ({ pageData }) => {
             {homeStyles}
             <HeadTag title={page_title} />
 
-            <SlideShowWrapLayout data={pageData.banners}>
-                {
-                    pageData.banners.map(({
-                        id,
-                        title,
-                        description,
-                        imgUrl,
-                        link,
-                    }, idx) => (
+            {
+                !!pageData.banners.length &&
+                    <SlideShowWrapLayout data={pageData.banners}>
+                        {
+                            pageData.banners.map(({
+                                id,
+                                title,
+                                detail,
+                                imgUrl,
+                                link,
+                            }, idx) => (
 
-                        <SlideShowItemLayout
-                            key={id}
-                            className={(idx === slideshowActive) ? 'active' : 'hide'}
-                        >
-                            <div className="inner">
-                                <Links
-                                    url={link}
-                                    className="item"
-                                    title={title}
-                                    newPage
+                                <SlideShowItemLayout
+                                    key={id}
+                                    className={(idx === slideshowActive) ? 'active' : 'hide'}
                                 >
-                                    <img
-                                        src={imgUrl}
-                                        alt={title}
-                                        title={title}
-                                        width="840"
-                                        height="386"
-                                    />
-                                </Links>
+                                    <div className="inner">
+                                        <Links
+                                            url={link}
+                                            className="item"
+                                            title={title}
+                                            newPage
+                                        >
+                                            <img
+                                                src={imgUrl}
+                                                alt={title}
+                                                title={title}
+                                                width="840"
+                                                height="386"
+                                            />
+                                        </Links>
 
-                                <SlideshowInfoLayout>
-                                    <div dangerouslySetInnerHTML={{ __html: description }} />
-                                </SlideshowInfoLayout>
-                            </div>
-                        </SlideShowItemLayout>
+                                        <SlideshowInfoLayout>
+                                            <div dangerouslySetInnerHTML={{ __html: detail }} />
+                                        </SlideshowInfoLayout>
+                                    </div>
+                                </SlideShowItemLayout>
 
-                    ))
-                }
-            </SlideShowWrapLayout>
+                            ))
+                        }
+                    </SlideShowWrapLayout>
+            }
 
             <ItemsWrap title={section_title_new_arrival} url="/product/list?page=1&type=all">
                 <Grid container spacing="30px">

@@ -22,10 +22,30 @@ const globalReducer = (state, { type, payload }) => {
                 logged: !!payload.other.userId,
             };
 
+        case 'cart_list':
+            return {
+                ...state,
+                cart: payload,
+            };
+
         case 'add_cart':
             return {
                 ...state,
-                cartCount: payload,
+                cart: {
+                    ...state.cart,
+                    count: Object.entries(payload).length,
+                    items: payload,
+                },
+            };
+
+        case 'remove_cart':
+            delete state.cart.items[payload];
+            return {
+                ...state,
+                cart: {
+                    ...state.cart,
+                    count: Object.entries(state.cart.items).length,
+                },
             };
 
         case 'target_box':

@@ -96,10 +96,10 @@ const ProductDetail = ({ pageData }) => {
         Service.cartAdd({ productId: pageData.id })
             .then(() => {
 
-                setCartItem(item);
+                setCartItem(item); // 更新 localStorage
                 globalDispatch({
                     type: 'add_cart',
-                    payload: Object.entries(item).length,
+                    payload: item,
                 });
 
             });

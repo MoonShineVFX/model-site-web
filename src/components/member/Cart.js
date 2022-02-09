@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { styled } from '@mui/system';
-import useLocalStorage from '../../utils/useLocalStorage';
 import Box from '../Box';
 import Links from '../Links';
 import { GlobalContext } from '../../context/global.state';
@@ -73,10 +72,7 @@ const ItemWrapLayout = styled(Links)(({ theme }) => ({
 const Cart = () => {
 
     // Context
-    const { logged } = useContext(GlobalContext);
-
-    // State
-    const [cartItem, setCartItem] = useLocalStorage('cartItem');
+    const { logged, cart } = useContext(GlobalContext);
 
     return (
 
@@ -84,9 +80,9 @@ const Cart = () => {
             <h4 className="title">{text_cart_title}</h4>
             <div className="items">
                 {
-                    Object.entries(cartItem).length ? (
+                    Object.entries(cart.items || {}).length ? (
 
-                        Object.keys(cartItem).map((id) => (
+                        Object.keys(cart.items).map((id) => (
 
                             <ItemWrapLayout
                                 key={id}
@@ -95,16 +91,16 @@ const Cart = () => {
                             >
                                 <div className="thumb">
                                     <img
-                                        src={cartItem[id].imgUrl}
-                                        alt={cartItem[id].title}
-                                        title={cartItem[id].title}
+                                        src={cart.items[id].imgUrl}
+                                        alt={cart.items[id].title}
+                                        title={cart.items[id].title}
                                         width="100"
                                         height="63"
                                     />
                                 </div>
                                 <div className="content">
-                                    <h4 className="title">{cartItem[id].title}</h4>
-                                    <span className="price">{priceWithCommas(cartItem[id].price)}</span>
+                                    <h4 className="title">{cart.items[id].title}</h4>
+                                    <span className="price">{priceWithCommas(cart.items[id].price)}</span>
                                 </div>
                             </ItemWrapLayout>
 

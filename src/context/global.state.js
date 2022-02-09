@@ -1,5 +1,4 @@
 import React, { createContext, useReducer } from 'react';
-import useLocalStorage from '../utils/useLocalStorage';
 import Service from '../utils/util.service';
 
 import {
@@ -14,11 +13,10 @@ const globalInitState = {
     tags: [],
     slideshowActive: 0,
     logged: false,
-    cartCount: 0,
     targetBox: '',
     targetPopup: null,
     snackbar: false,
-    cartItem: {},
+    cart: {},
 };
 
 // Form values
@@ -46,11 +44,10 @@ const GlobalProvider = ({ children }) => {
         tags,
         slideshowActive,
         logged,
-        cartCount,
         targetBox,
         targetPopup,
         snackbar,
-        cartItem,
+        cart,
     } = globalState;
 
     const { formStorageData } = formStorageState;
@@ -76,13 +73,6 @@ const GlobalProvider = ({ children }) => {
 
     };
 
-    // 更新購物車
-    const updateCartItem = () => {
-
-        // cartItem
-        // reference: https://www.noumansaleem.com/reactjs/2020/07/26/custom-react-hooks-with-useReducer-to-simplify-state-handling.html
-    };
-
     return (
 
         <Provider value={{
@@ -91,13 +81,11 @@ const GlobalProvider = ({ children }) => {
             tags,
             slideshowActive,
             logged,
-            cartCount,
             targetBox,
             targetPopup,
             snackbar,
-            cartItem,
+            cart,
             getGlobalData,
-            updateCartItem,
 
             // Form 表單暫存
             formStorageData,

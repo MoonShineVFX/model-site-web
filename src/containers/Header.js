@@ -67,19 +67,21 @@ const Header = () => {
     // Context
     const {
         logged,
-        cartCount,
         targetBox,
+        cart,
         globalDispatch,
     } = useContext(GlobalContext);
 
-    // State
-    const [cartItem, setCartItem] = useLocalStorage('cartItem');
+    const [cartItem] = useLocalStorage('cartItem');
 
     useEffect(() => {
 
         globalDispatch({
-            type: 'add_cart',
-            payload: Object.entries(cartItem || {}).length,
+            type: 'cart_list',
+            payload: {
+                count: Object.entries(cartItem || {}).length,
+                items: cartItem ?? {},
+            },
         });
 
     }, [cartItem, globalDispatch]);
@@ -112,7 +114,7 @@ const Header = () => {
                         onClick={() => handleClickBox('cartList')}
                     >
                         <FontIcon icon={faShoppingCart} />
-                        <span className="count">({cartCount})</span>
+                        <span className="count">({cart.count})</span>
                     </ShoppingCartLayout>
 
                     {

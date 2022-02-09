@@ -133,20 +133,20 @@ const Cart = ({ pageData }) => {
     // 刪除商品
     const handleRemoveItem = (e, id) => {
 
+        let obj = { ...cartItem };
+        delete obj[id];
+
         e.preventDefault();
-
-        let item = cartItem;
-        delete item[id];
-        setCartItem(item);
-
-        console.log('cartItem:', cartItem)
-
-        return;
         Service.cartRemove({ productId: id })
             .then(({ list, amount }) => {
 
                 setList(list);
                 setAmount(amount);
+                setCartItem(obj); // 更新 localStorage
+                globalDispatch({
+                    type: 'remove_cart',
+                    payload: id,
+                });
 
             });
 

@@ -6,7 +6,7 @@ import FontIcon from '../components/FontIcon';
 import deftag from '../utils/util.deftag';
 
 const {
-    footer: { text_privacy_link },
+    footer: { text_privacy_link, text_custom_service },
 } = deftag;
 
 // 串流平台
@@ -75,6 +75,9 @@ const Footer = () => (
                 {text_privacy_link}
             </Links>
 
+            <p>
+                {text_custom_service}: <Links url="mailto:service@moonshine.tw" newPage>service@moonshine.tw</Links>
+            </p>
             <p>© {dayjs().format('YYYY')} All rights reserved. Moonshine</p>
         </section>
     </FooterLayout>

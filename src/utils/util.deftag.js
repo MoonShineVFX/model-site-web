@@ -18,6 +18,7 @@ const deftag = {
     },
     footer: {
         text_privacy_link: '隱私權政策',
+        text_custom_service: '客服信箱資訊',
     },
     memberSign: {
         text_signin: '登入',

@@ -98,7 +98,7 @@ const Register = () => {
 
         delete reqData.confirm_password;
         Service.register(reqData)
-            .then(lightboxDispatch({ type: 'SHOW' }));
+            .then(() => lightboxDispatch({ type: 'SHOW' }));
 
     };
 

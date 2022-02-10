@@ -5,7 +5,7 @@ import { ArrowForwardIos as ArrowForwardIosIcon } from '@mui/icons-material';
 
 //
 const ButtonLayout = styled(Button)(({ theme }) => ({
-    color: theme.palette.secondary.main,
+    color: theme.palette.primary.contrastText,
     backgroundColor: theme.palette.primary.main,
     display: 'block',
     padding: '10px 18px',

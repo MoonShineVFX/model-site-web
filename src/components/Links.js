@@ -15,7 +15,7 @@ const ButtonLayout = styled(Button)(({ theme }) => ({
     minHeight: 'auto',
     lineHeight: 1,
     '&.default': {
-        color: theme.palette.textColor,
+        color: theme.palette.primary.contrastText,
         backgroundColor: theme.palette.primary.main,
         padding: theme.spacing(4, 9),
         '&:hover, &:focus': {

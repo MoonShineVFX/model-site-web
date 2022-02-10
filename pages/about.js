@@ -46,7 +46,7 @@ const BannerLayout = styled('section')(({ theme }) => ({
 const SupportLayout = styled(Grid)(({ theme }) => ({
     fontSize: '1.15em',
     textAlign: 'center',
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: theme.palette.card.main,
     borderRadius: theme.borderRadius,
     padding: '40px 0',
     '.count': {

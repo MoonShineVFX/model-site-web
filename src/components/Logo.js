@@ -13,7 +13,7 @@ const LogoLayout = styled('div')(({ theme }) => ({
     fontfamily : 'Leelawadee',
     fontWeight: 'bold',
     '.logo-text': {
-        color: theme.palette.priceColor, // 未來會是真的 logo
+        color: theme.palette.primary.main, // 未來會是真的 logo
         textDecoration: 'none',
     },
     '.pure-text': {

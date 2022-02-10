@@ -27,9 +27,9 @@ export default createTheme({
     borderRadius: '30px',
     palette: {
         primary: {
-            light: '#6281cc',
-            main: '#45516e',
-            dark: '#282a2f',
+            light: '#efc266',
+            main: '#e39800',
+            contrastText: '#2f3031',
         },
         secondary: {
             main: '#FFF',
@@ -42,11 +42,10 @@ export default createTheme({
             dark: '#707070',
         },
         textColor: '#FFF',
-        priceColor: '#859acb',
         bgColor: '#1F2023',
         card: {
-            light: '#45516e',
-            main: '#2f3137',
+            light: '#454547',
+            main: '#2f3031',
         },
     },
     components: {

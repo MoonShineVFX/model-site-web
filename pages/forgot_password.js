@@ -1,5 +1,14 @@
-import { Fragment, useState, useContext, useEffect } from 'react';
+import {
+    Fragment,
+    useState,
+    useContext,
+    useEffect,
+    createRef,
+} from 'react';
+
 import { useForm } from 'react-hook-form';
+import ReCAPTCHA from 'react-google-recaptcha';
+
 import Buttons from '../src/components/Buttons';
 import FormWrap, { FormRow, FormSuccessMesg } from '../src/components/FormWrap';
 
@@ -7,6 +16,7 @@ import HeadTag from '../src/containers/HeadTag';
 import { SignLayout, BtnDirectLayout } from '../src/components/member/memberSignLayout';
 import { GlobalContext } from '../src/context/global.state';
 import deftag from '../src/utils/util.deftag';
+import Service from '../src/utils/util.service';
 
 const {
     memberSign: {
@@ -19,6 +29,9 @@ const {
 } = deftag;
 
 const ForgotPassword = () => {
+
+    // Ref
+    const ref = createRef();
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
@@ -42,8 +55,15 @@ const ForgotPassword = () => {
     // 送資料
     const handleReqData = (reqData) => {
 
+        reqData = {
+            ...reqData,
+            'g-recaptcha-response': ref.current.getValue(),
+        };
+
         console.log('reqData:', reqData)
-        setSuccess(true);
+        return;
+        Service.forgotPassword(reqData)
+            .then(() => setSuccess(true));
 
     };
 
@@ -71,6 +91,12 @@ const ForgotPassword = () => {
                                         {...register('email', { required: true })}
                                     />
                                 </FormRow>
+
+                                <ReCAPTCHA
+                                    ref={ref}
+                                    sitekey="6Lf0sz0cAAAAAK4jNru0KQXUCcPPKQADNWd_OH7f"
+                                    // sitekey={process.env.NEXT_PUBLIC_SITE_KEY}
+                                />
 
                                 <div className="form-row form-row-btns">
                                     <Buttons

@@ -29,7 +29,7 @@ const ItemLayout = styled(Links)(({ theme }) => ({
         },
         '.item-content': {
             width: '100%',
-            backgroundColor: '#000',
+            backgroundColor: theme.palette.card.main,
             paddingLeft: '24px',
             paddingRight: '24px',
             position: 'absolute',

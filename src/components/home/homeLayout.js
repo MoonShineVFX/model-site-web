@@ -48,7 +48,7 @@ const SlideShowItemLayout = styled('div')(({ theme }) => ({
     },
     '.price': {
         fontSize: '1.15em',
-        color: theme.palette.priceColor,
+        color: theme.palette.primary.main,
     },
 }));
 

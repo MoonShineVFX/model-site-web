@@ -4,7 +4,7 @@ import { styled } from '@mui/system';
 //
 const BoxLayout = styled('div')(({ theme }) => ({
     fontSize: '1em',
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.card.main,
     borderRadius: '5px',
     position: 'absolute',
     top: '50px',

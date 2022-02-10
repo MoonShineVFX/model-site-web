@@ -57,11 +57,13 @@ const ListItemLayout = styled(ListItemButton)(({ theme }) => ({
         opacity: 1,
     },
     '&.Mui-selected': {
+        color: theme.palette.primary.contrastText,
         backgroundColor: theme.palette.primary.main,
         borderRadius: '3px',
         opacity: 1,
     },
     '&:hover&.Mui-selected': {
+        color: theme.palette.primary.contrastText,
         backgroundColor: theme.palette.primary.main,
         opacity: 1,
     },
@@ -70,7 +72,7 @@ const ListItemLayout = styled(ListItemButton)(({ theme }) => ({
     },
     '.checked': {
         minWidth: 'auto',
-        color: theme.palette.textColor,
+        color: theme.palette.primary.contrastText,
     },
 }));
 
@@ -110,6 +112,7 @@ const DetailContentLayout = styled(Grid)(({ theme }) => ({
     },
     '.tag': {
         fontSize: '0.8em',
+        color: theme.palette.primary.contrastText,
         backgroundColor: theme.palette.primary.main,
         borderRadius: '3px',
         marginRight: '16px',
@@ -132,7 +135,7 @@ const DetailContentLayout = styled(Grid)(({ theme }) => ({
     },
     '.price': {
         fontSize: '1.45em',
-        color: theme.palette.priceColor,
+        color: theme.palette.primary.main,
         textAlign: 'center',
         marginBottom: '20px',
     },

@@ -46,7 +46,7 @@ const FormRowLayout = styled('div')(({ theme }) => ({
         backgroundColor: theme.palette.bgColor,
         border: '0',
         borderRadius: '40px',
-        padding: '20px 40px',
+        padding: '22px 40px',
         outline: '0',
         '&::placeholder, &::-ms-input-placeholder': {
             color: theme.palette.textColor,
@@ -84,7 +84,7 @@ const FormWrap = ({ title, children, ...rest }) => (
 const FormRow = ({ name, className, errors, children, ...rest }) => (
 
     <FormRowLayout
-        className={`form-row ${className}`}
+        className={`form-row ${className ? className : ''}`}
         {...rest}
     >
         {children}

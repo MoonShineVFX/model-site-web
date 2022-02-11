@@ -131,13 +131,13 @@ const Cart = ({ pageData }) => {
     }, []);
 
     // 刪除商品
-    const handleRemoveItem = (e, id) => {
+    const handleRemoveItem = (e, { id, productId }) => {
 
         let obj = { ...cartItem };
-        delete obj[id];
+        delete obj[productId];
 
         e.preventDefault();
-        Service.cartRemove({ productId: id })
+        Service.cartRemove({ cartId: id })
             .then(({ list, amount }) => {
 
                 setList(list);
@@ -187,7 +187,7 @@ const Cart = ({ pageData }) => {
                                             <Item
                                                 key={data.id}
                                                 data={data}
-                                                onClick={(e) => handleRemoveItem(e, data.productId)}
+                                                onClick={(e) => handleRemoveItem(e, data)}
                                             />
 
                                         ))

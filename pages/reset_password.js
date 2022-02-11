@@ -6,6 +6,7 @@ import {
     useState,
 } from 'react';
 
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import Buttons from '../src/components/Buttons';
 import FontIcon from '../src/components/FontIcon';
@@ -21,6 +22,7 @@ import {
 import { GlobalContext } from '../src/context/global.state';
 import utilConst from '../src/utils/util.const';
 import deftag from '../src/utils/util.deftag';
+import Service from '../src/utils/util.service';
 
 const { paswdConfig } = utilConst;
 
@@ -43,6 +45,9 @@ const {
 } = deftag;
 
 const ResetPassword = () => {
+
+    // Router
+    const router = useRouter();
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
@@ -85,8 +90,15 @@ const ResetPassword = () => {
     // 送資料
     const handleReqData = (reqData) => {
 
-        console.log('reqData:', reqData)
-        setSuccess(true);
+        reqData = {
+            ...reqData,
+            token: router.query.token,
+            // token: router.query.token.split('/')[0],
+        };
+
+        delete reqData.confirm_password;
+        Service.resetPassword(reqData)
+            .then(() => setSuccess(true));
 
     };
 

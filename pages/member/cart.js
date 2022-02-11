@@ -145,7 +145,7 @@ const Cart = ({ pageData }) => {
                 setCartItem(obj); // 更新 localStorage
                 globalDispatch({
                     type: 'remove_cart',
-                    payload: id,
+                    payload: productId,
                 });
 
             });

@@ -90,8 +90,6 @@ const util = {
 
     },
 
-    pathnameKey: (path) => path.split('/')[1] || 'index',
-
     /**
      * @author Betty
      * @param  {number} price - 金額
@@ -102,9 +100,9 @@ const util = {
 
         let priceFormat = '';
 
-        if (price == null) price = '';
+        if (price === null) price = '';
 
-        if (fixed != null && !isNaN(parseFloat(price)))
+        if (fixed !== null && !isNaN(parseFloat(price)))
             price = parseFloat(price.toString().replace(/,/g, '')).toFixed(fixed);
 
         // 千分位處理

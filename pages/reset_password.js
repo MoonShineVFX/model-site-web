@@ -92,8 +92,8 @@ const ResetPassword = () => {
 
         reqData = {
             ...reqData,
-            token: router.query.token,
-            // token: router.query.token.split('/')[0],
+            ...router.query,
+            uid: +router.query.uid,
         };
 
         delete reqData.confirm_password;

@@ -50,6 +50,7 @@ const MyAccount = () => {
         e.preventDefault();
         Cookies.remove('token');
         globalDispatch({ type: 'target_box', payload: '' });
+        localStorage.removeItem('cartItem'); // 清除暫存購物車
         redirectTo();
 
     };

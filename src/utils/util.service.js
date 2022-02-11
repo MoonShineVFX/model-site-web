@@ -13,6 +13,7 @@ const Service = {
     resetPassword: (reqData) => util.serviceProxy('/reset_password', reqData),
 
     // 購物車
+    cartList: (reqData) => util.serviceProxy('/cart_products', reqData),
     cartAdd: (reqData) => util.serviceProxy('/cart_product_add', reqData),
     cartRemove: (reqData) => util.serviceProxy('/cart_product_remove', reqData),
 

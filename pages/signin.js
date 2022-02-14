@@ -1,17 +1,18 @@
 import { Fragment, useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import SigninGoogle from '../src/components/third-party/SigninGoogle';
-import Buttons from '../src/components/Buttons';
-import FontIcon from '../src/components/FontIcon';
-import Links from '../src/components/Links';
-import FormWrap, { FormRow } from '../src/components/FormWrap';
-import HeadTag from '../src/containers/HeadTag';
 import {
     SignLayout,
     BtnDirectLayout,
     ForgotPasswordLayout,
 } from '../src/components/member/memberSignLayout';
+import HeadTag from '../src/containers/HeadTag';
+
+import Buttons from '../src/components/Buttons';
+import FontIcon from '../src/components/FontIcon';
+import Links from '../src/components/Links';
+import FormWrap, { FormRow } from '../src/components/FormWrap';
+import SigninGoogle from '../src/components/third-party/SigninGoogle';
 
 import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
@@ -43,6 +44,7 @@ const Signin = () => {
 
     useEffect(() => {
 
+        globalDispatch({ type: 'sidenav', payload: false });
         globalDispatch({ type: 'target_box', payload: '' });
 
     }, []);

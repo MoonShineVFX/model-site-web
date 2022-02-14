@@ -1,24 +1,35 @@
 import { useEffect, useContext } from 'react';
-import { styled } from '@mui/system';
-import { Toolbar, Box } from '@mui/material';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { Box, useMediaQuery } from '@mui/material';
+import { faShoppingCart, faThLarge, faTimes } from '@fortawesome/free-solid-svg-icons';
+import Cookies from 'js-cookie';
 
-import { ButtonLink } from '../components/Links';
+import {
+    AppBarLayout,
+    HeaderLayout,
+    ShoppingCartLayout,
+    SideNavLayout,
+    SideNavIconLayout,
+} from './globalLayout';
+
+import Links, { ButtonLink } from '../components/Links';
 import Buttons from '../components/Buttons';
 import Logo from '../components/Logo';
 import FontIcon from '../components/FontIcon';
 import Navbar from './Navbar';
+import Community from '../components/Community';
 import Cart from '../components/member/Cart';
 import MyAccountBox from '../components/member/MyAccountBox';
 
 import { GlobalContext } from '../context/global.state';
 import useLocalStorage from '../utils/useLocalStorage';
+import util from '../utils/util';
 import deftag from '../utils/util.deftag';
 import Service from '../utils/util.service';
 
+const { redirectTo } = util;
 const {
     memberSign: { text_signin },
-    member: { my_account },
+    member: { my_account, text_logout },
 } = deftag;
 
 const arrangeCartList = (array) => array.reduce((acc, obj) => {
@@ -30,32 +41,6 @@ const arrangeCartList = (array) => array.reduce((acc, obj) => {
     return acc;
 
 }, {});
-
-//
-const AppBarLayout = styled('header')(({ theme }) => ({
-    maxHeight: '90px',
-    backgroundColor: theme.palette.bgColor,
-    boxShadow: 'none',
-}));
-
-//
-const HeaderLayout = styled(Toolbar)(({ theme }) => ({
-    padding: `${theme.spacing(3)} 0`,
-    [theme.breakpoints.up('sm')]: {
-        paddingLeft: 0,
-        paddingRight: 0,
-    },
-}));
-
-// 購物車 icon
-const ShoppingCartLayout = styled('div')(({ theme }) => ({
-    fontSize: '1.4em',
-    marginRight: '30px',
-    cursor: 'pointer',
-    '.count': {
-        marginLeft: '10px',
-    },
-}));
 
 // 購物車 || 我的帳號
 const renderBoxComp = (type) => {
@@ -73,6 +58,17 @@ const renderBoxComp = (type) => {
 
 };
 
+const SideNavIcon = ({ className, onClick, icon }) => (
+
+    <SideNavIconLayout
+        className={className}
+        onClick={onClick}
+    >
+        <FontIcon icon={icon} />
+    </SideNavIconLayout>
+
+);
+
 //
 const Header = () => {
 
@@ -80,13 +76,19 @@ const Header = () => {
     const {
         logged,
         targetBox,
+        sideNav,
         cart,
         globalDispatch,
     } = useContext(GlobalContext);
 
+    const matches = useMediaQuery((theme) => theme.breakpoints.down('md'));
     const [cartItem, setCartItem] = useLocalStorage('cartItem');
 
     useEffect(() => {
+
+        // 手機版側邊欄
+        if (!matches) globalDispatch({ type: 'sidenav', payload: false });
+        document.body.style.overflow = sideNav ? 'hidden' : '';
 
         // 有登入並更新當前登入者的購物車
         if (logged) {
@@ -115,8 +117,9 @@ const Header = () => {
             },
         });
 
-    }, [logged, globalDispatch]);
+    }, [logged, globalDispatch, sideNav]);
 
+    // 購物車與我的帳號 box
     const handleClickBox = (type) => {
 
         globalDispatch({
@@ -126,20 +129,35 @@ const Header = () => {
 
     };
 
+    // 手機版 sidenav: 關閉
+    const handleHideSideNav = () => globalDispatch({ type: 'sidenav', payload: false });
+
+    // 手機版 sidenav: 點擊
+    const handleClickSideNav = () => globalDispatch({ type: 'sidenav', payload: !sideNav });
+
+    // 登出
+    const handleClickLogout = (e) => {
+
+        e.preventDefault();
+        Cookies.remove('token');
+        globalDispatch({ type: 'target_box', payload: '' });
+        localStorage.removeItem('cartItem'); // 清除暫存購物車
+        redirectTo();
+
+    };
+
     return (
 
         <AppBarLayout>
             <HeaderLayout className="Model-container">
-                <Logo />
-
                 <Box sx={{ flexGrow: 1 }}>
+                    <Logo />
                     <Navbar />
                 </Box>
 
                 <Box sx={{
-                    display: { xs: 'flex', md: 'flex' },
+                    display: { xs: 'none', md: 'flex' },
                     alignItems: 'center',
-                    position: 'relative',
                 }}>
                     <ShoppingCartLayout
                         onClick={() => handleClickBox('cartList')}
@@ -168,7 +186,45 @@ const Header = () => {
 
                     {renderBoxComp(targetBox)}
                 </Box>
+
+                <Box sx={{
+                    display: { xs: 'flex', md: 'none' }
+                }}>
+                    <SideNavIcon
+                        icon={faThLarge}
+                        onClick={handleClickSideNav}
+                    />
+                </Box>
             </HeaderLayout>
+
+            <SideNavLayout className={sideNav ? 'active' : ''}>
+                <div className="sidenav-item">
+                    <SideNavIcon
+                        className="btn-close"
+                        icon={faTimes}
+                        onClick={handleHideSideNav}
+                    />
+                </div>
+
+                <Links url={logged ? '/member/account' : '/signin'}>
+                    {logged ? my_account : text_signin}
+                </Links>
+
+                <Navbar className="mWeb-navbar" />
+
+                {
+                    logged &&
+                        <Links
+                            url="#"
+                            onClick={handleClickLogout}
+                        >
+                            {text_logout}
+                        </Links>
+                }
+
+                <Community />
+                {/* <div className="mask" onClick={handleHideSideNav}></div> */}
+            </SideNavLayout>
         </AppBarLayout>
 
     );

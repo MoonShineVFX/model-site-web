@@ -8,19 +8,18 @@ import {
 
 import { useForm } from 'react-hook-form';
 
-import Buttons from '../src/components/Buttons';
-import Checkbox from '../src/components/Checkbox';
-import FormWrap, { FormRow } from '../src/components/FormWrap';
-import FontIcon from '../src/components/FontIcon';
-import Lightbox from '../src/components/Lightbox';
-
-import HeadTag from '../src/containers/HeadTag';
 import {
     SignLayout,
     BtnDirectLayout,
     AggreeLayout,
     ForgotPasswordLayout,
 } from '../src/components/member/memberSignLayout';
+import HeadTag from '../src/containers/HeadTag';
+import Buttons from '../src/components/Buttons';
+import Checkbox from '../src/components/Checkbox';
+import FormWrap, { FormRow } from '../src/components/FormWrap';
+import FontIcon from '../src/components/FontIcon';
+import Lightbox from '../src/components/Lightbox';
 
 import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
@@ -57,6 +56,7 @@ const Register = () => {
 
     useEffect(() => {
 
+        globalDispatch({ type: 'sidenav', payload: false });
         globalDispatch({ type: 'target_box', payload: '' });
 
     }, []);

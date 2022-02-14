@@ -15,7 +15,7 @@ const {
     },
 } = deftag;
 
-// 菜單
+// Menu
 const menus = {
     account: text_member_center,
     logout: text_logout,
@@ -24,7 +24,7 @@ const menus = {
 //
 const MyAccountLayout = styled(Box)(({ theme }) => ({
     minWidth: '150px',
-    top: '60px',
+    top: '100px',
     right: '30px',
     '.menu-item': {
         lineHeight: '1',
@@ -39,13 +39,13 @@ const MyAccountLayout = styled(Box)(({ theme }) => ({
 }));
 
 //
-const MyAccount = () => {
+const MyAccountBox = () => {
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
 
-    // 登出行為
-    const handleClickMenu = (e) => {
+    // 登出
+    const handleClickLogout = (e) => {
 
         e.preventDefault();
         Cookies.remove('token');
@@ -66,7 +66,7 @@ const MyAccount = () => {
                         url={(key === 'logout') ? '#' : `/member/${key}`}
                         title={menus[key]}
                         className="menu-item"
-                        {...(key === 'logout') && { onClick: handleClickMenu }}
+                        {...(key === 'logout') && { onClick: handleClickLogout }}
                     >
                         {menus[key]}
                     </Links>
@@ -79,4 +79,4 @@ const MyAccount = () => {
 
 };
 
-export default MyAccount;
+export default MyAccountBox;

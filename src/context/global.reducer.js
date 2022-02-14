@@ -14,6 +14,12 @@ const globalReducer = (state, { type, payload }) => {
                 slideshowActive: payload,
             };
 
+        case 'sidenav':
+            return {
+                ...state,
+                sideNav: payload,
+            };
+
         case 'global_data':
             return {
                 ...state,

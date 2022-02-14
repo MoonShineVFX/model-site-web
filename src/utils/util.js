@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Router from 'next/router';
+import router from 'next/router';
 import dayjs from 'dayjs';
 import Cookies from 'js-cookie';
 
@@ -179,8 +179,8 @@ const util = {
      */
     redirectTo: (url = '/') => {
 
-        Router.push(url);
-        Router.reload();
+        router.push(url);
+        router.reload();
 
     },
 

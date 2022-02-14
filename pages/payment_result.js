@@ -1,14 +1,13 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { styled } from '@mui/system';
-import HeadTag from '../src/containers/HeadTag';
-import { ButtonLink } from '../src/components/Links';
 import {
     TitleLayout,
     SectionLayout,
     CartLayout,
 } from '../src/components/member/cartLayout';
-
+import HeadTag from '../src/containers/HeadTag';
+import { ButtonLink } from '../src/components/Links';
 import { GlobalContext } from '../src/context/global.state';
 import deftag from '../src/utils/util.deftag';
 
@@ -45,6 +44,7 @@ const PaymentResult = () => {
 
     useEffect(() => {
 
+        globalDispatch({ type: 'sidenav', payload: false });
         globalDispatch({ type: 'target_box', payload: '' });
 
     }, []);

@@ -33,6 +33,7 @@ const Tutorial = ({ pageData }) => {
 
     useEffect(() => {
 
+        globalDispatch({ type: 'sidenav', payload: false });
         globalDispatch({ type: 'target_box', payload: '' });
 
     }, []);

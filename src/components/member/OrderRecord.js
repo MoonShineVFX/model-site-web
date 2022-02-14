@@ -1,5 +1,5 @@
-import Links from '../Links';
 import { OrderRecordLayout } from '../order/orderLayout';
+import Links from '../Links';
 import util from '../../utils/util';
 import deftag from '../../utils/util.deftag';
 

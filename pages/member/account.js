@@ -6,9 +6,9 @@ import React, {
 } from 'react';
 
 import { Tabs, Tab } from '@mui/material';
-import HeadTag from '../../src/containers/HeadTag';
 import { TitleLayout } from '../../src/components/member/cartLayout';
 import { TabWrapLayout, TabPanelLayout } from '../../src/components/member/accountLayout';
+import HeadTag from '../../src/containers/HeadTag';
 
 import MyProduct from '../../src/components/member/MyProduct';
 import OrderRecord from '../../src/components/member/OrderRecord';
@@ -54,6 +54,7 @@ const Account = ({ pageData }) => {
 
     useEffect(() => {
 
+        globalDispatch({ type: 'sidenav', payload: false });
         globalDispatch({ type: 'target_box', payload: '' });
 
     }, []);

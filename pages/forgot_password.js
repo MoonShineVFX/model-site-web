@@ -4,14 +4,13 @@ import {
     useContext,
     useEffect,
 } from 'react';
-
 import { useForm } from 'react-hook-form';
 
+import { SignLayout, BtnDirectLayout } from '../src/components/member/memberSignLayout';
+import HeadTag from '../src/containers/HeadTag';
 import Buttons from '../src/components/Buttons';
 import FormWrap, { FormRow, FormSuccessMesg } from '../src/components/FormWrap';
 
-import HeadTag from '../src/containers/HeadTag';
-import { SignLayout, BtnDirectLayout } from '../src/components/member/memberSignLayout';
 import { GlobalContext } from '../src/context/global.state';
 import deftag from '../src/utils/util.deftag';
 import Service from '../src/utils/util.service';
@@ -33,6 +32,7 @@ const ForgotPassword = () => {
 
     useEffect(() => {
 
+        globalDispatch({ type: 'sidenav', payload: false });
         globalDispatch({ type: 'target_box', payload: '' });
 
     }, []);

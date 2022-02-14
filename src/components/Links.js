@@ -1,16 +1,9 @@
-import Link from 'next/link';
 import PropTypes from 'prop-types';
+import router from 'next/router';
+import Link from 'next/link';
 import { styled } from '@mui/system';
 import { Button } from '@mui/material';
 
-//
-const style = {
-    alink: {
-        textDecoration: 'none',
-    },
-};
-
-//
 const ButtonLayout = styled(Button)(({ theme }) => ({
     minHeight: 'auto',
     lineHeight: 1,
@@ -57,17 +50,14 @@ const Links = ({ url, newPage, title, className, children, ...rest }) => (
 //
 const ButtonLink = ({ url, text, type, ...rest }) => (
 
-    <Links
-        url={url}
-        style={style.alink}
-        {...rest}
-    >
+    <div {...rest}>
         <ButtonLayout
             className={`${(type === 'third') ? 'third' : 'default'} model-button`}
+            onClick={() => router.push(url)}
         >
             {text}
         </ButtonLayout>
-    </Links>
+    </div>
 
 );
 

@@ -15,6 +15,7 @@ const globalInitState = {
     logged: false,
     targetBox: '',
     targetPopup: null,
+    sideNav: false,
     snackbar: false,
     cart: {},
 };
@@ -46,6 +47,7 @@ const GlobalProvider = ({ children }) => {
         logged,
         targetBox,
         targetPopup,
+        sideNav,
         snackbar,
         cart,
     } = globalState;
@@ -83,6 +85,7 @@ const GlobalProvider = ({ children }) => {
             logged,
             targetBox,
             targetPopup,
+            sideNav,
             snackbar,
             cart,
             getGlobalData,

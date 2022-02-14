@@ -69,6 +69,7 @@ const ProductList = ({ pageData }) => {
         // 沒有 tag 也不要丟空值
         if (query.tags) setSelectedTag(arrangeTags(query.tags));
 
+        globalDispatch({ type: 'sidenav', payload: false });
         globalDispatch({ type: 'target_box', payload: '' });
 
     }, []);

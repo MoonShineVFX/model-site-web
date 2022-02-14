@@ -1,4 +1,4 @@
-import { styled } from '@mui/system';
+import { NavMenuLayout } from './globalLayout';
 import Links from '../components/Links';
 import deftag from '../utils/util.deftag';
 
@@ -27,27 +27,9 @@ const navMenus = [
 ];
 
 //
-const NavMenuLayout = styled('nav', {
-    name: 'nav-menu-wrap',
-})(({ theme }) => ({
-    marginLeft: '40px',
-    'a': {
-        textDecoration: 'none',
-        color: theme.palette.textColor,
-        margin: '20px',
-        padding: theme.spacing(2),
-        opacity: .8,
-        transition: 'all .5s ease',
-        '&:hover': {
-            opacity: 1,
-        },
-    },
-}));
+const Navbar = ({ ...rest }) => (
 
-//
-const Navbar = () => (
-
-    <NavMenuLayout>
+    <NavMenuLayout {...rest}>
         {
             navMenus.map(({ key, text }) => (
 

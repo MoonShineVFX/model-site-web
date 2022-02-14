@@ -65,7 +65,6 @@ const styles = {
     },
     'select': {
         outline: 'none',
-        // appearance: 'none',
     },
     '.price': {
         fontWeight: 'bold',
@@ -86,6 +85,22 @@ const styles = {
             '&.third': {
                 borderRadius: '40px',
             },
+        },
+    },
+    [theme.breakpoints.up('md')]: {
+        '.web': {
+            display: 'block',
+        },
+        '.mWeb': {
+            display: 'none',
+        },
+    },
+    [theme.breakpoints.down('md')]: {
+        '.web': {
+            display: 'none',
+        },
+        '.mWeb': {
+            display: 'block',
         },
     },
 };

@@ -1,8 +1,7 @@
 import { Fragment, useContext, useEffect } from 'react';
-import HeadTag from '../../src/containers/HeadTag';
 import { TitleLayout } from '../../src/components/member/cartLayout';
-
 import { OrderDetailLayout, ItemWrapLayout } from '../../src/components/order/orderLayout';
+import HeadTag from '../../src/containers/HeadTag';
 import { GlobalContext } from '../../src/context/global.state';
 import util from '../../src/utils/util';
 import deftag from '../../src/utils/util.deftag';
@@ -30,6 +29,7 @@ const OrderDetail = ({ pageData }) => {
 
     useEffect(() => {
 
+        globalDispatch({ type: 'sidenav', payload: false });
         globalDispatch({ type: 'target_box', payload: '' });
 
     }, []);

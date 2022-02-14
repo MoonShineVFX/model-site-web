@@ -8,10 +8,12 @@ const {
 } = deftag;
 
 //
-const LogoLayout = styled('div')(({ theme }) => ({
+const LogoLayout = styled('span')(({ theme }) => ({
     fontSize: '28px',
-    fontfamily : 'Leelawadee',
     fontWeight: 'bold',
+    fontfamily : 'Leelawadee',
+    display: 'inline-block',
+    verticalAlign: 'middle',
     '.logo-text': {
         color: theme.palette.primary.main, // 未來會是真的 logo
         textDecoration: 'none',

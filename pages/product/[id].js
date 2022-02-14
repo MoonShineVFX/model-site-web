@@ -1,12 +1,6 @@
 import { Fragment, useContext, useEffect } from 'react';
 import { Grid } from '@mui/material';
 
-import HeadTag from '../../src/containers/HeadTag';
-import ItemsWrap from '../../src/components/ItemsWrap';
-import Item from '../../src/components/Item';
-import Buttons from '../../src/components/Buttons';
-import ImageEnlarge from '../../src/components/ImageEnlarge';
-
 import {
     DetailWrapLayout,
     DetailContentLayout,
@@ -14,6 +8,11 @@ import {
     DemoImageWrapLayout,
     DemoImageLayout,
 } from '../../src/components/product/productLayout';
+import HeadTag from '../../src/containers/HeadTag';
+import ItemsWrap from '../../src/components/ItemsWrap';
+import Item from '../../src/components/Item';
+import Buttons from '../../src/components/Buttons';
+import ImageEnlarge from '../../src/components/ImageEnlarge';
 
 import { GlobalContext } from '../../src/context/global.state';
 import useQuery from '../../src/utils/useQuery';
@@ -66,6 +65,7 @@ const ProductDetail = ({ pageData }) => {
     useEffect(() => {
 
         document.body.style.overflow = (visible && currEvent === 'viewImg') ? 'hidden' : '';
+        globalDispatch({ type: 'sidenav', payload: false });
         globalDispatch({ type: 'target_box', payload: '' });
 
     }, []);

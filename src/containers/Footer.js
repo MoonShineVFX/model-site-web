@@ -1,71 +1,18 @@
-import { faInstagram, faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
-import { styled } from '@mui/system';
 import dayjs from 'dayjs';
+import { FooterLayout } from './globalLayout';
 import Links from '../components/Links';
-import FontIcon from '../components/FontIcon';
+import Community from '../components/Community';
 import deftag from '../utils/util.deftag';
 
 const {
     footer: { text_privacy_link, text_custom_service },
 } = deftag;
 
-// 串流平台
-const socialMedia = [
-    {
-        url: 'https://www.instagram.com/moonshine.tw/?hl=zh-tw',
-        icon: faInstagram,
-    },
-    {
-        url: 'https://www.facebook.com/MoonShineAnimation',
-        icon: faFacebookSquare,
-    },
-];
-
-const FooterLayout = styled('footer')(({ theme }) => ({
-    textAlign: 'center',
-    marginTop: '100px',
-    marginBottom: '40px',
-    '*': {
-        color: theme.palette.textColor,
-    },
-    '.social-item': {
-        fontSize: '1.8em',
-        margin: theme.spacing(0, 3),
-        padding: theme.spacing(1),
-    },
-    '.privacy-link': {
-        textDecoration: 'none',
-        marginTop: '10px',
-        '&:hover': {
-            textDecoration: 'underline',
-        },
-    },
-    'p': {
-        marginTop: theme.spacing(5),
-    },
-}));
-
-//
 const Footer = () => (
 
     <FooterLayout>
         <section className="Model-container">
-            <div>
-                {
-                    socialMedia.map(({ url, icon }, idx) => (
-
-                        <Links
-                            key={idx}
-                            url={url}
-                            newPage
-                            className="social-item"
-                        >
-                            <FontIcon icon={icon} />
-                        </Links>
-
-                    ))
-                }
-            </div>
+            <Community />
 
             <Links
                 url="/privacy"

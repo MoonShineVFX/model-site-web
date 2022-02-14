@@ -7,7 +7,7 @@ const BoxLayout = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.card.main,
     borderRadius: '5px',
     position: 'absolute',
-    top: '50px',
+    top: '90px',
     zIndex: '10',
 }));
 

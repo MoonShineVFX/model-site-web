@@ -1,15 +1,12 @@
 import util from './util';
 
 const {
-    serviceProxy,
-    serviceServer,
     priceWithCommas,
     renderWithoutValue,
     mappingTags,
     dateFormat,
     formatBytes,
     arrangeFormatAndRender,
-    redirectTo,
 } = util;
 
 it('priceWithCommas', () => {
@@ -34,16 +31,53 @@ it('mappingTags', () => {
         { id: 1, name: 'aaa' },
     ];
 
-    const reqData1 = [
-        { age: 1, gender: 'aaa' },
-    ];
-
-    const resData = {
-        1: 'aaa',
-    };
+    const resData = { 1: 'aaa' };
 
     expect(mappingTags([])).toEqual({});
     expect(mappingTags(reqData)).toEqual(resData);
-    expect(mappingTags(reqData1)).toEqual(resData);
+
+});
+
+it('dateFormat', () => {
+
+    expect(dateFormat('2022-02-14')).toBe('2022/02/14 00:00');
+    expect(dateFormat('2022-02-14 00:00')).toBe('2022/02/14 00:00');
+    expect(dateFormat('2022-02-14T09:19:00')).toBe('2022/02/14 09:19');
+
+});
+
+it('formatBytes', () => {
+
+    expect(formatBytes(1024)).toBe('1K');
+    expect(formatBytes(54024)).toBe('52.76K');
+    expect(formatBytes(748691048)).toBe('714.01M');
+    expect(formatBytes(94608991654987)).toBe('86.05T');
+
+});
+
+it('arrangeFormatAndRender', () => {
+
+    const reqData = [
+        {
+            id: 1,
+            formatId: 11,
+            formatName: 'aa',
+            rendererId: 111,
+            rendererName: 'aaa',
+        },
+    ];
+
+    const resData = {
+        11: {
+            id: 1,
+            name: 'aa',
+            renders: [
+                { rendererId: 111, rendererName: 'aaa' },
+            ],
+        },
+    };
+
+    expect(arrangeFormatAndRender([])).toEqual({});
+    expect(arrangeFormatAndRender(reqData)).toEqual(resData);
 
 });

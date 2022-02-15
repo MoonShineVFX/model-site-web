@@ -9,7 +9,7 @@ const {
 
 //
 const LogoLayout = styled('span')(({ theme }) => ({
-    fontSize: '28px',
+    fontSize: '1.75em',
     fontWeight: 'bold',
     fontfamily : 'Leelawadee',
     display: 'inline-block',
@@ -20,6 +20,9 @@ const LogoLayout = styled('span')(({ theme }) => ({
     },
     '.pure-text': {
         cursor: 'default',
+    },
+    [theme.breakpoints.down('middle')]: {
+        fontSize: '1.4em',
     },
 }));
 

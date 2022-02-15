@@ -14,7 +14,10 @@ const HeaderLayout = styled(Toolbar)(({ theme }) => ({
         paddingLeft: 0,
         paddingRight: 0,
     },
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('mobile')]: {
+        padding: '20px 30px',
+    },
+    [theme.breakpoints.down('middle')]: {
         padding: '20px',
     },
 }));
@@ -45,7 +48,7 @@ const NavMenuLayout = styled('nav')(({ theme }) => ({
             opacity: 1,
         },
     },
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('mobile')]: {
         display: 'none',
     },
 }));
@@ -53,10 +56,9 @@ const NavMenuLayout = styled('nav')(({ theme }) => ({
 // mWeb sidenav
 const SideNavLayout = styled('div')(({ theme }) => ({
     display: 'none',
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('mobile')]: {
         width: '100%',
         height: '100vh',
-        backgroundColor: theme.palette.card.main,
         position: 'fixed',
         top: '0',
         left: '0',
@@ -64,9 +66,15 @@ const SideNavLayout = styled('div')(({ theme }) => ({
         '&.active, .mWeb-navbar, a:not(.social-item)': {
             display: 'block',
         },
+        '.wrap': {
+            backgroundColor: theme.palette.card.main,
+            padding: '20px 0',
+            position: 'relative',
+            zIndex: '1',
+        },
         '.sidenav-item': {
             textAlign: 'right',
-            padding: '30px',
+            padding: '0 30px',
         },
         '.mWeb-navbar': {
             marginLeft: '0',
@@ -91,10 +99,29 @@ const SideNavLayout = styled('div')(({ theme }) => ({
                 padding: '0',
             },
         },
+        '.shopping-cart': {
+            fontSize: '1.3em',
+            paddingTop: '16px',
+            paddingBottom: '16px',
+        },
+        '.count': {
+            marginLeft: '10px',
+        },
         '.mask': {
             width: '100%',
             height: '100%',
             backgroundColor: 'rgba(0, 0, 0, .65)',
+            position: 'absolute',
+            top: '0',
+            left: '0',
+        },
+    },
+    [theme.breakpoints.down('middle')]: {
+        '.sidenav-item': {
+            padding: '0 20px',
+        },
+        'a, .community': {
+            padding: '12px 50px',
         },
     },
 }));
@@ -115,6 +142,14 @@ const SideNavIconLayout = styled('span')(({ theme }) => ({
     },
     '&.btn-close': {
         fontSize: '1.4em',
+    },
+    [theme.breakpoints.down('middle')]: {
+        width: '34px',
+        height: '34px',
+        lineHeight: '34px',
+        '&.btn-close': {
+            fontSize: '1.2em',
+        },
     },
 }));
 
@@ -140,6 +175,9 @@ const FooterLayout = styled('footer')(({ theme }) => ({
     },
     'p': {
         marginTop: theme.spacing(5),
+    },
+    [theme.breakpoints.down('mobile')]: {
+        marginTop: '40px',
     },
 }));
 

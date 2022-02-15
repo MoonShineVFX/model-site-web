@@ -1,35 +1,30 @@
 import { useEffect, useContext } from 'react';
 import { Box, useMediaQuery } from '@mui/material';
-import { faShoppingCart, faThLarge, faTimes } from '@fortawesome/free-solid-svg-icons';
-import Cookies from 'js-cookie';
+import { faShoppingCart, faThLarge } from '@fortawesome/free-solid-svg-icons';
 
 import {
     AppBarLayout,
     HeaderLayout,
     ShoppingCartLayout,
-    SideNavLayout,
-    SideNavIconLayout,
 } from './globalLayout';
-
-import Links, { ButtonLink } from '../components/Links';
+import { ButtonLink } from '../components/Links';
 import Buttons from '../components/Buttons';
 import Logo from '../components/Logo';
 import FontIcon from '../components/FontIcon';
 import Navbar from './Navbar';
-import Community from '../components/Community';
+import SideNavIcon from './SideNavIcon';
 import Cart from '../components/member/Cart';
 import MyAccountBox from '../components/member/MyAccountBox';
+import SideNav from './SideNav';
 
 import { GlobalContext } from '../context/global.state';
 import useLocalStorage from '../utils/useLocalStorage';
-import util from '../utils/util';
 import deftag from '../utils/util.deftag';
 import Service from '../utils/util.service';
 
-const { redirectTo } = util;
 const {
     memberSign: { text_signin },
-    member: { my_account, text_logout },
+    member: { my_account },
 } = deftag;
 
 const arrangeCartList = (array) => array.reduce((acc, obj) => {
@@ -58,17 +53,6 @@ const renderBoxComp = (type) => {
 
 };
 
-const SideNavIcon = ({ className, onClick, icon }) => (
-
-    <SideNavIconLayout
-        className={className}
-        onClick={onClick}
-    >
-        <FontIcon icon={icon} />
-    </SideNavIconLayout>
-
-);
-
 //
 const Header = () => {
 
@@ -81,7 +65,7 @@ const Header = () => {
         globalDispatch,
     } = useContext(GlobalContext);
 
-    const matches = useMediaQuery((theme) => theme.breakpoints.down('md'));
+    const matches = useMediaQuery((theme) => theme.breakpoints.down('mobile'));
     const [cartItem, setCartItem] = useLocalStorage('cartItem');
 
     useEffect(() => {
@@ -129,22 +113,8 @@ const Header = () => {
 
     };
 
-    // 手機版 sidenav: 關閉
-    const handleHideSideNav = () => globalDispatch({ type: 'sidenav', payload: false });
-
     // 手機版 sidenav: 點擊
     const handleClickSideNav = () => globalDispatch({ type: 'sidenav', payload: !sideNav });
-
-    // 登出
-    const handleClickLogout = (e) => {
-
-        e.preventDefault();
-        Cookies.remove('token');
-        globalDispatch({ type: 'target_box', payload: '' });
-        localStorage.removeItem('cartItem'); // 清除暫存購物車
-        redirectTo();
-
-    };
 
     return (
 
@@ -156,7 +126,7 @@ const Header = () => {
                 </Box>
 
                 <Box sx={{
-                    display: { xs: 'none', md: 'flex' },
+                    display: { xs: 'none', mobile: 'flex' },
                     alignItems: 'center',
                 }}>
                     <ShoppingCartLayout
@@ -188,7 +158,7 @@ const Header = () => {
                 </Box>
 
                 <Box sx={{
-                    display: { xs: 'flex', md: 'none' }
+                    display: { xs: 'flex', mobile: 'none' }
                 }}>
                     <SideNavIcon
                         icon={faThLarge}
@@ -197,34 +167,7 @@ const Header = () => {
                 </Box>
             </HeaderLayout>
 
-            <SideNavLayout className={sideNav ? 'active' : ''}>
-                <div className="sidenav-item">
-                    <SideNavIcon
-                        className="btn-close"
-                        icon={faTimes}
-                        onClick={handleHideSideNav}
-                    />
-                </div>
-
-                <Links url={logged ? '/member/account' : '/signin'}>
-                    {logged ? my_account : text_signin}
-                </Links>
-
-                <Navbar className="mWeb-navbar" />
-
-                {
-                    logged &&
-                        <Links
-                            url="#"
-                            onClick={handleClickLogout}
-                        >
-                            {text_logout}
-                        </Links>
-                }
-
-                <Community />
-                {/* <div className="mask" onClick={handleHideSideNav}></div> */}
-            </SideNavLayout>
+            <SideNav />
         </AppBarLayout>
 
     );

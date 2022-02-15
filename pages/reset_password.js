@@ -152,10 +152,7 @@ const ResetPassword = () => {
                                         })}
                                     />
 
-                                     <span
-                                        className="Model-y-align"
-                                        onClick={() => handleToggle('password')}
-                                    >
+                                     <span onClick={() => handleToggle('password')}>
                                         <FontIcon icon={paswdConfig[toggle.password].icon} />
                                     </span>
                                 </FormRow>
@@ -175,10 +172,7 @@ const ResetPassword = () => {
                                         })}
                                     />
 
-                                    <span
-                                        className="Model-y-align"
-                                        onClick={() => handleToggle('confirm')}
-                                    >
+                                    <span onClick={() => handleToggle('confirm')}>
                                         <FontIcon icon={paswdConfig[toggle.confirm].icon} />
                                     </span>
                                 </FormRow>

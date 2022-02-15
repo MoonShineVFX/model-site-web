@@ -48,6 +48,17 @@ export default createTheme({
             main: '#2f3031',
         },
     },
+    breakpoints: {
+        values: {
+            xs: 0,
+            sm: 600,
+            md: 900,
+            lg: 1200,
+            xl: 1536,
+            mobile: 768,
+            middle: 480,
+        },
+    },
     components: {
         ...paper,
         ...button,

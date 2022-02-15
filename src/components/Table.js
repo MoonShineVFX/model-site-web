@@ -1,9 +1,4 @@
-import React, {
-    useRef,
-    useEffect,
-    useState,
-} from 'react';
-
+import React, { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/system';
 import { DataGrid } from '@material-ui/data-grid';

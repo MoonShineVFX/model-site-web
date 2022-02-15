@@ -123,10 +123,7 @@ const Signin = () => {
                                 })}
                             />
 
-                            <span
-                                className="Model-y-align"
-                                onClick={() => handleToggle('password')}
-                            >
+                            <span onClick={() => handleToggle('password')}>
                                 <FontIcon icon={paswdConfig[toggle.password].icon} />
                             </span>
                         </FormRow>

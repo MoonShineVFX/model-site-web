@@ -87,20 +87,19 @@ const styles = {
             },
         },
     },
-    [theme.breakpoints.up('md')]: {
-        '.web': {
-            display: 'block',
+    [theme.breakpoints.down('sm')]: {
+        '.Model-container': {
+            padding: '0 30px',
         },
-        '.mWeb': {
-            display: 'none',
+        '.Model-form-button': {
+            '.model-button': {
+                height: '56px',
+            },
         },
     },
-    [theme.breakpoints.down('md')]: {
-        '.web': {
-            display: 'none',
-        },
-        '.mWeb': {
-            display: 'block',
+    [theme.breakpoints.down('middle')]: {
+        '.Model-container': {
+            padding: '0 20px',
         },
     },
 };

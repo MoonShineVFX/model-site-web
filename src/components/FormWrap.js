@@ -7,7 +7,6 @@ import deftag from '../utils/util.deftag';
 //
 const FormWrapLayout = styled('div')(({ theme }) => ({
     maxWidth: '560px',
-    fontSize: '1.2em',
     backgroundColor: theme.palette.card.main,
     borderRadius: theme.borderRadius,
     margin: 'auto',
@@ -23,6 +22,21 @@ const FormWrapLayout = styled('div')(({ theme }) => ({
     '.form-row:not(.form-row-btns)': {
         marginBottom: '30px',
     },
+    [theme.breakpoints.up('sm')]: {
+        fontSize: '1.2em',
+    },
+    [theme.breakpoints.down('sm')]: {
+        maxWidth: '100%',
+        padding: '20px',
+    },
+    [theme.breakpoints.down('middle')]: {
+        '.title': {
+            margin: '10px 0 24px',
+        },
+        '.form-row:not(.form-row-btns)': {
+            marginBottom: '16px',
+        },
+    },
 }));
 
 //
@@ -32,6 +46,7 @@ const FormRowLayout = styled('div')(({ theme }) => ({
         'span': {
             padding: '4px 8px',
             position: 'absolute',
+            top: '14px',
             right: '20px',
             cursor: 'pointer',
         },
@@ -57,6 +72,26 @@ const FormRowLayout = styled('div')(({ theme }) => ({
         fontSize: '0.8em',
         marginTop: '8px',
         paddingLeft: '40px',
+    },
+    [theme.breakpoints.down('sm')]: {
+        '.error-mesg': {
+            fontSize: '1em',
+        },
+    },
+    [theme.breakpoints.down('middle')]: {
+        '&.row-password': {
+            'span': {
+                top: '10px',
+            },
+        },
+        'input': {
+            fontSize: '1em',
+            padding: '19px 30px',
+        },
+        '.error-mesg': {
+            fontSize: '0.9em',
+            paddingLeft: '30px',
+        },
     },
 }));
 

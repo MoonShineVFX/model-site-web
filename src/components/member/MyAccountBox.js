@@ -44,6 +44,9 @@ const MyAccountBox = () => {
     // Context
     const { globalDispatch } = useContext(GlobalContext);
 
+    // 當頁再次點擊要關閉 box
+    const handleClickAccount = () => globalDispatch({ type: 'target_box', payload: '' });
+
     // 登出
     const handleClickLogout = (e) => {
 
@@ -66,7 +69,7 @@ const MyAccountBox = () => {
                         url={(key === 'logout') ? '#' : `/member/${key}`}
                         title={menus[key]}
                         className="menu-item"
-                        {...(key === 'logout') && { onClick: handleClickLogout }}
+                        onClick={key === 'logout' ? handleClickLogout : handleClickAccount}
                     >
                         {menus[key]}
                     </Links>

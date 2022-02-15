@@ -35,6 +35,15 @@ const CheckboxLayout = styled('label')(({ theme }) => ({
         flex: '0 0 calc(100% - 30px - 10px)',
         marginTop: '1px',
     },
+    [theme.breakpoints.down('middle')]: {
+        '.checkmark': {
+            width: '26px',
+            height: '26px',
+        },
+        'svg': {
+            fontSize: '1.3em',
+        },
+    },
 }));
 
 //

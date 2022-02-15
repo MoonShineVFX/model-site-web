@@ -2,12 +2,14 @@ import { styled } from '@mui/system';
 import Links, { ButtonLink } from '../Links';
 
 // 外層 form
-const SignLayout = styled('section')({
-    marginTop: '80px',
+const SignLayout = styled('section')(({ theme }) => ({
     '.model-button': {
         marginBottom: '30px',
     },
-});
+    [theme.breakpoints.up('sm')]: {
+        marginTop: '60px',
+    },
+}));
 
 // 導頁按鈕
 const BtnDirectLayout = styled(ButtonLink)(({ theme }) => ({
@@ -15,6 +17,10 @@ const BtnDirectLayout = styled(ButtonLink)(({ theme }) => ({
     borderTop: `1px dashed ${theme.palette.border.dark}`,
     marginTop: '50px',
     paddingTop: '50px',
+    [theme.breakpoints.down('middle')]: {
+        marginTop: '40px',
+        paddingTop: '40px',
+    },
 }));
 
 // 註冊頁

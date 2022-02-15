@@ -72,7 +72,10 @@ const ItemWrapLayout = styled(Links)(({ theme }) => ({
 const Cart = () => {
 
     // Context
-    const { logged, cart } = useContext(GlobalContext);
+    const { logged, cart, globalDispatch } = useContext(GlobalContext);
+
+    // 當頁再次點擊要關閉 box
+    const handleResetBox = () => globalDispatch({ type: 'target_box', payload: '' });
 
     return (
 
@@ -113,6 +116,7 @@ const Cart = () => {
                 <Links
                     url={`/${logged ? 'member/cart' : 'signin'}`}
                     title={text_go_to_checkout}
+                    onClick={handleResetBox}
                 >
                     {text_go_to_checkout}
                 </Links>

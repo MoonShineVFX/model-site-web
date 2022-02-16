@@ -176,11 +176,12 @@ const util = {
     /**
      * @author Betty
      * @param {string} url
+     * @param {boolean} isRefresh 是否重刷頁面
      */
-    redirectTo: (url = '/') => {
+    redirectTo: (url = '/', isRefresh = true) => {
 
         router.push(url);
-        router.reload();
+        if (isRefresh) router.reload();
 
     },
 

@@ -7,11 +7,13 @@ import deftag from '../../utils/util.deftag';
 import Service from '../../utils/util.service';
 
 const {
-    common: { btn_update_submit },
     memberSign: {
         text_nickname,
         text_account,
-        text_reset_password,
+    },
+    member: {
+        btn_save,
+        text_change_password,
     },
 } = deftag;
 
@@ -54,13 +56,13 @@ const MyAccount = ({ data }) => {
                     <div className="form-row Model-form-button">
                         <Buttons
                             type="submit"
-                            text={btn_update_submit}
+                            text={btn_save}
                         />
 
                         <BtnDirectLayout
                             type="third"
-                            url="/reset_password"
-                            text={text_reset_password}
+                            url="/member/change_password"
+                            text={text_change_password}
                         />
                     </div>
                 </form>

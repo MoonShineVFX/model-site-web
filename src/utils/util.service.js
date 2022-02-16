@@ -23,9 +23,10 @@ const Service = {
     // 訂單記錄
     orderRecord: (reqData) => util.serviceProxy('/orders', reqData),
 
-    // 我的資料
+    // 帳戶資訊
     myAccount: (reqData) => util.serviceProxy('/my_account', reqData),
     updateMyAccount: (reqData) => util.serviceProxy('/account_update', reqData),
+    changePassword: (reqData) => util.serviceProxy('/change_password', reqData),
 
     // 取得下載連結
     donwloadLink: (reqData) => util.serviceProxy('/model_download_link', reqData),

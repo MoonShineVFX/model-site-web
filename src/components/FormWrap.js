@@ -6,7 +6,6 @@ import deftag from '../utils/util.deftag';
 
 //
 const FormWrapLayout = styled('div')(({ theme }) => ({
-    maxWidth: '560px',
     backgroundColor: theme.palette.card.main,
     borderRadius: theme.borderRadius,
     margin: 'auto',
@@ -23,6 +22,7 @@ const FormWrapLayout = styled('div')(({ theme }) => ({
         marginBottom: '30px',
     },
     [theme.breakpoints.up('sm')]: {
+        maxWidth: '560px',
         fontSize: '1.2em',
     },
     [theme.breakpoints.down('sm')]: {

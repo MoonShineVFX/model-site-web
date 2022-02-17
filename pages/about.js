@@ -39,7 +39,26 @@ const BannerLayout = styled('section')(({ theme }) => ({
     '.title': {
         fontSize: '1.7em',
         marginTop: '0',
-    }
+    },
+    [theme.breakpoints.down('mobile')]: {
+        height: '253px',
+        fontSize: '1em',
+        marginBottom: '20px',
+        '.description': {
+            padding: '0 30px',
+        },
+        '.title': {
+            fontSize: '1.3em',
+            marginTop: '0',
+            marginBottom: '0',
+            '& + p': {
+                margin: '10px 0',
+            },
+        },
+    },
+    [theme.breakpoints.down('middle')]: {
+        height: '158px',
+    },
 }));
 
 //
@@ -54,6 +73,13 @@ const SupportLayout = styled(Grid)(({ theme }) => ({
         fontSize: '2.3em',
         fontFamily: 'Robot',
         margin: '0 0 16px',
+    },
+    [theme.breakpoints.down('sm')]: {
+        fontSize: '0.8em',
+        padding: '30px',
+    },
+    [theme.breakpoints.down('middle')]: {
+        padding: '20px',
     },
 }));
 
@@ -107,7 +133,11 @@ const About = ({ pageData }) => {
                 </span>
             </BannerLayout>
 
-            <SupportLayout container component="section">
+            <SupportLayout
+                container
+                component="section"
+                columnSpacing={2}
+            >
                 {
                     Object.keys(support).map((key) => (
 

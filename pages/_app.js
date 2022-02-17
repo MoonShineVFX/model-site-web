@@ -87,10 +87,12 @@ const styles = {
             },
         },
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('mobile')]: {
         '.Model-container': {
             padding: '0 30px',
         },
+    },
+    [theme.breakpoints.down('sm')]: {
         '.Model-form-button': {
             '.model-button': {
                 height: '56px',

@@ -56,8 +56,7 @@ const Tutorial = ({ pageData }) => {
                         <Grid
                             key={id}
                             item
-                            xs={12}
-                            md={3}
+                            lg={3}
                         >
                             <Item
                                 type="product"

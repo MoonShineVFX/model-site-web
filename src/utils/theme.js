@@ -51,12 +51,12 @@ export default createTheme({
     breakpoints: {
         values: {
             xs: 0,
+            middle: 480,
             sm: 600,
+            mobile: 768,
             md: 900,
             lg: 1200,
             xl: 1536,
-            mobile: 768,
-            middle: 480,
         },
     },
     components: {

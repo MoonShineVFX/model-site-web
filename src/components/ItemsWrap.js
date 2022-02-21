@@ -8,18 +8,27 @@ const {
 } = deftag;
 
 //
-const ItemsTitle = styled('div')(() => ({
+const ItemsTitle = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     '> *': {
-        flex: 1,
+        flex: '2',
     },
-    'h2': {
+    '.title': {
         fontSize: '1.4em',
         fontWeight: 'normal',
         '& + div': {
             textAlign: 'right',
-            flex: '0 0 20%',
+            flex: '1',
+        },
+    },
+    [theme.breakpoints.down('mobile')]: {
+        '.title': {
+            fontSize: '1.2em',
+            opacity: '0.79',
+            '& + div': {
+                fontSize: '0.9em',
+            },
         },
     },
 }));
@@ -35,17 +44,15 @@ const ItemsWrap = ({
 
     <section {...rest}>
         <ItemsTitle>
-            <h2>{title}</h2>
-            <div>
-                {
-                    showMore &&
-                        <ButtonLink
-                            url={url}
-                            text={btn_show_more}
-                            type="third"
-                        />
-                }
-            </div>
+            <h2 className="title">{title}</h2>
+            {
+                showMore &&
+                    <ButtonLink
+                        url={url}
+                        text={btn_show_more}
+                        type="third"
+                    />
+            }
         </ItemsTitle>
 
         {children}

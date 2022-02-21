@@ -1,4 +1,4 @@
-import { GlobalStyles } from '@mui/material';
+import { GlobalStyles, Grid } from '@mui/material';
 import { styled } from '@mui/system';
 import SlideShow from '../Slideshow';
 
@@ -12,7 +12,7 @@ const styles = {
 const homeStyles = <GlobalStyles styles={styles} />;
 
 //
-const SlideShowWrapLayout = styled(SlideShow)({
+const SlideShowWrapLayout = styled(SlideShow)(({ theme }) => ({
     '.slideshow-control-arrows': {
         position: 'absolute',
         bottom: '24px',
@@ -31,7 +31,10 @@ const SlideShowWrapLayout = styled(SlideShow)({
             fontSize: '1em',
         },
     },
-});
+    [theme.breakpoints.down('mobile')]: {
+        display: 'none',
+    },
+}));
 
 //
 const SlideShowItemLayout = styled('div')(({ theme }) => ({
@@ -58,6 +61,13 @@ const SlideshowInfoLayout = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.card.main,
     padding: '30px 36px',
     position: 'relative',
+}));
+
+//
+const ItemNewArrivalLayout = styled(Grid)(({ theme }) => ({
+    [theme.breakpoints.down('mobile')]: {
+        overflowX: 'auto',
+    },
 }));
 
 //
@@ -98,5 +108,6 @@ export {
     SlideShowWrapLayout,
     SlideShowItemLayout,
     SlideshowInfoLayout,
+    ItemNewArrivalLayout,
     ItemTutorialLayout,
 };

@@ -5,6 +5,7 @@ import {
     SlideShowWrapLayout,
     SlideShowItemLayout,
     SlideshowInfoLayout,
+    ItemNewArrivalLayout,
     ItemTutorialLayout,
 } from '../src/components/home/homeLayout';
 
@@ -87,7 +88,14 @@ const Home = ({ pageData }) => {
             }
 
             <ItemsWrap title={section_title_new_arrival} url="/product/list?page=1&type=all">
-                <Grid container spacing="30px">
+                <ItemNewArrivalLayout
+                    container
+                    columnSpacing={{
+                        xs: '20px',
+                        mobile: '30px',
+                    }}
+                    wrap="nowrap"
+                >
                     {
                         pageData.newArrivals.map(({ id, title, price, imgUrl }) => (
 
@@ -96,6 +104,7 @@ const Home = ({ pageData }) => {
                                 item
                                 xs={12}
                                 md={3}
+                                className="items"
                             >
                                 <Item
                                     width="277"
@@ -108,7 +117,7 @@ const Home = ({ pageData }) => {
 
                         ))
                     }
-                </Grid>
+                </ItemNewArrivalLayout>
             </ItemsWrap>
 
             <ItemsWrap title={section_title_tutorial} url="/tutorial">

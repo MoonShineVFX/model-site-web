@@ -18,7 +18,7 @@ const ItemLayout = styled(Links)(({ theme }) => ({
     },
     '.title': {
         fontWeight: 'normal',
-        margin: 0,
+        margin: '0',
     },
     '&.style-section': {
         borderRadius: '16px',
@@ -33,8 +33,8 @@ const ItemLayout = styled(Links)(({ theme }) => ({
             paddingLeft: '24px',
             paddingRight: '24px',
             position: 'absolute',
-            bottom: 0,
-            opacity: .85,
+            bottom: '0',
+            opacity: '0.85',
         },
     },
     '&.style-product': {
@@ -47,6 +47,34 @@ const ItemLayout = styled(Links)(({ theme }) => ({
     },
     '.file-size': {
         opacity: '0.6',
+    },
+    [theme.breakpoints.down('md')]: {
+        '&.style-section': {
+            '.item-thumb': {
+                width: '100%',
+                height: '260px',
+            },
+        },
+    },
+    [theme.breakpoints.down('mobile')]: {
+        fontSize: '0.8em',
+        '&.style-section': {
+            width: '200px',
+            '.item-thumb': {
+                height: '200px',
+            },
+            '.item-content': {
+                padding: '8px 12px',
+            },
+        },
+        '.price': {
+            fontSize: '1.1em',
+        },
+    },
+    [theme.breakpoints.down('middle')]: {
+        '&.style-section': {
+            width: '155px',
+        },
     },
 }));
 

@@ -12,18 +12,57 @@ import deftag from '../src/utils/util.deftag';
 const { tutorial: { page_title } } = deftag;
 
 //
-const TitleLayout = styled('h1')({
+const TitleLayout = styled('h1')(({ theme }) => ({
     fontSize: '2.15em',
-    textAlign: 'center',
     marginBottom: '120px',
-});
+    [theme.breakpoints.up('middle')]: {
+        textAlign: 'center',
+    },
+    [theme.breakpoints.down('middle')]: {
+        fontSize: '1.4em',
+        marginBottom: '30px',
+    },
+}));
 
 //
-const ItemWrapLayout = styled(Grid)({
-    '.item.style-product .item-thumb': {
-        height: '161px',
+const ItemWrapLayout = styled(Grid)(({ theme }) => ({
+    '.item.style-product': {
+        width: '100%',
+        '.item-thumb': {
+            height: '161px',
+        },
     },
-});
+    '.title': {
+        display: '-webkit-box',
+        WebkitLineClamp: theme.lineClamp(2),
+        WebkitBoxOrient: 'vertical',
+        overflow: 'hidden',
+    },
+    [theme.breakpoints.down('middle')]: {
+        '.container': {
+            width: '100%',
+        },
+        '.item.style-product': {
+            backgroundColor: theme.palette.card.main,
+            borderRadius: '10px',
+            display: 'flex',
+            marginBottom: '0',
+            '&.style-product .item-thumb': {
+                maxWidth: '120px',
+                height: '10vh',
+                borderTopRightRadius: '0',
+                borderBottomRightRadius: '0',
+            },
+            '.item-content': {
+                width: 'calc(100% - 120px)',
+                padding: '10px',
+            },
+        },
+        '.title': {
+            fontSize: '1em',
+        },
+    },
+}));
 
 //
 const Tutorial = ({ pageData }) => {
@@ -47,7 +86,7 @@ const Tutorial = ({ pageData }) => {
             <ItemWrapLayout
                 container
                 rowSpacing="20px"
-                columnSpacing="36px"
+                columnSpacing={{ middle: '36px' }}
                 component="section"
             >
                 {
@@ -56,9 +95,11 @@ const Tutorial = ({ pageData }) => {
                         <Grid
                             key={id}
                             item
+                            xs={12}
                             middle={6}
-                            mobile={4}
+                            sm={4}
                             md={3}
+                            className="container"
                         >
                             <Item
                                 type="product"

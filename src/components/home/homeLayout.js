@@ -87,19 +87,54 @@ const ItemTutorialLayout = styled('div')(({ theme }) => ({
     },
     '.item-thumb': {
         height: '206px',
+        flex: '1',
     },
     '.item-content': {
         lineHeight: '1.8',
         padding: '30px 40px',
-        flex: 1,
+        flex: '2',
     },
     '.title': {
         fontSize: '1.3em',
-        marginTop: 0,
+        marginTop: '0',
         marginBottom: '24px',
     },
     'p': {
         fontSize: '1.15em',
+    },
+    [theme.breakpoints.down('mobile')]: {
+        '.itemWrap': {
+            marginBottom: '20px',
+        },
+        '.item-thumb': {
+            height: '160px',
+            flex: '1.5',
+        },
+        '.item-content': {
+            padding: '20px',
+        },
+        '.title': {
+            fontSize: '1.1em',
+        },
+    },
+    [theme.breakpoints.down('sm')]: {
+        '.item-thumb': {
+            height: '125px',
+        },
+        '.title': {
+            fontSize: '1em',
+        },
+    },
+    [theme.breakpoints.down('middle')]: {
+        '.itemWrap': {
+            marginBottom: '16px',
+        },
+        '.item-content': {
+            padding: '10px',
+        },
+        '.title': {
+            fontSize: '0.9em',
+        },
     },
 }));
 

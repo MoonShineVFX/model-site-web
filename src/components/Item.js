@@ -59,7 +59,7 @@ const ItemLayout = styled(Links)(({ theme }) => ({
     [theme.breakpoints.down('mobile')]: {
         fontSize: '0.8em',
         '&.style-section': {
-            width: '200px',
+            width: '180px',
             '.item-thumb': {
                 height: '200px',
             },

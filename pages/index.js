@@ -91,7 +91,7 @@ const Home = ({ pageData }) => {
                 <ItemNewArrivalLayout
                     container
                     columnSpacing={{
-                        xs: '20px',
+                        xs: '12px',
                         mobile: '30px',
                     }}
                     wrap="nowrap"

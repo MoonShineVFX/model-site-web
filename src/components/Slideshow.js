@@ -100,7 +100,7 @@ const SlideShow = ({ data, showDot, children, ...rest }) => {
     return (
 
         <SlideShowLayout {...rest}>
-            <SlideShowContainer>{children}</SlideShowContainer>
+            <SlideShowContainer className="container">{children}</SlideShowContainer>
 
             {
                 showDot &&

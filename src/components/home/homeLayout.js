@@ -12,7 +12,85 @@ const styles = {
 const homeStyles = <GlobalStyles styles={styles} />;
 
 //
-const SlideShowWrapLayout = styled(SlideShow)(({ theme }) => ({
+const BannerWrapLayout = styled('div')(({ theme }) => ({
+    [theme.breakpoints.down('md')]: {
+        marginBottom: '40px',
+        '.slideshow-control-arrows': {
+            display: 'none',
+        },
+        '.container': {
+            display: 'flex',
+            overflowX: 'auto',
+        },
+        '.item': {
+            display: 'block !important',
+            ':not(:last-child)': {
+                marginRight: '30px',
+            },
+        },
+        '.inner': {
+            width: 'calc(100vw - 90px)',
+            position: 'relative',
+            flexWrap: 'wrap',
+            'a': {
+                maxWidth: 'none',
+            },
+            '> div': {
+                width: 'calc(100% - 20px)',
+                height: '10vh',
+                backgroundColor: theme.palette.primary.main,
+                borderRadius: '50px',
+                padding: '10px 16px',
+                position: 'absolute',
+                left: '50%',
+                bottom: '10px',
+                transform: 'translateX(-50%)',
+                opacity: '0.82',
+                display: '-webkit-box',
+                WebkitLineClamp: theme.lineClamp(),
+                WebkitBoxOrient: 'vertical',
+                overflow: 'hidden',
+            },
+        },
+    },
+    [theme.breakpoints.down('mobile')]: {
+        '.item': {
+            ':not(:last-child)': {
+                marginRight: '20px',
+            },
+        },
+        '.inner': {
+            width: 'calc(100vw - 120px)',
+            'a': {
+                maxHeight: '300px',
+            },
+            '> div': {
+                height: '8vh',
+            },
+        },
+    },
+    [theme.breakpoints.down('sm')]: {
+        '.inner': {
+            width: 'calc(100vw - 150px)',
+            'a': {
+                maxHeight: '250px',
+            },
+        },
+    },
+    [theme.breakpoints.down('middle')]: {
+        '.inner': {
+            'a': {
+                maxHeight: '200px',
+            },
+            '> div': {
+                height: '6vh',
+            },
+        },
+    },
+}));
+
+//
+const SlideShowWrapLayout = styled(SlideShow)({
     '.slideshow-control-arrows': {
         position: 'absolute',
         bottom: '24px',
@@ -31,10 +109,7 @@ const SlideShowWrapLayout = styled(SlideShow)(({ theme }) => ({
             fontSize: '1em',
         },
     },
-    [theme.breakpoints.down('mobile')]: {
-        display: 'none',
-    },
-}));
+});
 
 //
 const SlideShowItemLayout = styled('div')(({ theme }) => ({
@@ -45,8 +120,8 @@ const SlideShowItemLayout = styled('div')(({ theme }) => ({
         display: 'flex',
         overflow: 'hidden',
     },
-    '.item': {
-        width: '840px',
+    'a': {
+        maxWidth: '70vw',
         height: '100%',
     },
     '.price': {
@@ -57,10 +132,10 @@ const SlideShowItemLayout = styled('div')(({ theme }) => ({
 
 //
 const SlideshowInfoLayout = styled('div')(({ theme }) => ({
-    flex: '0 0 calc(100% - 840px)',
     backgroundColor: theme.palette.card.main,
     padding: '30px 36px',
     position: 'relative',
+    flex: '1',
 }));
 
 //
@@ -140,6 +215,7 @@ const ItemTutorialLayout = styled('div')(({ theme }) => ({
 
 export {
     homeStyles,
+    BannerWrapLayout,
     SlideShowWrapLayout,
     SlideShowItemLayout,
     SlideshowInfoLayout,

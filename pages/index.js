@@ -2,9 +2,6 @@ import React, { Fragment, useContext, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import {
     homeStyles,
-    SlideShowWrapLayout,
-    SlideShowItemLayout,
-    SlideshowInfoLayout,
     ItemNewArrivalLayout,
     ItemTutorialLayout,
 } from '../src/components/home/homeLayout';
@@ -13,6 +10,7 @@ import HeadTag from '../src/containers/HeadTag';
 import Links from '../src/components/Links';
 import ItemsWrap from '../src/components/ItemsWrap';
 import Item from '../src/components/Item';
+import Banner from '../src/components/home/Banner';
 
 import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
@@ -29,7 +27,7 @@ const {
 const Home = ({ pageData }) => {
 
     // Context
-    const { slideshowActive, globalDispatch } = useContext(GlobalContext);
+    const { globalDispatch } = useContext(GlobalContext);
 
     useEffect(() => {
 
@@ -46,55 +44,17 @@ const Home = ({ pageData }) => {
 
             {
                 !!pageData.banners.length &&
-                    <SlideShowWrapLayout data={pageData.banners}>
-                        {
-                            pageData.banners.map(({
-                                id,
-                                title,
-                                detail,
-                                imgUrl,
-                                link,
-                            }, idx) => (
-
-                                <SlideShowItemLayout
-                                    key={id}
-                                    className={(idx === slideshowActive) ? 'active' : 'hide'}
-                                >
-                                    <div className="inner">
-                                        <Links
-                                            url={link}
-                                            className="item"
-                                            title={title}
-                                            newPage
-                                        >
-                                            <img
-                                                src={imgUrl}
-                                                alt={title}
-                                                title={title}
-                                                width="840"
-                                                height="386"
-                                            />
-                                        </Links>
-
-                                        <SlideshowInfoLayout>
-                                            <div dangerouslySetInnerHTML={{ __html: detail }} />
-                                        </SlideshowInfoLayout>
-                                    </div>
-                                </SlideShowItemLayout>
-
-                            ))
-                        }
-                    </SlideShowWrapLayout>
+                    <Banner pageData={pageData} />
             }
 
             <ItemsWrap title={section_title_new_arrival} url="/product/list?page=1&type=all">
                 <ItemNewArrivalLayout
                     container
+                    wrap="nowrap"
                     columnSpacing={{
                         xs: '12px',
                         mobile: '30px',
                     }}
-                    wrap="nowrap"
                 >
                     {
                         pageData.newArrivals.map(({ id, title, price, imgUrl }) => (

@@ -1,6 +1,15 @@
 import { styled } from '@mui/system';
-import { Grid, ListItemButton } from '@mui/material';
+import { GlobalStyles, Grid, ListItemButton } from '@mui/material';
 import ItemsWrap from '../ItemsWrap';
+
+const detailStyles = {
+    '.Model-container': {
+        padding: '0',
+    },
+};
+
+// Detail Style
+const productDetailStyles = <GlobalStyles styles={detailStyles} />;
 
 //
 const GridLayout = styled(Grid)(({ theme }) => ({
@@ -101,6 +110,9 @@ const DetailWrapLayout = styled('section')(({ theme }) => ({
     '.detail-banner': {
         height: '396px',
     },
+    [theme.breakpoints.down('mobile')]: {
+        borderRadius: '0',
+    },
 }));
 
 //
@@ -119,33 +131,71 @@ const DetailContentLayout = styled(Grid)(({ theme }) => ({
         padding: '6px 8px',
     },
     '.title': {
-        fontSize: '2.1em',
+        fontSize: '1.8em',
         fontWeight: 'normal',
-        margin: '10px 0 20px',
+        margin: '10px 0',
     },
     '.description': {
         lineHeight: '2',
     },
     '.label, .notice': {
-        opacity: '0.8',
+        opacity: '0.7',
     },
     '.notice': {
         fontSize: '0.85em',
         marginBottom: '0',
     },
     '.price': {
-        fontSize: '1.45em',
+        fontSize: '1.2em',
         color: theme.palette.primary.main,
-        textAlign: 'center',
-        marginBottom: '20px',
+        margin: '0 0 20px',
     },
     '.model-button': {
         width: '100%',
     },
     '.other-info': {
         marginTop: '40px',
+    },
+    '.other-info-item': {
+        display: 'flex',
+        '.label': {
+            maxWidth: '120px',
+            flex: '1',
+        },
         'p': {
             marginBottom: '20px',
+        },
+    },
+    [theme.breakpoints.up('mobile')]: {
+        '.grid-right': {
+            paddingLeft: '80px',
+        },
+        '.title': {
+            fontSize: '2.1em',
+        },
+        '.price': {
+            fontSize: '1.45em',
+            textAlign: 'center',
+        },
+        '.other-info-item': {
+            display: 'block',
+        },
+    },
+    [theme.breakpoints.down('mobile')]: {
+        padding: '30px',
+    },
+    [theme.breakpoints.down('middle')]: {
+        fontSize: '1em',
+        padding: '20px',
+        '.title': {
+            fontSize: '1.4em',
+            marginBottom: '10px',
+        },
+        '.price': {
+            fontSize: '1.1em',
+        },
+        '.other-info': {
+            marginTop: '20px',
         },
     },
 }));
@@ -167,9 +217,12 @@ const FormatAndRenderLayout = styled('ul')(({ theme }) => ({
 }));
 
 //
-const DemoImageWrapLayout = styled(ItemsWrap)({
-    margin: '80px 0 100px',
-});
+const DemoImageWrapLayout = styled(ItemsWrap)(({ theme }) => ({
+    margin: '40px 0',
+    [theme.breakpoints.up('mobile')]: {
+        margin: '80px 0 100px',
+    },
+}));
 
 //
 const DemoImageLayout = styled('div')(({ theme }) => ({
@@ -180,6 +233,7 @@ const DemoImageLayout = styled('div')(({ theme }) => ({
 }));
 
 export {
+    productDetailStyles,
     GridLayout,
     ListTitleLayout,
     ListItemLayout,

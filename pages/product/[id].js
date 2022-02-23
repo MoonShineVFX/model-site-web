@@ -1,7 +1,8 @@
 import { Fragment, useContext, useEffect } from 'react';
-import { Grid } from '@mui/material';
+import { Grid, useMediaQuery } from '@mui/material';
 
 import {
+    productDetailStyles,
     DetailWrapLayout,
     DetailContentLayout,
     FormatAndRenderLayout,
@@ -42,8 +43,33 @@ const {
     },
 } = deftag;
 
+// 價格
+const renderPrice = (price) => <h2 className="price">{priceWithCommas(price)}</h2>;
+
+// 其他資訊
+const renderOtherInfo = (pageData) => (
+
+    <div className="other-info">
+        <div className="other-info-item">
+            <div className="label">{text_model_sum}</div>
+            <p>{pageData.modelSum}</p>
+        </div>
+        <div className="other-info-item">
+            <div className="label">{text_file_size}</div>
+            <p>{pageData.fileSize}</p>
+        </div>
+        <div className="other-info-item">
+            <div className="label">{text_per_image_size}</div>
+            <p>{pageData.perImgSize}</p>
+        </div>
+    </div>
+
+);
+
 //
 const ProductDetail = ({ pageData }) => {
+
+    const matches = useMediaQuery((theme)=> theme.breakpoints.down('mobile'));
 
     // Router
     const query = useQuery();
@@ -109,6 +135,7 @@ const ProductDetail = ({ pageData }) => {
     return (
 
         <Fragment>
+            {productDetailStyles}
             <HeadTag title={pageData.title} />
 
             <DetailWrapLayout>
@@ -123,7 +150,11 @@ const ProductDetail = ({ pageData }) => {
                 </div>
 
                 <DetailContentLayout container>
-                    <Grid item xs>
+                    <Grid
+                        item
+                        xs={12}
+                        mobile={8}
+                    >
                         <div className="tags">
                             {pageData.tags.map((id) => (
 
@@ -137,6 +168,12 @@ const ProductDetail = ({ pageData }) => {
                             ))}
                         </div>
                         <h1 className="title">{pageData.title}</h1>
+
+                        {
+                            // mWeb
+                            matches && renderPrice(pageData.price)
+                        }
+
                         <p className="description">{pageData.description}</p>
                         <div>
                             <div className="label">{detail_format_and_render}</div>
@@ -164,31 +201,29 @@ const ProductDetail = ({ pageData }) => {
 
                     <Grid
                         item
-                        xs
-                        sx={{
-                            maxWidth: '260px',
-                            marginLeft: '80px',
-                        }}
+                        xs={12}
+                        mobile={4}
+                        className="grid-right"
                     >
-                        <h2 className="price">{priceWithCommas(pageData.price)}</h2>
+                        {
+                            // mWeb
+                            matches && renderOtherInfo(pageData)
+                        }
+
+                        {
+                            // Web
+                            !matches && renderPrice(pageData.price)
+                        }
+
                         <Buttons
                             text={button_add_to_card}
                             onClick={handleAddToCart}
                         />
-                        <div className="other-info">
-                            <div>
-                                <div className="label">{text_model_sum}</div>
-                                <p>{pageData.modelSum}</p>
-                            </div>
-                            <div>
-                                <div className="label">{text_file_size}</div>
-                                <p>{pageData.fileSize}</p>
-                            </div>
-                            <div>
-                                <div className="label">{text_per_image_size}</div>
-                                <p>{pageData.perImgSize}</p>
-                            </div>
-                        </div>
+
+                        {
+                            // Web
+                            !matches && renderOtherInfo(pageData)
+                        }
                     </Grid>
                 </DetailContentLayout>
             </DetailWrapLayout>

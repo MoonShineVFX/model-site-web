@@ -8,11 +8,14 @@ const TabWrapLayout = styled('section')(({ theme }) => ({
         display: 'none',
     },
     '.tab-menu': {
+        maxWidth: '40vw',
+        margin: 'auto',
         'button': {
             fontSize: '1em',
             color: theme.palette.textColor,
+            margin: '0 20px',
             padding: '16px 40px',
-            margin: '0 40px',
+            flex: '1',
             opacity: '0.6',
             '&.Mui-selected': {
                 opacity: '1',

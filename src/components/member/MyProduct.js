@@ -127,7 +127,6 @@ const Item = ({
                     url={selected[id]?.rendererId ? download : ''}
                     text={text_download}
                     className={`btn-download ${selected[id]?.rendererId ? '' : 'disabled'}`}
-                    newPage
                 />
             </div>
         </ItemLayout>

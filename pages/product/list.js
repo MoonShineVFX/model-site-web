@@ -111,18 +111,19 @@ const ProductList = ({ pageData }) => {
 
             <GridLayout
                 container
-                columnSpacing="40px"
+                columnSpacing={{ mobile: '40px' }}
                 component="section"
                 className="page-product"
             >
                 <Grid
                     item
-                    xs={2}
+                    xs={12}
+                    mobile={3}
+                    md={2}
                     component="aside"
                     className="tagsList"
                 >
                     <ListTitleLayout>{select_label}</ListTitleLayout>
-
                     <List>
                         {
                             tagsOpt.map(({ id, name }) => (
@@ -150,7 +151,9 @@ const ProductList = ({ pageData }) => {
 
                 <Grid
                     item
-                    xs
+                    xs={12}
+                    mobile={9}
+                    md={10}
                     component="figure"
                     className="productList"
                 >

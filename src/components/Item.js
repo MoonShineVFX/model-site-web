@@ -105,7 +105,7 @@ const Item = ({
             />
         </div>
         <div className="item-content">
-            <h3 className="title">{title}</h3>
+            <h3 className="title web-line-clamp">{title}</h3>
             {
                 price &&
                     <span className="price">{priceWithCommas(price)}</span>

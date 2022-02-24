@@ -8,9 +8,9 @@ import {
     FormatAndRenderLayout,
     DemoImageWrapLayout,
     DemoImageLayout,
+    RelativeProductsLayout,
 } from '../../src/components/product/productLayout';
 import HeadTag from '../../src/containers/HeadTag';
-import ItemsWrap from '../../src/components/ItemsWrap';
 import Item from '../../src/components/Item';
 import Buttons from '../../src/components/Buttons';
 import ImageEnlarge from '../../src/components/ImageEnlarge';
@@ -94,7 +94,7 @@ const ProductDetail = ({ pageData }) => {
         globalDispatch({ type: 'sidenav', payload: false });
         globalDispatch({ type: 'target_box', payload: '' });
 
-    }, []);
+    }, [visible, currEvent, globalDispatch]);
 
     // 點圖放大
     const handleClickImgEnlarge = (url, id) => {
@@ -234,8 +234,16 @@ const ProductDetail = ({ pageData }) => {
             >
                 <Grid
                     container
-                    rowSpacing="60px"
-                    columnSpacing="80px"
+                    rowSpacing={{
+                        xs: '20px',
+                        mobile: '40px',
+                        md: '60px',
+                    }}
+                    columnSpacing={{
+                        xs: '20px',
+                        mobile: '40px',
+                        md: '80px',
+                    }}
                 >
                     {
                         pageData.previews.map(({ id, url }) => (
@@ -243,8 +251,8 @@ const ProductDetail = ({ pageData }) => {
                             <Grid
                                 key={id}
                                 item
-                                xs={12}
-                                md={6}
+                                xs={6}
+                                mobile={6}
                             >
                                 <DemoImageLayout
                                     className="Model-effect-brightness"
@@ -265,11 +273,16 @@ const ProductDetail = ({ pageData }) => {
                 </Grid>
             </DemoImageWrapLayout>
 
-            <ItemsWrap
+            <RelativeProductsLayout
                 title={detail_section_title2}
                 showMore={false}
             >
-                <Grid container spacing="30px">
+                <Grid
+                    container
+                    wrap="nowrap"
+                    className="items"
+                    spacing={{ xs: '12px', mobile: '30px' }}
+                >
                     {
                         pageData.relativeProducts.map(({ id, title, price, imgUrl }, idx) => (
 
@@ -278,6 +291,7 @@ const ProductDetail = ({ pageData }) => {
                                 item
                                 xs={12}
                                 md={3}
+                                className="itemWrap"
                             >
                                 <Item
                                     url={`/product/${id}`}
@@ -288,7 +302,7 @@ const ProductDetail = ({ pageData }) => {
                         ))
                     }
                 </Grid>
-            </ItemsWrap>
+            </RelativeProductsLayout>
 
             {
                 (visible && currEvent === 'viewImg') &&

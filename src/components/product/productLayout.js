@@ -18,13 +18,13 @@ const GridLayout = styled(Grid)(({ theme }) => ({
         '.MuiButtonBase-root': {
             fontSize: '1.15em',
             color: theme.palette.textColor,
-            opacity: 0.6,
+            opacity: '0.6',
             '&:hover': {
-                opacity: 1,
+                opacity: '1',
             },
         },
         '.Mui-selected': {
-            opacity: 1,
+            opacity: '1',
         },
         '.MuiTabs-indicator': {
             backgroundColor: 'transparent',
@@ -37,6 +37,11 @@ const GridLayout = styled(Grid)(({ theme }) => ({
         marginBottom: '70px',
         '.MuiTabs-flexContainer': {
             justifyContent: 'center',
+        },
+    },
+    [theme.breakpoints.down('mobile')]: {
+        '.tagsList': {
+            display: 'none',
         },
     },
 }));
@@ -53,31 +58,31 @@ const ListTitleLayout = styled('h4')(({ theme }) => ({
         backgroundColor: theme.palette.textColor,
         marginTop: '12px',
         marginBottom: '12px',
-        opacity: 0.16,
+        opacity: '0.16',
     },
 }));
 
 //
 const ListItemLayout = styled(ListItemButton)(({ theme }) => ({
     marginBottom: '10px',
-    opacity: .8,
+    opacity: '0.8',
     transition: 'all .5s ease',
     '&:hover': {
-        opacity: 1,
+        opacity: '1',
     },
     '&.Mui-selected': {
         color: theme.palette.primary.contrastText,
         backgroundColor: theme.palette.primary.main,
         borderRadius: '3px',
-        opacity: 1,
+        opacity: '1',
     },
     '&:hover&.Mui-selected': {
         color: theme.palette.primary.contrastText,
         backgroundColor: theme.palette.primary.main,
-        opacity: 1,
+        opacity: '1',
     },
     '.MuiListItemText-root': {
-        margin: 0,
+        margin: '0',
     },
     '.checked': {
         minWidth: 'auto',
@@ -93,11 +98,13 @@ const ItemWrapLayout = styled('div')(({ theme }) => ({
     '.item': {
         flex: '0 0 calc(100% / 3)',
         padding: '0 8px',
-        [theme.breakpoints.down('lg')]: {
-            flex: '0 0 calc(100% / 2)',
-        },
         '&:nth-of-type(3n)': {
-            marginRight: 0,
+            marginRight: '0',
+        },
+    },
+    [theme.breakpoints.down('sm')]: {
+        '.item': {
+            flex: '0 0 calc(100% / 2)',
         },
     },
 }));
@@ -112,6 +119,19 @@ const DetailWrapLayout = styled('section')(({ theme }) => ({
     },
     [theme.breakpoints.down('mobile')]: {
         borderRadius: '0',
+        '.detail-banner': {
+            height: '35vh',
+        },
+    },
+    [theme.breakpoints.down('sm')]: {
+        '.detail-banner': {
+            height: '30vh',
+        },
+    },
+    [theme.breakpoints.down('middle')]: {
+        '.detail-banner': {
+            height: '25vh',
+        },
     },
 }));
 
@@ -222,6 +242,13 @@ const DemoImageWrapLayout = styled(ItemsWrap)(({ theme }) => ({
     [theme.breakpoints.up('mobile')]: {
         margin: '80px 0 100px',
     },
+    [theme.breakpoints.down('mobile')]: {
+        padding: '0 30px',
+    },
+    [theme.breakpoints.down('middle')]: {
+        paddingLeft: '20px',
+        paddingRight: '20px',
+    },
 }));
 
 //
@@ -230,6 +257,34 @@ const DemoImageLayout = styled('div')(({ theme }) => ({
     borderRadius: theme.borderRadius,
     overflow: 'hidden',
     cursor: 'pointer',
+    [theme.breakpoints.down('mobile')]: {
+        height: '200px',
+    },
+    [theme.breakpoints.down('middle')]: {
+        height: '140px',
+    },
+}));
+
+// 你可能會喜歡
+const RelativeProductsLayout = styled(ItemsWrap)(({ theme }) => ({
+    '.itemWrap': {
+        minWidth: '180px',
+    },
+    '.title': {
+        WebkitLineClamp: theme.lineClamp(1),
+    },
+    [theme.breakpoints.down('mobile')]: {
+        padding: '0 30px',
+        '.items': {
+            overflowX: 'auto',
+        },
+        '.itemWrap': {
+            maxWidth: '180px',
+            '.item': {
+                width: '100%',
+            },
+        },
+    },
 }));
 
 export {
@@ -243,4 +298,5 @@ export {
     FormatAndRenderLayout,
     DemoImageWrapLayout,
     DemoImageLayout,
+    RelativeProductsLayout,
 };

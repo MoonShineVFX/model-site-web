@@ -9,7 +9,13 @@ const PaginationLayout = styled(Pagination)(({ theme }) => ({
     },
     '.MuiPaginationItem-root': {
         color: theme.palette.textColor,
-        opacity: 0.6,
+        opacity: '0.6',
+    },
+    [theme.breakpoints.down('mobile')]: {
+        marginTop: '40px',
+    },
+    [theme.breakpoints.down('sm')]: {
+        marginTop: '20px',
     },
 }));
 

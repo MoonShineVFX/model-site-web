@@ -63,7 +63,7 @@ const Home = ({ pageData }) => {
                                 key={id}
                                 item
                                 xs={12}
-                                md={3}
+                                mobile={3}
                                 className="items"
                             >
                                 <Item

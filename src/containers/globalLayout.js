@@ -45,7 +45,7 @@ const NavMenuLayout = styled('nav')(({ theme }) => ({
         opacity: .8,
         transition: 'all .5s ease',
         '&:hover': {
-            opacity: 1,
+            opacity: '1',
         },
     },
     [theme.breakpoints.down('mobile')]: {

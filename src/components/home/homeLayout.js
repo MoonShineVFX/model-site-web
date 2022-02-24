@@ -140,8 +140,20 @@ const SlideshowInfoLayout = styled('div')(({ theme }) => ({
 
 //
 const ItemNewArrivalLayout = styled(Grid)(({ theme }) => ({
+    '.items': {
+        minWidth: '180px',
+    },
+    '.title': {
+        WebkitLineClamp: theme.lineClamp(1),
+    },
     [theme.breakpoints.down('mobile')]: {
         overflowX: 'auto',
+        '.items': {
+            maxWidth: '180px',
+            'a': {
+                width: '100%',
+            },
+        },
     },
 }));
 

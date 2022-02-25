@@ -1,5 +1,5 @@
+import { Grid } from '@mui/material';
 import { styled } from '@mui/system';
-import { ItemWrapLayout } from '../product/productLayout';
 import Box from '../Box';
 
 // Tab
@@ -8,13 +8,13 @@ const TabWrapLayout = styled('section')(({ theme }) => ({
         display: 'none',
     },
     '.tab-menu': {
-        maxWidth: '40vw',
+        maxWidth: '60%',
         margin: 'auto',
         'button': {
             fontSize: '1em',
             color: theme.palette.textColor,
             margin: '0 20px',
-            padding: '16px 40px',
+            padding: '0',
             flex: '1',
             opacity: '0.6',
             '&.Mui-selected': {
@@ -30,34 +30,55 @@ const TabWrapLayout = styled('section')(({ theme }) => ({
         fontWeight: 'normal',
         margin: '80px 0',
     },
+    [theme.breakpoints.down('mobile')]: {
+        '.tab-menu': {
+            maxWidth: '100%',
+        },
+        '.second-title': {
+            fontSize: '1.3em',
+            margin: '60px 0 20px',
+        },
+        '.download-notice': {
+            fontSize: '0.8em',
+            margin: '20px 0',
+            opacity: '0.6',
+        },
+    },
 }));
 
 //
 const TabPanelLayout = styled('div')({
-    margin: 'auto',
+    // margin: 'auto',
     // '&:not(.panel-product)': {
     //     maxWidth: '1000px',
     // },
 });
 
 // 我的模型庫
-const MyProductItemLayout = styled(ItemWrapLayout)(({ theme }) => ({
-    margin: '0 -24px 0',
-    '.item.style-product': {
-        flex: '0 0 calc(100% / 4)',
-        marginBottom: '40px',
-        padding: '0 24px',
-        '.item-thumb': {
-            height: '153px',
-            borderRadius: '0',
-        },
+const ItemLayout = styled('div')(({ theme }) => ({
+    lineHeight: '1.4',
+    border: '1px solid',
+    cursor: 'default',
+    '.item-thumb': {
+        height: '153px',
+        borderRadius: '0',
+    },
+    '.item-content': {
+        marginBottom: '20px',
+    },
+    '.title': {
+        fontWeight: 'normal',
+        marginBottom: '8px',
+    },
+    '.file-size': {
+        opacity: '0.6',
     },
     '.downloadWrap': {
-        padding: '0 20px 0',
+        padding: '0 20px',
     },
     '.options': {
         display: 'flex',
-        margin: '0 -8px',
+        margin: '0 -8px 20px',
         '> *': {
             flex: '1',
         },
@@ -80,51 +101,10 @@ const MyProductItemLayout = styled(ItemWrapLayout)(({ theme }) => ({
         paddingBottom: '4px',
         position: 'relative',
         zIndex: '1',
-    },
-}));
-
-// 項目
-const ItemLayout = styled('div')(({ theme }) => ({
-    lineHeight: '1.4',
-    flex: '0 0 calc(100% / 4 - 48px)',
-    margin: '0 24px 80px',
-    cursor: 'default',
-    '.item-content': {
-        marginBottom: '20px',
-    },
-    '.title': {
-        fontWeight: 'normal',
-        marginBottom: '8px',
-    },
-    '.file-size': {
-        opacity: '0.6',
-    },
-    '.downloadWrap': {
-        padding: '0 20px 0',
-    },
-    '.options': {
-        display: 'flex',
-        margin: '0 -8px 20px',
-        '> *': {
-            flex: '1',
+        '&.default': {
+            marginTop: '0',
+            padding: '10px',
         },
-    },
-    'select': {
-        fontSize: '0.9em',
-        color: theme.palette.textColor,
-        backgroundColor: theme.palette.bgColor,
-        border: '0',
-        borderBottom: `1px solid ${theme.palette.border.dark}`,
-        margin: '0 8px',
-        padding: '12px 2px',
-        opacity: '0.8',
-    },
-    '.btn-download': {
-        display: 'block',
-    },
-    '.model-button.default': {
-        marginTop: '0',
-        padding: '10px',
     },
     '.disabled': {
         pointerEvents: 'none',
@@ -168,7 +148,6 @@ const BoxWrapLayout = styled(Box)(({ theme }) => ({
 export {
     TabWrapLayout,
     TabPanelLayout,
-    MyProductItemLayout,
     ItemLayout,
     BoxWrapLayout,
 };

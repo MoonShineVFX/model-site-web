@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { MyProductItemLayout, ItemLayout } from './accountLayout';
+import { useMediaQuery, Grid } from '@mui/material';
+import { ItemLayout } from './accountLayout';
 import Links, { ButtonLink } from '../Links';
 import util from '../../utils/util';
 import deftag from '../../utils/util.deftag';
@@ -26,6 +27,7 @@ const Item = ({
     },
 }) => {
 
+    const matches = useMediaQuery((theme) => theme.breakpoints.up('mobile'));
     const options = arrangeFormatAndRender(models);
 
     // State
@@ -82,53 +84,58 @@ const Item = ({
                     height="153"
                 />
             </Links>
+
             <div className="item-content">
                 <h3 className="title">{title}</h3>
                 <span className="file-size">{text_file_size}: {formatBytes(fileSize)}</span>
             </div>
-            <div className="downloadWrap">
-                <div className="options" onClick={(e) => e.preventDefault()}>
-                    <select
-                        name="formatId"
-                        onChange={(e) => handleSelected(e, id)}
-                    >
-                        <option value="">{detail_option_format}</option>
-                        {
-                            Object.keys(options).map((formatId) => (
 
-                                <option
-                                    key={formatId}
-                                    value={formatId}
-                                >
-                                    {options[formatId].name}
-                                </option>
+            {
+                // 手機版不支援下載
+                matches &&
+                    <div className="downloadWrap">
+                        <div className="options" onClick={(e) => e.preventDefault()}>
+                            <select
+                                name="formatId"
+                                onChange={(e) => handleSelected(e, id)}
+                            >
+                                <option value="">{detail_option_format}</option>
+                                {
+                                    Object.keys(options).map((formatId) => (
 
-                            ))
-                        }
-                    </select>
+                                        <option
+                                            key={formatId}
+                                            value={formatId}
+                                        >
+                                            {options[formatId].name}
+                                        </option>
 
-                    <select
-                        name="rendererId"
-                        onChange={(e) => handleSelected(e, id)}
-                        value={selected[id]?.rendererId}
-                    >
-                        <option value="">{detail_option_renderer}</option>
-                        {
-                            options[format]?.renders.map(({ rendererId, rendererName }) => (
+                                    ))
+                                }
+                            </select>
 
-                                <option key={rendererId} value={rendererId}>{rendererName}</option>
+                            <select
+                                name="rendererId"
+                                onChange={(e) => handleSelected(e, id)}
+                                value={selected[id]?.rendererId}
+                            >
+                                <option value="">{detail_option_renderer}</option>
+                                {
+                                    options[format]?.renders.map(({ rendererId, rendererName }) => (
 
-                            ))
-                        }
-                    </select>
-                </div>
+                                        <option key={rendererId} value={rendererId}>{rendererName}</option>
 
-                <ButtonLink
-                    url={selected[id]?.rendererId ? download : ''}
-                    text={text_download}
-                    className={`btn-download ${selected[id]?.rendererId ? '' : 'disabled'}`}
-                />
-            </div>
+                                    ))
+                                }
+                            </select>
+                        </div>
+                        <ButtonLink
+                            url={selected[id]?.rendererId ? download : ''}
+                            text={text_download}
+                            className={`btn-download ${selected[id]?.rendererId ? '' : 'disabled'}`}
+                        />
+                    </div>
+            }
         </ItemLayout>
 
     );
@@ -138,18 +145,35 @@ const Item = ({
 //
 const MyProduct = ({ data }) => (
 
-    <MyProductItemLayout>
+    <Grid
+        container
+        className="container"
+        rowSpacing={{
+            // xs: '12px',
+            middle: '40px',
+            mobile: '80px',
+        }}
+        columnSpacing={{
+            // xs: '12px',
+            middle: '40px',
+        }}
+    >
         {
             data.map((obj) => (
 
-                <Item
+                <Grid
                     key={obj.id}
-                    data={obj}
-                />
+                    item
+                    // xs={12}
+                    middle={4}
+                    mobile={3}
+                >
+                    <Item data={obj} />
+                </Grid>
 
             ))
         }
-    </MyProductItemLayout>
+    </Grid>
 
 );
 

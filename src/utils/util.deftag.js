@@ -76,6 +76,7 @@ const deftag = {
         text_change_password: '修改密碼',
         text_change_password_success: '密碼修改成功，將回到會員中心。',
         btn_return_to_account: '回到會員中心',
+        text_mobile_download_notice: '行動版網頁不顯示下載功能，請至 PC 版網頁下載。',
     },
     orderRecord: {
         text_status_unpaid: '等待付款',

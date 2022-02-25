@@ -5,7 +5,7 @@ import React, {
     useState,
 } from 'react';
 
-import { Tabs, Tab } from '@mui/material';
+import { Tabs, Tab, useMediaQuery } from '@mui/material';
 import { TitleLayout } from '../../src/components/member/cartLayout';
 import { TabWrapLayout, TabPanelLayout } from '../../src/components/member/accountLayout';
 import HeadTag from '../../src/containers/HeadTag';
@@ -25,6 +25,7 @@ const {
         text_my_product,
         text_order_record,
         text_account_edit,
+        text_mobile_download_notice,
     },
 } = deftag;
 
@@ -43,6 +44,8 @@ const TabPanel = ({ value, indexKey, children, ...other }) => (
 
 //
 const Account = ({ pageData }) => {
+
+    const matches = useMediaQuery((theme) => theme.breakpoints.down('mobile'));
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
@@ -120,6 +123,11 @@ const Account = ({ pageData }) => {
                 </Tabs>
 
                 <h1 className="second-title">{types[type].title}</h1>
+
+                {
+                    // 手機版下載提示
+                    (matches && (type === 'product')) && <p className="download-notice">{text_mobile_download_notice}</p>
+                }
 
                 <TabPanelLayout className={`tab-panel panel-${type}`}>
                     {

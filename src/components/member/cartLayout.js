@@ -3,10 +3,16 @@ import Links from '../Links';
 
 // 外層 form
 //
-const TitleLayout = styled('h1')({
+const TitleLayout = styled('h1')(({ theme }) => ({
     textAlign: 'center',
     marginBottom: '100px',
-});
+    [theme.breakpoints.down('mobile')]: {
+        marginBottom: '60px',
+    },
+    [theme.breakpoints.down('middle')]: {
+        marginBottom: '40px',
+    },
+}));
 
 //
 const SectionLayout = styled('section')({

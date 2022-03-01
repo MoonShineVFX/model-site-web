@@ -1,4 +1,3 @@
-import { Grid } from '@mui/material';
 import { styled } from '@mui/system';
 import Box from '../Box';
 
@@ -36,7 +35,7 @@ const TabWrapLayout = styled('section')(({ theme }) => ({
         },
         '.second-title': {
             fontSize: '1.3em',
-            margin: '60px 0 20px',
+            margin: '40px 0 20px',
         },
         '.download-notice': {
             fontSize: '0.8em',
@@ -44,24 +43,28 @@ const TabWrapLayout = styled('section')(({ theme }) => ({
             opacity: '0.6',
         },
     },
+    [theme.breakpoints.down('middle')]: {
+        '.tab-menu': {
+            fontSize: '0.9em',
+            'button': {
+                margin: '0',
+            },
+        },
+    },
 }));
-
-//
-const TabPanelLayout = styled('div')({
-    // margin: 'auto',
-    // '&:not(.panel-product)': {
-    //     maxWidth: '1000px',
-    // },
-});
 
 // 我的模型庫
 const ItemLayout = styled('div')(({ theme }) => ({
     lineHeight: '1.4',
-    border: '1px solid',
     cursor: 'default',
     '.item-thumb': {
         height: '153px',
         borderRadius: '0',
+        display: 'block',
+        'img': {
+            width: '100%',
+            height: '100%',
+        },
     },
     '.item-content': {
         marginBottom: '20px',
@@ -114,9 +117,25 @@ const ItemLayout = styled('div')(({ theme }) => ({
             backgroundColor: '#CCC',
         },
     },
+    [theme.breakpoints.down('middle')]: {
+        borderRadius: '10px',
+        overflow: 'hidden',
+        '.item-thumb': {
+            height: '173px',
+        },
+        '.item-content': {
+            fontSize: '0.9em',
+            backgroundColor: theme.palette.card.main,
+            marginBottom: '0',
+            padding: '12px 16px',
+        },
+        '.title': {
+            margin: '0',
+        },
+    },
 }));
 
-// 訂單紀錄
+// 訂單紀錄 && 詳細頁
 // order/orderLayout.js
 
 // 修改會員資料
@@ -143,11 +162,20 @@ const BoxWrapLayout = styled(Box)(({ theme }) => ({
     '.form-row:not(.Model-form-button)': {
         marginBottom: '30px',
     },
+    [theme.breakpoints.down('sm')]: {
+        fontSize: '1em',
+        padding: '30px 20px',
+        '.row:not(:last-child), .form-row:not(.Model-form-button)': {
+            marginBottom: '20px',
+        },
+        '.title': {
+            marginBottom: '8px',
+        },
+    },
 }));
 
 export {
     TabWrapLayout,
-    TabPanelLayout,
     ItemLayout,
     BoxWrapLayout,
 };

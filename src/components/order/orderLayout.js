@@ -1,8 +1,9 @@
+import { Grid } from '@mui/material';
 import { styled } from '@mui/system';
 import { BoxWrapLayout } from '../member/accountLayout';
 import Links from '../Links';
 
-// 訂單紀錄
+// Web 訂單紀錄
 const OrderRecordLayout = styled('div')(({ theme }) => ({
     border: `1px solid ${theme.palette.border.dark}`,
     '.item-row': {
@@ -36,6 +37,37 @@ const OrderRecordLayout = styled('div')(({ theme }) => ({
     '.orderNumber': {
         color: theme.palette.textColor,
         display: 'inline-block',
+        wordBreak: 'break-word',
+    },
+    '.invoice': {
+        wordBreak: 'break-word',
+    },
+}));
+
+// mWeb
+const OrderRecordGridLayout = styled(Grid)(({ theme }) => ({
+    '.card-wrap': {
+        fontSize: '0.9em',
+        color: theme.palette.textColor,
+        textDecoration: 'none',
+        border: '1px solid',
+        display: 'flex',
+        flexWrap: 'wrap',
+        padding: '20px 0 0',
+    },
+    '.item': {
+        flex: '0 0 calc(100% / 2)',
+        marginBottom: '20px',
+        paddingLeft: '20px',
+        paddingRight: '20px',
+    },
+    '.title': {
+        marginTop: '0',
+        marginBottom: '4px',
+        opacity: '0.7',
+    },
+    '.orderNumber, .invoice': {
+        wordBreak: 'break-word',
     },
 }));
 
@@ -83,6 +115,7 @@ const ItemWrapLayout = styled(Links)(({ theme }) => ({
 
 export {
     OrderRecordLayout,
+    OrderRecordGridLayout,
     OrderDetailLayout,
     ItemWrapLayout,
 };

@@ -1,4 +1,5 @@
-import { OrderRecordLayout } from '../order/orderLayout';
+import { useMediaQuery, Grid } from '@mui/material';
+import { OrderRecordLayout, OrderRecordGridLayout } from '../order/orderLayout';
 import Links from '../Links';
 import util from '../../utils/util';
 import deftag from '../../utils/util.deftag';
@@ -43,7 +44,7 @@ const renderItemCell = ({
         <span className="item-cell cell-140">{status}</span>
         <span className="item-cell cell-140">{renderWithoutValue(payment)}</span>
         <span className="item-cell cell-160">{paidAt}</span>
-        <span className="item-cell cell-140">{renderWithoutValue(invoice)}</span>
+        <span className="item-cell cell-140 invoice">{renderWithoutValue(invoice)}</span>
     </div>
 
 );
@@ -77,8 +78,8 @@ const Item = ({
 
 );
 
-//
-const OrderRecord = ({ data }) => (
+// Web
+const withTable = (data) => (
 
     <OrderRecordLayout>
         {
@@ -110,5 +111,92 @@ const OrderRecord = ({ data }) => (
     </OrderRecordLayout>
 
 );
+
+// mWeb
+const withCard = (data) => (
+
+    <OrderRecordGridLayout
+        container
+        rowSpacing={{
+            xs: '20px',
+            sm: '40px',
+        }}
+    >
+        {
+            data.map(({
+                id,
+                orderNumber,
+                createdAt,
+                totalItems,
+                price,
+                status,
+                paidBy,
+                paidAt,
+                invoice,
+            }) => (
+
+                <Grid
+                    key={id}
+                    item
+                    xs={12}
+                >
+                    <Links
+                        url={`/order/${orderNumber}`}
+                        className="card-wrap"
+                        newPage
+                    >
+                        <div className="item">
+                            <h4 className="title">{orderRecord.text_order_number}</h4>
+                            <span className="orderNumber">{orderNumber}</span>
+                        </div>
+                        <div className="item">
+                            <h4 className="title">{orderRecord.text_order_create_at}</h4>
+                            {dateFormat(createdAt)}
+                        </div>
+                        <div className="item">
+                            <h4 className="title">{orderRecord.text_order_quantity}</h4>
+                            {`${totalItems}${text_item_unit}`}
+                        </div>
+                        <div className="item">
+                            <h4 className="title">{orderRecord.text_order_total_price}</h4>
+                            {priceWithCommas(price)}
+                        </div>
+                        <div className="item">
+                            <h4 className="title">{orderRecord.text_order_status}</h4>
+                            {orderRecord[`text_status_${status}`]}
+                        </div>
+                        <div className="item">
+                            <h4 className="title">{orderRecord.text_order_payment}</h4>
+                            {renderWithoutValue(orderRecord[`text_payment_${paidBy}`])}
+                        </div>
+                        <div className="item">
+                            <h4 className="title">{orderRecord.text_order_paid_at}</h4>
+                            {dateFormat(paidAt)}
+                        </div>
+                        <div className="item">
+                            <h4 className="title">{orderRecord.text_order_invoice}</h4>
+                            <span className="invoice">{renderWithoutValue(invoice)}</span>
+                        </div>
+                    </Links>
+                </Grid>
+
+            ))
+        }
+    </OrderRecordGridLayout>
+
+);
+
+//
+const OrderRecord = ({ data }) => {
+
+    const matches = useMediaQuery((theme) => theme.breakpoints.up('mobile'));
+
+    return (
+
+        matches ? withTable(data) : withCard(data)
+
+    );
+
+};
 
 export default OrderRecord;

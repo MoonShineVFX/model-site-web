@@ -7,7 +7,7 @@ import React, {
 
 import { Tabs, Tab, useMediaQuery } from '@mui/material';
 import { TitleLayout } from '../../src/components/member/cartLayout';
-import { TabWrapLayout, TabPanelLayout } from '../../src/components/member/accountLayout';
+import { TabWrapLayout } from '../../src/components/member/accountLayout';
 import HeadTag from '../../src/containers/HeadTag';
 
 import MyProduct from '../../src/components/member/MyProduct';
@@ -129,7 +129,7 @@ const Account = ({ pageData }) => {
                     (matches && (type === 'product')) && <p className="download-notice">{text_mobile_download_notice}</p>
                 }
 
-                <TabPanelLayout className={`tab-panel panel-${type}`}>
+                <div className={`tab-panel panel-${type}`}>
                     {
                         Object.keys(types).map((key) => (
 
@@ -143,7 +143,7 @@ const Account = ({ pageData }) => {
 
                         ))
                     }
-                </TabPanelLayout>
+                </div>
             </TabWrapLayout>
         </Fragment>
 

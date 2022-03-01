@@ -27,7 +27,7 @@ const Item = ({
     },
 }) => {
 
-    const matches = useMediaQuery((theme) => theme.breakpoints.up('mobile'));
+    const matches = useMediaQuery((theme) => theme.breakpoints.up('lg'));
     const options = arrangeFormatAndRender(models);
 
     // State
@@ -149,12 +149,12 @@ const MyProduct = ({ data }) => (
         container
         className="container"
         rowSpacing={{
-            // xs: '12px',
+            xs: '20px',
             middle: '40px',
-            mobile: '80px',
+            md: '80px',
         }}
         columnSpacing={{
-            // xs: '12px',
+            xs: '20px',
             middle: '40px',
         }}
     >
@@ -164,9 +164,10 @@ const MyProduct = ({ data }) => (
                 <Grid
                     key={obj.id}
                     item
-                    // xs={12}
-                    middle={4}
-                    mobile={3}
+                    xs={12}
+                    middle={6}
+                    sm={4}
+                    lg={3}
                 >
                     <Item data={obj} />
                 </Grid>

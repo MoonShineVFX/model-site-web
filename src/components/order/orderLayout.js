@@ -98,18 +98,25 @@ const ItemWrapLayout = styled(Links)(({ theme }) => ({
         marginBottom: '20px',
     },
     '.thumb': {
-        width: '160px',
         height: '93px',
         borderRadius: '10px',
-        marginRight: '20px',
         overflow: 'hidden',
     },
     '.content': {
-        flex: '0 0 calc(100% - 160px - 20px)',
+        flex: '1',
+        paddingLeft: '20px',
     },
     '.title': {
         fontWeight: 'normal',
         margin: '0',
+    },
+    'img': {
+        width: '100%',
+    },
+    [theme.breakpoints.down('middle')]: {
+        '.content': {
+            paddingLeft: '12px',
+        },
     },
 }));
 

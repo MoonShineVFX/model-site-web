@@ -9,17 +9,18 @@ const {
 
 //
 const LogoLayout = styled('span')(({ theme }) => ({
-    fontSize: '1.75em',
-    fontWeight: 'bold',
-    fontfamily : 'Leelawadee',
-    display: 'inline-block',
-    verticalAlign: 'middle',
     '.logo-text': {
-        color: theme.palette.primary.main, // 未來會是真的 logo
-        textDecoration: 'none',
+        height: '50px',
+    },
+    'img': {
+        width: '100%',
+        verticalAlign: 'middle',
     },
     '.pure-text': {
-        cursor: 'default',
+        fontSize: '1.75em',
+        fontWeight: 'bold',
+        color: theme.palette.primary.main, // 表單會上文字 logo
+        margin: '0', cursor: 'default',
     },
     [theme.breakpoints.down('middle')]: {
         fontSize: '1.4em',
@@ -30,13 +31,24 @@ const LogoLayout = styled('span')(({ theme }) => ({
 const Logo = ({ redirect, ...rest }) => (
 
     <LogoLayout {...rest}>
-        <Links
-            {...redirect && { url: '/' }}
-            className={`logo-text ${redirect ? '' : 'pure-text'}`}
-            title="Moonshine Logo"
-        >
-            {text_logo}
-        </Links>
+        {
+            redirect ? (
+
+                <Links
+                    url="/"
+                    className="logo-text"
+                    title={text_logo}
+                >
+                    <img
+                        src="/moonshine_logo.png"
+                        alt={text_logo}
+                        width="291"
+                        height="78"
+                    />
+                </Links>
+
+            ) : <h1 className="pure-text">{text_logo}</h1>
+        }
     </LogoLayout>
 
 );

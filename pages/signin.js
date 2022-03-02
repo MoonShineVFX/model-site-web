@@ -1,4 +1,9 @@
-import { Fragment, useContext, useEffect, useState } from 'react';
+import {
+    Fragment,
+    useContext,
+    useEffect,
+    useState,
+} from 'react';
 import { useForm } from 'react-hook-form';
 
 import {
@@ -11,6 +16,7 @@ import HeadTag from '../src/containers/HeadTag';
 import Buttons from '../src/components/Buttons';
 import FontIcon from '../src/components/FontIcon';
 import Links from '../src/components/Links';
+import ReCaptcha from '../src/components/ReCaptcha';
 import FormWrap, { FormRow } from '../src/components/FormWrap';
 import SigninGoogle from '../src/components/third-party/SigninGoogle';
 
@@ -85,6 +91,7 @@ const Signin = () => {
 
         <Fragment>
             <HeadTag title={text_signin} />
+            <ReCaptcha />
 
             <SignLayout>
                 <FormWrap title={text_signin_title}>
@@ -153,6 +160,7 @@ const Signin = () => {
                             />
                         </div>
                     </form>
+                    {/* <p>This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.</p> */}
                 </FormWrap>
             </SignLayout>
         </Fragment>

@@ -41,7 +41,9 @@ const deftag = {
         text_signin_with_google: '使用 Google 帳號登入',
         text_email_sent: '已成功發送至你輸入的電子信箱',
         text_register_success_title: '註冊成功',
-        text_register_success_message: '註冊成功，將離開此頁面。',
+        text_register_success_message: '請至信箱收取驗證信並啟用帳號。',
+        text_active_account_title: '帳號啟用',
+        text_active_account_message: '帳號已啟用！',
     },
     home: {
         page_title: '首頁',

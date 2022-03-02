@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import { ThemeProvider } from '@mui/material/styles';
 import { GlobalStyles, Box } from '@mui/material';
 
@@ -87,6 +88,9 @@ const styles = {
             },
         },
     },
+    // '.grecaptcha-badge': {
+    //     visibility: 'hidden',
+    // },
     [theme.breakpoints.down('mobile')]: {
         '.Model-container': {
             padding: '0 30px',
@@ -118,25 +122,27 @@ const WebSite = ({ Component, pageProps }) => {
                 <GlobalStyles styles={styles} />
 
                 <GlobalProvider>
-                    <Header />
-                    <Box
-                        component="main"
-                        sx={{ display: 'flex' }}
-                    >
+                    <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY}>
+                        <Header />
                         <Box
-                            component="div"
-                            className="Model-container"
-                            sx={{
-                                paddingTop: '20px',
-                                paddingBottom: '20px',
-                            }}
+                            component="main"
+                            sx={{ display: 'flex' }}
                         >
-                            <Content>
-                                <Component {...pageProps} />
-                            </Content>
+                            <Box
+                                component="div"
+                                className="Model-container"
+                                sx={{
+                                    paddingTop: '20px',
+                                    paddingBottom: '20px',
+                                }}
+                            >
+                                <Content>
+                                    <Component {...pageProps} />
+                                </Content>
+                            </Box>
                         </Box>
-                    </Box>
-                    <Footer />
+                        <Footer />
+                    </GoogleReCaptchaProvider>
                 </GlobalProvider>
             </ThemeProvider>
         </Fragment>

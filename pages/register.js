@@ -94,7 +94,7 @@ const Register = () => {
     const handleAgree = () => setDisabled(!disabled);
 
     // 送資料
-    const handleReqData = async (reqData) => {
+    const handleReqData = (reqData) => {
 
         delete reqData.confirm_password;
         Service.register(reqData)
@@ -221,7 +221,7 @@ const Register = () => {
                 visible &&
                     <Lightbox
                         type="success"
-                        onClick={redirectTo}
+                        onClick={() => lightboxDispatch({ type: 'HIDE' })}
                     >
                         {text_register_success_message}
                     </Lightbox>

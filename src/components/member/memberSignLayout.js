@@ -6,6 +6,12 @@ const SignLayout = styled('section')(({ theme }) => ({
     '.model-button': {
         marginBottom: '30px',
     },
+    'p': {
+        fontSize: '0.8em',
+        'a': {
+            color: theme.palette.textColor,
+        },
+    },
     [theme.breakpoints.up('sm')]: {
         marginTop: '60px',
     },

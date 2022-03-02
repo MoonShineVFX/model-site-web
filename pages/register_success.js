@@ -1,22 +1,18 @@
 import { useContext, useEffect } from 'react';
-import { useRouter } from 'next/router';
 import Result from '../src/components/Result';
 import { GlobalContext } from '../src/context/global.state';
 import deftag from '../src/utils/util.deftag';
 
 const {
-    paymentResult: {
-        page_title,
-        text_message,
-        text_direct_to_order_detail,
+    memberSign: {
+        text_register_success_title,
+        text_register_success_message,
+        btn_return_to_signin,
     },
 } = deftag;
 
 //
 const PaymentResult = () => {
-
-    // Router
-    const router = useRouter();
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
@@ -31,10 +27,10 @@ const PaymentResult = () => {
     return (
 
         <Result
-            title={page_title}
-            message={text_message}
-            btnText={text_direct_to_order_detail}
-            linkTo={`/order/${router.query.no}`}
+            title={text_register_success_title}
+            message={text_register_success_message}
+            btnText={btn_return_to_signin}
+            linkTo="/signin"
         />
 
     );

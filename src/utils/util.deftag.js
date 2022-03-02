@@ -40,7 +40,8 @@ const deftag = {
         text_new_password_success: '你的登入密碼已設定成功',
         text_signin_with_google: '使用 Google 帳號登入',
         text_email_sent: '已成功發送至你輸入的電子信箱',
-        text_register_success: '註冊成功，將離開此頁面。',
+        text_register_success_title: '註冊成功',
+        text_register_success_message: '註冊成功，將離開此頁面。',
     },
     home: {
         page_title: '首頁',

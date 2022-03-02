@@ -40,7 +40,7 @@ const {
         text_account_with_email,
         text_enter_password,
         text_agree_privacy,
-        text_register_success,
+        text_register_success_message,
     },
     error: {
         error_password_at_least_eight,
@@ -223,7 +223,7 @@ const Register = () => {
                         type="success"
                         onClick={redirectTo}
                     >
-                        {text_register_success}
+                        {text_register_success_message}
                     </Lightbox>
             }
         </Fragment>

@@ -155,18 +155,23 @@ const ProductDetail = ({ pageData }) => {
                         xs={12}
                         mobile={8}
                     >
-                        <div className="tags">
-                            {pageData.tags.map((id) => (
+                        {
+                            // Betty: 暫時隱藏 tag
+                            false &&
+                                <div className="tags">
+                                    {pageData.tags.map((id) => (
 
-                                <span
-                                    key={id}
-                                    className="tag"
-                                >
-                                    {mappingTags(tags)[id]}
-                                </span>
+                                        <span
+                                            key={id}
+                                            className="tag"
+                                        >
+                                            {mappingTags(tags)[id]}
+                                        </span>
 
-                            ))}
-                        </div>
+                                    ))}
+                                </div>
+                        }
+
                         <h1 className="title">{pageData.title}</h1>
 
                         {

@@ -39,11 +39,11 @@ const GridLayout = styled(Grid)(({ theme }) => ({
             justifyContent: 'center',
         },
     },
-    [theme.breakpoints.down('mobile')]: {
-        '.tagsList': {
-            display: 'none',
-        },
-    },
+    // [theme.breakpoints.down('mobile')]: {
+    //     '.tagsList': {
+    //         display: 'none',
+    //     },
+    // },
 }));
 
 //
@@ -90,23 +90,24 @@ const ListItemLayout = styled(ListItemButton)(({ theme }) => ({
     },
 }));
 
+// Betty: 暫時隱藏 tag
 //
-const ItemWrapLayout = styled('div')(({ theme }) => ({
-    display: 'flex',
-    flexWrap: 'wrap',
-    margin: '0 -8px 0',
-    '.item': {
-        flex: '0 0 calc(100% / 3)',
-        padding: '0 8px',
-        '&:nth-of-type(3n)': {
-            marginRight: '0',
-        },
-    },
-    [theme.breakpoints.down('sm')]: {
-        '.item': {
-            flex: '0 0 calc(100% / 2)',
-        },
-    },
+const ItemWrapLayout = styled(Grid)(({ theme }) => ({
+    // display: 'flex',
+    // flexWrap: 'wrap',
+    // margin: '0 -8px 0',
+    // '.item': {
+    //     flex: '0 0 calc(100% / 4)',
+    //     padding: '0 8px',
+    //     '&:nth-of-type(4n)': {
+    //         marginRight: '0',
+    //     },
+    // },
+    // [theme.breakpoints.down('sm')]: {
+    //     '.item': {
+    //         flex: '0 0 calc(100% / 2)',
+    //     },
+    // },
 }));
 
 /** Detail */

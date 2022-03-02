@@ -111,68 +111,83 @@ const ProductList = ({ pageData }) => {
 
             <GridLayout
                 container
-                columnSpacing={{ mobile: '40px' }}
+                columnSpacing={{ lg: '40px' }}
                 component="section"
                 className="page-product"
             >
+                {
+                    // Betty: 暫時隱藏 tag
+                    false &&
+                        <Grid
+                            item
+                            xs={12}
+                            mobile={3}
+                            md={2}
+                            component="aside"
+                            className="tagsList"
+                        >
+                            <ListTitleLayout>{select_label}</ListTitleLayout>
+                            <List>
+                                {
+                                    tagsOpt.map(({ id, name }) => (
+
+                                        <ListItemLayout
+                                            key={id}
+                                            selected={selectedTag[id]}
+                                            onClick={() => handleSelectedTag(id)}
+                                            component="li"
+                                        >
+                                            <ListItemText>{name}</ListItemText>
+
+                                            {
+                                                selectedTag[id] &&
+                                                    <ListItemIcon className="checked">
+                                                        <FontIcon icon={faCheck} />
+                                                    </ListItemIcon>
+                                            }
+                                        </ListItemLayout>
+
+                                    ))
+                                }
+                            </List>
+                        </Grid>
+                }
+
                 <Grid
                     item
                     xs={12}
-                    mobile={3}
-                    md={2}
-                    component="aside"
-                    className="tagsList"
-                >
-                    <ListTitleLayout>{select_label}</ListTitleLayout>
-                    <List>
-                        {
-                            tagsOpt.map(({ id, name }) => (
-
-                                <ListItemLayout
-                                    key={id}
-                                    selected={selectedTag[id]}
-                                    onClick={() => handleSelectedTag(id)}
-                                    component="li"
-                                >
-                                    <ListItemText>{name}</ListItemText>
-
-                                    {
-                                        selectedTag[id] &&
-                                            <ListItemIcon className="checked">
-                                                <FontIcon icon={faCheck} />
-                                            </ListItemIcon>
-                                    }
-                                </ListItemLayout>
-
-                            ))
-                        }
-                    </List>
-                </Grid>
-
-                <Grid
-                    item
-                    xs={12}
-                    mobile={9}
-                    md={10}
+                    // mobile={9}
+                    // md={10}
                     component="figure"
                     className="productList"
                 >
                     {
                         pageData.products.length ? (
 
-                            <ItemWrapLayout>
+                            <ItemWrapLayout
+                                container
+                                rowSpacing="40px"
+                                columnSpacing="16px"
+                            >
                                 {
                                     pageData.products.map(({ id, title, price, imgUrl }) => (
 
-                                        <Item
+                                        <Grid
                                             key={id}
-                                            type="product"
-                                            url={`/product/${id}`}
-                                            width="321"
-                                            height="186"
-                                            data={{ title, price, imgUrl }}
-                                            newPage
-                                        />
+                                            item
+                                            xs={6}
+                                            sm={4}
+                                            mobile={3}
+                                        >
+                                            <Item
+                                                type="product"
+                                                url={`/product/${id}`}
+                                                width="321"
+                                                height="186"
+                                                data={{ title, price, imgUrl }}
+                                                newPage
+                                            />
+                                        </Grid>
 
                                     ))
                                 }

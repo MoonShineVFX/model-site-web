@@ -12,15 +12,14 @@ import {
     ForgotPasswordLayout,
 } from '../src/components/member/memberSignLayout';
 import HeadTag from '../src/containers/HeadTag';
-
 import Buttons from '../src/components/Buttons';
 import FontIcon from '../src/components/FontIcon';
 import Links from '../src/components/Links';
-import ReCaptcha from '../src/components/ReCaptcha';
 import FormWrap, { FormRow } from '../src/components/FormWrap';
 import SigninGoogle from '../src/components/third-party/SigninGoogle';
 
 import { GlobalContext } from '../src/context/global.state';
+import useReCaptchaVerify from '../src/utils/useReCaptchaVerify';
 import util from '../src/utils/util';
 import utilConst from '../src/utils/util.const';
 import deftag from '../src/utils/util.deftag';
@@ -29,6 +28,7 @@ import Service from '../src/utils/util.service';
 const { redirectTo } = util;
 const { paswdConfig } = utilConst;
 const {
+    common: { text_verify_not_robot },
     memberSign: {
         text_signin,
         text_register,
@@ -46,7 +46,10 @@ const {
 const Signin = () => {
 
     // Context
-    const { globalDispatch } = useContext(GlobalContext);
+    const { isVerified, globalDispatch } = useContext(GlobalContext);
+
+    // Hook
+    const [token, handleGetToken] = useReCaptchaVerify(null);
 
     useEffect(() => {
 
@@ -82,8 +85,12 @@ const Signin = () => {
     const handleReqData = (reqData) => {
 
         let auth = btoa(`${reqData.email}:${reqData.password}`);
-        Service.signin({ headers: { Authorization: `Basic ${auth}`} })
-            .then(redirectTo);
+        Service.signin({
+            reqData: {
+                recaptcha: token,
+            },
+            headers: { Authorization: `Basic ${auth}`},
+        }).then(redirectTo);
 
     };
 
@@ -91,7 +98,6 @@ const Signin = () => {
 
         <Fragment>
             <HeadTag title={text_signin} />
-            <ReCaptcha />
 
             <SignLayout>
                 <FormWrap title={text_signin_title}>
@@ -137,8 +143,14 @@ const Signin = () => {
 
                         <div className="form-row form-row-btns">
                             <Buttons
+                                text={text_verify_not_robot}
+                                onClick={handleGetToken}
+                            />
+
+                            <Buttons
                                 type="submit"
                                 text={text_signin}
+                                disabled={!isVerified}
                             />
 
                             {/* <SigninGoogle /> */}

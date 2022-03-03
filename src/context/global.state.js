@@ -18,6 +18,8 @@ const globalInitState = {
     sideNav: false,
     snackbar: false,
     cart: {},
+    dynamicAction: '',
+    isVerified: false,
 };
 
 // Form values
@@ -50,6 +52,8 @@ const GlobalProvider = ({ children }) => {
         sideNav,
         snackbar,
         cart,
+        dynamicAction,
+        isVerified,
     } = globalState;
 
     const { formStorageData } = formStorageState;
@@ -88,6 +92,8 @@ const GlobalProvider = ({ children }) => {
             sideNav,
             snackbar,
             cart,
+            dynamicAction,
+            isVerified,
             getGlobalData,
 
             // Form 表單暫存

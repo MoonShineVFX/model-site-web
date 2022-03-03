@@ -72,6 +72,18 @@ const globalReducer = (state, { type, payload }) => {
                 snackbar: payload,
             };
 
+        case 'recaptcha_action':
+            return {
+                ...state,
+                dynamicAction: payload,
+            };
+
+        case 'recaptcha_is_verified':
+            return {
+                ...state,
+                isVerified: payload,
+            };
+
         default:
             return { ...state };
     }

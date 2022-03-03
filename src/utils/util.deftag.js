@@ -9,6 +9,7 @@ const deftag = {
         text_item_unit: '項',
         btn_lightbox_cancel: '取消',
         btn_lightbox_submit: '確認',
+        text_verify_not_robot: '按此驗證我不是機器人',
     },
     header: {
         text_cart_title: '購物車品項',

@@ -10,10 +10,10 @@ const {
 //
 const LogoLayout = styled('span')(({ theme }) => ({
     '.logo-text': {
-        height: '50px',
+        width: '200px',
     },
     'img': {
-        width: '100%',
+        height: '100%',
         verticalAlign: 'middle',
     },
     '.pure-text': {

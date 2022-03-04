@@ -32,7 +32,8 @@ const SigninGoogle = () => {
     return (
 
         <GoogleSigninLayout
-            clientId="440366749945-ufbv6jl00nqq79ancj5ip414hk9cuqaa.apps.googleusercontent.com"
+            clientId="222093084288-blone4f9a5m54hu9ieb58ie2l9mit5u8.apps.googleusercontent.com"
+            // clientId={process.env.NEXT_PUBLIC_GOOGLE_SIGNIN_CLIENTID}
             onSuccess={handleCallback}
             onFailure={handleCallback}
             // isSignedIn={true} // 已登入狀態

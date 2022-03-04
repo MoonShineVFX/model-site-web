@@ -86,9 +86,7 @@ const Signin = () => {
 
         let auth = btoa(`${reqData.email}:${reqData.password}`);
         Service.signin({
-            reqData: {
-                recaptcha: token,
-            },
+            reqData: { recaptcha: token },
             headers: { Authorization: `Basic ${auth}`},
         }).then(redirectTo);
 
@@ -153,7 +151,7 @@ const Signin = () => {
                                 disabled={!isVerified}
                             />
 
-                            {/* <SigninGoogle /> */}
+                            <SigninGoogle />
 
                             <ForgotPasswordLayout>
                                 <Links

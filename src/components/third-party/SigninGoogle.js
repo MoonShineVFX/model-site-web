@@ -1,5 +1,6 @@
 import { styled } from '@mui/system';
 import GoogleLogin from 'react-google-login';
+import Service from '../../utils/util.service';
 import deftag from '../../utils/util.deftag';
 
 const {
@@ -23,17 +24,22 @@ const GoogleSigninLayout = styled(GoogleLogin)({
 //
 const SigninGoogle = () => {
 
-    const handleCallback = (response) => {
+    const handleCallback = (res) => {
 
-        console.log('response:', response);
+        console.log('res:', res);
+        Service.signWithGoogle({ access_token: res.accessToken })
+            .then(() => {
+
+                console.log('yahhhhh~~~');
+
+            });
 
     };
 
     return (
 
         <GoogleSigninLayout
-            clientId="222093084288-blone4f9a5m54hu9ieb58ie2l9mit5u8.apps.googleusercontent.com"
-            // clientId={process.env.NEXT_PUBLIC_GOOGLE_SIGNIN_CLIENTID}
+            clientId={process.env.NEXT_PUBLIC_GOOGLE_SIGNIN_CLIENTID}
             onSuccess={handleCallback}
             onFailure={handleCallback}
             // isSignedIn={true} // 已登入狀態

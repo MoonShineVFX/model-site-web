@@ -12,6 +12,9 @@ const Service = {
     forgotPassword: (reqData) => util.serviceProxy('/forget_password', reqData),
     resetPassword: (reqData) => util.serviceProxy('/reset_password', reqData),
 
+    // 第三方註冊/登入
+    signWithGoogle: (reqData) => util.serviceProxy('/google_login', reqData),
+
     // 購物車
     cartList: (reqData) => util.serviceProxy('/cart_products', reqData),
     cartAdd: (reqData) => util.serviceProxy('/cart_product_add', reqData),

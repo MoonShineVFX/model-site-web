@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { ErrorMessage } from '@hookform/error-message';
 import { styled } from '@mui/system';
-import Logo from './Logo';
 import deftag from '../utils/util.deftag';
 
 //
@@ -18,8 +17,11 @@ const FormWrapLayout = styled('div')(({ theme }) => ({
         margin: '16px 0 36px',
         opacity: '0.6',
     },
-    '.form-row:not(.form-row-btns)': {
-        marginBottom: '30px',
+    '.form-row, .model-button': {
+        marginBottom: '24px',
+    },
+    '.form-row-btns': {
+        marginTop: '40px',
     },
     [theme.breakpoints.up('sm')]: {
         maxWidth: '560px',
@@ -33,7 +35,7 @@ const FormWrapLayout = styled('div')(({ theme }) => ({
         '.title': {
             margin: '10px 0 24px',
         },
-        '.form-row:not(.form-row-btns)': {
+        '.form-row, .model-button': {
             marginBottom: '16px',
         },
     },
@@ -106,7 +108,6 @@ const FormWrap = ({ title, children, ...rest }) => (
 
     <FormWrapLayout className="Model-form-button formWrap" {...rest}>
         <div className="form-top">
-            <Logo redirect={false} />
             <h3 className="title">{title}</h3>
         </div>
 

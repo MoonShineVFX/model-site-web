@@ -16,49 +16,32 @@ const LogoLayout = styled('span')(({ theme }) => ({
         height: '100%',
         verticalAlign: 'middle',
     },
-    '.pure-text': {
-        fontSize: '1.75em',
-        fontWeight: 'bold',
-        color: theme.palette.primary.main, // 表單會上文字 logo
-        margin: '0', cursor: 'default',
-    },
     [theme.breakpoints.down('middle')]: {
         fontSize: '1.4em',
     },
 }));
 
 //
-const Logo = ({ redirect, ...rest }) => (
+const Logo = ({ ...rest }) => (
 
     <LogoLayout {...rest}>
-        {
-            redirect ? (
-
-                <Links
-                    url="/"
-                    className="logo-text"
-                    title={text_logo}
-                >
-                    <img
-                        src="/moonshine_logo.png"
-                        alt={text_logo}
-                        width="291"
-                        height="78"
-                    />
-                </Links>
-
-            ) : <h1 className="pure-text">{text_logo}</h1>
-        }
+        <Links
+            url="/"
+            className="logo-text"
+            title={text_logo}
+        >
+            <img
+                src="/moonshine_logo.png"
+                alt={text_logo}
+                width="291"
+                height="78"
+            />
+        </Links>
     </LogoLayout>
 
 );
 
-Logo.defaultProps = {
-    redirect: true,
-};
-
 Logo.propTypes = {
-    redirect: PropTypes.bool,
     children: PropTypes.any,
 };
 

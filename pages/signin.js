@@ -142,6 +142,7 @@ const Signin = () => {
                         <div className="form-row form-row-btns">
                             <Buttons
                                 text={text_verify_not_robot}
+                                disabled={isVerified}
                                 onClick={handleGetToken}
                             />
 

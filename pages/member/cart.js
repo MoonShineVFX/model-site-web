@@ -41,7 +41,10 @@ const TableGrid = ({ colLeft, colRight }) => (
 
     <Grid
         container
-        columnSpacing="20px"
+        columnSpacing={{
+            xs: '10px',
+            sm: '20px',
+        }}
     >
         <Grid
             item
@@ -90,7 +93,7 @@ const Item = ({
                     </div>
 
                     <div className="info">
-                        <h4 className="web-line-clamp title" title={title}>{title}</h4>
+                        <h4 className="title" title={title}>{title}</h4>
                     </div>
                 </Fragment>
             )}

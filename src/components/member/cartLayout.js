@@ -15,7 +15,7 @@ const TitleLayout = styled('h1')(({ theme }) => ({
 }));
 
 //
-const SectionLayout = styled('section')({
+const SectionLayout = styled('section')(({ theme }) => ({
     maxWidth: '760px',
     margin: '0 auto',
     '.title-large': {
@@ -44,13 +44,7 @@ const SectionLayout = styled('section')({
             textAlign: 'right',
         },
     },
-    '.amount': {
-        fontSize: '1.25em',
-        '.price': {
-            paddingRight: 'calc((32px / 2) - 4px)', // 刪除按鈕的寬度一半 + padding
-        },
-    },
-});
+}));
 
 // 購物車
 const CartLayout = styled('div')(({ theme }) => ({
@@ -63,6 +57,9 @@ const CartLayout = styled('div')(({ theme }) => ({
         '> *': {
             flex: '1',
         },
+    },
+    [theme.breakpoints.down('sm')]: {
+        padding: '20px',
     },
 }));
 
@@ -96,6 +93,20 @@ const ItemLayout = styled(Links)(({ theme }) => ({
             fontSize: '1.2em',
             color: '#ce5151',
             padding: '4px',
+        },
+    },
+    '.amount': {
+        fontSize: '1.25em',
+        '.price': {
+            paddingRight: 'calc((32px / 2) - 4px)', // 刪除按鈕的寬度一半 + padding
+        },
+    },
+    [theme.breakpoints.down('sm')]: {
+        '.thumb': {
+            marginRight: '10px',
+        },
+        '.amount': {
+            fontSize: '1em',
         },
     },
 }));

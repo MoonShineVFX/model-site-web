@@ -20,6 +20,7 @@ const globalInitState = {
     cart: {},
     dynamicAction: '',
     isVerified: false,
+    langOpt: 'zh-tw',
 };
 
 // Form values
@@ -54,6 +55,7 @@ const GlobalProvider = ({ children }) => {
         cart,
         dynamicAction,
         isVerified,
+        langOpt,
     } = globalState;
 
     const { formStorageData } = formStorageState;
@@ -94,6 +96,7 @@ const GlobalProvider = ({ children }) => {
             cart,
             dynamicAction,
             isVerified,
+            langOpt,
             getGlobalData,
 
             // Form 表單暫存

@@ -155,16 +155,32 @@ const SideNavIconLayout = styled('span')(({ theme }) => ({
 
 /** Footer */
 const FooterLayout = styled('footer')(({ theme }) => ({
-    textAlign: 'center',
-    marginTop: '100px',
-    marginBottom: '40px',
+    fontSize: '0.9em',
+    borderTop: `1px solid ${theme.palette.border.dark}`,
+    marginTop: '160px',
+    padding: '40px 0',
     '*': {
         color: theme.palette.textColor,
     },
+    '.container': {
+        alignItems: 'center',
+        margin: 'auto',
+        border: '1px solid'
+    },
+    '.grid-right': {
+        textAlign: 'right',
+    },
+    'img': {
+        marginRight: '16px',
+    },
+    '.community': {
+        display: 'inline-block',
+        verticalAlign: 'middle',
+    },
     '.social-item': {
         fontSize: '1.8em',
-        margin: theme.spacing(0, 3),
-        padding: theme.spacing(1),
+        margin: '0 4px',
+        padding: '4px',
     },
     '.privacy-link': {
         textDecoration: 'none',
@@ -181,6 +197,16 @@ const FooterLayout = styled('footer')(({ theme }) => ({
     },
 }));
 
+// 語系
+const LangOptionLayout = styled('select')(({ theme }) => ({
+    fontSize: '1em',
+    backgroundColor: theme.palette.card.main,
+    border: '0',
+    borderRadius: theme.borderRadius,
+    marginLeft: '20px',
+    padding: '16px 20px',
+}));
+
 export {
     AppBarLayout,
     HeaderLayout,
@@ -189,4 +215,5 @@ export {
     SideNavLayout,
     SideNavIconLayout,
     FooterLayout,
+    LangOptionLayout,
 };

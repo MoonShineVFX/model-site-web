@@ -84,6 +84,12 @@ const globalReducer = (state, { type, payload }) => {
                 isVerified: payload,
             };
 
+        case 'lang_option':
+            return {
+                ...state,
+                langOpt: payload,
+            };
+
         default:
             return { ...state };
     }

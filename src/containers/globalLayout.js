@@ -165,10 +165,17 @@ const FooterLayout = styled('footer')(({ theme }) => ({
     '.container': {
         alignItems: 'center',
         margin: 'auto',
-        border: '1px solid'
+    },
+    '.grid-left > *': {
+        display: 'inline-block',
+        verticalAlign: 'middle',
+        '&:not(img)': {
+            marginRight: '30px',
+        },
     },
     '.grid-right': {
         textAlign: 'right',
+        position: 'relative',
     },
     'img': {
         marginRight: '16px',
@@ -182,12 +189,11 @@ const FooterLayout = styled('footer')(({ theme }) => ({
         margin: '0 4px',
         padding: '4px',
     },
-    '.privacy-link': {
-        textDecoration: 'none',
-        marginTop: '10px',
-        '&:hover': {
-            textDecoration: 'underline',
-        },
+    '.model-button': {
+        backgroundColor: theme.palette.card.main,
+        display: 'inline-block',
+        marginLeft: '30px',
+        padding: '10px 30px',
     },
     'p': {
         marginTop: theme.spacing(5),

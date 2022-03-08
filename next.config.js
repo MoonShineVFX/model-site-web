@@ -2,6 +2,10 @@ module.exports = {
     env: {
         HOST: process.env.NEXT_PUBLIC_HOST || 'market.moonshine.tw',
     },
+    i18n: {
+        locales: ['zh', 'en', 'jp', 'cn'],
+        defaultLocale: 'zh',
+    },
     async redirects () {
         return [
             {

@@ -1,10 +1,9 @@
-import { useContext } from 'react';
+import { useRouter } from 'next/router';
 import dayjs from 'dayjs';
 import { Grid } from '@mui/material';
 import { FooterLayout, LangOptionLayout } from './globalLayout';
 import Links from '../components/Links';
 import Community from '../components/Community';
-import { GlobalContext } from '../context/global.state';
 import deftag from '../utils/util.deftag';
 
 const {
@@ -12,20 +11,19 @@ const {
     footer: {
         text_privacy_link,
         text_custom_service,
-        text_lang_option,
     },
 } = deftag;
 
 // 語系選單
 const LangOption = () => {
 
-    // Context
-    const { langOpt, globalDispatch } = useContext(GlobalContext);
+    // Router
+    const router = useRouter();
 
-    //
+    // 選取語言
     const handleSelected = ({ target }) => {
 
-        globalDispatch({ type: 'lang_option', payload: target.value, });
+        router.push(router.asPath, router.asPath, { locale: target.value });
 
     };
 
@@ -33,16 +31,15 @@ const LangOption = () => {
 
         <LangOptionLayout
             name="lang"
+            defaultValue={router.locale}
             onChange={handleSelected}
         >
-            <option value="">{text_lang_option}</option>
-
             {
                 Object.keys(lang).map((code) => (
 
                     <option
                         key={code}
-                        value={langOpt}
+                        value={code}
                     >
                         {lang[code]}
                     </option>
@@ -65,45 +62,18 @@ const Footer = () => (
         >
             <Grid
                 item
-                xs={6}
+                xs={8}
+                className="grid-left"
             >
                 <img
-                    src="/favicon.ico"
+                    src="/logo_small.png"
                     alt=""
-                    width=""
-                    height=""
+                    width="30"
+                    height="25"
                 />
+
                 <span>© {dayjs().format('YYYY')} All rights reserved. Moonshine</span>
-            </Grid>
 
-            <Grid
-                item
-                xs={6}
-                className="grid-right"
-            >
-                <Community />
-                <LangOption />
-            </Grid>
-        </Grid>
-
-        <Grid
-            container
-            className="container Model-container"
-        >
-            <Grid
-                item
-                xs={6}
-            >
-                <p>
-                    {text_custom_service}: <Links url="mailto:service@moonshine.tw" newPage>service@moonshine.tw</Links>
-                </p>
-            </Grid>
-
-            <Grid
-                item
-                xs={6}
-                className="grid-right"
-            >
                 <Links
                     url="/privacy"
                     newPage
@@ -111,6 +81,21 @@ const Footer = () => (
                 >
                     {text_privacy_link}
                 </Links>
+
+                <Links url="mailto:service@moonshine.tw" newPage>{text_custom_service}: service@moonshine.tw</Links>
+            </Grid>
+
+            <Grid
+                item
+                xs={4}
+                className="grid-right"
+            >
+                {
+                    // Betty: 暫且沒有社群
+                    false && <Community />
+                }
+
+                <LangOption />
             </Grid>
         </Grid>
     </FooterLayout>

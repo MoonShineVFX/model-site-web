@@ -13,10 +13,6 @@ const deftag = {
         currency_tw: 'NT',
         currency_en: 'USD',
     },
-    lang: {
-        'zh-tw': '繁體中文',
-        'en-us': 'English',
-    },
     header: {
         text_cart_title: '購物車品項',
         text_go_to_checkout: '前往結帳',
@@ -25,7 +21,12 @@ const deftag = {
     footer: {
         text_privacy_link: '隱私權政策',
         text_custom_service: '客服信箱資訊',
-        text_lang_option: '請選擇語言',
+    },
+    lang: {
+        'zh': '繁體中文',
+        'en': 'English',
+        // 'cn': '简体中文',
+        // 'jp': '日文',
     },
     memberSign: {
         text_signin: '登入',

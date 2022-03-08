@@ -1,8 +1,10 @@
 import { styled } from '@mui/system';
 import GoogleLogin from 'react-google-login';
+import util from '../../utils/util';
 import Service from '../../utils/util.service';
 import deftag from '../../utils/util.deftag';
 
+const { redirectTo } = util;
 const {
     memberSign: { text_signin_with_google },
 } = deftag;
@@ -28,11 +30,7 @@ const SigninGoogle = () => {
 
         console.log('res:', res);
         Service.signWithGoogle({ access_token: res.accessToken })
-            .then(() => {
-
-                console.log('yahhhhh~~~');
-
-            });
+            .then(redirectTo);
 
     };
 

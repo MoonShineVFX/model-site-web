@@ -22,12 +22,10 @@ import FontIcon from '../src/components/FontIcon';
 import Lightbox from '../src/components/Lightbox';
 
 import { GlobalContext } from '../src/context/global.state';
-import util from '../src/utils/util';
 import utilConst from '../src/utils/util.const';
 import deftag from '../src/utils/util.deftag';
 import Service from '../src/utils/util.service';
 
-const { redirectTo } = util;
 const { paswdConfig } = utilConst;
 
 const {

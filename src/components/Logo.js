@@ -31,7 +31,7 @@ const Logo = ({ ...rest }) => (
             title={text_logo}
         >
             <img
-                src="/moonshine_logo.png"
+                src="/logo_large.png"
                 alt={text_logo}
                 width="291"
                 height="78"

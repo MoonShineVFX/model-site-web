@@ -1,8 +1,8 @@
 import { useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Result from '../src/components/Result';
-import { GlobalContext } from '../src/context/global.state';
-import deftag from '../src/utils/util.deftag';
+import Result from '../../src/components/Result';
+import { GlobalContext } from '../../src/context/global.state';
+import deftag from '../../src/utils/util.deftag';
 
 const {
     paymentResult: {

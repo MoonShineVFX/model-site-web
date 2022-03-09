@@ -114,7 +114,7 @@ const Cart = () => {
             </div>
             <div className="goToOrder">
                 <Links
-                    url={`/${logged ? 'member/cart' : 'signin'}`}
+                    url={`/${logged ? 'cart' : 'signin'}`}
                     title={text_go_to_checkout}
                     onClick={handleResetBox}
                 >

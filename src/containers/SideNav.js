@@ -57,7 +57,7 @@ const Sidenav = () => {
                 </div>
 
                 <Links
-                    url={logged ? '/member/cart' : '/signin'}
+                    url={logged ? '/cart' : '/signin'}
                     className="shopping-cart"
                 >
                     <FontIcon icon={faShoppingCart} />

@@ -69,10 +69,9 @@ const Item = ({
 
     return (
 
-        <ItemLayout>
+        <ItemLayout title={title}>
             <Links
                 url={`/product/${id}`}
-                title={title}
                 className="item-thumb"
                 newPage
             >
@@ -80,62 +79,62 @@ const Item = ({
                     src={imgUrl}
                     alt={title}
                     title={title}
-                    width="264"
-                    height="153"
+                    width="378"
+                    height="239"
                 />
             </Links>
 
             <div className="item-content">
-                <h3 className="title">{title}</h3>
+                <h3 className="title web-line-clamp">{title}</h3>
                 <span className="file-size">{text_file_size}: {formatBytes(fileSize)}</span>
-            </div>
 
-            {
-                // 手機版不支援下載
-                matches &&
-                    <div className="downloadWrap">
-                        <div className="options" onClick={(e) => e.preventDefault()}>
-                            <select
-                                name="formatId"
-                                onChange={(e) => handleSelected(e, id)}
-                            >
-                                <option value="">{detail_option_format}</option>
-                                {
-                                    Object.keys(options).map((formatId) => (
+                {
+                    // 手機版不支援下載
+                    matches &&
+                        <div className="downloadWrap">
+                            <div className="options" onClick={(e) => e.preventDefault()}>
+                                <select
+                                    name="formatId"
+                                    onChange={(e) => handleSelected(e, id)}
+                                >
+                                    <option value="">{detail_option_format}</option>
+                                    {
+                                        Object.keys(options).map((formatId) => (
 
-                                        <option
-                                            key={formatId}
-                                            value={formatId}
-                                        >
-                                            {options[formatId].name}
-                                        </option>
+                                            <option
+                                                key={formatId}
+                                                value={formatId}
+                                            >
+                                                {options[formatId].name}
+                                            </option>
 
-                                    ))
-                                }
-                            </select>
+                                        ))
+                                    }
+                                </select>
 
-                            <select
-                                name="rendererId"
-                                onChange={(e) => handleSelected(e, id)}
-                                value={selected[id]?.rendererId}
-                            >
-                                <option value="">{detail_option_renderer}</option>
-                                {
-                                    options[format]?.renders.map(({ rendererId, rendererName }) => (
+                                <select
+                                    name="rendererId"
+                                    onChange={(e) => handleSelected(e, id)}
+                                    value={selected[id]?.rendererId}
+                                >
+                                    <option value="">{detail_option_renderer}</option>
+                                    {
+                                        options[format]?.renders.map(({ rendererId, rendererName }) => (
 
-                                        <option key={rendererId} value={rendererId}>{rendererName}</option>
+                                            <option key={rendererId} value={rendererId}>{rendererName}</option>
 
-                                    ))
-                                }
-                            </select>
+                                        ))
+                                    }
+                                </select>
+                            </div>
+                            <ButtonLink
+                                url={selected[id]?.rendererId ? download : ''}
+                                text={text_download}
+                                className={`btn-download ${selected[id]?.rendererId ? '' : 'disabled'}`}
+                            />
                         </div>
-                        <ButtonLink
-                            url={selected[id]?.rendererId ? download : ''}
-                            text={text_download}
-                            className={`btn-download ${selected[id]?.rendererId ? '' : 'disabled'}`}
-                        />
-                    </div>
-            }
+                }
+            </div>
         </ItemLayout>
 
     );
@@ -148,15 +147,7 @@ const MyProduct = ({ data }) => (
     <Grid
         container
         className="container"
-        rowSpacing={{
-            xs: '20px',
-            middle: '40px',
-            md: '80px',
-        }}
-        columnSpacing={{
-            xs: '20px',
-            middle: '40px',
-        }}
+        spacing="30px"
     >
         {
             data.map((obj) => (
@@ -166,8 +157,7 @@ const MyProduct = ({ data }) => (
                     item
                     xs={12}
                     middle={6}
-                    sm={4}
-                    lg={3}
+                    mobile={4}
                 >
                     <Item data={obj} />
                 </Grid>

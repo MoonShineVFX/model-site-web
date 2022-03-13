@@ -122,8 +122,6 @@ const Account = ({ pageData }) => {
                     }
                 </Tabs>
 
-                <h1 className="second-title">{types[type].title}</h1>
-
                 {
                     // 手機版下載提示
                     (matches && (type === 'product')) && <p className="download-notice">{text_mobile_download_notice}</p>

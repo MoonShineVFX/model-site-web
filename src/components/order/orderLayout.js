@@ -50,7 +50,7 @@ const OrderRecordGridLayout = styled(Grid)(({ theme }) => ({
         fontSize: '0.9em',
         color: theme.palette.textColor,
         textDecoration: 'none',
-        border: '1px solid',
+        border: `1px solid ${theme.palette.border.dark}`,
         display: 'flex',
         flexWrap: 'wrap',
         padding: '20px 0 0',
@@ -73,49 +73,64 @@ const OrderRecordGridLayout = styled(Grid)(({ theme }) => ({
 
 // 訂單詳細
 const OrderDetailLayout = styled(BoxWrapLayout)(({ theme }) => ({
+    maxWidth: '800px',
     position: 'relative',
+    padding: '60px',
     '.info': {
-        borderBottom: `1px dashed ${theme.palette.border.dark}`,
-        marginBottom: '40px',
-        '.row': {
-            marginBottom: '20px',
-        },
+        marginBottom: '20px',
+    },
+    '.row-item': {
+        fontSize: '0.9em',
+        marginBottom: '20px',
     },
     '.title': {
-        fontSize: '0.9em',
-        fontWeight: 'normal',
+        fontSize: '1.15em',
         marginBottom: '4px',
+        opacity: '0.6',
+    },
+    '.items': {
+        borderTop: `1px dashed ${theme.palette.border.dark}`,
+        padding: '60px 0',
+    },
+    '.btn-action': {
+        textAlign: 'center',
+        'button': {
+            paddingLeft: '60px',
+            paddingRight: '60px',
+        },
     },
 }));
 
 // 購買商品
-const ItemWrapLayout = styled(Links)(({ theme }) => ({
+const ItemLayout = styled(Links)(({ theme }) => ({
     color: theme.palette.textColor,
     textDecoration: 'none',
     display: 'flex',
     alignItems: 'center',
-    '&:not(:last-child)': {
-        marginBottom: '20px',
-    },
     '.thumb': {
-        height: '93px',
-        borderRadius: '10px',
+        height: '110px',
+        borderRadius: theme.borderRadius,
+        marginRight: '16px',
         overflow: 'hidden',
     },
     '.content': {
-        flex: '1',
-        paddingLeft: '20px',
+        flex: '0 0 calc(100% - 150px)',
+        opacity: '0.6',
     },
     '.title': {
+        minHeight: '45px',
+        fontSize: '0.8em',
         fontWeight: 'normal',
-        margin: '0',
+        lineHeight: '1.4',
+        marginBottom: '10px',
+        opacity: '1',
     },
-    'img': {
-        width: '100%',
-    },
+    // 'img': {
+    //     width: '100%',
+    // },
     [theme.breakpoints.down('middle')]: {
         '.content': {
-            paddingLeft: '12px',
+            // paddingLeft: '12px',
         },
     },
 }));
@@ -124,5 +139,5 @@ export {
     OrderRecordLayout,
     OrderRecordGridLayout,
     OrderDetailLayout,
-    ItemWrapLayout,
+    ItemLayout,
 };

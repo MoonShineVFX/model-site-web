@@ -141,6 +141,7 @@ const Header = () => {
 
                             <Buttons
                                 text={my_account}
+                                variant="outlined"
                                 onClick={() => handleClickBox('myAccount')}
                             />
 

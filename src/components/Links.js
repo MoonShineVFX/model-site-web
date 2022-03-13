@@ -5,6 +5,7 @@ import { styled } from '@mui/system';
 import { Button } from '@mui/material';
 
 const ButtonLayout = styled(Button)(({ theme }) => ({
+    fontWeight: 'normal',
     minHeight: 'auto',
     lineHeight: 1,
     '&.default': {

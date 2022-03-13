@@ -156,7 +156,7 @@ const SideNavIconLayout = styled('span')(({ theme }) => ({
 /** Footer */
 const FooterLayout = styled('footer')(({ theme }) => ({
     fontSize: '0.9em',
-    borderTop: `1px solid ${theme.palette.border.dark}`,
+    borderTop: '1px solid rgba(255,255,255,0.10)',
     marginTop: '160px',
     padding: '40px 0',
     '*': {
@@ -166,11 +166,18 @@ const FooterLayout = styled('footer')(({ theme }) => ({
         alignItems: 'center',
         margin: 'auto',
     },
-    '.grid-left > *': {
-        display: 'inline-block',
-        verticalAlign: 'middle',
-        '&:not(img)': {
-            marginRight: '30px',
+    '.light': {
+        opacity: '0.6',
+    },
+    '.top > *': {
+        marginRight: '30px',
+    },
+    '.bottom': {
+        fontSize: '0.8em',
+        color: theme.palette.border.dark,
+        marginTop: '4px',
+        'a': {
+            color: '#BBB',
         },
     },
     '.grid-right': {
@@ -189,17 +196,41 @@ const FooterLayout = styled('footer')(({ theme }) => ({
         margin: '0 4px',
         padding: '4px',
     },
-    '.model-button': {
-        backgroundColor: theme.palette.card.main,
-        display: 'inline-block',
-        marginLeft: '30px',
-        padding: '10px 30px',
-    },
     'p': {
         marginTop: theme.spacing(5),
     },
+    [theme.breakpoints.up('mobile')]: {
+        '.grid-left > *': {
+            display: 'inline-block',
+            verticalAlign: 'middle',
+        },
+    },
     [theme.breakpoints.down('mobile')]: {
         marginTop: '40px',
+        '.container': {
+            flexDirection: 'column-reverse',
+        },
+        '.grid-left': {
+            textAlign: 'center',
+            marginTop: '30px',
+        },
+        'img': {
+            maxWidth: '30px',
+            height: '100%',
+            verticalAlign: 'middle',
+        },
+        '.copyright': {
+            verticalAlign: 'middle',
+        },
+        '.top': {
+            marginTop: '2px',
+            '> *': {
+                marginRight: '20px',
+            },
+        },
+        '.bottom': {
+            margin: '10px 0',
+        },
     },
 }));
 
@@ -209,8 +240,10 @@ const LangOptionLayout = styled('select')(({ theme }) => ({
     backgroundColor: theme.palette.card.main,
     border: '0',
     borderRadius: theme.borderRadius,
-    marginLeft: '20px',
     padding: '16px 20px',
+    [theme.breakpoints.up('mobile')]: {
+        marginLeft: '20px',
+    },
 }));
 
 export {

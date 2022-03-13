@@ -88,9 +88,9 @@ const styles = {
             },
         },
     },
-    // '.grecaptcha-badge': {
-    //     visibility: 'hidden',
-    // },
+    '.grecaptcha-badge': {
+        visibility: 'hidden',
+    },
     [theme.breakpoints.down('mobile')]: {
         '.Model-container': {
             padding: '0 30px',

@@ -20,7 +20,7 @@ const deftag = {
     },
     footer: {
         text_privacy_link: '隱私權政策',
-        text_custom_service: '客服信箱資訊',
+        text_custom_service: '客服信箱',
     },
     lang: {
         'zh': '繁體中文',
@@ -121,12 +121,11 @@ const deftag = {
         support_render: '個以上算圖引擎支援',
     },
     tutorial: {
-        page_title: '網站使用文件',
+        page_title: '教學文件',
     },
     paymentResult: {
-        page_title: '付款結果',
-        text_message: '資訊將在3分鐘後更新',
-        text_direct_to_order_detail: '查看訂單詳細',
+        page_title: '購買成功',
+        text_direct_to_order_detail: '訂單明細',
     },
     privacy: {
         page_title: '會員條款與隱私權政策',

@@ -1,7 +1,9 @@
 import { Fragment, useContext, useEffect } from 'react';
+import { Grid } from '@mui/material';
 import { TitleLayout } from '../../src/components/member/cartLayout';
-import { OrderDetailLayout, ItemWrapLayout } from '../../src/components/order/orderLayout';
+import { OrderDetailLayout, ItemLayout } from '../../src/components/order/orderLayout';
 import HeadTag from '../../src/containers/HeadTag';
+import { ButtonLink } from '../../src/components/Links';
 import { GlobalContext } from '../../src/context/global.state';
 import util from '../../src/utils/util';
 import deftag from '../../src/utils/util.deftag';
@@ -20,9 +22,46 @@ const {
         text_order_invoice,
         text_order_detail_title,
     },
+    member: {
+        text_my_product
+    },
 } = deftag;
 
 const OrderDetail = ({ pageData }) => {
+
+    // Fake
+    pageData.products = [
+        {
+            "id": 1,
+            "title": "測試模型1 測試模型1 測試模型1 測試模型1 測試模型1 測試模型1",
+            "imgUrl": "//fakeimg.pl/150x110",
+            "price": 100
+        },
+        {
+            "id": 2,
+            "title": "測試模型2",
+            "imgUrl": "//fakeimg.pl/150x110",
+            "price": 100
+        },
+        {
+            "id": 3,
+            "title": "測試模型3",
+            "imgUrl": "//fakeimg.pl/150x110",
+            "price": 100
+        },
+        {
+            "id": 4,
+            "title": "測試模型4",
+            "imgUrl": "//fakeimg.pl/150x110",
+            "price": 100
+        },
+        {
+            "id": 5,
+            "title": "測試模型5",
+            "imgUrl": "//fakeimg.pl/150x110",
+            "price": 100
+        },
+    ];
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
@@ -41,67 +80,103 @@ const OrderDetail = ({ pageData }) => {
             <TitleLayout>{text_order_detail_title}</TitleLayout>
 
             <OrderDetailLayout>
-                <div className="info">
-                    <div className="row">
-                        <h4 className="title">{text_order_number}</h4>
-                        <div>{pageData.orderNumber}</div>
-                    </div>
-                    <div className="row">
-                        <h4 className="title">{text_order_create_at}</h4>
-                        <div>{dateFormat(pageData.createdAt)}</div>
-                    </div>
-                    <div className="row">
-                        <h4 className="title">{text_order_paid_at}</h4>
-                        <div>{dateFormat(pageData.paidAt)}</div>
-                    </div>
-                    <div className="row">
-                        <h4 className="title">{text_order_quantity}</h4>
-                        <div>{pageData.totalItems}</div>
-                    </div>
-                    <div className="row">
-                        <h4 className="title">{text_order_total_price}</h4>
-                        <div>{priceWithCommas(pageData.price)}</div>
-                    </div>
-                    <div className="row">
-                        <h4 className="title">{text_order_status}</h4>
-                        <div>{deftag.orderRecord[`text_status_${pageData.status}`]}</div>
-                    </div>
-                    <div className="row">
-                        <h4 className="title">{text_order_payment}</h4>
-                        <div>{deftag.orderRecord[`text_payment_${pageData.paidBy}`]}</div>
-                    </div>
-                    <div className="row">
-                        <h4 className="title">{text_order_invoice}</h4>
-                        <div>{pageData.invoice}</div>
-                    </div>
-                </div>
+                <Grid
+                    container
+                    rowSpacing={{ mobile: '60px' }}
+                    columnSpacing="60px"
+                    className="info"
+                >
+                    <Grid
+                        item
+                        xs={12}
+                        mobile={6}
+                    >
+                        <div className="row-item">
+                            <h4 className="title">{text_order_number}</h4>
+                            <div>{pageData.orderNumber}</div>
+                        </div>
+                        <div className="row-item">
+                            <h4 className="title">{text_order_create_at}</h4>
+                            <div>{dateFormat(pageData.createdAt)}</div>
+                        </div>
+                        <div className="row-item">
+                            <h4 className="title">{text_order_paid_at}</h4>
+                            <div>{dateFormat(pageData.paidAt)}</div>
+                        </div>
+                        <div className="row-item">
+                            <h4 className="title">{text_order_payment}</h4>
+                            <div>{deftag.orderRecord[`text_payment_${pageData.paidBy}`]}</div>
+                        </div>
+                    </Grid>
 
-                <div className="items">
+                    <Grid
+                        item
+                        xs={12}
+                        mobile={6}
+                    >
+                        <div className="row-item">
+                            <h4 className="title">{text_order_quantity}</h4>
+                            <div>{pageData.totalItems}</div>
+                        </div>
+                         <div className="row-item">
+                            <h4 className="title">{text_order_total_price}</h4>
+                            <div>{priceWithCommas(pageData.price)}</div>
+                        </div>
+                        <div className="row-item">
+                            <h4 className="title">{text_order_status}</h4>
+                            <div>{deftag.orderRecord[`text_status_${pageData.status}`]}</div>
+                        </div>
+                        <div className="row-item">
+                            <h4 className="title">{text_order_invoice}</h4>
+                            <div>{pageData.invoice}</div>
+                        </div>
+                    </Grid>
+                </Grid>
+
+                <Grid
+                    container
+                    rowSpacing="30px"
+                    columnSpacing="60px"
+                    className="items"
+                >
                     {
                         pageData.products.map(({ id, title, imgUrl, price }) => (
 
-                            <ItemWrapLayout
+                            <Grid
                                 key={id}
-                                url={`/product/${id}`}
-                                newPage
+                                item
+                                xs={12}
+                                mobile={6}
                             >
-                                <div className="thumb">
-                                    <img
-                                        src={imgUrl}
-                                        alt={title}
-                                        title={title}
-                                        width="160"
-                                        height="93"
-                                    />
-                                </div>
-                                <div className="content">
-                                    <h4 className="title">{title}</h4>
-                                    <span className="price">{priceWithCommas(price)}</span>
-                                </div>
-                            </ItemWrapLayout>
+                                <ItemLayout
+                                    url={`/product/${id}`}
+                                    newPage
+                                >
+                                    <span className="thumb">
+                                        <img
+                                            src={imgUrl}
+                                            alt={title}
+                                            title={title}
+                                            width="150"
+                                            height="110"
+                                        />
+                                    </span>
+                                    <span className="content">
+                                        <h4 className="title web-line-clamp">{title}</h4>
+                                        <span>{priceWithCommas(price)}</span>
+                                    </span>
+                                </ItemLayout>
+                            </Grid>
 
                         ))
                     }
+                </Grid>
+
+                <div className="btn-action">
+                    <ButtonLink
+                        text={text_my_product}
+                        url="/member/account"
+                    />
                 </div>
             </OrderDetailLayout>
         </Fragment>

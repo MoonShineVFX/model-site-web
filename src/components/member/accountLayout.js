@@ -7,48 +7,81 @@ const TabWrapLayout = styled('section')(({ theme }) => ({
         display: 'none',
     },
     '.tab-menu': {
-        maxWidth: '60%',
+        backgroundColor: theme.palette.card.main,
         margin: 'auto',
+        '&:before': {
+            content: "''",
+            width: '100%',
+            height: '70px',
+            backgroundColor: theme.palette.card.main,
+            position: 'absolute',
+            left: '0',
+            zIndex: '0',
+        },
         'button': {
+            height: '70px',
             fontSize: '1em',
             color: theme.palette.textColor,
-            margin: '0 20px',
-            padding: '0',
+            margin: '0 30px',
+            padding: '0 30px',
             flex: '1',
             opacity: '0.6',
             '&.Mui-selected': {
+                fontWeight: 'normal',
+                color: theme.palette.textColor,
                 opacity: '1',
+                '&:after': {
+                    content: "''",
+                    width: '100%',
+                    height: '4px',
+                    backgroundColor: theme.palette.primary.main,
+                    position: 'absolute',
+                    left: '0',
+                    bottom: '0',
+                },
             },
         },
     },
-    '.MuiTabs-flexContainer': {
-        justifyContent: 'center',
+    '.tab-panel': {
+        paddingTop: '80px',
     },
-    '.second-title': {
-        fontSize: '1.9em',
-        fontWeight: 'normal',
-        margin: '80px 0',
+    '.MuiTabs-flexContainer': {
+        display: 'block',
+        textAlign: 'center',
     },
     [theme.breakpoints.down('mobile')]: {
-        '.tab-menu': {
-            maxWidth: '100%',
-        },
-        '.second-title': {
-            fontSize: '1.3em',
-            margin: '40px 0 20px',
+        '.tab-menu button': {
+            paddingLeft: '20px',
+            paddingRight: '20px',
         },
         '.download-notice': {
             fontSize: '0.8em',
-            margin: '20px 0',
+            margin: '50px 0 0',
             opacity: '0.6',
+        },
+        '.tab-panel': {
+            paddingTop: '40px',
+        },
+    },
+    [theme.breakpoints.down('sm')]: {
+        '.tab-menu': {
+            fontSize: '0.9em',
+            minHeight: 'auto',
+            '&:before': {
+                height: '58px',
+            },
+            'button': {
+                height: '58px',
+                margin: '0',
+            },
+        },
+        '.MuiTabs-flexContainer': {
+            display: 'flex',
         },
     },
     [theme.breakpoints.down('middle')]: {
-        '.tab-menu': {
-            fontSize: '0.9em',
-            'button': {
-                margin: '0',
-            },
+        '.item-content': {
+            padding: '20px',
         },
     },
 }));
@@ -56,49 +89,52 @@ const TabWrapLayout = styled('section')(({ theme }) => ({
 // 我的模型庫
 const ItemLayout = styled('div')(({ theme }) => ({
     lineHeight: '1.4',
+    borderRadius: '10px',
+    overflow: 'hidden',
     cursor: 'default',
+    '.item-content': {
+        backgroundColor: theme.palette.card.main,
+        padding: '30px',
+    },
     '.item-thumb': {
-        height: '153px',
+        height: '239px',
         borderRadius: '0',
         display: 'block',
-        'img': {
-            width: '100%',
-            height: '100%',
-        },
     },
-    '.item-content': {
-        marginBottom: '20px',
+    'img': {
+        width: '100%',
     },
     '.title': {
         fontWeight: 'normal',
-        marginBottom: '8px',
+        WebkitLineClamp: theme.lineClamp(1),
+        margin: '0 0 10px',
     },
     '.file-size': {
+        fontSize: '0.9em',
         opacity: '0.6',
     },
     '.downloadWrap': {
-        padding: '0 20px',
+        marginTop: '20px',
     },
     '.options': {
-        display: 'flex',
-        margin: '0 -8px 20px',
-        '> *': {
-            flex: '1',
-        },
+        textAlign: 'right',
+        marginBottom: '20px',
     },
     'select': {
         fontSize: '0.9em',
         color: theme.palette.textColor,
-        backgroundColor: theme.palette.bgColor,
-        border: '0',
-        borderBottom: `1px solid ${theme.palette.border.dark}`,
-        margin: '0 8px',
-        padding: '12px 2px',
+        backgroundColor: theme.palette.card.main,
+        border: '1px solid',
+        borderRadius: theme.borderRadius,
+        marginLeft: '12px',
+        padding: '12px 20px',
         opacity: '0.8',
     },
+    '.btn-download': {
+        textAlign: 'right',
+    },
     '.model-button': {
-        width: '100%',
-        borderRadius: '0',
+        borderRadius: '4px',
         marginTop: '24px',
         paddingTop: '4px',
         paddingBottom: '4px',
@@ -106,7 +142,7 @@ const ItemLayout = styled('div')(({ theme }) => ({
         zIndex: '1',
         '&.default': {
             marginTop: '0',
-            padding: '10px',
+            padding: '12px 70px',
         },
     },
     '.disabled': {
@@ -115,22 +151,6 @@ const ItemLayout = styled('div')(({ theme }) => ({
         '.model-button': {
             color: '#A6A6A6',
             backgroundColor: '#CCC',
-        },
-    },
-    [theme.breakpoints.down('middle')]: {
-        borderRadius: '10px',
-        overflow: 'hidden',
-        '.item-thumb': {
-            height: '173px',
-        },
-        '.item-content': {
-            fontSize: '0.9em',
-            backgroundColor: theme.palette.card.main,
-            marginBottom: '0',
-            padding: '12px 16px',
-        },
-        '.title': {
-            margin: '0',
         },
     },
 }));
@@ -161,6 +181,9 @@ const BoxWrapLayout = styled(Box)(({ theme }) => ({
     },
     '.form-row:not(.Model-form-button)': {
         marginBottom: '30px',
+    },
+    '.model-button': {
+        marginLeft: '0',
     },
     [theme.breakpoints.down('sm')]: {
         fontSize: '1em',

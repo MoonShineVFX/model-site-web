@@ -1,16 +1,16 @@
 import PropTypes from 'prop-types';
 import { styled } from '@mui/system';
 import { Button } from '@mui/material';
-import { ArrowForwardIos as ArrowForwardIosIcon } from '@mui/icons-material';
 
 //
 const ButtonLayout = styled(Button)(({ theme }) => ({
-    color: theme.palette.primary.contrastText,
-    backgroundColor: theme.palette.primary.main,
+    fontWeight: 'normal',
     display: 'block',
     padding: '10px 18px',
-    '&:hover': {
-        backgroundColor: theme.palette.primary.light,
+    '&.MuiButton-contained': {
+        '&:hover': {
+            backgroundColor: theme.palette.primary.light,
+        },
     },
     '.MuiButton-endIcon': {
         textAlign: 'right',
@@ -25,22 +25,32 @@ const ButtonLayout = styled(Button)(({ theme }) => ({
         color: '#A6A6A6',
         backgroundColor: '#CCC',
     },
+    '&.MuiButton-outlined': {
+        color: theme.palette.textColor,
+        borderColor: theme.palette.border.light,
+    },
 }));
 
 //
-const Buttons = ({ text, children, ...rest }) => (
+const Buttons = ({ text, variant, children, ...rest }) => (
 
     <ButtonLayout
         {...rest}
         className="model-button"
+        variant={variant}
     >
         {text ? text : children}
     </ButtonLayout>
 
 );
 
+Buttons.defaultProps = {
+    variant: 'contained',
+};
+
 Buttons.propTypes = {
     text: PropTypes.string,
+    variant: PropTypes.string,
     children: PropTypes.any,
 };
 

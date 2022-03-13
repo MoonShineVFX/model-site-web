@@ -10,42 +10,45 @@ const { about } = deftag;
 
 //
 const BannerLayout = styled('section')(({ theme }) => ({
-    height: '396px',
     fontSize: '1.25em',
     marginBottom: '40px',
     position: 'relative',
-    '&:before': {
-        content: '""',
-        height: '100%',
-        display: 'inline-block',
-        verticalAlign: 'middle',
-    },
     '.thumb': {
         width: '100%',
         height: '100%',
         borderRadius: theme.borderRadius,
-        position: 'absolute',
-        opacity: '.6',
+        opacity: '0.6',
         overflow: 'hidden',
-        top: '0',
-        left: '0',
-        zIndex: '-1',
-    },
-    '.description': {
-        display: 'inline-block',
-        verticalAlign: 'middle',
-        padding: '0 110px',
     },
     '.title': {
         fontSize: '1.7em',
         marginTop: '0',
     },
+    [theme.breakpoints.up('mobile')]: {
+        height: '396px',
+        padding: '0 110px',
+        '&:before': {
+            content: '""',
+            height: '100%',
+            display: 'inline-block',
+            verticalAlign: 'middle',
+        },
+        '.thumb': {
+            position: 'absolute',
+            top: '0',
+            left: '0',
+            zIndex: '-1',
+        },
+        '.description': {
+            display: 'inline-block',
+            verticalAlign: 'middle',
+        },
+    },
     [theme.breakpoints.down('mobile')]: {
-        height: '253px',
         fontSize: '1em',
         marginBottom: '20px',
-        '.description': {
-            padding: '0 30px',
+        '.thumb': {
+            height: '253px',
         },
         '.title': {
             fontSize: '1.3em',
@@ -55,9 +58,14 @@ const BannerLayout = styled('section')(({ theme }) => ({
                 margin: '10px 0',
             },
         },
+        '.description': {
+            margin: '30px 0',
+        },
     },
     [theme.breakpoints.down('middle')]: {
-        height: '158px',
+        '.thumb': {
+            height: '180px',
+        },
     },
 }));
 
@@ -72,6 +80,7 @@ const SupportLayout = styled(Grid)(({ theme }) => ({
         lineHeight: '1',
         fontSize: '2.3em',
         fontFamily: 'Robot',
+        color: theme.palette.primary.main,
         margin: '0 0 16px',
     },
     [theme.breakpoints.down('sm')]: {
@@ -127,10 +136,10 @@ const About = ({ pageData }) => {
                     />
                 </div>
 
-                <span className="description">
+                <div className="description">
                     <h1 className="title">{title}</h1>
                     <p>{description}</p>
-                </span>
+                </div>
             </BannerLayout>
 
             <SupportLayout

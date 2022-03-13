@@ -1,16 +1,41 @@
 import { useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { styled } from '@mui/system';
+import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
+import { ButtonLink } from '../../src/components/Links';
 import Result from '../../src/components/Result';
 import { GlobalContext } from '../../src/context/global.state';
 import deftag from '../../src/utils/util.deftag';
 
 const {
+    member: { text_my_product },
     paymentResult: {
         page_title,
-        text_message,
         text_direct_to_order_detail,
     },
 } = deftag;
+
+//
+const ResultWrap = styled(Result)(({ theme }) => ({
+    '.model-button.third': {
+        borderRadius: '40px',
+        marginTop: '30px',
+    },
+    [theme.breakpoints.down('sm')]: {
+        padding: '60px 40px',
+    },
+    [theme.breakpoints.down('middle')]: {
+        padding: '40px',
+        'button.model-button': {
+            fontSize: '1em',
+            paddingTop: '16px',
+            paddingBottom: '16px',
+            '&.third': {
+                marginTop: '20px',
+            },
+        },
+    },
+}));
 
 //
 const PaymentResult = () => {
@@ -30,12 +55,18 @@ const PaymentResult = () => {
 
     return (
 
-        <Result
+        <ResultWrap
             title={page_title}
-            message={text_message}
-            btnText={text_direct_to_order_detail}
-            linkTo={`/order/${router.query.no}`}
-        />
+            btnText={text_my_product}
+            linkTo="/member/account"
+            icon={faCircleCheck}
+        >
+            <ButtonLink
+                type="third"
+                url={`/order/${router.query.no}`}
+                text={text_direct_to_order_detail}
+            />
+        </ResultWrap>
 
     );
 

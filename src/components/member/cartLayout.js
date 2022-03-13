@@ -4,8 +4,9 @@ import Links from '../Links';
 // 外層 form
 //
 const TitleLayout = styled('h1')(({ theme }) => ({
+    fontWeight: 'normal',
     textAlign: 'center',
-    marginBottom: '100px',
+    marginBottom: '60px',
     [theme.breakpoints.down('mobile')]: {
         marginBottom: '60px',
     },

@@ -8,42 +8,62 @@ import {
 } from './member/cartLayout';
 import HeadTag from '../containers/HeadTag';
 import { ButtonLink } from './Links';
+import FontIcon from './FontIcon';
+
+const TitleWrapLayout = styled(TitleLayout)(({ theme }) => ({
+    '&.withIcon': {
+        marginBottom: '30px',
+    },
+    '.status': {
+        fontSize: '3.6em',
+        color: theme.palette.primary.main,
+    },
+}));
 
 //
 const ResultLayout = styled(CartLayout)(({ theme }) => ({
     minHeight: '200px',
     fontSize: '1.2em',
     textAlign: 'center',
-    padding: '40px 80px 80px',
+    padding: '80px',
     '.btn-linkTo': {
         width: '100%',
     },
-    '.model-button': {
-        marginTop: '20px',
+    'button.model-button': {
+        marginTop: '0',
+        padding: '20px 36px',
     },
 }));
 
 //
 const Result = ({
     title,
+    icon,
     message,
     btnText,
     linkTo,
+    children,
+    ...rest
 }) => (
 
     <Fragment>
         <HeadTag title={title} />
-        <TitleLayout>{title}</TitleLayout>
+        <TitleWrapLayout {...icon && { className: 'withIcon' }}>
+            {title}
+            {icon && <div className="status"><FontIcon icon={icon} /></div>}
+        </TitleWrapLayout>
 
         <SectionLayout>
-            <ResultLayout>
-                <p>{message}</p>
+            <ResultLayout {...rest}>
+                {message && <p>{message}</p>}
 
                 <ButtonLink
                     url={linkTo}
                     className="btn-linkTo"
                     text={btnText}
                 />
+
+                {children}
             </ResultLayout>
         </SectionLayout>
     </Fragment>
@@ -52,9 +72,11 @@ const Result = ({
 
 Result.propTypes = {
     title: PropTypes.string,
+    icon: PropTypes.string,
     message: PropTypes.string,
     btnText: PropTypes.string,
     linkTo: PropTypes.string.isRequired,
+    children: PropTypes.any,
 };
 
 export default Result;

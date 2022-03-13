@@ -14,6 +14,7 @@ const { tutorial: { page_title } } = deftag;
 //
 const TitleLayout = styled('h1')(({ theme }) => ({
     fontSize: '2.15em',
+    fontWeight: 'normal',
     marginBottom: '120px',
     [theme.breakpoints.up('middle')]: {
         textAlign: 'center',

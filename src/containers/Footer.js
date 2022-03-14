@@ -84,17 +84,19 @@ const Footer = () => {
                             <Fragment>
                                 <span className="copyright">© {dayjs().format('YYYY')} All rights reserved. Moonshine</span>
                                 <div className="top">
-                                    <Links
-                                        url="/privacy"
-                                        newPage
-                                        className="light privacy-link"
-                                    >
-                                        {text_privacy_link}
-                                    </Links>
+                                    <div className="link">
+                                        <Links
+                                            url="/privacy"
+                                            newPage
+                                            className="light privacy-link"
+                                        >
+                                            {text_privacy_link}
+                                        </Links>
 
-                                    <Links url="mailto:service@moonshine.tw" className="light" newPage>{text_custom_service}: service@moonshine.tw</Links>
+                                        <Links url="mailto:service@moonshine.tw" className="light" newPage>{text_custom_service}: service@moonshine.tw</Links>
+                                    </div>
+                                    <p className="bottom">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.</p>
                                 </div>
-                                <p className="bottom">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.</p>
                             </Fragment>
 
                         ) : (

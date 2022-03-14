@@ -169,9 +169,6 @@ const FooterLayout = styled('footer')(({ theme }) => ({
     '.light': {
         opacity: '0.6',
     },
-    '.top > *': {
-        marginRight: '30px',
-    },
     '.bottom': {
         fontSize: '0.8em',
         color: theme.palette.border.dark,
@@ -204,6 +201,9 @@ const FooterLayout = styled('footer')(({ theme }) => ({
             display: 'inline-block',
             verticalAlign: 'middle',
         },
+        '.light': {
+            marginLeft: '30px',
+        },
     },
     [theme.breakpoints.down('mobile')]: {
         marginTop: '40px',
@@ -223,13 +223,14 @@ const FooterLayout = styled('footer')(({ theme }) => ({
             verticalAlign: 'middle',
         },
         '.top': {
+            maxWidth: '330px',
             marginTop: '2px',
-            '> *': {
-                marginRight: '20px',
-            },
+        },
+        '.light': {
+            margin: '0 10px',
         },
         '.bottom': {
-            margin: '10px 0',
+            margin: '10px 0 0',
         },
     },
 }));

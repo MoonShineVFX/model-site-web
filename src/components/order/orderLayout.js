@@ -80,16 +80,19 @@ const OrderDetailLayout = styled(BoxWrapLayout)(({ theme }) => ({
         marginBottom: '20px',
     },
     '.row-item': {
-        fontSize: '0.9em',
         marginBottom: '20px',
+        '.title': {
+            marginBottom: '4px',
+            opacity: '0.6',
+        },
+        '.value': {
+            fontSize: '0.8em',
+        },
     },
-    '.title': {
-        fontSize: '1.15em',
-        marginBottom: '4px',
-        opacity: '0.6',
+    '.items-container': {
+        borderTop: `1px dashed ${theme.palette.border.dark}`,
     },
     '.items': {
-        borderTop: `1px dashed ${theme.palette.border.dark}`,
         padding: '60px 0',
     },
     '.btn-action': {
@@ -98,6 +101,25 @@ const OrderDetailLayout = styled(BoxWrapLayout)(({ theme }) => ({
             paddingLeft: '60px',
             paddingRight: '60px',
         },
+    },
+    [theme.breakpoints.down('mobile')]: {
+        '.items': {
+            padding: '40px 0',
+        },
+        '.btn-action': {
+            'button': {
+                width: '100%',
+            },
+        },
+    },
+    [theme.breakpoints.down('sm')]: {
+        padding: '30px',
+        '.row-item': {
+            fontSize: '1.25em',
+        },
+    },
+    [theme.breakpoints.down('middle')]: {
+        padding: '30px 20px',
     },
 }));
 
@@ -116,21 +138,30 @@ const ItemLayout = styled(Links)(({ theme }) => ({
     '.content': {
         flex: '0 0 calc(100% - 150px)',
         opacity: '0.6',
+        '.title': {
+            minHeight: '45px',
+            fontSize: '0.8em',
+            fontWeight: 'normal',
+            lineHeight: '1.4',
+            marginBottom: '10px',
+            opacity: '1',
+        },
     },
-    '.title': {
-        minHeight: '45px',
-        fontSize: '0.8em',
-        fontWeight: 'normal',
-        lineHeight: '1.4',
-        marginBottom: '10px',
-        opacity: '1',
-    },
-    // 'img': {
-    //     width: '100%',
-    // },
-    [theme.breakpoints.down('middle')]: {
+    [theme.breakpoints.down('sm')]: {
         '.content': {
-            // paddingLeft: '12px',
+            fontSize: '1.25em',
+            '.title': {
+                minHeight: '43px',
+            },
+        },
+    },
+    [theme.breakpoints.down('middle')]: {
+        '.thumb': {
+            height: '95px',
+        },
+        '.content': {
+            fontSize: '1.15em',
+            flex: '0 0 calc(100% - 130px)',
         },
     },
 }));

@@ -15,7 +15,7 @@ const homeStyles = <GlobalStyles styles={styles} />;
 const BannerWrapLayout = styled('div')(({ theme }) => ({
     [theme.breakpoints.down('md')]: {
         marginBottom: '40px',
-        '.slideshow-control-arrows': {
+        '.slideshow-control-arrows, .flag, .description': {
             display: 'none',
         },
         '.container': {
@@ -36,20 +36,13 @@ const BannerWrapLayout = styled('div')(({ theme }) => ({
                 maxWidth: 'none',
             },
             '> div': {
-                width: 'calc(100% - 20px)',
-                height: '10vh',
-                backgroundColor: theme.palette.primary.main,
-                borderRadius: '50px',
-                padding: '10px 16px',
+                width: '100%',
+                backgroundColor: 'rgba(47, 48, 49, 0.82)',
+                padding: '20px',
                 position: 'absolute',
                 left: '50%',
-                bottom: '10px',
+                bottom: '0',
                 transform: 'translateX(-50%)',
-                opacity: '0.82',
-                display: '-webkit-box',
-                WebkitLineClamp: theme.lineClamp(),
-                WebkitBoxOrient: 'vertical',
-                overflow: 'hidden',
             },
         },
     },
@@ -133,9 +126,23 @@ const SlideShowItemLayout = styled('div')(({ theme }) => ({
 //
 const SlideshowInfoLayout = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.card.main,
-    padding: '30px 36px',
+    padding: '50px',
     position: 'relative',
     flex: '1',
+    '.title': {
+        lineHeight: '1.2',
+        fontWeight: 'normal',
+        margin: '10px 0 20px',
+    },
+    '.flag': {
+        fontSize: '0.9em',
+        color: theme.palette.primary.main,
+    },
+    [theme.breakpoints.down('md')]: {
+        '.title': {
+            margin: '0',
+        },
+    },
 }));
 
 //

@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useMediaQuery } from '@mui/material';
 import {
     BannerWrapLayout,
     SlideShowWrapLayout,
@@ -9,6 +10,8 @@ import Links from '../Links';
 import { GlobalContext } from '../../context/global.state';
 
 const Banner = ({ pageData }) => {
+
+    const matches = useMediaQuery((theme) => theme.breakpoints.down('mobile'));
 
     // Context
     const { slideshowActive } = useContext(GlobalContext);
@@ -24,9 +27,10 @@ const Banner = ({ pageData }) => {
                     pageData.banners.map(({
                         id,
                         title,
-                        detail,
-                        imgUrl,
+                        description,
                         link,
+                        imgUrl,
+                        mobileImgUrl,
                     }, idx) => (
 
                         <SlideShowItemLayout
@@ -40,15 +44,17 @@ const Banner = ({ pageData }) => {
                                     newPage
                                 >
                                     <img
-                                        src={imgUrl}
+                                        src={matches ? mobileImgUrl : imgUrl}
                                         alt={title}
-                                        width="840"
-                                        height="386"
+                                        width={matches ? '436' : '840'}
+                                        height={matches ? '606' : '386'}
                                     />
                                 </Links>
 
                                 <SlideshowInfoLayout>
-                                    <div dangerouslySetInnerHTML={{ __html: detail }} />
+                                    <span className="flag">New</span>
+                                    <h2 className="title">{title}</h2>
+                                    <p className="description">{description}</p>
                                 </SlideshowInfoLayout>
                             </div>
                         </SlideShowItemLayout>

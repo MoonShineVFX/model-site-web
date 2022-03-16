@@ -6,7 +6,7 @@ import util from '../src/utils/util';
 import deftag from '../src/utils/util.deftag';
 
 const {
-    privacy: { page_title },
+    privacy: { privacy_title },
 } = deftag;
 
 //
@@ -25,8 +25,8 @@ const Privacy = ({ pageData }) => {
     return (
 
         <Fragment>
-            <HeadTag title={page_title} />
-            <TitleLayout>{page_title}</TitleLayout>
+            <HeadTag title={privacy_title} />
+            <TitleLayout>{privacy_title}</TitleLayout>
 
             <SectionLayout>
                 <div dangerouslySetInnerHTML={{ __html: pageData.detail }} />

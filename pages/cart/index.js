@@ -28,11 +28,11 @@ import Service from '../../src/utils/util.service';
 const { priceWithCommas } = util;
 const {
     cart: {
-        text_order_title,
+        cart_order_title,
         btn_confirm_order,
-        section_title,
-        text_notice,
-        text_empty_cart,
+        cart_section_title,
+        cart_text_notice,
+        cart_text_empty,
     },
 } = deftag;
 
@@ -173,11 +173,11 @@ const Cart = ({ pageData }) => {
     return (
 
         <Fragment>
-            <HeadTag title={text_order_title} />
-            <TitleLayout>{text_order_title}</TitleLayout>
+            <HeadTag title={cart_order_title} />
+            <TitleLayout>{cart_order_title}</TitleLayout>
 
             <SectionLayout>
-                <h3 className="title-large">{section_title}</h3>
+                <h3 className="title-large">{cart_section_title}</h3>
 
                 <CartLayout>
                     {
@@ -210,7 +210,7 @@ const Cart = ({ pageData }) => {
                                 </div>
                             </Fragment>
 
-                        ) : text_empty_cart
+                        ) : cart_text_empty
                     }
                 </CartLayout>
 
@@ -219,7 +219,7 @@ const Cart = ({ pageData }) => {
                         text={btn_confirm_order}
                         onClick={handleClickOrder}
                     />
-                    <p>{text_notice}</p>
+                    <p>{cart_text_notice}</p>
                 </div>
             </SectionLayout>
 

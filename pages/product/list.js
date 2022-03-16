@@ -32,10 +32,10 @@ import util from '../../src/utils/util';
 import deftag from '../../src/utils/util.deftag';
 
 const {
+    common: { menu_store },
     product: {
-        page_title,
-        select_label,
-        text_filter_no_product,
+        product_select_label,
+        product_no_data,
     },
 } = deftag;
 
@@ -107,7 +107,7 @@ const ProductList = ({ pageData }) => {
     return (
 
         <Fragment>
-            <HeadTag title={page_title} />
+            <HeadTag title={menu_store} />
 
             <GridLayout
                 container
@@ -126,7 +126,7 @@ const ProductList = ({ pageData }) => {
                             component="aside"
                             className="tagsList"
                         >
-                            <ListTitleLayout>{select_label}</ListTitleLayout>
+                            <ListTitleLayout>{product_select_label}</ListTitleLayout>
                             <List>
                                 {
                                     tagsOpt.map(({ id, name }) => (
@@ -193,7 +193,7 @@ const ProductList = ({ pageData }) => {
                                 }
                             </ItemWrapLayout>
 
-                        ) : <h2 className="no-product">{text_filter_no_product}</h2>
+                        ) : <h2 className="no-product">{product_no_data}</h2>
                     }
 
                     {

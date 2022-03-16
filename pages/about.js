@@ -123,7 +123,7 @@ const About = ({ pageData }) => {
     return (
 
         <Fragment>
-            <HeadTag title={about.page_title} />
+            <HeadTag title={about.about_title} />
 
             <BannerLayout>
                 <div className="thumb">
@@ -156,7 +156,7 @@ const About = ({ pageData }) => {
                             xs={4}
                         >
                             <p className="count">{support[key]}</p>
-                            {about[`support_${key}`]}
+                            {about[`about_support_${key}`]}
                         </Grid>
 
                     ))

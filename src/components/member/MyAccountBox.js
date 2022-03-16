@@ -9,15 +9,15 @@ import deftag from '../../utils/util.deftag';
 
 const { redirectTo } = util;
 const {
+    common: { text_logout },
     member: {
-        text_member_center,
-        text_logout,
+        member_account_center,
     },
 } = deftag;
 
 // Menu
 const menus = {
-    account: text_member_center,
+    account: member_account_center,
     logout: text_logout,
 };
 

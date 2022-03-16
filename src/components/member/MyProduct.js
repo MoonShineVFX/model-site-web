@@ -9,10 +9,10 @@ import Service from '../../utils/util.service';
 const { formatBytes, arrangeFormatAndRender } = util;
 const {
     product: {
-        text_file_size,
-        text_download,
-        detail_option_format,
-        detail_option_renderer,
+        product_file_size,
+        product_download,
+        product_format,
+        product_render,
     },
 } = deftag;
 
@@ -86,7 +86,7 @@ const Item = ({
 
             <div className="item-content">
                 <h3 className="title web-line-clamp">{title}</h3>
-                <span className="file-size">{text_file_size}: {formatBytes(fileSize)}</span>
+                <span className="file-size">{product_file_size}: {formatBytes(fileSize)}</span>
 
                 {
                     // 手機版不支援下載
@@ -97,7 +97,7 @@ const Item = ({
                                     name="formatId"
                                     onChange={(e) => handleSelected(e, id)}
                                 >
-                                    <option value="">{detail_option_format}</option>
+                                    <option value="">{product_format}</option>
                                     {
                                         Object.keys(options).map((formatId) => (
 
@@ -117,7 +117,7 @@ const Item = ({
                                     onChange={(e) => handleSelected(e, id)}
                                     value={selected[id]?.rendererId}
                                 >
-                                    <option value="">{detail_option_renderer}</option>
+                                    <option value="">{product_render}</option>
                                     {
                                         options[format]?.renders.map(({ rendererId, rendererName }) => (
 
@@ -129,7 +129,7 @@ const Item = ({
                             </div>
                             <ButtonLink
                                 url={selected[id]?.rendererId ? download : ''}
-                                text={text_download}
+                                text={product_download}
                                 className={`btn-download ${selected[id]?.rendererId ? '' : 'disabled'}`}
                             />
                         </div>

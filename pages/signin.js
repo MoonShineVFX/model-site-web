@@ -28,13 +28,13 @@ import Service from '../src/utils/util.service';
 const { redirectTo } = util;
 const { paswdConfig } = utilConst;
 const {
-    common: { text_verify_not_robot },
+    common: { btn_verify },
     memberSign: {
         text_signin,
         text_register,
         text_forgot_password,
         text_signin_title,
-        text_account_with_email,
+        text_account,
         text_password,
     },
     error: {
@@ -107,7 +107,7 @@ const Signin = () => {
                             <input
                                 type="text"
                                 name="email"
-                                placeholder={text_account_with_email}
+                                placeholder={text_account}
                                 {...register('email', { required: true })}
                             />
                         </FormRow>
@@ -141,7 +141,7 @@ const Signin = () => {
 
                         <div className="form-row form-row-btns">
                             <Buttons
-                                text={text_verify_not_robot}
+                                text={btn_verify}
                                 disabled={isVerified}
                                 onClick={handleGetToken}
                             />

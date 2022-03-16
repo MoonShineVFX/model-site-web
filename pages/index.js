@@ -18,9 +18,9 @@ import deftag from '../src/utils/util.deftag';
 
 const {
     home: {
-        page_title,
-        section_title_new_arrival,
-        section_title_tutorial,
+        home_title,
+        home_section_title01,
+        home_section_title02,
     },
 } = deftag;
 
@@ -40,14 +40,14 @@ const Home = ({ pageData }) => {
 
         <Fragment>
             {homeStyles}
-            <HeadTag title={page_title} />
+            <HeadTag title={home_title} />
 
             {
                 !!pageData.banners.length &&
                     <Banner pageData={pageData} />
             }
 
-            <ItemsWrap title={section_title_new_arrival} url="/product/list?page=1&type=all">
+            <ItemsWrap title={home_section_title01} url="/product/list?page=1&type=all">
                 <ItemNewArrivalLayout
                     container
                     wrap="nowrap"
@@ -80,7 +80,7 @@ const Home = ({ pageData }) => {
                 </ItemNewArrivalLayout>
             </ItemsWrap>
 
-            <ItemsWrap title={section_title_tutorial} url="/tutorial">
+            <ItemsWrap title={home_section_title02} url="/tutorial">
                 <ItemTutorialLayout>
                     {
                         pageData.tutorials.map(({ id, title, description, imgUrl, link }) => (

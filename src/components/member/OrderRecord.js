@@ -5,10 +5,7 @@ import util from '../../utils/util';
 import deftag from '../../utils/util.deftag';
 
 const { priceWithCommas, dateFormat, renderWithoutValue } = util;
-const {
-    common: { text_item_unit },
-    orderRecord,
-} = deftag;
+const { orderRecord } = deftag;
 
 // 表格欄位樣板
 const renderItemCell = ({
@@ -67,10 +64,10 @@ const Item = ({
         data: {
             number: orderNumber,
             createAt: dateFormat(createdAt),
-            status: orderRecord[`text_status_${status}`],
-            quantity: `${totalItems}${text_item_unit}`,
+            status: orderRecord[`order_status_${status}`],
+            quantity: totalItems,
             price: priceWithCommas(price),
-            payment: orderRecord[`text_payment_${paidBy}`],
+            payment: orderRecord[`order_payment_${paidBy}`],
             paidAt: dateFormat(paidAt),
             invoice,
         },
@@ -86,14 +83,14 @@ const withTable = (data) => (
             renderItemCell({
                 className: 'row-head',
                 data: {
-                    number: orderRecord.text_order_number,
-                    createAt: orderRecord.text_order_create_at,
-                    status: orderRecord.text_order_status,
-                    quantity: orderRecord.text_order_quantity,
-                    price: orderRecord.text_order_total_price,
-                    payment: orderRecord.text_order_payment,
-                    paidAt: orderRecord.text_order_paid_at,
-                    invoice: orderRecord.text_order_invoice,
+                    number: orderRecord.order_text_order_number,
+                    createAt: orderRecord.order_text_create_at,
+                    status: orderRecord.order_text_status,
+                    quantity: orderRecord.order_text_quantity,
+                    price: orderRecord.order_text_total_price,
+                    payment: orderRecord.order_text_payment,
+                    paidAt: orderRecord.order_text_paid_at,
+                    invoice: orderRecord.order_text_invoice,
                 },
             })
         }
@@ -146,35 +143,35 @@ const withCard = (data) => (
                         newPage
                     >
                         <div className="item">
-                            <h4 className="title">{orderRecord.text_order_number}</h4>
+                            <h4 className="title">{orderRecord.order_text_order_number}</h4>
                             <span className="orderNumber">{orderNumber}</span>
                         </div>
                         <div className="item">
-                            <h4 className="title">{orderRecord.text_order_create_at}</h4>
+                            <h4 className="title">{orderRecord.order_text_create_at}</h4>
                             {dateFormat(createdAt)}
                         </div>
                         <div className="item">
-                            <h4 className="title">{orderRecord.text_order_quantity}</h4>
-                            {`${totalItems}${text_item_unit}`}
+                            <h4 className="title">{orderRecord.order_text_quantity}</h4>
+                            {totalItems}
                         </div>
                         <div className="item">
-                            <h4 className="title">{orderRecord.text_order_total_price}</h4>
+                            <h4 className="title">{orderRecord.order_text_total_price}</h4>
                             {priceWithCommas(price)}
                         </div>
                         <div className="item">
-                            <h4 className="title">{orderRecord.text_order_status}</h4>
-                            {orderRecord[`text_status_${status}`]}
+                            <h4 className="title">{orderRecord.order_text_status}</h4>
+                            {orderRecord[`order_status_${status}`]}
                         </div>
                         <div className="item">
-                            <h4 className="title">{orderRecord.text_order_payment}</h4>
-                            {renderWithoutValue(orderRecord[`text_payment_${paidBy}`])}
+                            <h4 className="title">{orderRecord.order_text_payment}</h4>
+                            {renderWithoutValue(orderRecord[`order_payment_${paidBy}`])}
                         </div>
                         <div className="item">
-                            <h4 className="title">{orderRecord.text_order_paid_at}</h4>
+                            <h4 className="title">{orderRecord.order_text_paid_at}</h4>
                             {dateFormat(paidAt)}
                         </div>
                         <div className="item">
-                            <h4 className="title">{orderRecord.text_order_invoice}</h4>
+                            <h4 className="title">{orderRecord.order_text_invoice}</h4>
                             <span className="invoice">{renderWithoutValue(invoice)}</span>
                         </div>
                     </Links>

@@ -31,15 +31,15 @@ const {
 // deftag
 const {
     product: {
-        detail_section_title1,
-        detail_section_title2,
-        button_add_to_card,
-        notice_message,
-        detail_format_and_render,
-        detail_option_renderer,
-        text_model_sum,
-        text_file_size,
-        text_per_image_size,
+        product_detail_section_title01,
+        product_detail_section_title02,
+        btn_add_to_cart,
+        product_detail_notice_message,
+        product_detail_format_and_render,
+        product_render,
+        product_model_sum,
+        product_file_size,
+        product_per_image_size,
     },
 } = deftag;
 
@@ -51,15 +51,15 @@ const renderOtherInfo = (pageData) => (
 
     <div className="other-info">
         <div className="other-info-item">
-            <div className="label">{text_model_sum}</div>
+            <div className="label">{product_model_sum}</div>
             <p>{pageData.modelSum}</p>
         </div>
         <div className="other-info-item">
-            <div className="label">{text_file_size}</div>
+            <div className="label">{product_file_size}</div>
             <p>{pageData.fileSize}</p>
         </div>
         <div className="other-info-item">
-            <div className="label">{text_per_image_size}</div>
+            <div className="label">{product_per_image_size}</div>
             <p>{pageData.perImgSize}</p>
         </div>
     </div>
@@ -181,7 +181,7 @@ const ProductDetail = ({ pageData }) => {
 
                         <p className="description">{pageData.description}</p>
                         <div>
-                            <div className="label">{detail_format_and_render}</div>
+                            <div className="label">{product_detail_format_and_render}</div>
                             <FormatAndRenderLayout>
                                 {
                                     Object.keys(arrangeFormatAndRender(pageData.models)).map((id) => (
@@ -192,7 +192,7 @@ const ProductDetail = ({ pageData }) => {
                                         >
                                             <h4 className="title">{arrangeFormatAndRender(pageData.models)[id].name}</h4>
                                             <span className="renders">
-                                                <span>{detail_option_renderer}: </span>
+                                                <span>{product_render}: </span>
                                                 {arrangeFormatAndRender(pageData.models)[id].renders.map(({ rendererName }) => rendererName).join('、')}
                                             </span>
                                         </li>
@@ -201,7 +201,7 @@ const ProductDetail = ({ pageData }) => {
                                 }
                             </FormatAndRenderLayout>
                         </div>
-                        <p className="notice">{notice_message}</p>
+                        <p className="notice">{product_detail_notice_message}</p>
                     </Grid>
 
                     <Grid
@@ -221,7 +221,7 @@ const ProductDetail = ({ pageData }) => {
                         }
 
                         <Buttons
-                            text={button_add_to_card}
+                            text={btn_add_to_cart}
                             onClick={handleAddToCart}
                         />
 
@@ -234,7 +234,7 @@ const ProductDetail = ({ pageData }) => {
             </DetailWrapLayout>
 
             <DemoImageWrapLayout
-                title={detail_section_title1}
+                title={product_detail_section_title01}
                 showMore={false}
             >
                 <Grid
@@ -279,7 +279,7 @@ const ProductDetail = ({ pageData }) => {
             </DemoImageWrapLayout>
 
             <RelativeProductsLayout
-                title={detail_section_title2}
+                title={product_detail_section_title02}
                 showMore={false}
             >
                 <Grid

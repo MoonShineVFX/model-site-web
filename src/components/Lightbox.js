@@ -13,7 +13,7 @@ import { Close as CloseIcon } from '@mui/icons-material';
 import { GlobalContext } from '../context/global.state';
 import deftag from '../utils/util.deftag';
 
-const { common: { btn_lightbox_cancel, btn_lightbox_submit } } = deftag;
+const { common: { btn_cancel, btn_confirm } } = deftag;
 
 const DialogLayout = styled(Dialog)(({ theme }) => ({
     '.MuiTypography-root': {
@@ -82,7 +82,7 @@ const Lightbox = (props) => {
                                 autoFocus
                                 onClick={handleClose}
                             >
-                                {btnTextCancel || btn_lightbox_cancel}
+                                {btnTextCancel || btn_cancel}
                             </Button>
                     }
 
@@ -90,7 +90,7 @@ const Lightbox = (props) => {
                         type="submit"
                         onClick={onClick}
                     >
-                        {btnTextSubmit || btn_lightbox_submit}
+                        {btnTextSubmit || btn_confirm}
                     </Button>
                 </DialogActions>
             </DialogLayout>
@@ -113,14 +113,14 @@ const Lightbox = (props) => {
                         autoFocus
                         onClick={handleClose}
                     >
-                        {btnTextCancel || btn_lightbox_cancel}
+                        {btnTextCancel || btn_cancel}
                     </Button>
 
                     <Button
                         type="submit"
                         onClick={onClick}
                     >
-                        {btnTextSubmit || btn_lightbox_submit}
+                        {btnTextSubmit || btn_confirm}
                     </Button>
                 </DialogActions>
             </DialogLayout>

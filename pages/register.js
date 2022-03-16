@@ -35,7 +35,7 @@ const {
         btn_return_to_signin,
         text_nickname,
         text_real_name,
-        text_account_with_email,
+        text_account,
         text_enter_password,
         text_agree_privacy,
         text_register_success_message,
@@ -135,7 +135,7 @@ const Register = () => {
                             <input
                                 type="text"
                                 name="email"
-                                placeholder={text_account_with_email}
+                                placeholder={text_account}
                                 {...register('email', { required: true })}
                             />
                         </FormRow>

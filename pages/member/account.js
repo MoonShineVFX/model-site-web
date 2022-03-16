@@ -21,12 +21,12 @@ import Service from '../../src/utils/util.service';
 
 const {
     member: {
-        text_member_center,
-        text_my_product,
-        text_order_record,
-        text_account_edit,
-        text_mobile_download_notice,
+        member_account_center,
+        member_my_product,
+        member_account_update,
+        member_mobile_download_notice,
     },
+    orderRecord: { order_text_order_record },
 } = deftag;
 
 //
@@ -65,15 +65,15 @@ const Account = ({ pageData }) => {
     // 所有 type
     const types = {
         product: {
-            title: text_my_product,
+            title: member_my_product,
             component: <MyProduct data={pageData.list} />,
         },
         order: {
-            title: text_order_record,
+            title: order_text_order_record,
             component: <OrderRecord data={orderRecordList} />,
         },
         account: {
-            title: text_account_edit,
+            title: member_account_update,
             component: <MyAccount data={profile} />,
         },
     };
@@ -100,8 +100,8 @@ const Account = ({ pageData }) => {
     return (
 
         <Fragment>
-            <HeadTag title={`${text_member_center}-${types[type].title}`} />
-            <TitleLayout>{text_member_center}</TitleLayout>
+            <HeadTag title={`${member_account_center}-${types[type].title}`} />
+            <TitleLayout>{member_account_center}</TitleLayout>
 
             <TabWrapLayout>
                 <Tabs
@@ -124,7 +124,7 @@ const Account = ({ pageData }) => {
 
                 {
                     // 手機版下載提示
-                    (matches && (type === 'product')) && <p className="download-notice">{text_mobile_download_notice}</p>
+                    (matches && (type === 'product')) && <p className="download-notice">{member_mobile_download_notice}</p>
                 }
 
                 <div className={`tab-panel panel-${type}`}>

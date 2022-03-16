@@ -15,8 +15,9 @@ import deftag from '../utils/util.deftag';
 
 const { redirectTo } = util;
 const {
+    common: { text_logout },
     memberSign: { text_signin },
-    member: { text_logout, text_member_center },
+    member: { member_account_center },
 } = deftag;
 
 //
@@ -65,7 +66,7 @@ const Sidenav = () => {
                 </Links>
 
                 <Links url={logged ? '/member/account' : '/signin'}>
-                    {logged ? text_member_center : text_signin}
+                    {logged ? member_account_center : text_signin}
                 </Links>
 
                 <Navbar className="mWeb-navbar" />

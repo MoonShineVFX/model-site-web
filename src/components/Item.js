@@ -6,7 +6,7 @@ import deftag from '../utils/util.deftag';
 
 const { priceWithCommas, formatBytes } = util;
 const {
-    product: { text_file_size },
+    product: { product_file_size },
 } = deftag;
 
 //
@@ -112,7 +112,7 @@ const Item = ({
             }
             {
                 fileSize &&
-                    <span className="file-size">{text_file_size} {formatBytes(fileSize)}</span>
+                    <span className="file-size">{product_file_size} {formatBytes(fileSize)}</span>
             }
         </div>
         {children && children}

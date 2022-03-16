@@ -10,10 +10,10 @@ const { priceWithCommas } = util;
 
 const {
     header: {
-        text_cart_title,
-        text_go_to_checkout,
-        text_empty_cart,
+        cart_box_title,
+        cart_go_to_checkout,
     },
+    cart: { cart_text_empty },
 } = deftag;
 
 //
@@ -80,7 +80,7 @@ const Cart = () => {
     return (
 
         <CartLayout>
-            <h4 className="title">{text_cart_title}</h4>
+            <h4 className="title">{cart_box_title}</h4>
             <div className="items">
                 {
                     Object.entries(cart.items || {}).length ? (
@@ -109,16 +109,16 @@ const Cart = () => {
 
                         ))
 
-                    ) : text_empty_cart
+                    ) : cart_text_empty
                 }
             </div>
             <div className="goToOrder">
                 <Links
                     url={`/${logged ? 'cart' : 'signin'}`}
-                    title={text_go_to_checkout}
+                    title={cart_go_to_checkout}
                     onClick={handleResetBox}
                 >
-                    {text_go_to_checkout}
+                    {cart_go_to_checkout}
                 </Links>
             </div>
         </CartLayout>

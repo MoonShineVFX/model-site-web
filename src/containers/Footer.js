@@ -5,12 +5,14 @@ import { Grid, useMediaQuery } from '@mui/material';
 import { FooterLayout, LangOptionLayout } from './globalLayout';
 import Links from '../components/Links';
 import Community from '../components/Community';
+import utilConst from '../utils/util.const';
 import deftag from '../utils/util.deftag';
 
+const { langs } = utilConst;
 const {
-    lang,
+    common,
     footer: {
-        text_privacy_link,
+        text_privacy,
         text_custom_service,
     },
 } = deftag;
@@ -36,13 +38,13 @@ const LangOption = () => {
             onChange={handleSelected}
         >
             {
-                Object.keys(lang).map((code) => (
+                langs.map((code) => (
 
                     <option
                         key={code}
                         value={code}
                     >
-                        {lang[code]}
+                        {common[`lang_${code}`]}
                     </option>
 
                 ))
@@ -90,7 +92,7 @@ const Footer = () => {
                                             newPage
                                             className="light privacy-link"
                                         >
-                                            {text_privacy_link}
+                                            {text_privacy}
                                         </Links>
 
                                         <Links url="mailto:service@moonshine.tw" className="light" newPage>{text_custom_service}: service@moonshine.tw</Links>
@@ -109,7 +111,7 @@ const Footer = () => {
                                         newPage
                                         className="light privacy-link"
                                     >
-                                        {text_privacy_link}
+                                        {text_privacy}
                                     </Links>
                                     <Links url="mailto:service@moonshine.tw" className="light" newPage>{text_custom_service}: service@moonshine.tw</Links>
                                 </div>

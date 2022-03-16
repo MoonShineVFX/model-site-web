@@ -12,8 +12,8 @@ const {
         text_account,
     },
     member: {
-        btn_save,
-        text_change_password,
+        btn_saved,
+        member_change_password,
     },
 } = deftag;
 
@@ -56,13 +56,13 @@ const MyAccount = ({ data }) => {
                     <div className="form-row Model-form-button">
                         <Buttons
                             type="submit"
-                            text={btn_save}
+                            text={btn_saved}
                         />
 
                         <BtnDirectLayout
                             type="third"
                             url="/member/change_password"
-                            text={text_change_password}
+                            text={member_change_password}
                         />
                     </div>
                 </form>

@@ -24,7 +24,7 @@ import Service from '../utils/util.service';
 
 const {
     memberSign: { text_signin },
-    member: { my_account },
+    member: { member_my_account },
 } = deftag;
 
 const arrangeCartList = (array) => array.reduce((acc, obj) => {
@@ -140,7 +140,7 @@ const Header = () => {
                         logged ? (
 
                             <Buttons
-                                text={my_account}
+                                text={member_my_account}
                                 variant="outlined"
                                 onClick={() => handleClickBox('myAccount')}
                             />

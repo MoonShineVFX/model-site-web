@@ -31,10 +31,10 @@ const {
         text_new_password,
     },
     member: {
-        text_old_password,
-        text_change_password,
-        text_change_password_success,
-        btn_return_to_account,
+        member_old_password,
+        member_change_password,
+        member_change_password_success,
+        text_return_to_account,
     },
     error: {
         error_password_different,
@@ -97,7 +97,7 @@ const ChangePassword = () => {
     return (
 
         <Fragment>
-            <HeadTag title={text_change_password} />
+            <HeadTag title={member_change_password} />
 
             <SignLayout>
                 <FormWrap>
@@ -110,7 +110,7 @@ const ChangePassword = () => {
                             <input
                                 type={paswdConfig[toggle.password].type}
                                 name="password"
-                                placeholder={text_old_password}
+                                placeholder={member_old_password}
                                 {...register('password', {
                                     required: true,
                                     minLength: {
@@ -182,7 +182,7 @@ const ChangePassword = () => {
                             <BtnDirectLayout
                                 type="third"
                                 url={goToAccount}
-                                text={btn_return_to_account}
+                                text={text_return_to_account}
                             />
                         </div>
                     </form>
@@ -195,7 +195,7 @@ const ChangePassword = () => {
                         type="success"
                         onClick={() => redirectTo(goToAccount, false)}
                     >
-                        {text_change_password_success}
+                        {member_change_password_success}
                     </Lightbox>
             }
         </Fragment>

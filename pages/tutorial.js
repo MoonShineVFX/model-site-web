@@ -9,7 +9,7 @@ import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
 import deftag from '../src/utils/util.deftag';
 
-const { tutorial: { page_title } } = deftag;
+const { tutorial: { tutorial_title } } = deftag;
 
 //
 const TitleLayout = styled('h1')(({ theme }) => ({
@@ -81,8 +81,8 @@ const Tutorial = ({ pageData }) => {
     return (
 
         <Fragment>
-            <HeadTag title={page_title} />
-            <TitleLayout>{page_title}</TitleLayout>
+            <HeadTag title={tutorial_title} />
+            <TitleLayout>{tutorial_title}</TitleLayout>
 
             <ItemWrapLayout
                 container

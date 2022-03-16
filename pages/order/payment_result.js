@@ -8,11 +8,8 @@ import { GlobalContext } from '../../src/context/global.state';
 import deftag from '../../src/utils/util.deftag';
 
 const {
-    member: { text_my_product },
-    paymentResult: {
-        page_title,
-        text_direct_to_order_detail,
-    },
+    member: { member_my_product },
+    orderRecord: { order_detail, order_success },
 } = deftag;
 
 //
@@ -56,15 +53,15 @@ const PaymentResult = () => {
     return (
 
         <ResultWrap
-            title={page_title}
-            btnText={text_my_product}
+            title={order_success}
+            btnText={member_my_product}
             linkTo="/member/account"
             icon={faCircleCheck}
         >
             <ButtonLink
                 type="third"
                 url={`/order/${router.query.no}`}
-                text={text_direct_to_order_detail}
+                text={order_detail}
             />
         </ResultWrap>
 

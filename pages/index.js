@@ -57,7 +57,7 @@ const Home = ({ pageData }) => {
                     }}
                 >
                     {
-                        pageData.newArrivals.map(({ id, title, price, imgUrl }) => (
+                        pageData.products.map(({ id, title, price, imgUrl }) => (
 
                             <Grid
                                 key={id}

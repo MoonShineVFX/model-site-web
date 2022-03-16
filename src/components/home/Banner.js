@@ -11,7 +11,7 @@ import { GlobalContext } from '../../context/global.state';
 
 const Banner = ({ pageData }) => {
 
-    const matches = useMediaQuery((theme) => theme.breakpoints.down('mobile'));
+    const matches = useMediaQuery((theme) => theme.breakpoints.down('middle'));
 
     // Context
     const { slideshowActive } = useContext(GlobalContext);
@@ -41,14 +41,30 @@ const Banner = ({ pageData }) => {
                                 <Links
                                     url={link}
                                     title={title}
+                                    className="thumb"
                                     newPage
                                 >
-                                    <img
-                                        src={matches ? mobileImgUrl : imgUrl}
-                                        alt={title}
-                                        width={matches ? '436' : '840'}
-                                        height={matches ? '606' : '386'}
-                                    />
+                                    {
+                                        matches ? (
+
+                                            <img
+                                                src={mobileImgUrl}
+                                                alt={title}
+                                                width="436"
+                                                height="606"
+                                            />
+
+                                        ) : (
+
+                                            <img
+                                                src={imgUrl}
+                                                alt={title}
+                                                width="840"
+                                                height="386"
+                                            />
+
+                                        )
+                                    }
                                 </Links>
 
                                 <SlideshowInfoLayout>

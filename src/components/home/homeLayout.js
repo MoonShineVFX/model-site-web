@@ -29,20 +29,19 @@ const BannerWrapLayout = styled('div')(({ theme }) => ({
             },
         },
         '.inner': {
-            width: 'calc(100vw - 90px)',
+            width: '80vw',
             position: 'relative',
             flexWrap: 'wrap',
-            'a': {
-                maxWidth: 'none',
-            },
             '> div': {
                 width: '100%',
                 backgroundColor: 'rgba(47, 48, 49, 0.82)',
-                padding: '20px',
+                padding: '20px 16px 26px',
                 position: 'absolute',
-                left: '50%',
                 bottom: '0',
-                transform: 'translateX(-50%)',
+                left: '0',
+            },
+            '.title': {
+                fontSize: '1em',
             },
         },
     },
@@ -51,32 +50,20 @@ const BannerWrapLayout = styled('div')(({ theme }) => ({
             ':not(:last-child)': {
                 marginRight: '20px',
             },
-        },
-        '.inner': {
-            width: 'calc(100vw - 120px)',
-            'a': {
-                maxHeight: '300px',
+            '.inner': {
+                height: '40vh',
             },
-            '> div': {
-                height: '8vh',
-            },
-        },
-    },
-    [theme.breakpoints.down('sm')]: {
-        '.inner': {
-            width: 'calc(100vw - 150px)',
-            'a': {
-                maxHeight: '250px',
+            '.thumb': {
+                height: '100%',
             },
         },
     },
     [theme.breakpoints.down('middle')]: {
-        '.inner': {
-            'a': {
-                maxHeight: '200px',
-            },
+        '.item .inner': {
+            width: '70vw',
+            height: '60vh',
             '> div': {
-                height: '6vh',
+                padding: '16px',
             },
         },
     },
@@ -108,18 +95,18 @@ const SlideShowWrapLayout = styled(SlideShow)({
 const SlideShowItemLayout = styled('div')(({ theme }) => ({
     '.inner': {
         lineHeight: '1.8',
-        maxHeight: '386px',
-        borderRadius: theme.borderRadius,
+        borderRadius: '15px',
         display: 'flex',
         overflow: 'hidden',
-    },
-    'a': {
-        maxWidth: '70vw',
-        height: '100%',
     },
     '.price': {
         fontSize: '1.15em',
         color: theme.palette.primary.main,
+    },
+    [theme.breakpoints.up('md')]: {
+        '.inner': {
+            maxHeight: '386px',
+        },
     },
 }));
 

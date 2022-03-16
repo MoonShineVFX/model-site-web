@@ -6,6 +6,9 @@ module.exports = {
         locales: ['zh', 'en', 'jp', 'cn'],
         defaultLocale: 'zh',
     },
+    images: {
+        domains: ['market-dev.moonshine.tw', 'market.moonshine.tw'],
+    },
     async redirects () {
         return [
             {

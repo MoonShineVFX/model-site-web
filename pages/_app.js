@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import { ThemeProvider } from '@mui/material/styles';
 import { GlobalStyles, Box } from '@mui/material';
@@ -7,7 +6,6 @@ import { GlobalStyles, Box } from '@mui/material';
 import { GlobalProvider } from '../src/context/global.state';
 
 import theme from '../src/utils/theme';
-import HeadTag from '../src/containers/HeadTag';
 import Header from '../src/containers/Header';
 import Content from '../src/containers/Content';
 import Footer from '../src/containers/Footer';
@@ -115,37 +113,33 @@ const WebSite = ({ Component, pageProps }) => {
 
     return (
 
-        <Fragment>
-            <HeadTag />
+        <ThemeProvider theme={theme}>
+            <GlobalStyles styles={styles} />
 
-            <ThemeProvider theme={theme}>
-                <GlobalStyles styles={styles} />
-
-                <GlobalProvider>
-                    <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY}>
-                        <Header />
+            <GlobalProvider>
+                <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY}>
+                    <Header />
+                    <Box
+                        component="main"
+                        sx={{ display: 'flex' }}
+                    >
                         <Box
-                            component="main"
-                            sx={{ display: 'flex' }}
+                            component="div"
+                            className="Model-container"
+                            sx={{
+                                paddingTop: '20px',
+                                paddingBottom: '20px',
+                            }}
                         >
-                            <Box
-                                component="div"
-                                className="Model-container"
-                                sx={{
-                                    paddingTop: '20px',
-                                    paddingBottom: '20px',
-                                }}
-                            >
-                                <Content>
-                                    <Component {...pageProps} />
-                                </Content>
-                            </Box>
+                            <Content>
+                                <Component {...pageProps} />
+                            </Content>
                         </Box>
-                        <Footer />
-                    </GoogleReCaptchaProvider>
-                </GlobalProvider>
-            </ThemeProvider>
-        </Fragment>
+                    </Box>
+                    <Footer />
+                </GoogleReCaptchaProvider>
+            </GlobalProvider>
+        </ThemeProvider>
 
     );
 

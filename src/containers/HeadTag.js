@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
+import deftag from '../utils/util.deftag';
+
+const { common: { og_title, og_description } } = deftag;
 
  const HeadSEO = ({ title, description, children }) => (
 
@@ -8,14 +11,19 @@ import Head from 'next/head';
         <title>{title}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="description" content={description} />
+
+        {/* og:Tag */}
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        {/* <meta property="og:image" content="/logo_large.png" /> */}
         {children}
     </Head>
 
 );
 
 HeadSEO.defaultProps = {
-    title: '模型平台',
-    description: '模型,3D,免費',
+    title: og_title,
+    description: og_description,
 };
 
 HeadSEO.propTypes = {

@@ -1,5 +1,7 @@
 const deftag = {
     common: {
+        og_title: '模型平台',
+        og_description: '模型,3D,素材',
         text_logo: 'Moonshine Market',
         text_logout: '登出',
         menu_store: '商店',

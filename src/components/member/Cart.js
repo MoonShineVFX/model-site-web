@@ -59,11 +59,10 @@ const ItemWrapLayout = styled(Links)(({ theme }) => ({
         flex: '0 0 calc(100% - 100px)',
     },
     '.title': {
-        fontWeight: 'normal',
         margin: '0',
     },
     'span': {
-        fontSize: '1.5em',
+        fontSize: '1.3em',
         fontWeight: 'bold',
     },
 }));

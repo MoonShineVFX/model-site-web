@@ -13,6 +13,14 @@ const homeStyles = <GlobalStyles styles={styles} />;
 
 //
 const BannerWrapLayout = styled('div')(({ theme }) => ({
+    '.description': {
+        WebkitLineClamp: theme.lineClamp(5),
+    },
+    [theme.breakpoints.down('lg')]: {
+        '.slideshow-info-wrap': {
+            padding: '30px',
+        },
+    },
     [theme.breakpoints.down('md')]: {
         marginBottom: '40px',
         '.slideshow-control-arrows, .flag, .description': {
@@ -118,7 +126,6 @@ const SlideshowInfoLayout = styled('div')(({ theme }) => ({
     flex: '1',
     '.title': {
         lineHeight: '1.2',
-        fontWeight: 'normal',
         margin: '10px 0 20px',
     },
     '.flag': {

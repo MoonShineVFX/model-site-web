@@ -141,7 +141,6 @@ const ItemLayout = styled(Links)(({ theme }) => ({
         '.title': {
             minHeight: '45px',
             fontSize: '0.8em',
-            fontWeight: 'normal',
             lineHeight: '1.4',
             marginBottom: '10px',
             opacity: '1',

@@ -13,9 +13,7 @@ const FormWrapLayout = styled('div')(({ theme }) => ({
         textAlign: 'center',
     },
     '.title': {
-        fontWeight: 'normal',
         margin: '16px 0 36px',
-        opacity: '0.6',
     },
     '.form-row, .model-button': {
         marginBottom: '24px',
@@ -66,8 +64,7 @@ const FormRowLayout = styled('div')(({ theme }) => ({
         padding: '22px 40px',
         outline: '0',
         '&::placeholder, &::-ms-input-placeholder': {
-            color: theme.palette.textColor,
-            opacity: '1',
+            color: 'rgba(255, 255, 255, 0.8)',
         },
     },
     '.error-mesg': {

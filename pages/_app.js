@@ -65,6 +65,9 @@ const styles = {
     'select': {
         outline: 'none',
     },
+    '.title': {
+        fontWeight: 'normal',
+    },
     '.price': {
         fontWeight: 'bold',
         fontFamily: 'Roboto',

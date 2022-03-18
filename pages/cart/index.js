@@ -6,7 +6,7 @@ import React, {
     useRef,
 } from 'react';
 
-import { Grid } from '@mui/material';
+import { Grid, useMediaQuery } from '@mui/material';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -42,20 +42,22 @@ const TableGrid = ({ colLeft, colRight }) => (
     <Grid
         container
         columnSpacing={{
-            xs: '10px',
-            sm: '20px',
+            xs: '20px',
+            sm: '30px',
         }}
     >
         <Grid
             item
-            xs={7}
+            xs={10}
+            sm={8}
             className="item-cell"
         >
             {colLeft && colLeft}
         </Grid>
         <Grid
             item
-            xs={5}
+            xs={2}
+            sm={4}
             className="item-cell right"
         >
             {colRight && colRight}
@@ -73,47 +75,61 @@ const Item = ({
         price,
         imgUrl,
     },
-}) => (
+}) => {
 
-    <ItemLayout
-        url={`/product/${productId}`}
-        newPage
-    >
-        <TableGrid
-            colLeft={(
-                <Fragment>
-                    <div className="thumb">
-                        <img
-                            src={imgUrl}
-                            alt={title}
-                            title={title}
-                            width="103"
-                            height="66"
-                        />
-                    </div>
+    const matches = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
-                    <div className="info">
-                        <h4 className="title" title={title}>{title}</h4>
-                    </div>
-                </Fragment>
-            )}
-            colRight={(
-                <Fragment>
-                    <div className="price">{priceWithCommas(price)}</div>
-                    <div className="action">
-                        <span onClick={onClick}>
+    return (
+
+        <ItemLayout
+            url={`/product/${productId}`}
+            newPage
+        >
+            <TableGrid
+                colLeft={(
+                    <Fragment>
+                        <div className="thumb">
+                            <img
+                                src={imgUrl}
+                                alt={title}
+                                title={title}
+                                width="103"
+                                height="66"
+                            />
+                        </div>
+
+                        <div className="info">
+                            <h4 className="title web-line-clamp" title={title}>{title}</h4>
+                            {
+                                matches &&
+                                    <span className="price">{priceWithCommas(price)}</span>
+                            }
+                        </div>
+                    </Fragment>
+                )}
+                colRight={(
+                    <div>
+                        {
+                            !matches &&
+                                <span className="price">{priceWithCommas(price)}</span>
+                        }
+
+                        <span className="action" onClick={onClick}>
                             <FontIcon icon={faTimes} />
                         </span>
                     </div>
-                </Fragment>
-            )}
-        />
-    </ItemLayout>
+                )}
+            />
+        </ItemLayout>
 
-);
+    );
+
+};
 
 //
 const Cart = ({ pageData }) => {
+
+    const matches = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
@@ -199,14 +215,27 @@ const Cart = ({ pageData }) => {
                                 </div>
 
                                 <div className="amount">
-                                    <TableGrid
-                                        colRight={(
-                                            <Fragment>
+                                    {
+                                        matches ? (
+
+                                            <div>
                                                 <span>總額</span>
                                                 <span className="price">{priceWithCommas(amount)}</span>
-                                            </Fragment>
-                                        )}
-                                    />
+                                            </div>
+
+                                        ) : (
+
+                                            <TableGrid
+                                                colRight={(
+                                                    <div>
+                                                        <span>總額</span>
+                                                        <div className="price">{priceWithCommas(amount)}</div>
+                                                    </div>
+                                                )}
+                                            />
+
+                                        )
+                                    }
                                 </div>
                             </Fragment>
 

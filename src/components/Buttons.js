@@ -22,8 +22,8 @@ const ButtonLayout = styled(Button)(({ theme }) => ({
         },
     },
     '&.Mui-disabled': {
-        color: '#A6A6A6',
-        backgroundColor: '#CCC',
+        color: theme.palette.secondary.dark,
+        backgroundColor: theme.palette.disabled,
     },
     '&.MuiButton-outlined': {
         color: theme.palette.textColor,

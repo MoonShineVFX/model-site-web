@@ -67,10 +67,10 @@ const Banner = ({ pageData }) => {
                                     }
                                 </Links>
 
-                                <SlideshowInfoLayout>
+                                <SlideshowInfoLayout className="slideshow-info-wrap">
                                     <span className="flag">New</span>
                                     <h2 className="title">{title}</h2>
-                                    <p className="description">{description}</p>
+                                    <p className="description web-line-clamp" title={description}>{description}</p>
                                 </SlideshowInfoLayout>
                             </div>
                         </SlideShowItemLayout>

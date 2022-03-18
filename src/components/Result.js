@@ -15,7 +15,7 @@ const TitleWrapLayout = styled(TitleLayout)(({ theme }) => ({
         marginBottom: '30px',
     },
     '.status': {
-        fontSize: '3.6em',
+        fontSize: '3em',
         color: theme.palette.primary.main,
     },
 }));

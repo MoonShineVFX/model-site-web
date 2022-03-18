@@ -153,7 +153,6 @@ const DetailContentLayout = styled(Grid)(({ theme }) => ({
     },
     '.title': {
         fontSize: '1.8em',
-        fontWeight: 'normal',
         margin: '10px 0',
     },
     '.description': {

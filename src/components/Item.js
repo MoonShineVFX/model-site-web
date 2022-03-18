@@ -17,7 +17,6 @@ const ItemLayout = styled(Links)(({ theme }) => ({
         padding: '16px 0',
     },
     '.title': {
-        fontWeight: 'normal',
         margin: '0',
     },
     '&.style-section': {

@@ -105,7 +105,6 @@ const ItemLayout = styled('div')(({ theme }) => ({
         width: '100%',
     },
     '.title': {
-        fontWeight: 'normal',
         WebkitLineClamp: theme.lineClamp(1),
         margin: '0 0 10px',
     },
@@ -175,7 +174,6 @@ const BoxWrapLayout = styled(Box)(({ theme }) => ({
         },
     },
     '.title': {
-        fontWeight: 'normal',
         margin: '0 0 16px',
         opacity: '0.65',
     },

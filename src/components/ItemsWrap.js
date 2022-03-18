@@ -16,7 +16,6 @@ const ItemsTitle = styled('div')(({ theme }) => ({
     },
     '.title': {
         fontSize: '1.4em',
-        fontWeight: 'normal',
         '& + div': {
             textAlign: 'right',
             flex: '1',

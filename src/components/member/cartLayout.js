@@ -2,7 +2,6 @@ import { styled } from '@mui/system';
 import Links from '../Links';
 
 // 外層 form
-//
 const TitleLayout = styled('h1')(({ theme }) => ({
     fontWeight: 'normal',
     textAlign: 'center',
@@ -59,13 +58,41 @@ const CartLayout = styled('div')(({ theme }) => ({
             flex: '1',
         },
     },
+    '.items': {
+        marginBottom: '60px',
+    },
+    '.amount': {
+        fontSize: '1.15em',
+        borderTop: `1px dashed ${theme.palette.border.dark}`,
+        paddingTop: '40px',
+        '.price': {
+            fontSize: '1.25em',
+            fontWeight: 'normal',
+            color: theme.palette.primary.main,
+        },
+    },
+    [theme.breakpoints.down('mobile')]: {
+        '.amount .price': {
+            fontSize: '1em',
+        },
+    },
     [theme.breakpoints.down('sm')]: {
         padding: '20px',
+        '.amount': {
+            paddingTop: '30px',
+            paddingBottom: '10px',
+            '.price': {
+                fontSize: '1.2em',
+                float: 'right',
+                marginTop: '-4px',
+            },
+        },
     },
 }));
 
 // 商品
 const ItemLayout = styled(Links)(({ theme }) => ({
+    fontSize: '1.25em',
     color: theme.palette.textColor,
     textDecoration: 'none',
     display: 'flex',
@@ -80,31 +107,38 @@ const ItemLayout = styled(Links)(({ theme }) => ({
     '.info': {
         width: 'calc(100% - 103px)',
         fontSize: '0.9em',
-        '> *:not(.title)': {
-            opacity: '0.6',
+        '> *': {
+            fontWeight: 'normal',
         },
     },
     '.title': {
-        fontSize: '1.2em',
         margin: '0',
-        WebkitLineClamp: theme.lineClamp(1),
+        WebkitLineClamp: theme.lineClamp(2),
+    },
+    '.price': {
+        fontSize: '0.9em',
+        fontWeight: 'normal',
     },
     '.action': {
-        'span': {
-            fontSize: '1.2em',
-            color: '#ce5151',
-            padding: '4px',
-        },
+        fontSize: '1em',
+        color: '#ce5151',
+        padding: '4px',
+        float: 'right',
     },
-    '.amount': {
-        fontSize: '1.25em',
-        '.price': {
-            paddingRight: 'calc((32px / 2) - 4px)', // 刪除按鈕的寬度一半 + padding
+    [theme.breakpoints.down('mobile')]: {
+        '.thumb': {
+            marginRight: '10px',
         },
     },
     [theme.breakpoints.down('sm')]: {
         '.thumb': {
             marginRight: '10px',
+        },
+        '.title': {
+            fontSize: '0.85em',
+        },
+        '.price': {
+            fontSize: '1em',
         },
         '.amount': {
             fontSize: '1em',

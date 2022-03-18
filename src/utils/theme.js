@@ -33,7 +33,7 @@ export default createTheme({
         },
         secondary: {
             main: '#FFF',
-            dark: 'rgba(255,255,255,.6)',
+            dark: 'rgba(255, 255, 255, 0.6)',
             contrastText: '#000',
         },
         border: {
@@ -47,6 +47,7 @@ export default createTheme({
             light: '#454547',
             main: '#2f3031',
         },
+        disabled: '#676665',
     },
     breakpoints: {
         values: {

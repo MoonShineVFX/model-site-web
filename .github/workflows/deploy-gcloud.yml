@@ -26,10 +26,14 @@ jobs:
         env:
           RECAPTCHA_KEY: ${{ secrets.MODEL_LIB_RECAPTCHA_KEY }}
           GOOGLE_SIGNIN_CLIENTID: ${{ secrets.MODEL_LIB_GOOGLE_SIGNIN_CLIENTID }}
+          TAWKTO_PROPERTYID: ${{ secrets.MODEL_LIB_TAWKTO_PROPERTYID }}
+          TAWKTO_TAWKID: ${{ secrets.MODEL_LIB_TAWKTO_TAWKID }}
         run: |
           echo "NEXT_PUBLIC_HOST=$HOST" >> .env.local
           echo "NEXT_PUBLIC_RECAPTCHA_KEY=$RECAPTCHA_KEY" >> .env.local
           echo "NEXT_PUBLIC_GOOGLE_SIGNIN_CLIENTID=$GOOGLE_SIGNIN_CLIENTID" >> .env.local
+          echo "NEXT_PUBLIC_TAWKTO_PROPERTYID=$TAWKTO_PROPERTYID" >> .env.local
+          echo "NEXT_PUBLIC_TAWKTO_TAWKID=$TAWKTO_TAWKID" >> .env.local
       - id: auth
         uses: google-github-actions/auth@v0.4.0
         with:

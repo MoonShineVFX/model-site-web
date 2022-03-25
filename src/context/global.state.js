@@ -20,6 +20,7 @@ const globalInitState = {
     cart: {},
     dynamicAction: '',
     isVerified: false,
+    deftags: {},
 };
 
 // Form values
@@ -54,6 +55,7 @@ const GlobalProvider = ({ children }) => {
         cart,
         dynamicAction,
         isVerified,
+        deftags,
     } = globalState;
 
     const { formStorageData } = formStorageState;
@@ -94,6 +96,7 @@ const GlobalProvider = ({ children }) => {
             cart,
             dynamicAction,
             isVerified,
+            deftags,
             getGlobalData,
 
             // Form 表單暫存

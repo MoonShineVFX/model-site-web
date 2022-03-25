@@ -36,6 +36,7 @@ const Service = {
 
     // 選擇語系(set cookie)
     setLang: (reqData) => util.serviceProxy('/set_language', reqData),
+    deftagList: (reqData) => util.serviceProxy('/lang_configs', reqData),
 };
 
 export default Service;

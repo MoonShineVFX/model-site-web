@@ -25,10 +25,17 @@ const LangOption = () => {
     const router = useRouter();
 
     // 選取語言
-    const handleSelected = ({ target }) => {
+    const handleSelected = async ({ target }) => {
 
-        Service.setLang({ langCode: target.value });
-        router.push(router.asPath, router.asPath, { locale: target.value });
+        await Service.setLang({ langCode: target.value });
+        await Service.deftagList()
+            .then((resData) => {
+
+                console.log(resData)
+
+            });
+
+            router.push(router.asPath, router.asPath, { locale: target.value });
 
     };
 

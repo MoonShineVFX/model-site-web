@@ -113,6 +113,7 @@ const styles = {
     },
 };
 
+// tawk.to
 const propertyId = process.env.NEXT_PUBLIC_TAWKTO_PROPERTYID;
 const tawkId = process.env.NEXT_PUBLIC_TAWKTO_TAWKID;
 

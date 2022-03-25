@@ -7,6 +7,7 @@ import Links from '../components/Links';
 import Community from '../components/Community';
 import utilConst from '../utils/util.const';
 import deftag from '../utils/util.deftag';
+import Service from '../utils/util.service';
 
 const { langs } = utilConst;
 const {
@@ -26,6 +27,7 @@ const LangOption = () => {
     // 選取語言
     const handleSelected = ({ target }) => {
 
+        Service.setLang({ langCode: target.value });
         router.push(router.asPath, router.asPath, { locale: target.value });
 
     };

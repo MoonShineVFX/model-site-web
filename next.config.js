@@ -5,6 +5,7 @@ module.exports = {
     i18n: {
         locales: ['zh', 'en', 'jp', 'cn'],
         defaultLocale: 'zh',
+        localeDetection: false,
     },
     images: {
         domains: ['market-dev.moonshine.tw', 'market.moonshine.tw'],

@@ -39,9 +39,9 @@ const Privacy = ({ pageData }) => {
 
 export default Privacy;
 
-export async function getServerSideProps () {
+export async function getServerSideProps ({ locale }) {
 
-    const resData = await util.serviceServer({ url: '/privacy' });
+    const resData = await util.serviceServer({ url: `/privacy?lang=${locale}` });
     const { data } = resData;
 
     if (!data.result) {

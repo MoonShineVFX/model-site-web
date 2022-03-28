@@ -123,9 +123,9 @@ const Tutorial = ({ pageData }) => {
 
 export default Tutorial;
 
-export async function getServerSideProps () {
+export async function getServerSideProps ({ locale }) {
 
-    const resData = await util.serviceServer({ url: '/tutorials' });
+    const resData = await util.serviceServer({ url: `/tutorials?lang=${locale}` });
     const { data } = resData;
 
     if (!data.result) {

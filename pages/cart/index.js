@@ -282,7 +282,7 @@ const Cart = ({ pageData }) => {
 
 export default Cart;
 
-export async function getServerSideProps ({ req }) {
+export async function getServerSideProps ({ req, locale }) {
 
     // 沒有 cookie(token) 導登入頁
     if (!req.cookies.token) {
@@ -297,7 +297,7 @@ export async function getServerSideProps ({ req }) {
     }
 
     const resData = await util.serviceServer({
-        url: '/cart_products',
+        url: `/cart_products?lang=${locale}`,
         headers: {
             Cookie: `sessionid=${req.cookies.sessionid}`,
             Authorization: `Bearer ${req.cookies.token}`,

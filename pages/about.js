@@ -170,9 +170,9 @@ const About = ({ pageData }) => {
 
 export default About;
 
-export async function getServerSideProps () {
+export async function getServerSideProps ({ locale }) {
 
-    const resData = await util.serviceServer({ url: '/about_us' });
+    const resData = await util.serviceServer({ url: `/about_us?lang=${locale}` });
     const { data } = resData;
 
     if (!data.result) {

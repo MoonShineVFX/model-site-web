@@ -28,7 +28,6 @@ const SigninGoogle = () => {
 
     const handleCallback = (res) => {
 
-        console.log('res:', res);
         Service.signWithGoogle({ access_token: res.accessToken })
             .then(redirectTo);
 

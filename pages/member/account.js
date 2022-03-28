@@ -151,7 +151,7 @@ const Account = ({ pageData }) => {
 
 export default Account;
 
-export async function getServerSideProps ({ req }) {
+export async function getServerSideProps ({ req, locale }) {
 
     // 沒有 cookie(token) 導登入頁
     if (!req.cookies.token) {
@@ -166,7 +166,7 @@ export async function getServerSideProps ({ req }) {
     }
 
     const resData = await util.serviceServer({
-        url: '/my_products',
+        url: `/my_products?lang=${locale}`,
         headers: {
             Authorization: `Bearer ${req.cookies.token}`,
         },

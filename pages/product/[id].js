@@ -324,11 +324,11 @@ const ProductDetail = ({ pageData }) => {
 
 export default ProductDetail;
 
-export async function getServerSideProps ({ params }) {
+export async function getServerSideProps ({ params, locale }) {
 
     const resData = await util.serviceServer({
         method: 'get',
-        url: `/products/${params.id}`,
+        url: `/products/${params.id}?lang=${locale}`,
     });
 
     const { data } = resData;

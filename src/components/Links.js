@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import router from 'next/router';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { styled } from '@mui/system';
 import { Button } from '@mui/material';
@@ -29,38 +29,53 @@ const ButtonLayout = styled(Button)(({ theme }) => ({
 }));
 
 //
-const Links = ({ url, newPage, title, className, children, ...rest }) => (
+const Links = ({ url, newPage, title, className, children, ...rest }) => {
 
-    <Link href={url}>
-        <a
-            href={url}
-            title={title}
-            className={className}
-            {...newPage && {
-                target: '_blank',
-                rel: 'noreferrer noopener',
-            }}
-            {...rest}
+    const { locale } = useRouter();
+
+    return (
+
+        <Link
+            href={`${(locale !== 'zh') ? locale : ''}${url}`}
+            locale={locale}
         >
-            {children}
-        </a>
-    </Link>
+            <a
+                href={`${(locale !== 'zh') ? locale : ''}${url}`}
+                title={title}
+                className={className}
+                {...newPage && {
+                    target: '_blank',
+                    rel: 'noreferrer noopener',
+                }}
+                {...rest}
+            >
+                {children}
+            </a>
+        </Link>
 
-);
+    );
+
+};
 
 //
-const ButtonLink = ({ url, text, type, ...rest }) => (
+const ButtonLink = ({ url, text, type, ...rest }) => {
 
-    <div {...rest}>
-        <ButtonLayout
-            className={`${(type === 'third') ? 'third' : 'default'} model-button`}
-            onClick={() => router.push(url)}
-        >
-            {text}
-        </ButtonLayout>
-    </div>
+    const router = useRouter();
 
-);
+    return (
+
+        <div {...rest}>
+            <ButtonLayout
+                className={`${(type === 'third') ? 'third' : 'default'} model-button`}
+                onClick={() => router.push(url, url, { locale: router.locale })}
+            >
+                {text}
+            </ButtonLayout>
+        </div>
+
+    );
+
+};
 
 Links.defaultProps = {
     url: '',

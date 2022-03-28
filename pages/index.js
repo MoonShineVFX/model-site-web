@@ -119,9 +119,9 @@ const Home = ({ pageData }) => {
 
 export default Home;
 
-export async function getServerSideProps () {
+export async function getServerSideProps ({ locale }) {
 
-    const resData = await util.serviceServer({ url: '/index' });
+    const resData = await util.serviceServer({ url: `/index?lang=${locale}` });
     const { data } = resData;
 
     if (!data.result) {

@@ -215,11 +215,11 @@ const ProductList = ({ pageData }) => {
 
 export default ProductList;
 
-export async function getServerSideProps ({ query }) {
+export async function getServerSideProps ({ query, locale }) {
 
     const resData = await util.serviceServer({
         method: 'get',
-        url: `/products?page=${query.page}${query.tags ? `&tags=${query.tags}` : ''}`,
+        url: `/products?page=${query.page}${query.tags ? `&tags=${query.tags}` : ''}&lang=${locale}`,
     });
 
     const { data } = resData;

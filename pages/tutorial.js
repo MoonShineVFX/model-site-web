@@ -109,6 +109,7 @@ const Tutorial = ({ pageData }) => {
                                 height="161"
                                 data={{ title, imgUrl }}
                                 newPage
+                                extra
                             />
                         </Grid>
 

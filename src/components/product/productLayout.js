@@ -273,6 +273,9 @@ const RelativeProductsLayout = styled(ItemsWrap)(({ theme }) => ({
     '.title': {
         WebkitLineClamp: theme.lineClamp(1),
     },
+    'img': {
+        height: '100%',
+    },
     [theme.breakpoints.down('mobile')]: {
         padding: '0 30px',
         '.items': {

@@ -183,7 +183,7 @@ const util = {
      */
     redirectTo: (url = '/', isRefresh = true) => {
 
-        router.push(url);
+        router.push(url, router.asPath, { locale: router.locale });
         if (isRefresh) router.reload();
 
     },

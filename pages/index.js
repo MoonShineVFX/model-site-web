@@ -91,6 +91,7 @@ const Home = ({ pageData }) => {
                                 title={title}
                                 className="itemWrap"
                                 newPage
+                                extra
                             >
                                 <div className="item-thumb">
                                     <img

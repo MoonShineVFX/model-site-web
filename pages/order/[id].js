@@ -126,7 +126,6 @@ const OrderDetail = ({ pageData }) => {
                                             <img
                                                 src={imgUrl}
                                                 alt={title}
-                                                title={title}
                                                 width="150"
                                                 height="110"
                                             />

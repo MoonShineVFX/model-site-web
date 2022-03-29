@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { styled } from '@mui/system';
 import Links from './Links';
 import deftag from '../utils/util.deftag';
@@ -40,9 +39,5 @@ const Logo = ({ ...rest }) => (
     </LogoLayout>
 
 );
-
-Logo.propTypes = {
-    children: PropTypes.any,
-};
 
 export default Logo;

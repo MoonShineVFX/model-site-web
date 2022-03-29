@@ -98,7 +98,6 @@ const Item = ({
             <img
                 src={imgUrl}
                 alt={title}
-                title={title}
                 width={width}
                 height={height}
             />

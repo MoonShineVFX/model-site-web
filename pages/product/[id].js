@@ -141,9 +141,8 @@ const ProductDetail = ({ pageData }) => {
             <DetailWrapLayout>
                 <div className="detail-banner">
                     <img
-                        src={pageData.imgUrl}
+                        src={matches ? pageData.mobileImgUrl : pageData.imgUrl}
                         alt={pageData.title}
-                        title={pageData.title}
                         width="1200"
                         height="396"
                     />
@@ -266,7 +265,6 @@ const ProductDetail = ({ pageData }) => {
                                     <img
                                         src={url}
                                         alt={id}
-                                        title={id}
                                         width="560"
                                         height="317"
                                     />

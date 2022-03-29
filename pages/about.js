@@ -130,7 +130,6 @@ const About = ({ pageData }) => {
                     <img
                         src={imgUrl}
                         alt={title}
-                        title={title}
                         width="1200"
                         height="396"
                     />

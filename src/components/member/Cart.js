@@ -95,7 +95,6 @@ const Cart = () => {
                                     <img
                                         src={cart.items[id].imgUrl}
                                         alt={cart.items[id].title}
-                                        title={cart.items[id].title}
                                         width="100"
                                         height="63"
                                     />

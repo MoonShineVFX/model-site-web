@@ -34,7 +34,7 @@ const LangOption = () => {
 
         //     });
 
-        router.push(router.pathname, router.pathname, { locale: target.value });
+        router.push(router.asPath, router.asPath, { locale: target.value });
 
     };
 
@@ -83,7 +83,7 @@ const Footer = () => {
                 >
                     <img
                         src="/logo_small.png"
-                        alt=""
+                        alt="logo small"
                         width="41"
                         height="32"
                     />

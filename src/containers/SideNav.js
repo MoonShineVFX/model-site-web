@@ -81,7 +81,10 @@ const Sidenav = () => {
                         </Links>
                 }
 
-                <Community />
+                {
+                    // Betty: 暫且沒有社群
+                    false && <Community />
+                }
             </div>
             <div className="mask" onClick={handleHideSideNav}></div>
         </SideNavLayout>

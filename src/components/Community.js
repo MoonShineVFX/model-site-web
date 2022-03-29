@@ -22,9 +22,10 @@ const Community = () => (
 
                 <Links
                     key={idx}
-                    url={url}
-                    newPage
+                    href={url}
                     className="social-item"
+                    newPage
+                    extra
                 >
                     <FontIcon icon={icon} />
                 </Links>

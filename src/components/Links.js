@@ -29,18 +29,22 @@ const ButtonLayout = styled(Button)(({ theme }) => ({
 }));
 
 //
-const Links = ({ url, newPage, title, className, children, ...rest }) => {
+const Links = ({
+    url,
+    newPage,
+    extra,
+    title,
+    className,
+    children,
+    ...rest
+}) => {
 
     const { locale } = useRouter();
 
     return (
 
-        <Link
-            href={`${(locale !== 'zh') ? locale : ''}${url}`}
-            locale={locale}
-        >
+        <Link href={extra ? url : `/${(locale !== 'zh') ? locale : ''}${url}`}>
             <a
-                href={`${(locale !== 'zh') ? locale : ''}${url}`}
                 title={title}
                 className={className}
                 {...newPage && {
@@ -80,11 +84,13 @@ const ButtonLink = ({ url, text, type, ...rest }) => {
 Links.defaultProps = {
     url: '',
     newPage: false,
+    extra: false,
 };
 
 Links.propTypes = {
     url: PropTypes.string.isRequired,
     newPage: PropTypes.bool,
+    extra: PropTypes.bool,
     title: PropTypes.string,
     className: PropTypes.string,
     children: PropTypes.any,

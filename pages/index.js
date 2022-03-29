@@ -96,7 +96,6 @@ const Home = ({ pageData }) => {
                                     <img
                                         src={imgUrl}
                                         alt={title}
-                                        title={title}
                                         width="380"
                                         height="206"
                                     />

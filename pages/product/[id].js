@@ -344,7 +344,7 @@ export async function getServerSideProps ({ params, locale }) {
 
         return {
             redirect: {
-                destination: '/product/list?page=1&type=all',
+                destination: '/product/list?page=1',
                 permanent: false,
             },
         };

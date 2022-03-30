@@ -43,7 +43,7 @@ const Links = ({
 
     return (
 
-        <Link href={extra ? url : `/${(locale !== 'zh') ? locale : ''}${url}`}>
+        <Link href={url} locale={locale}>
             <a
                 title={title}
                 className={className}

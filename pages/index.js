@@ -47,7 +47,7 @@ const Home = ({ pageData }) => {
                     <Banner pageData={pageData} />
             }
 
-            <ItemsWrap title={home_section_title01} url="/product/list?page=1&type=all">
+            <ItemsWrap title={home_section_title01} url="/product/list?page=1">
                 <ItemNewArrivalLayout
                     container
                     wrap="nowrap"

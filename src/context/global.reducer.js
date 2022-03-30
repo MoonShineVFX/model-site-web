@@ -28,6 +28,12 @@ const globalReducer = (state, { type, payload }) => {
                 logged: !!payload.other.userId,
             };
 
+        case 'lang_list':
+            return {
+                ...state,
+                deftags: payload,
+            };
+
         case 'cart_list':
             return {
                 ...state,

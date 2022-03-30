@@ -11,11 +11,13 @@ const {
 const ItemsTitle = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
+    margin: '20px 0',
     '> *': {
         flex: '2',
     },
     '.title': {
         fontSize: '1.4em',
+        margin: '0',
         '& + div': {
             textAlign: 'right',
             flex: '1',
@@ -64,7 +66,7 @@ ItemsWrap.defaultProps = {
 };
 
 ItemsWrap.propTypes = {
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
     showMore: PropTypes.bool,
     url: PropTypes.string,
     children: PropTypes.any.isRequired,

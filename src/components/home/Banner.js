@@ -43,7 +43,6 @@ const Banner = ({ pageData }) => {
                                     title={title}
                                     className="thumb"
                                     newPage
-                                    extra
                                 >
                                     {
                                         matches ? (

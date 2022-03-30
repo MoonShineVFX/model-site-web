@@ -7,7 +7,6 @@ import Links from '../components/Links';
 import Community from '../components/Community';
 import utilConst from '../utils/util.const';
 import deftag from '../utils/util.deftag';
-import Service from '../utils/util.service';
 
 const { langs } = utilConst;
 const {
@@ -25,16 +24,10 @@ const LangOption = () => {
     const router = useRouter();
 
     // 選取語言
-    const handleSelected = ({ target }) => {
+    const handleSelected = ({ target: { value } }) => {
 
-        // Service.deftagList()
-        //     .then((resData) => {
-
-        //         console.log(resData)
-
-        //     });
-
-        router.push(router.asPath, router.asPath, { locale: target.value });
+        // url 更新
+        router.push(router.asPath, router.asPath, { locale: value });
 
     };
 

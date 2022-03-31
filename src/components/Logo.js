@@ -1,12 +1,7 @@
 import { styled } from '@mui/system';
 import Links from './Links';
-import deftag from '../utils/util.deftag';
+import useDeftags from '../utils/useDeftags';
 
-const {
-    common: { text_logo },
-} = deftag;
-
-//
 const LogoLayout = styled('span')(({ theme }) => ({
     '.logo-text': {
         width: '170px',
@@ -21,23 +16,30 @@ const LogoLayout = styled('span')(({ theme }) => ({
 }));
 
 //
-const Logo = ({ ...rest }) => (
+const Logo = ({ ...rest }) => {
 
-    <LogoLayout {...rest}>
-        <Links
-            url="/"
-            className="logo-text"
-            title={text_logo}
-        >
-            <img
-                src="/logo_large.png"
-                alt={text_logo}
-                width="291"
-                height="78"
-            />
-        </Links>
-    </LogoLayout>
+    // Hook
+    const [deftag] = useDeftags();
 
-);
+    return (
+
+        <LogoLayout {...rest}>
+            <Links
+                url="/"
+                className="logo-text"
+                title={deftag?.text_logo}
+            >
+                <img
+                    src="/logo_large.png"
+                    alt={deftag?.text_logo}
+                    width="291"
+                    height="78"
+                />
+            </Links>
+        </LogoLayout>
+
+    );
+
+};
 
 export default Logo;

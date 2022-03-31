@@ -1,5 +1,4 @@
 import { Fragment, useContext, useEffect } from 'react';
-import { useRouter } from 'next/router';
 import { Grid } from '@mui/material';
 import {
     homeStyles,
@@ -7,27 +6,22 @@ import {
     ItemTutorialLayout,
 } from '../src/components/home/homeLayout';
 
-import HeadTag from '../src/containers/HeadTag';
 import Links from '../src/components/Links';
 import ItemsWrap from '../src/components/ItemsWrap';
 import Item from '../src/components/Item';
 import Banner from '../src/components/home/Banner';
 
 import { GlobalContext } from '../src/context/global.state';
-import useLocalStorage from '../src/utils/useLocalStorage';
 import util from '../src/utils/util';
+import useDeftags from '../src/utils/useDeftags';
 
 const Home = ({ pageData }) => {
 
-    // Router
-    const { locale } = useRouter();
-
     // Context
-    const { deftags, globalDispatch } = useContext(GlobalContext);
+    const { globalDispatch } = useContext(GlobalContext);
 
     // Hook
-    const [deftag] = useLocalStorage('langList');
-    const langs = (deftag !== 'undefined') ? deftags : deftag;
+    const [deftag] = useDeftags();
 
     useEffect(() => {
 
@@ -40,14 +34,13 @@ const Home = ({ pageData }) => {
 
         <Fragment>
             {homeStyles}
-            <HeadTag title={langs?.[locale]?.home_title} />
 
             {
                 !!pageData.banners.length &&
                     <Banner pageData={pageData} />
             }
 
-            <ItemsWrap title={langs?.[locale]?.home_section_title01} url="/product/list?page=1">
+            <ItemsWrap title={deftag?.home_section_title01} url="/product/list?page=1">
                 <ItemNewArrivalLayout
                     container
                     wrap="nowrap"
@@ -80,7 +73,7 @@ const Home = ({ pageData }) => {
                 </ItemNewArrivalLayout>
             </ItemsWrap>
 
-            <ItemsWrap title={langs?.[locale]?.home_section_title02} url="/tutorial">
+            <ItemsWrap title={deftag?.home_section_title02} url="/tutorial">
                 <ItemTutorialLayout>
                     {
                         pageData.tutorials.map(({ id, title, description, imgUrl, link }) => (

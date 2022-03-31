@@ -4,11 +4,8 @@ import { styled } from '@mui/system';
 import HeadTag from '../src/containers/HeadTag';
 import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
-import deftag from '../src/utils/util.deftag';
+import useDeftags from '../src/utils/useDeftags';
 
-const { about } = deftag;
-
-//
 const BannerLayout = styled('section')(({ theme }) => ({
     fontSize: '1.25em',
     marginBottom: '40px',
@@ -113,6 +110,9 @@ const About = ({ pageData }) => {
     // Context
     const { globalDispatch } = useContext(GlobalContext);
 
+    // Hook
+    const [deftag] = useDeftags();
+
     useEffect(() => {
 
         globalDispatch({ type: 'sidenav', payload: false });
@@ -123,7 +123,7 @@ const About = ({ pageData }) => {
     return (
 
         <Fragment>
-            <HeadTag title={about.about_title} />
+            <HeadTag title={deftag?.about_title} />
 
             <BannerLayout>
                 <div className="thumb">
@@ -155,7 +155,7 @@ const About = ({ pageData }) => {
                             xs={4}
                         >
                             <p className="count">{support[key]}</p>
-                            {about[`about_support_${key}`]}
+                            {deftag?.[`about_support_${key}`]}
                         </Grid>
 
                     ))

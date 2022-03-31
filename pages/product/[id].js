@@ -16,11 +16,11 @@ import Buttons from '../../src/components/Buttons';
 import ImageEnlarge from '../../src/components/ImageEnlarge';
 
 import { GlobalContext } from '../../src/context/global.state';
+import util from '../../src/utils/util';
+import Service from '../../src/utils/util.service';
 import useQuery from '../../src/utils/useQuery';
 import useLocalStorage from '../../src/utils/useLocalStorage';
-import util from '../../src/utils/util';
-import deftag from '../../src/utils/util.deftag';
-import Service from '../../src/utils/util.service';
+import useDeftags from '../../src/utils/useDeftags';
 
 const {
     priceWithCommas,
@@ -28,38 +28,23 @@ const {
     arrangeFormatAndRender,
 } = util;
 
-// deftag
-const {
-    product: {
-        product_detail_section_title01,
-        product_detail_section_title02,
-        btn_add_to_cart,
-        product_detail_notice_message,
-        product_detail_format_and_render,
-        product_render,
-        product_model_sum,
-        product_file_size,
-        product_per_image_size,
-    },
-} = deftag;
-
 // 價格
 const renderPrice = (price) => <h2 className="price">{priceWithCommas(price)}</h2>;
 
 // 其他資訊
-const renderOtherInfo = (pageData) => (
+const renderOtherInfo = (pageData, deftag) => (
 
     <div className="other-info">
         <div className="other-info-item">
-            <div className="label">{product_model_sum}</div>
+            <div className="label">{deftag?.product_model_sum}</div>
             <p>{pageData.modelSum}</p>
         </div>
         <div className="other-info-item">
-            <div className="label">{product_file_size}</div>
+            <div className="label">{deftag?.product_file_size}</div>
             <p>{pageData.fileSize}</p>
         </div>
         <div className="other-info-item">
-            <div className="label">{product_per_image_size}</div>
+            <div className="label">{deftag?.product_per_image_size}</div>
             <p>{pageData.perImgSize}</p>
         </div>
     </div>
@@ -69,7 +54,9 @@ const renderOtherInfo = (pageData) => (
 //
 const ProductDetail = ({ pageData }) => {
 
+    // Hook
     const matches = useMediaQuery((theme)=> theme.breakpoints.down('mobile'));
+    const [deftag] = useDeftags();
 
     // Router
     const query = useQuery();
@@ -180,7 +167,7 @@ const ProductDetail = ({ pageData }) => {
 
                         <p className="description">{pageData.description}</p>
                         <div>
-                            <div className="label">{product_detail_format_and_render}</div>
+                            <div className="label">{deftag?.product_detail_format_and_render}</div>
                             <FormatAndRenderLayout>
                                 {
                                     Object.keys(arrangeFormatAndRender(pageData.models)).map((id) => (
@@ -191,7 +178,7 @@ const ProductDetail = ({ pageData }) => {
                                         >
                                             <h4 className="title">{arrangeFormatAndRender(pageData.models)[id].name}</h4>
                                             <span className="renders">
-                                                <span>{product_render}: </span>
+                                                <span>{deftag?.product_render}: </span>
                                                 {arrangeFormatAndRender(pageData.models)[id].renders.map(({ rendererName }) => rendererName).join('、')}
                                             </span>
                                         </li>
@@ -200,7 +187,7 @@ const ProductDetail = ({ pageData }) => {
                                 }
                             </FormatAndRenderLayout>
                         </div>
-                        <p className="notice">{product_detail_notice_message}</p>
+                        <p className="notice">{deftag?.product_detail_notice_message}</p>
                     </Grid>
 
                     <Grid
@@ -211,7 +198,7 @@ const ProductDetail = ({ pageData }) => {
                     >
                         {
                             // mWeb
-                            matches && renderOtherInfo(pageData)
+                            matches && renderOtherInfo(pageData, deftag)
                         }
 
                         {
@@ -220,7 +207,7 @@ const ProductDetail = ({ pageData }) => {
                         }
 
                         <Buttons
-                            text={btn_add_to_cart}
+                            text={deftag?.btn_add_to_cart}
                             onClick={handleAddToCart}
                         />
 
@@ -233,7 +220,7 @@ const ProductDetail = ({ pageData }) => {
             </DetailWrapLayout>
 
             <DemoImageWrapLayout
-                title={product_detail_section_title01}
+                title={deftag?.product_detail_section_title01}
                 showMore={false}
             >
                 <Grid
@@ -277,7 +264,7 @@ const ProductDetail = ({ pageData }) => {
             </DemoImageWrapLayout>
 
             <RelativeProductsLayout
-                title={product_detail_section_title02}
+                title={deftag?.product_detail_section_title02}
                 showMore={false}
             >
                 <Grid

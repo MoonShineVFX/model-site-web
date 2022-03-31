@@ -1,50 +1,48 @@
 import { NavMenuLayout } from './globalLayout';
 import Links from '../components/Links';
-import deftag from '../utils/util.deftag';
+import useDeftags from '../utils/useDeftags';
 
-const {
-    common: {
-        menu_store,
-        menu_about,
-        menu_tutorial,
-    },
-} = deftag;
+const Navbar = ({ ...rest }) => {
 
-//
-const navMenus = [
-    {
-        key: 'product/list?page=1',
-        text: menu_store,
-    },
-    {
-        key: 'about',
-        text: menu_about,
-    },
-    {
-        key: 'tutorial',
-        text: menu_tutorial,
-    },
-];
+    // Hook
+    const [deftag] = useDeftags();
 
-//
-const Navbar = ({ ...rest }) => (
-
-    <NavMenuLayout {...rest}>
+    //
+    const navMenus = [
         {
-            navMenus.map(({ key, text }) => (
+            key: 'product/list?page=1',
+            text: deftag?.menu_store,
+        },
+        {
+            key: 'about',
+            text: deftag?.menu_about,
+        },
+        {
+            key: 'tutorial',
+            text: deftag?.menu_tutorial,
+        },
+    ];
 
-                <Links
-                    key={key}
-                    url={`/${key}`}
-                    title={text}
-                >
-                    {text}
-                </Links>
+    return (
 
-            ))
-        }
-    </NavMenuLayout>
+        <NavMenuLayout {...rest}>
+            {
+                navMenus.map(({ key, text }) => (
 
-);
+                    <Links
+                        key={key}
+                        url={`/${key}`}
+                        title={text}
+                    >
+                        {text}
+                    </Links>
+
+                ))
+            }
+        </NavMenuLayout>
+
+    );
+
+};
 
 export default Navbar;

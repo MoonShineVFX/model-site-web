@@ -7,9 +7,7 @@ import Item from '../src/components/Item';
 
 import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
-import deftag from '../src/utils/util.deftag';
-
-const { tutorial: { tutorial_title } } = deftag;
+import useDeftags from '../src/utils/useDeftags';
 
 //
 const TitleLayout = styled('h1')(({ theme }) => ({
@@ -71,6 +69,9 @@ const Tutorial = ({ pageData }) => {
     // Context
     const { globalDispatch } = useContext(GlobalContext);
 
+    // Hook
+    const [deftag] = useDeftags();
+
     useEffect(() => {
 
         globalDispatch({ type: 'sidenav', payload: false });
@@ -81,8 +82,8 @@ const Tutorial = ({ pageData }) => {
     return (
 
         <Fragment>
-            <HeadTag title={tutorial_title} />
-            <TitleLayout>{tutorial_title}</TitleLayout>
+            <HeadTag title={deftag?.tutorial_title} />
+            <TitleLayout>{deftag?.tutorial_title}</TitleLayout>
 
             <ItemWrapLayout
                 container

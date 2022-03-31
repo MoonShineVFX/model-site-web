@@ -26,18 +26,11 @@ import HeadTag from '../../src/containers/HeadTag';
 import FontIcon from '../../src/components/FontIcon';
 import Item from '../../src/components/Item';
 import Paginations from '../../src/components/Paginations';
+
 import { GlobalContext } from '../../src/context/global.state';
 import useQuery from '../../src/utils/useQuery';
 import util from '../../src/utils/util';
-import deftag from '../../src/utils/util.deftag';
-
-const {
-    common: { menu_store },
-    product: {
-        product_select_label,
-        product_no_data,
-    },
-} = deftag;
+import useDeftags from '../../src/utils/useDeftags';
 
 // 整理 URL 標籤格式
 const arrangeTags = (string) => {
@@ -59,7 +52,13 @@ const ProductList = ({ pageData }) => {
     const query = useQuery();
 
     // Context
-    const { tags: tagsOpt, globalDispatch } = useContext(GlobalContext);
+    const {
+        tags: tagsOpt,
+        globalDispatch,
+    } = useContext(GlobalContext);
+
+    // Hook
+    const [deftag] = useDeftags();
 
     // State
     const [selectedTag, setSelectedTag] = useState({});
@@ -107,7 +106,7 @@ const ProductList = ({ pageData }) => {
     return (
 
         <Fragment>
-            <HeadTag title={menu_store} />
+            <HeadTag title={deftag?.menu_store} />
 
             <GridLayout
                 container
@@ -126,7 +125,7 @@ const ProductList = ({ pageData }) => {
                             component="aside"
                             className="tagsList"
                         >
-                            <ListTitleLayout>{product_select_label}</ListTitleLayout>
+                            <ListTitleLayout>{deftag?.product_select_label}</ListTitleLayout>
                             <List>
                                 {
                                     tagsOpt.map(({ id, name }) => (
@@ -193,7 +192,7 @@ const ProductList = ({ pageData }) => {
                                 }
                             </ItemWrapLayout>
 
-                        ) : <h2 className="no-product">{product_no_data}</h2>
+                        ) : <h2 className="no-product">{deftag?.product_no_data}</h2>
                     }
 
                     {

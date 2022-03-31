@@ -6,31 +6,17 @@ import HeadTag from '../../src/containers/HeadTag';
 import { ButtonLink } from '../../src/components/Links';
 import { GlobalContext } from '../../src/context/global.state';
 import util from '../../src/utils/util';
-import deftag from '../../src/utils/util.deftag';
+import useDeftags from '../../src/utils/useDeftags';
 
 const { priceWithCommas, dateFormat } = util;
-
-const {
-    orderRecord: {
-        order_text_order_number,
-        order_text_create_at,
-        order_text_paid_at,
-        order_text_status,
-        order_text_quantity,
-        order_text_total_price,
-        order_text_payment,
-        order_text_invoice,
-        order_detail,
-    },
-    member: {
-        member_my_product
-    },
-} = deftag;
 
 const OrderDetail = ({ pageData }) => {
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
+
+    // Hook
+    const [deftag] = useDeftags();
 
     useEffect(() => {
 
@@ -42,8 +28,8 @@ const OrderDetail = ({ pageData }) => {
     return (
 
         <Fragment>
-            <HeadTag title={order_detail} />
-            <TitleLayout>{order_detail}</TitleLayout>
+            <HeadTag title={deftag?.order_detail} />
+            <TitleLayout>{deftag?.order_detail}</TitleLayout>
 
             <OrderDetailLayout>
                 <Grid
@@ -58,20 +44,20 @@ const OrderDetail = ({ pageData }) => {
                         mobile={6}
                     >
                         <div className="row-item">
-                            <h4 className="title">{order_text_order_number}</h4>
+                            <h4 className="title">{deftag?.order_text_order_number}</h4>
                             <div className="value">{pageData.orderNumber}</div>
                         </div>
                         <div className="row-item">
-                            <h4 className="title">{order_text_create_at}</h4>
+                            <h4 className="title">{deftag?.order_text_create_at}</h4>
                             <div className="value">{dateFormat(pageData.createdAt)}</div>
                         </div>
                         <div className="row-item">
-                            <h4 className="title">{order_text_paid_at}</h4>
+                            <h4 className="title">{deftag?.order_text_paid_at}</h4>
                             <div className="value">{dateFormat(pageData.paidAt)}</div>
                         </div>
                         <div className="row-item">
-                            <h4 className="title">{order_text_payment}</h4>
-                            <div className="value">{deftag.orderRecord[`order_payment_${pageData.paidBy}`]}</div>
+                            <h4 className="title">{deftag?.order_text_payment}</h4>
+                            <div className="value">{deftag?.[`order_payment_${pageData.paidBy}`]}</div>
                         </div>
                     </Grid>
 
@@ -81,19 +67,19 @@ const OrderDetail = ({ pageData }) => {
                         mobile={6}
                     >
                         <div className="row-item">
-                            <h4 className="title">{order_text_quantity}</h4>
+                            <h4 className="title">{deftag?.order_text_quantity}</h4>
                             <div className="value">{pageData.totalItems}</div>
                         </div>
                          <div className="row-item">
-                            <h4 className="title">{order_text_total_price}</h4>
+                            <h4 className="title">{deftag?.order_text_total_price}</h4>
                             <div className="value">{priceWithCommas(pageData.price)}</div>
                         </div>
                         <div className="row-item">
-                            <h4 className="title">{order_text_status}</h4>
-                            <div className="value">{deftag.orderRecord[`order_status_${pageData.status}`]}</div>
+                            <h4 className="title">{deftag?.order_text_status}</h4>
+                            <div className="value">{deftag?.[`order_status_${pageData.status}`]}</div>
                         </div>
                         <div className="row-item">
-                            <h4 className="title">{order_text_invoice}</h4>
+                            <h4 className="title">{deftag?.order_text_invoice}</h4>
                             <div className="value">{pageData.invoice}</div>
                         </div>
                     </Grid>
@@ -144,7 +130,7 @@ const OrderDetail = ({ pageData }) => {
 
                 <div className="btn-action">
                     <ButtonLink
-                        text={member_my_product}
+                        text={deftag?.member_my_product}
                         url="/member/account"
                     />
                 </div>

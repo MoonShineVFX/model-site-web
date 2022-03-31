@@ -5,20 +5,10 @@ import { Grid, useMediaQuery } from '@mui/material';
 import { FooterLayout, LangOptionLayout } from './globalLayout';
 import Links from '../components/Links';
 import Community from '../components/Community';
-import utilConst from '../utils/util.const';
-import deftag from '../utils/util.deftag';
-
-const { langs } = utilConst;
-const {
-    common,
-    footer: {
-        text_privacy,
-        text_custom_service,
-    },
-} = deftag;
+import useDeftags from '../utils/useDeftags';
 
 // 語系選單
-const LangOption = () => {
+const LangOption = ({ deftag }) => {
 
     // Router
     const router = useRouter();
@@ -39,14 +29,16 @@ const LangOption = () => {
             onChange={handleSelected}
         >
             {
-                langs.map((code) => (
+                router.locales.map((code) => (
 
-                    <option
-                        key={code}
-                        value={code}
-                    >
-                        {common[`lang_${code}`]}
-                    </option>
+                    // 僅支援繁中與英文
+                    (code === 'zh' || code === 'en') &&
+                        <option
+                            key={code}
+                            value={code}
+                        >
+                            {deftag?.[`lang_${code}`]}
+                        </option>
 
                 ))
             }
@@ -59,7 +51,9 @@ const LangOption = () => {
 //
 const Footer = () => {
 
+    // Hook
     const matches = useMediaQuery((theme) => theme.breakpoints.down('mobile'));
+    const [deftag] = useDeftags();
 
     return (
 
@@ -93,10 +87,10 @@ const Footer = () => {
                                             newPage
                                             className="light privacy-link"
                                         >
-                                            {text_privacy}
+                                            {deftag?.text_privacy}
                                         </Links>
 
-                                        <Links url="mailto:service@moonshine.tw" className="light" newPage>{text_custom_service}: service@moonshine.tw</Links>
+                                        <Links url="mailto:service@moonshine.tw" className="light" newPage>{deftag?.text_custom_service}: service@moonshine.tw</Links>
                                     </div>
                                     <p className="bottom">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.</p>
                                 </div>
@@ -112,9 +106,9 @@ const Footer = () => {
                                         newPage
                                         className="light privacy-link"
                                     >
-                                        {text_privacy}
+                                        {deftag?.text_privacy}
                                     </Links>
-                                    <Links url="mailto:service@moonshine.tw" className="light" newPage>{text_custom_service}: service@moonshine.tw</Links>
+                                    <Links url="mailto:service@moonshine.tw" className="light" newPage>{deftag?.text_custom_service}: service@moonshine.tw</Links>
                                 </div>
                                 <div className="bottom">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.</div>
                             </span>
@@ -134,7 +128,7 @@ const Footer = () => {
                         false && <Community />
                     }
 
-                    <LangOption />
+                    <LangOption deftag={deftag} />
                 </Grid>
             </Grid>
         </FooterLayout>

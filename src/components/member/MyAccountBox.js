@@ -5,21 +5,9 @@ import Box from '../Box';
 import Links from '../Links';
 import { GlobalContext } from '../../context/global.state';
 import util from '../../utils/util';
-import deftag from '../../utils/util.deftag';
+import useDeftags from '../../utils/useDeftags';
 
 const { redirectTo } = util;
-const {
-    common: { text_logout },
-    member: {
-        member_account_center,
-    },
-} = deftag;
-
-// Menu
-const menus = {
-    account: member_account_center,
-    logout: text_logout,
-};
 
 //
 const MyAccountLayout = styled(Box)(({ theme }) => ({
@@ -43,6 +31,15 @@ const MyAccountBox = () => {
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
+
+    // Hook
+    const [deftag] = useDeftags();
+
+    // Menu
+    const menus = {
+        account: deftag?.member_account_center,
+        logout: deftag?.text_logout,
+    };
 
     // 當頁再次點擊要關閉 box
     const handleClickAccount = () => globalDispatch({ type: 'target_box', payload: '' });

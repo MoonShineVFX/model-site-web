@@ -2,10 +2,9 @@ import { useMediaQuery, Grid } from '@mui/material';
 import { OrderRecordLayout, OrderRecordGridLayout } from '../order/orderLayout';
 import Links from '../Links';
 import util from '../../utils/util';
-import deftag from '../../utils/util.deftag';
+import useDeftags from '../../utils/useDeftags';
 
 const { priceWithCommas, dateFormat, renderWithoutValue } = util;
-const { orderRecord } = deftag;
 
 // 表格欄位樣板
 const renderItemCell = ({
@@ -58,16 +57,17 @@ const Item = ({
         paidAt,
         invoice,
     },
+    deftag,
 }) => (
 
     renderItemCell({
         data: {
             number: orderNumber,
             createAt: dateFormat(createdAt),
-            status: orderRecord[`order_status_${status}`],
+            status: deftag?.[`order_status_${status}`],
             quantity: totalItems,
             price: priceWithCommas(price),
-            payment: orderRecord[`order_payment_${paidBy}`],
+            payment: deftag?.[`order_payment_${paidBy}`],
             paidAt: dateFormat(paidAt),
             invoice,
         },
@@ -76,21 +76,21 @@ const Item = ({
 );
 
 // Web
-const withTable = (data) => (
+const withTable = (data, deftag) => (
 
     <OrderRecordLayout>
         {
             renderItemCell({
                 className: 'row-head',
                 data: {
-                    number: orderRecord.order_text_order_number,
-                    createAt: orderRecord.order_text_create_at,
-                    status: orderRecord.order_text_status,
-                    quantity: orderRecord.order_text_quantity,
-                    price: orderRecord.order_text_total_price,
-                    payment: orderRecord.order_text_payment,
-                    paidAt: orderRecord.order_text_paid_at,
-                    invoice: orderRecord.order_text_invoice,
+                    number: deftag?.order_text_order_number,
+                    createAt: deftag?.order_text_create_at,
+                    status: deftag?.order_text_status,
+                    quantity: deftag?.order_text_quantity,
+                    price: deftag?.order_text_total_price,
+                    payment: deftag?.order_text_payment,
+                    paidAt: deftag?.order_text_paid_at,
+                    invoice: deftag?.order_text_invoice,
                 },
             })
         }
@@ -101,6 +101,7 @@ const withTable = (data) => (
                 <Item
                     key={obj.id}
                     data={obj}
+                    deftag={deftag}
                 />
 
             ))
@@ -110,7 +111,7 @@ const withTable = (data) => (
 );
 
 // mWeb
-const withCard = (data) => (
+const withCard = (data, deftag) => (
 
     <OrderRecordGridLayout
         container
@@ -143,35 +144,35 @@ const withCard = (data) => (
                         newPage
                     >
                         <div className="item">
-                            <h4 className="title">{orderRecord.order_text_order_number}</h4>
+                            <h4 className="title">{deftag?.order_text_order_number}</h4>
                             <span className="orderNumber">{orderNumber}</span>
                         </div>
                         <div className="item">
-                            <h4 className="title">{orderRecord.order_text_create_at}</h4>
+                            <h4 className="title">{deftag?.order_text_create_at}</h4>
                             {dateFormat(createdAt)}
                         </div>
                         <div className="item">
-                            <h4 className="title">{orderRecord.order_text_quantity}</h4>
+                            <h4 className="title">{deftag?.order_text_quantity}</h4>
                             {totalItems}
                         </div>
                         <div className="item">
-                            <h4 className="title">{orderRecord.order_text_total_price}</h4>
+                            <h4 className="title">{deftag?.order_text_total_price}</h4>
                             {priceWithCommas(price)}
                         </div>
                         <div className="item">
-                            <h4 className="title">{orderRecord.order_text_status}</h4>
-                            {orderRecord[`order_status_${status}`]}
+                            <h4 className="title">{deftag?.order_text_status}</h4>
+                            {deftag?.[`order_status_${status}`]}
                         </div>
                         <div className="item">
-                            <h4 className="title">{orderRecord.order_text_payment}</h4>
-                            {renderWithoutValue(orderRecord[`order_payment_${paidBy}`])}
+                            <h4 className="title">{deftag?.order_text_payment}</h4>
+                            {renderWithoutValue(deftag?.[`order_payment_${paidBy}`])}
                         </div>
                         <div className="item">
-                            <h4 className="title">{orderRecord.order_text_paid_at}</h4>
+                            <h4 className="title">{deftag?.order_text_paid_at}</h4>
                             {dateFormat(paidAt)}
                         </div>
                         <div className="item">
-                            <h4 className="title">{orderRecord.order_text_invoice}</h4>
+                            <h4 className="title">{deftag?.order_text_invoice}</h4>
                             <span className="invoice">{renderWithoutValue(invoice)}</span>
                         </div>
                     </Links>
@@ -186,11 +187,13 @@ const withCard = (data) => (
 //
 const OrderRecord = ({ data }) => {
 
+    // Hook
     const matches = useMediaQuery((theme) => theme.breakpoints.up('mobile'));
+    const [deftag] = useDeftags();
 
     return (
 
-        matches ? withTable(data) : withCard(data)
+        matches ? withTable(data, deftag) : withCard(data, deftag)
 
     );
 

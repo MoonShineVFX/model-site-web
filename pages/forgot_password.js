@@ -12,23 +12,16 @@ import Buttons from '../src/components/Buttons';
 import FormWrap, { FormRow, FormSuccessMesg } from '../src/components/FormWrap';
 
 import { GlobalContext } from '../src/context/global.state';
-import deftag from '../src/utils/util.deftag';
 import Service from '../src/utils/util.service';
-
-const {
-    memberSign: {
-        text_forgot_password,
-        text_enter_register_email,
-        btn_get_reset_password_link,
-        btn_return_to_signin,
-        text_email_sent,
-    },
-} = deftag;
+import useDeftags from '../src/utils/useDeftags';
 
 const ForgotPassword = () => {
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
+
+    // Hook
+    const [deftag] = useDeftags();
 
     useEffect(() => {
 
@@ -58,14 +51,14 @@ const ForgotPassword = () => {
     return (
 
         <Fragment>
-            <HeadTag title={text_forgot_password} />
+            <HeadTag title={deftag?.text_forgot_password} />
 
             <SignLayout>
                 <FormWrap
-                    {...!success && { title: text_forgot_password }}
+                    {...!success && { title: deftag?.text_forgot_password }}
                 >
                     {
-                        success ? <FormSuccessMesg mesg={text_email_sent} /> : (
+                        success ? <FormSuccessMesg mesg={deftag?.text_email_sent} /> : (
 
                             <form onSubmit={handleSubmit(handleReqData)}>
                                 <FormRow
@@ -75,7 +68,7 @@ const ForgotPassword = () => {
                                     <input
                                         type="text"
                                         name="email"
-                                        placeholder={text_enter_register_email}
+                                        placeholder={deftag?.text_enter_register_email}
                                         {...register('email', { required: true })}
                                     />
                                 </FormRow>
@@ -83,13 +76,13 @@ const ForgotPassword = () => {
                                 <div className="form-row form-row-btns">
                                     <Buttons
                                         type="submit"
-                                        text={btn_get_reset_password_link}
+                                        text={deftag?.btn_get_reset_password_link}
                                     />
 
                                     <BtnDirectLayout
                                         type="third"
                                         url="/signin"
-                                        text={btn_return_to_signin}
+                                        text={deftag?.btn_return_to_signin}
                                     />
                                 </div>
                             </form>

@@ -18,14 +18,9 @@ import MyAccountBox from '../components/member/MyAccountBox';
 import SideNav from './SideNav';
 
 import { GlobalContext } from '../context/global.state';
-import useLocalStorage from '../utils/useLocalStorage';
-import deftag from '../utils/util.deftag';
 import Service from '../utils/util.service';
-
-const {
-    memberSign: { text_signin },
-    member: { member_my_account },
-} = deftag;
+import useLocalStorage from '../utils/useLocalStorage';
+import useDeftags from '../utils/useDeftags';
 
 const arrangeCartList = (array) => array.reduce((acc, obj) => {
 
@@ -65,8 +60,10 @@ const Header = () => {
         globalDispatch,
     } = useContext(GlobalContext);
 
+    // Hook
     const matches = useMediaQuery((theme) => theme.breakpoints.down('mobile'));
     const [cartItem, setCartItem] = useLocalStorage('cartItem');
+    const [deftag] = useDeftags();
 
     useEffect(() => {
 
@@ -140,7 +137,7 @@ const Header = () => {
                         logged ? (
 
                             <Buttons
-                                text={member_my_account}
+                                text={deftag?.member_my_account}
                                 variant="outlined"
                                 onClick={() => handleClickBox('myAccount')}
                             />
@@ -149,7 +146,7 @@ const Header = () => {
 
                             <ButtonLink
                                 url="/signin"
-                                text={text_signin}
+                                text={deftag?.text_signin}
                             />
 
                         )

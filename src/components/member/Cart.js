@@ -4,17 +4,9 @@ import Box from '../Box';
 import Links from '../Links';
 import { GlobalContext } from '../../context/global.state';
 import util from '../../utils/util';
-import deftag from '../../utils/util.deftag';
+import useDeftags from '../../utils/useDeftags';
 
 const { priceWithCommas } = util;
-
-const {
-    header: {
-        cart_box_title,
-        cart_go_to_checkout,
-    },
-    cart: { cart_text_empty },
-} = deftag;
 
 //
 const CartLayout = styled(Box)(({ theme }) => ({
@@ -73,13 +65,16 @@ const Cart = () => {
     // Context
     const { logged, cart, globalDispatch } = useContext(GlobalContext);
 
+    // Hook
+    const [deftag] = useDeftags();
+
     // 當頁再次點擊要關閉 box
     const handleResetBox = () => globalDispatch({ type: 'target_box', payload: '' });
 
     return (
 
         <CartLayout>
-            <h4 className="title">{cart_box_title}</h4>
+            <h4 className="title">{deftag?.cart_box_title}</h4>
             <div className="items">
                 {
                     Object.entries(cart.items || {}).length ? (
@@ -107,16 +102,16 @@ const Cart = () => {
 
                         ))
 
-                    ) : cart_text_empty
+                    ) : deftag?.cart_text_empty
                 }
             </div>
             <div className="goToOrder">
                 <Links
                     url={`/${logged ? 'cart' : 'signin'}`}
-                    title={cart_go_to_checkout}
+                    title={deftag?.cart_go_to_checkout}
                     onClick={handleResetBox}
                 >
-                    {cart_go_to_checkout}
+                    {deftag?.cart_go_to_checkout}
                 </Links>
             </div>
         </CartLayout>

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { ErrorMessage } from '@hookform/error-message';
 import { styled } from '@mui/system';
-import deftag from '../utils/util.deftag';
+import useDeftags from '../utils/useDeftags';
 
 //
 const FormWrapLayout = styled('div')(({ theme }) => ({
@@ -134,16 +134,23 @@ const FormRow = ({ name, className, errors, children, ...rest }) => (
 );
 
 // 錯誤訊息
-const FormErrorMesg = ({ name, errors }) => (
+const FormErrorMesg = ({ name, errors }) => {
 
-    <ErrorMessage
-        name={name}
-        errors={errors}
-        message={deftag.error[`error_${errors[name]?.type}`]}
-        render={({ message }) => <p className="error-mesg">{message}</p>}
-    />
+    // Hook
+    const [deftag] = useDeftags();
 
-);
+    return (
+
+        <ErrorMessage
+            name={name}
+            errors={errors}
+            message={deftag?.[`error_${errors[name]?.type}`]}
+            render={({ message }) => <p className="error-mesg">{message}</p>}
+        />
+
+    );
+
+};
 
 // 成功訊息
 const FormSuccessMesg = ({ mesg }) => (

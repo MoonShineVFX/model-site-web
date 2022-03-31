@@ -19,29 +19,14 @@ import FormWrap, { FormRow } from '../src/components/FormWrap';
 import SigninGoogle from '../src/components/third-party/SigninGoogle';
 
 import { GlobalContext } from '../src/context/global.state';
-import useReCaptchaVerify from '../src/utils/useReCaptchaVerify';
 import util from '../src/utils/util';
 import utilConst from '../src/utils/util.const';
-import deftag from '../src/utils/util.deftag';
 import Service from '../src/utils/util.service';
+import useReCaptchaVerify from '../src/utils/useReCaptchaVerify';
+import useDeftags from '../src/utils/useDeftags';
 
 const { redirectTo } = util;
 const { paswdConfig } = utilConst;
-const {
-    common: { btn_verify },
-    memberSign: {
-        text_signin,
-        text_register,
-        text_forgot_password,
-        text_signin_title,
-        text_account,
-        text_password,
-    },
-    error: {
-        error_password_at_least_eight,
-        error_pattern,
-    },
-} = deftag;
 
 const Signin = () => {
 
@@ -50,6 +35,7 @@ const Signin = () => {
 
     // Hook
     const [token, handleGetToken] = useReCaptchaVerify(null);
+    const [deftag] = useDeftags();
 
     useEffect(() => {
 
@@ -95,10 +81,10 @@ const Signin = () => {
     return (
 
         <Fragment>
-            <HeadTag title={text_signin} />
+            <HeadTag title={deftag?.text_signin} />
 
             <SignLayout>
-                <FormWrap title={text_signin_title}>
+                <FormWrap title={deftag?.text_signin_title}>
                     <form onSubmit={handleSubmit(handleReqData)}>
                         <FormRow
                             name="email"
@@ -107,7 +93,7 @@ const Signin = () => {
                             <input
                                 type="text"
                                 name="email"
-                                placeholder={text_account}
+                                placeholder={deftag?.text_account}
                                 {...register('email', { required: true })}
                             />
                         </FormRow>
@@ -120,16 +106,16 @@ const Signin = () => {
                             <input
                                 type={paswdConfig[toggle.password].type}
                                 name="password"
-                                placeholder={text_password}
+                                placeholder={deftag?.text_password}
                                 {...register('password', {
                                     required: true,
                                     minLength: {
                                         value: 8,
-                                        message: error_password_at_least_eight,
+                                        message: deftag?.error_password_at_least_eight,
                                     },
                                     pattern: {
                                         value: /^(?=.*\d)[0-9a-zA-Z!\u0022#$%&'()*+,./:;<=>?@[\]\^_`{|}~-]{8,}$/g,
-                                        message: error_pattern,
+                                        message: deftag?.error_pattern,
                                     },
                                 })}
                             />
@@ -141,14 +127,14 @@ const Signin = () => {
 
                         <div className="form-row form-row-btns">
                             <Buttons
-                                text={btn_verify}
+                                text={deftag?.btn_verify}
                                 disabled={isVerified}
                                 onClick={handleGetToken}
                             />
 
                             <Buttons
                                 type="submit"
-                                text={text_signin}
+                                text={deftag?.text_signin}
                                 disabled={!isVerified}
                             />
 
@@ -157,9 +143,9 @@ const Signin = () => {
                             <ForgotPasswordLayout>
                                 <Links
                                     url="/forgot_password"
-                                    title={text_forgot_password}
+                                    title={deftag?.text_forgot_password}
                                 >
-                                    {text_forgot_password}
+                                    {deftag?.text_forgot_password}
                                 </Links>
                             </ForgotPasswordLayout>
 
@@ -167,7 +153,7 @@ const Signin = () => {
                                 type="third"
                                 url="/register"
                                 className="btn-register"
-                                text={text_register}
+                                text={deftag?.text_register}
                             />
                         </div>
                     </form>

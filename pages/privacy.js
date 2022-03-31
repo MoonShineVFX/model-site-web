@@ -3,17 +3,15 @@ import { TitleLayout, SectionLayout } from '../src/components/member/cartLayout'
 import HeadTag from '../src/containers/HeadTag';
 import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
-import deftag from '../src/utils/util.deftag';
+import useDeftags from '../src/utils/useDeftags';
 
-const {
-    privacy: { privacy_title },
-} = deftag;
-
-//
 const Privacy = ({ pageData }) => {
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
+
+    // Hook
+    const [deftag] = useDeftags();
 
     useEffect(() => {
 
@@ -25,8 +23,8 @@ const Privacy = ({ pageData }) => {
     return (
 
         <Fragment>
-            <HeadTag title={privacy_title} />
-            <TitleLayout>{privacy_title}</TitleLayout>
+            <HeadTag title={deftag?.privacy_title} />
+            <TitleLayout>{deftag?.privacy_title}</TitleLayout>
 
             <SectionLayout>
                 <div dangerouslySetInnerHTML={{ __html: pageData.detail }} />

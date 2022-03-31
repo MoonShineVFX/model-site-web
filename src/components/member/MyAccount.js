@@ -3,22 +3,13 @@ import { BtnDirectLayout } from '../member/memberSignLayout';
 import { BoxWrapLayout } from './accountLayout';
 import Buttons from '../Buttons';
 import { FormRow } from '../FormWrap';
-import deftag from '../../utils/util.deftag';
 import Service from '../../utils/util.service';
+import useDeftags from '../../utils/useDeftags';
 
-const {
-    memberSign: {
-        text_nickname,
-        text_account,
-    },
-    member: {
-        btn_saved,
-        member_change_password,
-    },
-} = deftag;
-
-//
 const MyAccount = ({ data }) => {
+
+    // Hook
+    const [deftag] = useDeftags();
 
     // React Hook Form
     const { handleSubmit, register } = useForm();
@@ -35,19 +26,19 @@ const MyAccount = ({ data }) => {
 
         <BoxWrapLayout>
             <div className="row">
-                <h4 className="title">{text_account}</h4>
+                <h4 className="title">{deftag?.text_account}</h4>
                 {data.email}
             </div>
 
             <div className="row">
-                <h4 className="title">{text_nickname}</h4>
+                <h4 className="title">{deftag?.text_nickname}</h4>
 
                 <form onSubmit={handleSubmit(handleReqData)}>
                     <FormRow name="nickname">
                         <input
                             type="text"
                             name="nickname"
-                            placeholder={text_nickname}
+                            placeholder={deftag?.text_nickname}
                             defaultValue={data.nickname}
                             {...register('nickname')}
                         />
@@ -56,13 +47,13 @@ const MyAccount = ({ data }) => {
                     <div className="form-row Model-form-button">
                         <Buttons
                             type="submit"
-                            text={btn_saved}
+                            text={deftag?.btn_saved}
                         />
 
                         <BtnDirectLayout
                             type="third"
                             url="/member/change_password"
-                            text={member_change_password}
+                            text={deftag?.member_change_password}
                         />
                     </div>
                 </form>

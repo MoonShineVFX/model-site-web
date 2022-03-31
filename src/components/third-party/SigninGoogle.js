@@ -2,14 +2,10 @@ import { styled } from '@mui/system';
 import GoogleLogin from 'react-google-login';
 import util from '../../utils/util';
 import Service from '../../utils/util.service';
-import deftag from '../../utils/util.deftag';
+import useDeftags from '../../utils/useDeftags';
 
 const { redirectTo } = util;
-const {
-    memberSign: { text_signin_with_google },
-} = deftag;
 
-//
 const GoogleSigninLayout = styled(GoogleLogin)({
     width: '100%',
     height: '70px',
@@ -26,6 +22,10 @@ const GoogleSigninLayout = styled(GoogleLogin)({
 //
 const SigninGoogle = () => {
 
+    // Hook
+    const [deftag] = useDeftags();
+
+    //
     const handleCallback = (res) => {
 
         Service.signWithGoogle({ access_token: res.accessToken })
@@ -41,7 +41,7 @@ const SigninGoogle = () => {
             onFailure={handleCallback}
             // isSignedIn={true} // 已登入狀態
             cookiePolicy={'single_host_origin'}
-            buttonText={text_signin_with_google} // 預設 google 按鈕
+            buttonText={deftag?.text_signin_with_google} // 預設 google 按鈕
         />
 
     );

@@ -6,6 +6,7 @@ import {
     ItemTutorialLayout,
 } from '../src/components/home/homeLayout';
 
+import HeadTag from '../src/containers/HeadTag';
 import Links from '../src/components/Links';
 import ItemsWrap from '../src/components/ItemsWrap';
 import Item from '../src/components/Item';
@@ -34,6 +35,7 @@ const Home = ({ pageData }) => {
 
         <Fragment>
             {homeStyles}
+            <HeadTag title={deftag?.home_title} />
 
             {
                 !!pageData.banners.length &&

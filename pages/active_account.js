@@ -2,21 +2,16 @@ import { useContext, useEffect } from 'react';
 import Result from '../src/components/Result';
 import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
-import deftag from '../src/utils/util.deftag';
-
-const {
-    memberSign: {
-        text_active_account_title,
-        text_active_account_message,
-        btn_return_to_signin,
-    },
-} = deftag;
+import useDeftags from '../src/utils/useDeftags';
 
 //
 const ActiveAccount = () => {
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
+
+    // Hook
+    const [deftag] = useDeftags();
 
     useEffect(() => {
 
@@ -28,9 +23,9 @@ const ActiveAccount = () => {
     return (
 
         <Result
-            title={text_active_account_title}
-            message={text_active_account_message}
-            btnText={btn_return_to_signin}
+            title={deftag?.text_active_account_title}
+            message={deftag?.text_active_account_message}
+            btnText={deftag?.btn_return_to_signin}
             linkTo="/signin"
         />
 

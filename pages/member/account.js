@@ -16,18 +16,8 @@ import MyAccount from '../../src/components/member/MyAccount';
 
 import { GlobalContext } from '../../src/context/global.state';
 import util from '../../src/utils/util';
-import deftag from '../../src/utils/util.deftag';
 import Service from '../../src/utils/util.service';
-
-const {
-    member: {
-        member_account_center,
-        member_my_product,
-        member_account_update,
-        member_mobile_download_notice,
-    },
-    orderRecord: { order_text_order_record },
-} = deftag;
+import useDeftags from '../../src/utils/useDeftags';
 
 //
 const TabPanel = ({ value, indexKey, children, ...other }) => (
@@ -45,10 +35,12 @@ const TabPanel = ({ value, indexKey, children, ...other }) => (
 //
 const Account = ({ pageData }) => {
 
-    const matches = useMediaQuery((theme) => theme.breakpoints.down('mobile'));
-
     // Context
     const { globalDispatch } = useContext(GlobalContext);
+
+    // Hook
+    const matches = useMediaQuery((theme) => theme.breakpoints.down('mobile'));
+    const [deftag] = useDeftags();
 
     // State
     const [type, setType] = useState('product');
@@ -65,15 +57,15 @@ const Account = ({ pageData }) => {
     // 所有 type
     const types = {
         product: {
-            title: member_my_product,
+            title: deftag?.member_my_product,
             component: <MyProduct data={pageData.list} />,
         },
         order: {
-            title: order_text_order_record,
+            title: deftag?.order_text_order_record,
             component: <OrderRecord data={orderRecordList} />,
         },
         account: {
-            title: member_account_update,
+            title: deftag?.member_account_update,
             component: <MyAccount data={profile} />,
         },
     };
@@ -100,8 +92,8 @@ const Account = ({ pageData }) => {
     return (
 
         <Fragment>
-            <HeadTag title={`${member_account_center}-${types[type].title}`} />
-            <TitleLayout>{member_account_center}</TitleLayout>
+            <HeadTag title={`${deftag?.member_account_center}-${types[type].title}`} />
+            <TitleLayout>{deftag?.member_account_center}</TitleLayout>
 
             <TabWrapLayout>
                 <Tabs
@@ -124,7 +116,7 @@ const Account = ({ pageData }) => {
 
                 {
                     // 手機版下載提示
-                    (matches && (type === 'product')) && <p className="download-notice">{member_mobile_download_notice}</p>
+                    (matches && (type === 'product')) && <p className="download-notice">{deftag?.member_mobile_download_notice}</p>
                 }
 
                 <div className={`tab-panel panel-${type}`}>

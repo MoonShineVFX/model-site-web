@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import Head from 'next/head';
 import deftag from '../utils/util.deftag';
 
-const { common: { og_title, og_description } } = deftag;
+const { og_title, og_description } = deftag;
 
- const HeadSEO = ({ title, description, children }) => (
+const HeadSEO = ({ title, description, children }) => (
 
     <Head>
         <title>{title}</title>

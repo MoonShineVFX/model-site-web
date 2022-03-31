@@ -1,11 +1,7 @@
 import PropTypes from 'prop-types';
 import { styled } from '@mui/system';
 import { ButtonLink } from '../components/Links';
-import deftag from '../utils/util.deftag';
-
-const {
-    common: { btn_show_more },
-} = deftag;
+import useDeftags from '../utils/useDeftags';
 
 //
 const ItemsTitle = styled('div')(({ theme }) => ({
@@ -41,25 +37,32 @@ const ItemsWrap = ({
     url,
     children,
     ...rest
-}) => (
+}) => {
 
-    <section {...rest}>
-        <ItemsTitle>
-            <h2 className="title">{title}</h2>
-            {
-                showMore &&
-                    <ButtonLink
-                        url={url}
-                        text={btn_show_more}
-                        type="third"
-                    />
-            }
-        </ItemsTitle>
+    // Hook
+    const [deftag] = useDeftags();
 
-        {children}
-    </section>
+    return (
 
-);
+        <section {...rest}>
+            <ItemsTitle>
+                <h2 className="title">{title}</h2>
+                {
+                    showMore &&
+                        <ButtonLink
+                            url={url}
+                            text={deftag?.btn_show_more}
+                            type="third"
+                        />
+                }
+            </ItemsTitle>
+
+            {children}
+        </section>
+
+    );
+
+};
 
 ItemsWrap.defaultProps = {
     showMore: true,

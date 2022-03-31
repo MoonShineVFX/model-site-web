@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import Cookies from 'js-cookie';
 import deftag from './util.deftag';
 
-const { common } = deftag;
+const { currency_tw } = deftag;
 
 const util = {
     /**
@@ -111,7 +111,7 @@ const util = {
         // 千分位處理
         priceFormat = Math.round(price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-        return (price < 0) ? `-$${priceFormat.replace(/-/g, '')}` : `${common.currency_tw}$ ${priceFormat}`;
+        return (price < 0) ? `-$${priceFormat.replace(/-/g, '')}` : `${currency_tw}$ ${priceFormat}`;
 
     },
 

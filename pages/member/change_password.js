@@ -17,37 +17,20 @@ import Lightbox from '../../src/components/Lightbox';
 import { GlobalContext } from '../../src/context/global.state';
 import util from '../../src/utils/util';
 import utilConst from '../../src/utils/util.const';
-import deftag from '../../src/utils/util.deftag';
 import Service from '../../src/utils/util.service';
+import useDeftags from '../../src/utils/useDeftags';
 
 const { redirectTo } = util;
 const { paswdConfig } = utilConst;
-const {
-    common: {
-        btn_submit,
-    },
-    memberSign: {
-        text_confirm_password,
-        text_new_password,
-    },
-    member: {
-        member_old_password,
-        member_change_password,
-        member_change_password_success,
-        text_return_to_account,
-    },
-    error: {
-        error_password_different,
-        error_password_at_least_eight,
-        error_pattern,
-    },
-} = deftag;
 const goToAccount = '/member/account';
 
 const ChangePassword = () => {
 
     // Context
     const { visible, globalDispatch, lightboxDispatch } = useContext(GlobalContext);
+
+    // Hook
+    const [deftag] = useDeftags();
 
     useEffect(() => {
 
@@ -97,7 +80,7 @@ const ChangePassword = () => {
     return (
 
         <Fragment>
-            <HeadTag title={member_change_password} />
+            <HeadTag title={deftag?.member_change_password} />
 
             <SignLayout>
                 <FormWrap>
@@ -110,16 +93,16 @@ const ChangePassword = () => {
                             <input
                                 type={paswdConfig[toggle.password].type}
                                 name="password"
-                                placeholder={member_old_password}
+                                placeholder={deftag?.member_old_password}
                                 {...register('password', {
                                     required: true,
                                     minLength: {
                                         value: 8,
-                                        message: error_password_at_least_eight,
+                                        message: deftag?.error_password_at_least_eight,
                                     },
                                     pattern: {
                                         value: /^(?=.*\d)[0-9a-zA-Z!\u0022#$%&'()*+,./:;<=>?@[\]\^_`{|}~-]{8,}$/g,
-                                        message: error_pattern,
+                                        message: deftag?.error_pattern,
                                     },
                                 })}
                             />
@@ -137,14 +120,14 @@ const ChangePassword = () => {
                             <input
                                 type={paswdConfig[toggle.newPassword].type}
                                 name="newPassword"
-                                placeholder={text_new_password}
+                                placeholder={deftag?.text_new_password}
                                 {...register('newPassword', {
                                     required: true,
                                     minLength: {
                                         value: 8,
-                                        message: error_password_at_least_eight,
+                                        message: deftag?.error_password_at_least_eight,
                                     },
-                                    validate: (value) => (value === password.current) || error_password_different,
+                                    validate: (value) => (value === password.current) || deftag?.error_password_different,
                                 })}
                             />
 
@@ -161,10 +144,10 @@ const ChangePassword = () => {
                             <input
                                 type={paswdConfig[toggle.confirm].type}
                                 name="confirmNewPassword"
-                                placeholder={text_confirm_password}
+                                placeholder={deftag?.text_confirm_password}
                                 {...register('confirmNewPassword', {
                                     required: true,
-                                    validate: (value) => (value === password.current) || error_password_different,
+                                    validate: (value) => (value === password.current) || deftag?.error_password_different,
                                 })}
                             />
 
@@ -176,13 +159,13 @@ const ChangePassword = () => {
                         <div className="form-row form-row-btns">
                             <Buttons
                                 type="submit"
-                                text={btn_submit}
+                                text={deftag?.btn_submit}
                             />
 
                             <BtnDirectLayout
                                 type="third"
                                 url={goToAccount}
-                                text={text_return_to_account}
+                                text={deftag?.text_return_to_account}
                             />
                         </div>
                     </form>
@@ -195,7 +178,7 @@ const ChangePassword = () => {
                         type="success"
                         onClick={() => redirectTo(goToAccount, false)}
                     >
-                        {member_change_password_success}
+                        {deftag?.member_change_password_success}
                     </Lightbox>
             }
         </Fragment>

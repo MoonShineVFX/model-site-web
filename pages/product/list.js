@@ -28,8 +28,8 @@ import Item from '../../src/components/Item';
 import Paginations from '../../src/components/Paginations';
 
 import { GlobalContext } from '../../src/context/global.state';
-import useQuery from '../../src/utils/useQuery';
 import util from '../../src/utils/util';
+import useQuery from '../../src/utils/useQuery';
 import useDeftags from '../../src/utils/useDeftags';
 
 // 整理 URL 標籤格式

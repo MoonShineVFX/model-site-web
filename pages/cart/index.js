@@ -22,19 +22,10 @@ import FontIcon from '../../src/components/FontIcon';
 import useLocalStorage from '../../src/utils/useLocalStorage';
 import { GlobalContext } from '../../src/context/global.state';
 import util from '../../src/utils/util';
-import deftag from '../../src/utils/util.deftag';
 import Service from '../../src/utils/util.service';
+import useDeftags from '../../src/utils/useDeftags';
 
 const { priceWithCommas } = util;
-const {
-    cart: {
-        cart_order_title,
-        btn_confirm_order,
-        cart_section_title,
-        cart_text_notice,
-        cart_text_empty,
-    },
-} = deftag;
 
 // 商品欄位
 const TableGrid = ({ colLeft, colRight }) => (
@@ -128,10 +119,12 @@ const Item = ({
 //
 const Cart = ({ pageData }) => {
 
-    const matches = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-
     // Context
     const { globalDispatch } = useContext(GlobalContext);
+
+    // Hook
+    const matches = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+    const [deftag] = useDeftags();
 
     // Ref
     const formRef = useRef(null);
@@ -188,11 +181,11 @@ const Cart = ({ pageData }) => {
     return (
 
         <Fragment>
-            <HeadTag title={cart_order_title} />
-            <TitleLayout>{cart_order_title}</TitleLayout>
+            <HeadTag title={deftag?.cart_order_title} />
+            <TitleLayout>{deftag?.cart_order_title}</TitleLayout>
 
             <SectionLayout>
-                <h3 className="title-large">{cart_section_title}</h3>
+                <h3 className="title-large">{deftag?.cart_section_title}</h3>
 
                 <CartLayout>
                     {
@@ -238,16 +231,16 @@ const Cart = ({ pageData }) => {
                                 </div>
                             </Fragment>
 
-                        ) : cart_text_empty
+                        ) : deftag?.cart_text_empty
                     }
                 </CartLayout>
 
                 <div className="btn-action">
                     <Buttons
-                        text={btn_confirm_order}
+                        text={deftag?.btn_confirm_order}
                         onClick={handleClickOrder}
                     />
-                    <p>{cart_text_notice}</p>
+                    <p>{deftag?.cart_text_notice}</p>
                 </div>
             </SectionLayout>
 

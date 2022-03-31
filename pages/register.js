@@ -23,34 +23,18 @@ import Lightbox from '../src/components/Lightbox';
 
 import { GlobalContext } from '../src/context/global.state';
 import utilConst from '../src/utils/util.const';
-import deftag from '../src/utils/util.deftag';
 import Service from '../src/utils/util.service';
+import useDeftags from '../src/utils/useDeftags';
 
 const { paswdConfig } = utilConst;
-
-const {
-    memberSign: {
-        text_register,
-        text_confirm_password,
-        btn_return_to_signin,
-        text_nickname,
-        text_real_name,
-        text_account,
-        text_enter_password,
-        text_agree_privacy,
-        text_register_success_message,
-    },
-    error: {
-        error_password_at_least_eight,
-        error_password_different,
-        error_pattern,
-    },
-} = deftag;
 
 const Register = () => {
 
     // Context
     const { visible, globalDispatch, lightboxDispatch } = useContext(GlobalContext);
+
+    // Hook
+    const [deftag] = useDeftags();
 
     useEffect(() => {
 
@@ -103,9 +87,9 @@ const Register = () => {
     return (
 
         <Fragment>
-            <HeadTag title={text_register} />
+            <HeadTag title={deftag?.text_register} />
             <SignLayout>
-                <FormWrap title={text_register}>
+                <FormWrap title={deftag?.text_register}>
                     <form onSubmit={handleSubmit(handleReqData)}>
                         <FormRow
                             name="nickname"
@@ -114,7 +98,7 @@ const Register = () => {
                             <input
                                 type="text"
                                 name="nickname"
-                                placeholder={text_nickname}
+                                placeholder={deftag?.text_nickname}
                                 {...register('nickname', { required: true })}
                             />
                         </FormRow>
@@ -123,7 +107,7 @@ const Register = () => {
                             <input
                                 type="text"
                                 name="realName"
-                                placeholder={text_real_name}
+                                placeholder={deftag?.text_real_name}
                                 {...register('realName')}
                             />
                         </FormRow>
@@ -135,7 +119,7 @@ const Register = () => {
                             <input
                                 type="text"
                                 name="email"
-                                placeholder={text_account}
+                                placeholder={deftag?.text_account}
                                 {...register('email', { required: true })}
                             />
                         </FormRow>
@@ -148,16 +132,16 @@ const Register = () => {
                             <input
                                 type={paswdConfig[toggle.password].type}
                                 name="password"
-                                placeholder={text_enter_password}
+                                placeholder={deftag?.text_enter_password}
                                 {...register('password', {
                                     required: true,
                                     minLength: {
                                         value: 8,
-                                        message: error_password_at_least_eight,
+                                        message: deftag?.error_password_at_least_eight,
                                     },
                                     pattern: {
                                         value: /^(?=.*\d)[0-9a-zA-Z!\u0022#$%&'()*+,./:;<=>?@[\]\^_`{|}~-]{8,}$/g,
-                                        message: error_pattern,
+                                        message: deftag?.error_pattern,
                                     },
                                 })}
                             />
@@ -175,10 +159,10 @@ const Register = () => {
                             <input
                                 type={paswdConfig[toggle.confirm].type}
                                 name="confirm_password"
-                                placeholder={text_confirm_password}
+                                placeholder={deftag?.text_confirm_password}
                                 {...register('confirm_password', {
                                     required: true,
-                                    validate: (value) => (value === password.current) || error_password_different,
+                                    validate: (value) => (value === password.current) || deftag?.error_password_different,
                                 })}
                             />
 
@@ -192,14 +176,14 @@ const Register = () => {
                                 name="agree"
                                 onChange={handleAgree}
                             >
-                                <AggreeLayout url="/privacy" newPage>{text_agree_privacy}</AggreeLayout>
+                                <AggreeLayout url="/privacy" newPage>{deftag?.text_agree_privacy}</AggreeLayout>
                             </Checkbox>
                         </div>
 
                         <div className="form-row form-row-btns">
                             <Buttons
                                 type="submit"
-                                text={text_register}
+                                text={deftag?.text_register}
                                 disabled={disabled}
                             />
 
@@ -208,7 +192,7 @@ const Register = () => {
                             <BtnDirectLayout
                                 type="third"
                                 url="/signin"
-                                text={btn_return_to_signin}
+                                text={deftag?.btn_return_to_signin}
                             />
                         </div>
                     </form>
@@ -221,7 +205,7 @@ const Register = () => {
                         type="success"
                         onClick={() => lightboxDispatch({ type: 'HIDE' })}
                     >
-                        {text_register_success_message}
+                        {deftag?.text_register_success_message}
                     </Lightbox>
             }
         </Fragment>

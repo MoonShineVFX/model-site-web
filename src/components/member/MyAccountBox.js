@@ -5,7 +5,6 @@ import Box from '../Box';
 import Links from '../Links';
 import { GlobalContext } from '../../context/global.state';
 import util from '../../utils/util';
-import useDeftags from '../../utils/useDeftags';
 
 const { redirectTo } = util;
 
@@ -33,12 +32,12 @@ const MyAccountBox = () => {
     const { globalDispatch } = useContext(GlobalContext);
 
     // Hook
-    const [deftag] = useDeftags();
+    const { deftags } = useContext(GlobalContext);
 
     // Menu
     const menus = {
-        account: deftag?.member_account_center,
-        logout: deftag?.text_logout,
+        account: deftags.member_account_center,
+        logout: deftags.text_logout,
     };
 
     // 當頁再次點擊要關閉 box

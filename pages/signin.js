@@ -11,7 +11,7 @@ import {
     BtnDirectLayout,
     ForgotPasswordLayout,
 } from '../src/components/member/memberSignLayout';
-import HeadTag from '../src/containers/HeadTag';
+import Head from '../src/containers/Head';
 import Buttons from '../src/components/Buttons';
 import FontIcon from '../src/components/FontIcon';
 import Links from '../src/components/Links';
@@ -23,19 +23,17 @@ import util from '../src/utils/util';
 import utilConst from '../src/utils/util.const';
 import Service from '../src/utils/util.service';
 import useReCaptchaVerify from '../src/utils/useReCaptchaVerify';
-import useDeftags from '../src/utils/useDeftags';
 
 const { redirectTo } = util;
 const { paswdConfig } = utilConst;
 
-const Signin = () => {
+const Signin = ({ langs }) => {
 
     // Context
     const { isVerified, globalDispatch } = useContext(GlobalContext);
 
     // Hook
     const [token, handleGetToken] = useReCaptchaVerify(null);
-    const [deftag] = useDeftags();
 
     useEffect(() => {
 
@@ -81,10 +79,13 @@ const Signin = () => {
     return (
 
         <Fragment>
-            <HeadTag title={deftag?.text_signin} />
+            <Head
+                title={langs.text_signin}
+                description={langs.og_description}
+            />
 
             <SignLayout>
-                <FormWrap title={deftag?.text_signin_title}>
+                <FormWrap title={langs.text_signin_title}>
                     <form onSubmit={handleSubmit(handleReqData)}>
                         <FormRow
                             name="email"
@@ -93,7 +94,7 @@ const Signin = () => {
                             <input
                                 type="text"
                                 name="email"
-                                placeholder={deftag?.text_account}
+                                placeholder={langs.text_account}
                                 {...register('email', { required: true })}
                             />
                         </FormRow>
@@ -106,16 +107,16 @@ const Signin = () => {
                             <input
                                 type={paswdConfig[toggle.password].type}
                                 name="password"
-                                placeholder={deftag?.text_password}
+                                placeholder={langs.text_password}
                                 {...register('password', {
                                     required: true,
                                     minLength: {
                                         value: 8,
-                                        message: deftag?.error_password_at_least_eight,
+                                        message: langs.error_password_at_least_eight,
                                     },
                                     pattern: {
                                         value: /^(?=.*\d)[0-9a-zA-Z!\u0022#$%&'()*+,./:;<=>?@[\]\^_`{|}~-]{8,}$/g,
-                                        message: deftag?.error_pattern,
+                                        message: langs.error_pattern,
                                     },
                                 })}
                             />
@@ -127,14 +128,14 @@ const Signin = () => {
 
                         <div className="form-row form-row-btns">
                             <Buttons
-                                text={deftag?.btn_verify}
+                                text={langs.btn_verify}
                                 disabled={isVerified}
                                 onClick={handleGetToken}
                             />
 
                             <Buttons
                                 type="submit"
-                                text={deftag?.text_signin}
+                                text={langs.text_signin}
                                 disabled={!isVerified}
                             />
 
@@ -143,9 +144,9 @@ const Signin = () => {
                             <ForgotPasswordLayout>
                                 <Links
                                     url="/forgot_password"
-                                    title={deftag?.text_forgot_password}
+                                    title={langs.text_forgot_password}
                                 >
-                                    {deftag?.text_forgot_password}
+                                    {langs.text_forgot_password}
                                 </Links>
                             </ForgotPasswordLayout>
 
@@ -153,11 +154,10 @@ const Signin = () => {
                                 type="third"
                                 url="/register"
                                 className="btn-register"
-                                text={deftag?.text_register}
+                                text={langs.text_register}
                             />
                         </div>
                     </form>
-                    {/* <p>This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.</p> */}
                 </FormWrap>
             </SignLayout>
         </Fragment>
@@ -186,4 +186,4 @@ export async function getServerSideProps ({ req }) {
         props: {},
     };
 
-};
+}

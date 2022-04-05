@@ -11,7 +11,6 @@ import SideNavIcon from './SideNavIcon';
 
 import { GlobalContext } from '../context/global.state';
 import util from '../utils/util';
-import useDeftags from '../utils/useDeftags';
 
 const { redirectTo } = util;
 
@@ -19,14 +18,12 @@ const Sidenav = () => {
 
     // Context
     const {
+        deftags,
         logged,
         sideNav,
         cart,
         globalDispatch,
     } = useContext(GlobalContext);
-
-    // Hook
-    const [deftag] = useDeftags();
 
     // 手機版 sidenav: 關閉
     const handleHideSideNav = () => globalDispatch({ type: 'sidenav', payload: false });
@@ -63,7 +60,7 @@ const Sidenav = () => {
                 </Links>
 
                 <Links url={logged ? '/member/account' : '/signin'}>
-                    {logged ? deftag?.member_account_center : deftag?.text_signin}
+                    {logged ? deftags.member_account_center : deftags.text_signin}
                 </Links>
 
                 <Navbar className="mWeb-navbar" />
@@ -74,7 +71,7 @@ const Sidenav = () => {
                             url="#"
                             onClick={handleClickLogout}
                         >
-                            {deftag?.text_logout}
+                            {deftags.text_logout}
                         </Links>
                 }
 

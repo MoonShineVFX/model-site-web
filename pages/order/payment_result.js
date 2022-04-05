@@ -5,7 +5,6 @@ import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { ButtonLink } from '../../src/components/Links';
 import Result from '../../src/components/Result';
 import { GlobalContext } from '../../src/context/global.state';
-import useDeftags from '../../src/utils/useDeftags';
 
 //
 const ResultWrap = styled(Result)(({ theme }) => ({
@@ -30,16 +29,13 @@ const ResultWrap = styled(Result)(({ theme }) => ({
 }));
 
 //
-const PaymentResult = () => {
+const PaymentResult = ({ langs }) => {
 
     // Router
     const router = useRouter();
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
-
-    // Hook
-    const [deftag] = useDeftags();
 
     useEffect(() => {
 
@@ -51,15 +47,15 @@ const PaymentResult = () => {
     return (
 
         <ResultWrap
-            title={deftag?.order_success}
-            btnText={deftag?.member_my_product}
+            title={langs.order_success}
+            btnText={langs.member_my_product}
             linkTo="/member/account"
             icon={faCircleCheck}
         >
             <ButtonLink
                 type="third"
                 url={`/order/${router.query.no}`}
-                text={deftag?.order_detail}
+                text={langs.order_detail}
             />
         </ResultWrap>
 

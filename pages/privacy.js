@@ -1,17 +1,13 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import { TitleLayout, SectionLayout } from '../src/components/member/cartLayout';
-import HeadTag from '../src/containers/HeadTag';
+import Head from '../src/containers/Head';
 import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
-import useDeftags from '../src/utils/useDeftags';
 
-const Privacy = ({ pageData }) => {
+const Privacy = ({ langs, pageData }) => {
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
-
-    // Hook
-    const [deftag] = useDeftags();
 
     useEffect(() => {
 
@@ -23,8 +19,11 @@ const Privacy = ({ pageData }) => {
     return (
 
         <Fragment>
-            <HeadTag title={deftag?.privacy_title} />
-            <TitleLayout>{deftag?.privacy_title}</TitleLayout>
+            <Head
+                title={langs.privacy_title}
+                description={langs.og_description}
+            />
+            <TitleLayout>{langs.privacy_title}</TitleLayout>
 
             <SectionLayout>
                 <div dangerouslySetInnerHTML={{ __html: pageData.detail }} />
@@ -56,4 +55,4 @@ export async function getServerSideProps ({ locale }) {
         },
     };
 
-};
+}

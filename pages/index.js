@@ -6,7 +6,7 @@ import {
     ItemTutorialLayout,
 } from '../src/components/home/homeLayout';
 
-import HeadTag from '../src/containers/HeadTag';
+import Head from '../src/containers/Head';
 import Links from '../src/components/Links';
 import ItemsWrap from '../src/components/ItemsWrap';
 import Item from '../src/components/Item';
@@ -14,35 +14,34 @@ import Banner from '../src/components/home/Banner';
 
 import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
-import useDeftags from '../src/utils/useDeftags';
 
-const Home = ({ pageData }) => {
+const Home = ({ langs, pageData }) => {
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
-
-    // Hook
-    const [deftag] = useDeftags();
 
     useEffect(() => {
 
         globalDispatch({ type: 'sidenav', payload: false });
         globalDispatch({ type: 'target_box', payload: '' });
 
-    }, []);
+    }, [globalDispatch]);
 
     return (
 
         <Fragment>
             {homeStyles}
-            <HeadTag title={deftag?.home_title} />
+            <Head
+                title={langs.home_title}
+                description={langs.og_description}
+            />
 
             {
                 !!pageData.banners.length &&
                     <Banner pageData={pageData} />
             }
 
-            <ItemsWrap title={deftag?.home_section_title01} url="/product/list?page=1">
+            <ItemsWrap title={langs.home_section_title01} url="/product/list?page=1">
                 <ItemNewArrivalLayout
                     container
                     wrap="nowrap"
@@ -75,7 +74,7 @@ const Home = ({ pageData }) => {
                 </ItemNewArrivalLayout>
             </ItemsWrap>
 
-            <ItemsWrap title={deftag?.home_section_title02} url="/tutorial">
+            <ItemsWrap title={langs.home_section_title02} url="/tutorial">
                 <ItemTutorialLayout>
                     {
                         pageData.tutorials.map(({ id, title, description, imgUrl, link }) => (
@@ -132,4 +131,4 @@ export async function getServerSideProps ({ locale }) {
         },
     };
 
-};
+}

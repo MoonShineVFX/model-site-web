@@ -22,7 +22,7 @@ import {
     ItemWrapLayout,
 } from '../../src/components/product/productLayout';
 
-import HeadTag from '../../src/containers/HeadTag';
+import Head from '../../src/containers/Head';
 import FontIcon from '../../src/components/FontIcon';
 import Item from '../../src/components/Item';
 import Paginations from '../../src/components/Paginations';
@@ -30,7 +30,6 @@ import Paginations from '../../src/components/Paginations';
 import { GlobalContext } from '../../src/context/global.state';
 import util from '../../src/utils/util';
 import useQuery from '../../src/utils/useQuery';
-import useDeftags from '../../src/utils/useDeftags';
 
 // 整理 URL 標籤格式
 const arrangeTags = (string) => {
@@ -45,7 +44,7 @@ const arrangeTags = (string) => {
 
 };
 
-const ProductList = ({ pageData }) => {
+const ProductList = ({ langs, pageData }) => {
 
     // Router
     const router = useRouter();
@@ -56,9 +55,6 @@ const ProductList = ({ pageData }) => {
         tags: tagsOpt,
         globalDispatch,
     } = useContext(GlobalContext);
-
-    // Hook
-    const [deftag] = useDeftags();
 
     // State
     const [selectedTag, setSelectedTag] = useState({});
@@ -106,7 +102,10 @@ const ProductList = ({ pageData }) => {
     return (
 
         <Fragment>
-            <HeadTag title={deftag?.menu_store} />
+            <Head
+                title={langs.menu_store}
+                description={langs.og_description}
+            />
 
             <GridLayout
                 container
@@ -125,7 +124,7 @@ const ProductList = ({ pageData }) => {
                             component="aside"
                             className="tagsList"
                         >
-                            <ListTitleLayout>{deftag?.product_select_label}</ListTitleLayout>
+                            <ListTitleLayout>{langs.product_select_label}</ListTitleLayout>
                             <List>
                                 {
                                     tagsOpt.map(({ id, name }) => (
@@ -192,7 +191,7 @@ const ProductList = ({ pageData }) => {
                                 }
                             </ItemWrapLayout>
 
-                        ) : <h2 className="no-product">{deftag?.product_no_data}</h2>
+                        ) : <h2 className="no-product">{langs.product_no_data}</h2>
                     }
 
                     {
@@ -237,4 +236,4 @@ export async function getServerSideProps ({ query, locale }) {
         },
     };
 
-};
+}

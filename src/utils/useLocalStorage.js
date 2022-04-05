@@ -12,7 +12,7 @@ export default function useLocalStorage (key, initVal) {
         }
         catch (error) {
 
-            console.log(error);
+            // console.log(error);
             return initVal;
 
         }

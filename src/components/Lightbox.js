@@ -11,7 +11,6 @@ import {
 } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
 import { GlobalContext } from '../context/global.state';
-import useDeftags from '../utils/useDeftags';
 
 //
 const DialogLayout = styled(Dialog)(({ theme }) => ({
@@ -59,10 +58,7 @@ const Lightbox = (props) => {
     } = props;
 
     // Context
-    const { visible, lightboxDispatch } = useContext(GlobalContext);
-
-    // Hook
-    const [deftag] = useDeftags();
+    const { visible, deftags, lightboxDispatch } = useContext(GlobalContext);
 
     // Close
     const handleClose = () => lightboxDispatch({ type: 'HIDE' });
@@ -84,7 +80,7 @@ const Lightbox = (props) => {
                                 autoFocus
                                 onClick={handleClose}
                             >
-                                {btnTextCancel || deftag?.btn_cancel}
+                                {btnTextCancel || deftags.btn_cancel}
                             </Button>
                     }
 
@@ -92,7 +88,7 @@ const Lightbox = (props) => {
                         type="submit"
                         onClick={onClick}
                     >
-                        {btnTextSubmit || deftag?.btn_confirm}
+                        {btnTextSubmit || deftags.btn_confirm}
                     </Button>
                 </DialogActions>
             </DialogLayout>
@@ -115,14 +111,14 @@ const Lightbox = (props) => {
                         autoFocus
                         onClick={handleClose}
                     >
-                        {btnTextCancel || deftag?.btn_cancel}
+                        {btnTextCancel || deftags.btn_cancel}
                     </Button>
 
                     <Button
                         type="submit"
                         onClick={onClick}
                     >
-                        {btnTextSubmit || deftag?.btn_confirm}
+                        {btnTextSubmit || deftags.btn_confirm}
                     </Button>
                 </DialogActions>
             </DialogLayout>

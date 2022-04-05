@@ -1,8 +1,9 @@
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/system';
 import Links from './Links';
+import { GlobalContext } from '../context/global.state';
 import util from '../utils/util';
-import useDeftags from '../utils/useDeftags';
 
 const { priceWithCommas, formatBytes } = util;
 
@@ -84,8 +85,8 @@ const Item = ({
     children,
 }) => {
 
-    // Hook
-    const [deftag] = useDeftags();
+    // Context
+    const { deftags } = useContext(GlobalContext);
 
     return (
 
@@ -111,7 +112,7 @@ const Item = ({
                 }
                 {
                     fileSize &&
-                        <span className="file-size">{deftag?.product_file_size} {formatBytes(fileSize)}</span>
+                        <span className="file-size">{deftags.product_file_size} {formatBytes(fileSize)}</span>
                 }
             </div>
             {children && children}

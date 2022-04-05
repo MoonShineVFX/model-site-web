@@ -2,12 +2,11 @@ import React, { Fragment, useContext, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { styled } from '@mui/system';
 
-import HeadTag from '../src/containers/HeadTag';
+import Head from '../src/containers/Head';
 import Item from '../src/components/Item';
 
 import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
-import useDeftags from '../src/utils/useDeftags';
 
 //
 const TitleLayout = styled('h1')(({ theme }) => ({
@@ -64,13 +63,10 @@ const ItemWrapLayout = styled(Grid)(({ theme }) => ({
 }));
 
 //
-const Tutorial = ({ pageData }) => {
+const Tutorial = ({ langs, pageData }) => {
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
-
-    // Hook
-    const [deftag] = useDeftags();
 
     useEffect(() => {
 
@@ -82,8 +78,11 @@ const Tutorial = ({ pageData }) => {
     return (
 
         <Fragment>
-            <HeadTag title={deftag?.tutorial_title} />
-            <TitleLayout>{deftag?.tutorial_title}</TitleLayout>
+            <Head
+                title={langs.tutorial_title}
+                description={langs.og_description}
+            />
+            <TitleLayout>{langs.tutorial_title}</TitleLayout>
 
             <ItemWrapLayout
                 container
@@ -143,4 +142,4 @@ export async function getServerSideProps ({ locale }) {
         },
     };
 
-};
+}

@@ -1,8 +1,9 @@
+import { useContext } from 'react';
 import { styled } from '@mui/system';
 import GoogleLogin from 'react-google-login';
+import { GlobalContext } from '../../context/global.state';
 import util from '../../utils/util';
 import Service from '../../utils/util.service';
-import useDeftags from '../../utils/useDeftags';
 
 const { redirectTo } = util;
 
@@ -22,8 +23,8 @@ const GoogleSigninLayout = styled(GoogleLogin)({
 //
 const SigninGoogle = () => {
 
-    // Hook
-    const [deftag] = useDeftags();
+    // Context
+    const { deftags } = useContext(GlobalContext);
 
     //
     const handleCallback = (res) => {
@@ -41,7 +42,7 @@ const SigninGoogle = () => {
             onFailure={handleCallback}
             // isSignedIn={true} // 已登入狀態
             cookiePolicy={'single_host_origin'}
-            buttonText={deftag?.text_signin_with_google} // 預設 google 按鈕
+            buttonText={deftags.text_signin_with_google} // 預設 google 按鈕
         />
 
     );

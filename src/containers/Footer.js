@@ -1,11 +1,11 @@
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import { useRouter } from 'next/router';
 import dayjs from 'dayjs';
 import { Grid, useMediaQuery } from '@mui/material';
 import { FooterLayout, LangOptionLayout } from './globalLayout';
 import Links from '../components/Links';
 import Community from '../components/Community';
-import useDeftags from '../utils/useDeftags';
+import { GlobalContext } from '../context/global.state';
 
 // 語系選單
 const LangOption = ({ deftag }) => {
@@ -37,7 +37,7 @@ const LangOption = ({ deftag }) => {
                             key={code}
                             value={code}
                         >
-                            {deftag?.[`lang_${code}`]}
+                            {deftag[`lang_${code}`]}
                         </option>
 
                 ))
@@ -51,9 +51,11 @@ const LangOption = ({ deftag }) => {
 //
 const Footer = () => {
 
+    // Context
+    const { deftags } = useContext(GlobalContext);
+
     // Hook
     const matches = useMediaQuery((theme) => theme.breakpoints.down('mobile'));
-    const [deftag] = useDeftags();
 
     return (
 
@@ -87,10 +89,10 @@ const Footer = () => {
                                             newPage
                                             className="light privacy-link"
                                         >
-                                            {deftag?.text_privacy}
+                                            {deftags.text_privacy}
                                         </Links>
 
-                                        <Links url="mailto:service@moonshine.tw" className="light" newPage>{deftag?.text_custom_service}: service@moonshine.tw</Links>
+                                        <Links url="mailto:service@moonshine.tw" className="light" newPage>{deftags.text_custom_service}: service@moonshine.tw</Links>
                                     </div>
                                     <p className="bottom">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.</p>
                                 </div>
@@ -106,9 +108,9 @@ const Footer = () => {
                                         newPage
                                         className="light privacy-link"
                                     >
-                                        {deftag?.text_privacy}
+                                        {deftags.text_privacy}
                                     </Links>
-                                    <Links url="mailto:service@moonshine.tw" className="light" newPage>{deftag?.text_custom_service}: service@moonshine.tw</Links>
+                                    <Links url="mailto:service@moonshine.tw" className="light" newPage>{deftags.text_custom_service}: service@moonshine.tw</Links>
                                 </div>
                                 <div className="bottom">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.</div>
                             </span>
@@ -128,7 +130,7 @@ const Footer = () => {
                         false && <Community />
                     }
 
-                    <LangOption deftag={deftag} />
+                    <LangOption deftag={deftags} />
                 </Grid>
             </Grid>
         </FooterLayout>

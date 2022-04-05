@@ -1,7 +1,8 @@
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { ErrorMessage } from '@hookform/error-message';
 import { styled } from '@mui/system';
-import useDeftags from '../utils/useDeftags';
+import { GlobalContext } from '../context/global.state';
 
 //
 const FormWrapLayout = styled('div')(({ theme }) => ({
@@ -136,15 +137,15 @@ const FormRow = ({ name, className, errors, children, ...rest }) => (
 // 錯誤訊息
 const FormErrorMesg = ({ name, errors }) => {
 
-    // Hook
-    const [deftag] = useDeftags();
+    // Context
+    const { deftags } = useContext(GlobalContext);
 
     return (
 
         <ErrorMessage
             name={name}
             errors={errors}
-            message={deftag?.[`error_${errors[name]?.type}`]}
+            message={deftags[`error_${errors[name]?.type}`]}
             render={({ message }) => <p className="error-mesg">{message}</p>}
         />
 

@@ -1,6 +1,7 @@
+import { useContext } from 'react';
 import { styled } from '@mui/system';
 import Links from './Links';
-import useDeftags from '../utils/useDeftags';
+import { GlobalContext } from '../context/global.state';
 
 const LogoLayout = styled('span')(({ theme }) => ({
     '.logo-text': {
@@ -18,8 +19,8 @@ const LogoLayout = styled('span')(({ theme }) => ({
 //
 const Logo = ({ ...rest }) => {
 
-    // Hook
-    const [deftag] = useDeftags();
+    // Context
+    const { deftags } = useContext(GlobalContext);
 
     return (
 
@@ -27,11 +28,11 @@ const Logo = ({ ...rest }) => {
             <Links
                 url="/"
                 className="logo-text"
-                title={deftag?.text_logo}
+                title={deftags.text_logo}
             >
                 <img
                     src="/logo_large.png"
-                    alt={deftag?.text_logo}
+                    alt={deftags.text_logo}
                     width="291"
                     height="78"
                 />

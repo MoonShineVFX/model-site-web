@@ -8,7 +8,7 @@ import {
 import { useForm } from 'react-hook-form';
 
 import { SignLayout, BtnDirectLayout } from '../../src/components/member/memberSignLayout';
-import HeadTag from '../../src/containers/HeadTag';
+import Head from '../../src/containers/Head';
 import Buttons from '../../src/components/Buttons';
 import FontIcon from '../../src/components/FontIcon';
 import FormWrap, { FormRow } from '../../src/components/FormWrap';
@@ -18,19 +18,15 @@ import { GlobalContext } from '../../src/context/global.state';
 import util from '../../src/utils/util';
 import utilConst from '../../src/utils/util.const';
 import Service from '../../src/utils/util.service';
-import useDeftags from '../../src/utils/useDeftags';
 
 const { redirectTo } = util;
 const { paswdConfig } = utilConst;
 const goToAccount = '/member/account';
 
-const ChangePassword = () => {
+const ChangePassword = ({ langs }) => {
 
     // Context
     const { visible, globalDispatch, lightboxDispatch } = useContext(GlobalContext);
-
-    // Hook
-    const [deftag] = useDeftags();
 
     useEffect(() => {
 
@@ -80,7 +76,10 @@ const ChangePassword = () => {
     return (
 
         <Fragment>
-            <HeadTag title={deftag?.member_change_password} />
+            <Head
+                title={langs.member_change_password}
+                description={langs.og_description}
+            />
 
             <SignLayout>
                 <FormWrap>
@@ -93,16 +92,16 @@ const ChangePassword = () => {
                             <input
                                 type={paswdConfig[toggle.password].type}
                                 name="password"
-                                placeholder={deftag?.member_old_password}
+                                placeholder={langs.member_old_password}
                                 {...register('password', {
                                     required: true,
                                     minLength: {
                                         value: 8,
-                                        message: deftag?.error_password_at_least_eight,
+                                        message: langs.error_password_at_least_eight,
                                     },
                                     pattern: {
                                         value: /^(?=.*\d)[0-9a-zA-Z!\u0022#$%&'()*+,./:;<=>?@[\]\^_`{|}~-]{8,}$/g,
-                                        message: deftag?.error_pattern,
+                                        message: langs.error_pattern,
                                     },
                                 })}
                             />
@@ -120,14 +119,14 @@ const ChangePassword = () => {
                             <input
                                 type={paswdConfig[toggle.newPassword].type}
                                 name="newPassword"
-                                placeholder={deftag?.text_new_password}
+                                placeholder={langs.text_new_password}
                                 {...register('newPassword', {
                                     required: true,
                                     minLength: {
                                         value: 8,
-                                        message: deftag?.error_password_at_least_eight,
+                                        message: langs.error_password_at_least_eight,
                                     },
-                                    validate: (value) => (value === password.current) || deftag?.error_password_different,
+                                    validate: (value) => (value === password.current) || langs.error_password_different,
                                 })}
                             />
 
@@ -144,10 +143,10 @@ const ChangePassword = () => {
                             <input
                                 type={paswdConfig[toggle.confirm].type}
                                 name="confirmNewPassword"
-                                placeholder={deftag?.text_confirm_password}
+                                placeholder={langs.text_confirm_password}
                                 {...register('confirmNewPassword', {
                                     required: true,
-                                    validate: (value) => (value === password.current) || deftag?.error_password_different,
+                                    validate: (value) => (value === password.current) || langs.error_password_different,
                                 })}
                             />
 
@@ -159,13 +158,13 @@ const ChangePassword = () => {
                         <div className="form-row form-row-btns">
                             <Buttons
                                 type="submit"
-                                text={deftag?.btn_submit}
+                                text={langs.btn_submit}
                             />
 
                             <BtnDirectLayout
                                 type="third"
                                 url={goToAccount}
-                                text={deftag?.text_return_to_account}
+                                text={langs.text_return_to_account}
                             />
                         </div>
                     </form>
@@ -178,7 +177,7 @@ const ChangePassword = () => {
                         type="success"
                         onClick={() => redirectTo(goToAccount, false)}
                     >
-                        {deftag?.member_change_password_success}
+                        {langs.member_change_password_success}
                     </Lightbox>
             }
         </Fragment>

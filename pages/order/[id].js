@@ -2,21 +2,17 @@ import { Fragment, useContext, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { TitleLayout } from '../../src/components/member/cartLayout';
 import { OrderDetailLayout, ItemLayout } from '../../src/components/order/orderLayout';
-import HeadTag from '../../src/containers/HeadTag';
+import Head from '../../src/containers/Head';
 import { ButtonLink } from '../../src/components/Links';
 import { GlobalContext } from '../../src/context/global.state';
 import util from '../../src/utils/util';
-import useDeftags from '../../src/utils/useDeftags';
 
 const { priceWithCommas, dateFormat } = util;
 
-const OrderDetail = ({ pageData }) => {
+const OrderDetail = ({ langs, pageData }) => {
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
-
-    // Hook
-    const [deftag] = useDeftags();
 
     useEffect(() => {
 
@@ -28,8 +24,11 @@ const OrderDetail = ({ pageData }) => {
     return (
 
         <Fragment>
-            <HeadTag title={deftag?.order_detail} />
-            <TitleLayout>{deftag?.order_detail}</TitleLayout>
+            <Head
+                title={langs.order_detail}
+                description={langs.og_description}
+            />
+            <TitleLayout>{langs.order_detail}</TitleLayout>
 
             <OrderDetailLayout>
                 <Grid
@@ -44,20 +43,20 @@ const OrderDetail = ({ pageData }) => {
                         mobile={6}
                     >
                         <div className="row-item">
-                            <h4 className="title">{deftag?.order_text_order_number}</h4>
+                            <h4 className="title">{langs.order_text_order_number}</h4>
                             <div className="value">{pageData.orderNumber}</div>
                         </div>
                         <div className="row-item">
-                            <h4 className="title">{deftag?.order_text_create_at}</h4>
+                            <h4 className="title">{langs.order_text_create_at}</h4>
                             <div className="value">{dateFormat(pageData.createdAt)}</div>
                         </div>
                         <div className="row-item">
-                            <h4 className="title">{deftag?.order_text_paid_at}</h4>
+                            <h4 className="title">{langs.order_text_paid_at}</h4>
                             <div className="value">{dateFormat(pageData.paidAt)}</div>
                         </div>
                         <div className="row-item">
-                            <h4 className="title">{deftag?.order_text_payment}</h4>
-                            <div className="value">{deftag?.[`order_payment_${pageData.paidBy}`]}</div>
+                            <h4 className="title">{langs.order_text_payment}</h4>
+                            <div className="value">{langs.[`order_payment_${pageData.paidBy}`]}</div>
                         </div>
                     </Grid>
 
@@ -67,19 +66,19 @@ const OrderDetail = ({ pageData }) => {
                         mobile={6}
                     >
                         <div className="row-item">
-                            <h4 className="title">{deftag?.order_text_quantity}</h4>
+                            <h4 className="title">{langs.order_text_quantity}</h4>
                             <div className="value">{pageData.totalItems}</div>
                         </div>
                          <div className="row-item">
-                            <h4 className="title">{deftag?.order_text_total_price}</h4>
+                            <h4 className="title">{langs.order_text_total_price}</h4>
                             <div className="value">{priceWithCommas(pageData.price)}</div>
                         </div>
                         <div className="row-item">
-                            <h4 className="title">{deftag?.order_text_status}</h4>
-                            <div className="value">{deftag?.[`order_status_${pageData.status}`]}</div>
+                            <h4 className="title">{langs.order_text_status}</h4>
+                            <div className="value">{langs.[`order_status_${pageData.status}`]}</div>
                         </div>
                         <div className="row-item">
-                            <h4 className="title">{deftag?.order_text_invoice}</h4>
+                            <h4 className="title">{langs.order_text_invoice}</h4>
                             <div className="value">{pageData.invoice}</div>
                         </div>
                     </Grid>
@@ -130,7 +129,7 @@ const OrderDetail = ({ pageData }) => {
 
                 <div className="btn-action">
                     <ButtonLink
-                        text={deftag?.member_my_product}
+                        text={langs.member_my_product}
                         url="/member/account"
                     />
                 </div>

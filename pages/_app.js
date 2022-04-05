@@ -4,13 +4,12 @@ import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import { ThemeProvider } from '@mui/material/styles';
 import { GlobalStyles, Box } from '@mui/material';
 
-// Context
 import { GlobalProvider } from '../src/context/global.state';
-
 import theme from '../src/utils/theme';
 import Header from '../src/containers/Header';
 import Content from '../src/containers/Content';
 import Footer from '../src/containers/Footer';
+import util from '../src/utils/util';
 
 const styles = {
     body: {
@@ -118,7 +117,7 @@ const propertyId = process.env.NEXT_PUBLIC_TAWKTO_PROPERTYID;
 const tawkId = process.env.NEXT_PUBLIC_TAWKTO_TAWKID;
 
 //
-const WebSite = ({ Component, pageProps }) => {
+const WebSite = ({ Component, pageProps, langs, ...rest }) => {
 
     useEffect(() => {
 
@@ -147,8 +146,14 @@ const WebSite = ({ Component, pageProps }) => {
                                 paddingBottom: '20px',
                             }}
                         >
-                            <Content>
-                                <Component {...pageProps} />
+                            <Content {...{ langs }}>
+                                <Component
+                                    {...pageProps}
+                                    {...{
+                                        langs,
+                                        router: rest.router.state
+                                    }}
+                                />
                             </Content>
                         </Box>
                     </Box>
@@ -162,3 +167,12 @@ const WebSite = ({ Component, pageProps }) => {
 };
 
 export default WebSite;
+
+// 先撈詞條
+WebSite.getInitialProps = async ({ ctx }) => {
+
+    const resData = await util.serviceServer({ url: `/lang_configs` });
+    const { data } = resData;
+    return { langs: data.data[ctx.locale] };
+
+}

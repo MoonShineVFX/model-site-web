@@ -20,7 +20,6 @@ import SideNav from './SideNav';
 import { GlobalContext } from '../context/global.state';
 import Service from '../utils/util.service';
 import useLocalStorage from '../utils/useLocalStorage';
-import useDeftags from '../utils/useDeftags';
 
 const arrangeCartList = (array) => array.reduce((acc, obj) => {
 
@@ -53,6 +52,7 @@ const Header = () => {
 
     // Context
     const {
+        deftags,
         logged,
         targetBox,
         sideNav,
@@ -63,7 +63,6 @@ const Header = () => {
     // Hook
     const matches = useMediaQuery((theme) => theme.breakpoints.down('mobile'));
     const [cartItem, setCartItem] = useLocalStorage('cartItem');
-    const [deftag] = useDeftags();
 
     useEffect(() => {
 
@@ -137,7 +136,7 @@ const Header = () => {
                         logged ? (
 
                             <Buttons
-                                text={deftag?.member_my_account}
+                                text={deftags.member_my_account}
                                 variant="outlined"
                                 onClick={() => handleClickBox('myAccount')}
                             />
@@ -146,7 +145,7 @@ const Header = () => {
 
                             <ButtonLink
                                 url="/signin"
-                                text={deftag?.text_signin}
+                                text={deftags.text_signin}
                             />
 
                         )

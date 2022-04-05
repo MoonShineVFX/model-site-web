@@ -1,10 +1,9 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { styled } from '@mui/system';
-import HeadTag from '../src/containers/HeadTag';
+import Head from '../src/containers/Head';
 import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
-import useDeftags from '../src/utils/useDeftags';
 
 const BannerLayout = styled('section')(({ theme }) => ({
     fontSize: '1.25em',
@@ -90,7 +89,7 @@ const SupportLayout = styled(Grid)(({ theme }) => ({
 }));
 
 //
-const About = ({ pageData }) => {
+const About = ({ langs, pageData }) => {
 
     const {
         title,
@@ -110,9 +109,6 @@ const About = ({ pageData }) => {
     // Context
     const { globalDispatch } = useContext(GlobalContext);
 
-    // Hook
-    const [deftag] = useDeftags();
-
     useEffect(() => {
 
         globalDispatch({ type: 'sidenav', payload: false });
@@ -123,7 +119,10 @@ const About = ({ pageData }) => {
     return (
 
         <Fragment>
-            <HeadTag title={deftag?.about_title} />
+            <Head
+                title={langs.about_title}
+                description={langs.og_description}
+            />
 
             <BannerLayout>
                 <div className="thumb">
@@ -155,7 +154,7 @@ const About = ({ pageData }) => {
                             xs={4}
                         >
                             <p className="count">{support[key]}</p>
-                            {deftag?.[`about_support_${key}`]}
+                            {langs[`about_support_${key}`]}
                         </Grid>
 
                     ))
@@ -188,4 +187,4 @@ export async function getServerSideProps ({ locale }) {
         },
     };
 
-};
+}

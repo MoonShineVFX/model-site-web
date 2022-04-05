@@ -1,7 +1,8 @@
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/system';
 import { ButtonLink } from '../components/Links';
-import useDeftags from '../utils/useDeftags';
+import { GlobalContext } from '../context/global.state';
 
 //
 const ItemsTitle = styled('div')(({ theme }) => ({
@@ -39,19 +40,19 @@ const ItemsWrap = ({
     ...rest
 }) => {
 
-    // Hook
-    const [deftag] = useDeftags();
+    // Context
+    const { deftags } = useContext(GlobalContext);
 
     return (
 
         <section {...rest}>
             <ItemsTitle>
-                <h2 className="title">{title}</h2>
+                <h2 className="title" suppressHydrationWarning={true}>{title}</h2>
                 {
                     showMore &&
                         <ButtonLink
                             url={url}
-                            text={deftag?.btn_show_more}
+                            text={deftags.btn_show_more}
                             type="third"
                         />
                 }

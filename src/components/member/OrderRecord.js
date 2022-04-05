@@ -1,8 +1,9 @@
+import { useContext } from 'react';
 import { useMediaQuery, Grid } from '@mui/material';
 import { OrderRecordLayout, OrderRecordGridLayout } from '../order/orderLayout';
 import Links from '../Links';
+import { GlobalContext } from '../../context/global.state';
 import util from '../../utils/util';
-import useDeftags from '../../utils/useDeftags';
 
 const { priceWithCommas, dateFormat, renderWithoutValue } = util;
 
@@ -187,13 +188,15 @@ const withCard = (data, deftag) => (
 //
 const OrderRecord = ({ data }) => {
 
+    // Context
+    const { deftags } = useContext(GlobalContext);
+
     // Hook
     const matches = useMediaQuery((theme) => theme.breakpoints.up('mobile'));
-    const [deftag] = useDeftags();
 
     return (
 
-        matches ? withTable(data, deftag) : withCard(data, deftag)
+        matches ? withTable(data, deftags) : withCard(data, deftags)
 
     );
 

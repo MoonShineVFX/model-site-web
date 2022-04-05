@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useMediaQuery, Grid } from '@mui/material';
 import { ItemLayout } from './accountLayout';
 import Links, { ButtonLink } from '../Links';
+import { GlobalContext } from '../../context/global.state';
 import util from '../../utils/util';
 import Service from '../../utils/util.service';
-import useDeftags from '../../utils/useDeftags';
 
 const { formatBytes, arrangeFormatAndRender } = util;
 
@@ -19,10 +19,12 @@ const Item = ({
     },
 }) => {
 
+    // Context
+    const { deftags } = useContext(GlobalContext);
+
     // Hook
     const matches = useMediaQuery((theme) => theme.breakpoints.up('lg'));
     const options = arrangeFormatAndRender(models);
-    const [deftag] = useDeftags();
 
     // State
     const [format, setFormat] = useState('');
@@ -79,7 +81,7 @@ const Item = ({
 
             <div className="item-content">
                 <h3 className="title web-line-clamp">{title}</h3>
-                <span className="file-size">{deftag?.product_file_size}: {formatBytes(fileSize)}</span>
+                <span className="file-size">{deftags.product_file_size}: {formatBytes(fileSize)}</span>
 
                 {
                     // 手機版不支援下載
@@ -90,7 +92,7 @@ const Item = ({
                                     name="formatId"
                                     onChange={(e) => handleSelected(e, id)}
                                 >
-                                    <option value="">{deftag?.product_format}</option>
+                                    <option value="">{deftags.product_format}</option>
                                     {
                                         Object.keys(options).map((formatId) => (
 
@@ -110,7 +112,7 @@ const Item = ({
                                     onChange={(e) => handleSelected(e, id)}
                                     value={selected[id]?.rendererId}
                                 >
-                                    <option value="">{deftag?.product_render}</option>
+                                    <option value="">{deftags.product_render}</option>
                                     {
                                         options[format]?.renders.map(({ rendererId, rendererName }) => (
 
@@ -122,7 +124,7 @@ const Item = ({
                             </div>
                             <ButtonLink
                                 url={selected[id]?.rendererId ? download : ''}
-                                text={deftag?.product_download}
+                                text={deftags.product_download}
                                 className={`btn-download ${selected[id]?.rendererId ? '' : 'disabled'}`}
                             />
                         </div>

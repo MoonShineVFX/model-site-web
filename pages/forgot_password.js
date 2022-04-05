@@ -7,21 +7,17 @@ import {
 import { useForm } from 'react-hook-form';
 
 import { SignLayout, BtnDirectLayout } from '../src/components/member/memberSignLayout';
-import HeadTag from '../src/containers/HeadTag';
+import Head from '../src/containers/Head';
 import Buttons from '../src/components/Buttons';
 import FormWrap, { FormRow, FormSuccessMesg } from '../src/components/FormWrap';
 
 import { GlobalContext } from '../src/context/global.state';
 import Service from '../src/utils/util.service';
-import useDeftags from '../src/utils/useDeftags';
 
-const ForgotPassword = () => {
+const ForgotPassword = ({ langs }) => {
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
-
-    // Hook
-    const [deftag] = useDeftags();
 
     useEffect(() => {
 
@@ -51,14 +47,17 @@ const ForgotPassword = () => {
     return (
 
         <Fragment>
-            <HeadTag title={deftag?.text_forgot_password} />
+            <Head
+                title={langs.text_forgot_password}
+                description={langs.og_description}
+            />
 
             <SignLayout>
                 <FormWrap
-                    {...!success && { title: deftag?.text_forgot_password }}
+                    {...!success && { title: langs.text_forgot_password }}
                 >
                     {
-                        success ? <FormSuccessMesg mesg={deftag?.text_email_sent} /> : (
+                        success ? <FormSuccessMesg mesg={langs.text_email_sent} /> : (
 
                             <form onSubmit={handleSubmit(handleReqData)}>
                                 <FormRow
@@ -68,7 +67,7 @@ const ForgotPassword = () => {
                                     <input
                                         type="text"
                                         name="email"
-                                        placeholder={deftag?.text_enter_register_email}
+                                        placeholder={langs.text_enter_register_email}
                                         {...register('email', { required: true })}
                                     />
                                 </FormRow>
@@ -76,13 +75,13 @@ const ForgotPassword = () => {
                                 <div className="form-row form-row-btns">
                                     <Buttons
                                         type="submit"
-                                        text={deftag?.btn_get_reset_password_link}
+                                        text={langs.btn_get_reset_password_link}
                                     />
 
                                     <BtnDirectLayout
                                         type="third"
                                         url="/signin"
-                                        text={deftag?.btn_return_to_signin}
+                                        text={langs.btn_return_to_signin}
                                     />
                                 </div>
                             </form>
@@ -117,4 +116,4 @@ export async function getServerSideProps ({ req }) {
         props: {},
     };
 
-};
+}

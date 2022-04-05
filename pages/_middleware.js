@@ -1,14 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
-export function middleware (req = NextRequest) {
+export function middleware () {
 
-    console.log('betty req:', req)
-
-    // const res = NextResponse.rewrite(new URL('/', req.url));
-    // res.cookie('wtf', 'betty');
-
-    // // console.log('betty res:', res)
-    // return res;
-    // return new Response('Hello world!');
+    let response = NextResponse.next();
+    return response;
 
 }

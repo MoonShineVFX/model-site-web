@@ -2,16 +2,12 @@ import { useContext, useEffect } from 'react';
 import Result from '../src/components/Result';
 import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
-import useDeftags from '../src/utils/useDeftags';
 
 //
-const ActiveAccount = () => {
+const ActiveAccount = ({ langs }) => {
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
-
-    // Hook
-    const [deftag] = useDeftags();
 
     useEffect(() => {
 
@@ -23,9 +19,9 @@ const ActiveAccount = () => {
     return (
 
         <Result
-            title={deftag?.text_active_account_title}
-            message={deftag?.text_active_account_message}
-            btnText={deftag?.btn_return_to_signin}
+            title={langs.text_active_account_title}
+            message={langs.text_active_account_message}
+            btnText={langs.btn_return_to_signin}
             linkTo="/signin"
         />
 
@@ -58,4 +54,4 @@ export async function getServerSideProps ({ req, query }) {
         props: {},
     };
 
-};
+}

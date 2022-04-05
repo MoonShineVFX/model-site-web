@@ -1,25 +1,26 @@
+import { useContext } from 'react';
 import { NavMenuLayout } from './globalLayout';
 import Links from '../components/Links';
-import useDeftags from '../utils/useDeftags';
+import { GlobalContext } from '../context/global.state';
 
 const Navbar = ({ ...rest }) => {
 
-    // Hook
-    const [deftag] = useDeftags();
+    // Context
+    const { deftags } = useContext(GlobalContext);
 
     //
     const navMenus = [
         {
             key: 'product/list?page=1',
-            text: deftag?.menu_store,
+            text: deftags.menu_store,
         },
         {
             key: 'about',
-            text: deftag?.menu_about,
+            text: deftags.menu_about,
         },
         {
             key: 'tutorial',
-            text: deftag?.menu_tutorial,
+            text: deftags.menu_tutorial,
         },
     ];
 

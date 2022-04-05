@@ -14,7 +14,7 @@ import {
     BtnDirectLayout,
     ResetPasswordSuccessLayout,
 } from '../src/components/member/memberSignLayout';
-import HeadTag from '../src/containers/HeadTag';
+import Head from '../src/containers/Head';
 import Buttons from '../src/components/Buttons';
 import FontIcon from '../src/components/FontIcon';
 import FormWrap, { FormRow, FormSuccessMesg } from '../src/components/FormWrap';
@@ -22,20 +22,16 @@ import FormWrap, { FormRow, FormSuccessMesg } from '../src/components/FormWrap';
 import { GlobalContext } from '../src/context/global.state';
 import utilConst from '../src/utils/util.const';
 import Service from '../src/utils/util.service';
-import useDeftags from '../src/utils/useDeftags';
 
 const { paswdConfig } = utilConst;
 
-const ResetPassword = () => {
+const ResetPassword = ({ langs }) => {
 
     // Router
     const router = useRouter();
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
-
-    // Hook
-    const [deftag] = useDeftags();
 
     useEffect(() => {
 
@@ -91,22 +87,25 @@ const ResetPassword = () => {
     return (
 
         <Fragment>
-            <HeadTag title={deftag?.text_reset_password} />
+            <Head
+                title={langs.text_reset_password}
+                description={langs.og_description}
+            />
 
             <SignLayout>
                 <FormWrap
-                    {...!success && { title: deftag?.text_reset_password }}
+                    {...!success && { title: langs.text_reset_password }}
                 >
                     {
                         success ? (
 
                             <ResetPasswordSuccessLayout>
-                                <FormSuccessMesg mesg={deftag?.text_new_password_success} />
+                                <FormSuccessMesg mesg={langs.text_new_password_success} />
 
                                 <div className="form-row form-row-btns">
                                     <BtnDirectLayout
                                         url="/signin"
-                                        text={deftag?.btn_return_to_signin}
+                                        text={langs.btn_return_to_signin}
                                         className="reset-pawd-success"
                                     />
                                 </div>
@@ -123,16 +122,16 @@ const ResetPassword = () => {
                                     <input
                                         type={paswdConfig[toggle.password].type}
                                         name="password"
-                                        placeholder={deftag?.text_new_password}
+                                        placeholder={langs.text_new_password}
                                         {...register('password', {
                                             required: true,
                                             minLength: {
                                                 value: 8,
-                                                message: deftag?.error_password_at_least_eight,
+                                                message: langs.error_password_at_least_eight,
                                             },
                                             pattern: {
                                                 value: /^(?=.*\d)[0-9a-zA-Z!\u0022#$%&'()*+,./:;<=>?@[\]\^_`{|}~-]{8,}$/g,
-                                                message: deftag?.error_pattern,
+                                                message: langs.error_pattern,
                                             },
                                         })}
                                     />
@@ -150,10 +149,10 @@ const ResetPassword = () => {
                                     <input
                                         type={paswdConfig[toggle.confirm].type}
                                         name="confirm_password"
-                                        placeholder={deftag?.text_confirm_password}
+                                        placeholder={langs.text_confirm_password}
                                         {...register('confirm_password', {
                                             required: true,
-                                            validate: (value) => (value === password.current) || deftag?.error_password_different,
+                                            validate: (value) => (value === password.current) || langs.error_password_different,
                                         })}
                                     />
 
@@ -165,7 +164,7 @@ const ResetPassword = () => {
                                 <div className="form-row form-row-btns">
                                     <Buttons
                                         type="submit"
-                                        text={deftag?.btn_submit}
+                                        text={langs.btn_submit}
                                     />
                                 </div>
                             </form>
@@ -200,4 +199,4 @@ export async function getServerSideProps ({ req }) {
         props: {},
     };
 
-};
+}

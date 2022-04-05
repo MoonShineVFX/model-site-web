@@ -15,7 +15,7 @@ import {
     CartLayout,
     ItemLayout,
 } from '../../src/components/member/cartLayout';
-import HeadTag from '../../src/containers/HeadTag';
+import Head from '../../src/containers/Head';
 import Buttons from '../../src/components/Buttons';
 import FontIcon from '../../src/components/FontIcon';
 
@@ -23,7 +23,6 @@ import useLocalStorage from '../../src/utils/useLocalStorage';
 import { GlobalContext } from '../../src/context/global.state';
 import util from '../../src/utils/util';
 import Service from '../../src/utils/util.service';
-import useDeftags from '../../src/utils/useDeftags';
 
 const { priceWithCommas } = util;
 
@@ -117,14 +116,13 @@ const Item = ({
 };
 
 //
-const Cart = ({ pageData }) => {
+const Cart = ({ langs, pageData }) => {
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
 
     // Hook
     const matches = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-    const [deftag] = useDeftags();
 
     // Ref
     const formRef = useRef(null);
@@ -181,11 +179,14 @@ const Cart = ({ pageData }) => {
     return (
 
         <Fragment>
-            <HeadTag title={deftag?.cart_order_title} />
-            <TitleLayout>{deftag?.cart_order_title}</TitleLayout>
+            <Head
+                title={langs.cart_order_title}
+                description={langs.og_description}
+            />
+            <TitleLayout>{langs.cart_order_title}</TitleLayout>
 
             <SectionLayout>
-                <h3 className="title-large">{deftag?.cart_section_title}</h3>
+                <h3 className="title-large">{langs.cart_section_title}</h3>
 
                 <CartLayout>
                     {
@@ -231,16 +232,16 @@ const Cart = ({ pageData }) => {
                                 </div>
                             </Fragment>
 
-                        ) : deftag?.cart_text_empty
+                        ) : langs.cart_text_empty
                     }
                 </CartLayout>
 
                 <div className="btn-action">
                     <Buttons
-                        text={deftag?.btn_confirm_order}
+                        text={langs.btn_confirm_order}
                         onClick={handleClickOrder}
                     />
-                    <p>{deftag?.cart_text_notice}</p>
+                    <p>{langs.cart_text_notice}</p>
                 </div>
             </SectionLayout>
 
@@ -312,4 +313,4 @@ export async function getServerSideProps ({ req, locale }) {
         },
     };
 
-};
+}

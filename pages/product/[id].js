@@ -10,7 +10,7 @@ import {
     DemoImageLayout,
     RelativeProductsLayout,
 } from '../../src/components/product/productLayout';
-import HeadTag from '../../src/containers/HeadTag';
+import Head from '../../src/containers/Head';
 import Item from '../../src/components/Item';
 import Buttons from '../../src/components/Buttons';
 import ImageEnlarge from '../../src/components/ImageEnlarge';
@@ -20,7 +20,6 @@ import util from '../../src/utils/util';
 import Service from '../../src/utils/util.service';
 import useQuery from '../../src/utils/useQuery';
 import useLocalStorage from '../../src/utils/useLocalStorage';
-import useDeftags from '../../src/utils/useDeftags';
 
 const {
     priceWithCommas,
@@ -32,19 +31,19 @@ const {
 const renderPrice = (price) => <h2 className="price">{priceWithCommas(price)}</h2>;
 
 // 其他資訊
-const renderOtherInfo = (pageData, deftag) => (
+const renderOtherInfo = (pageData, langs) => (
 
     <div className="other-info">
         <div className="other-info-item">
-            <div className="label">{deftag?.product_model_sum}</div>
+            <div className="label">{langs.product_model_sum}</div>
             <p>{pageData.modelSum}</p>
         </div>
         <div className="other-info-item">
-            <div className="label">{deftag?.product_file_size}</div>
+            <div className="label">{langs.product_file_size}</div>
             <p>{pageData.fileSize}</p>
         </div>
         <div className="other-info-item">
-            <div className="label">{deftag?.product_per_image_size}</div>
+            <div className="label">{langs.product_per_image_size}</div>
             <p>{pageData.perImgSize}</p>
         </div>
     </div>
@@ -52,11 +51,10 @@ const renderOtherInfo = (pageData, deftag) => (
 );
 
 //
-const ProductDetail = ({ pageData }) => {
+const ProductDetail = ({ langs, pageData }) => {
 
     // Hook
     const matches = useMediaQuery((theme)=> theme.breakpoints.down('mobile'));
-    const [deftag] = useDeftags();
 
     // Router
     const query = useQuery();
@@ -123,7 +121,10 @@ const ProductDetail = ({ pageData }) => {
 
         <Fragment>
             {productDetailStyles}
-            <HeadTag title={pageData.title} />
+            <Head
+                title={pageData.title}
+                description={langs.og_description}
+            />
 
             <DetailWrapLayout>
                 <div className="detail-banner">
@@ -167,7 +168,7 @@ const ProductDetail = ({ pageData }) => {
 
                         <p className="description">{pageData.description}</p>
                         <div>
-                            <div className="label">{deftag?.product_detail_format_and_render}</div>
+                            <div className="label">{langs.product_detail_format_and_render}</div>
                             <FormatAndRenderLayout>
                                 {
                                     Object.keys(arrangeFormatAndRender(pageData.models)).map((id) => (
@@ -178,7 +179,7 @@ const ProductDetail = ({ pageData }) => {
                                         >
                                             <h4 className="title">{arrangeFormatAndRender(pageData.models)[id].name}</h4>
                                             <span className="renders">
-                                                <span>{deftag?.product_render}: </span>
+                                                <span>{langs.product_render}: </span>
                                                 {arrangeFormatAndRender(pageData.models)[id].renders.map(({ rendererName }) => rendererName).join('、')}
                                             </span>
                                         </li>
@@ -187,7 +188,7 @@ const ProductDetail = ({ pageData }) => {
                                 }
                             </FormatAndRenderLayout>
                         </div>
-                        <p className="notice">{deftag?.product_detail_notice_message}</p>
+                        <p className="notice">{langs.product_detail_notice_message}</p>
                     </Grid>
 
                     <Grid
@@ -198,7 +199,7 @@ const ProductDetail = ({ pageData }) => {
                     >
                         {
                             // mWeb
-                            matches && renderOtherInfo(pageData, deftag)
+                            matches && renderOtherInfo(pageData, langs)
                         }
 
                         {
@@ -207,20 +208,20 @@ const ProductDetail = ({ pageData }) => {
                         }
 
                         <Buttons
-                            text={deftag?.btn_add_to_cart}
+                            text={langs.btn_add_to_cart}
                             onClick={handleAddToCart}
                         />
 
                         {
                             // Web
-                            !matches && renderOtherInfo(pageData)
+                            !matches && renderOtherInfo(pageData, langs)
                         }
                     </Grid>
                 </DetailContentLayout>
             </DetailWrapLayout>
 
             <DemoImageWrapLayout
-                title={deftag?.product_detail_section_title01}
+                title={langs.product_detail_section_title01}
                 showMore={false}
             >
                 <Grid
@@ -264,7 +265,7 @@ const ProductDetail = ({ pageData }) => {
             </DemoImageWrapLayout>
 
             <RelativeProductsLayout
-                title={deftag?.product_detail_section_title02}
+                title={langs.product_detail_section_title02}
                 showMore={false}
             >
                 <Grid

@@ -8,7 +8,7 @@ import React, {
 import { Tabs, Tab, useMediaQuery } from '@mui/material';
 import { TitleLayout } from '../../src/components/member/cartLayout';
 import { TabWrapLayout } from '../../src/components/member/accountLayout';
-import HeadTag from '../../src/containers/HeadTag';
+import Head from '../../src/containers/Head';
 
 import MyProduct from '../../src/components/member/MyProduct';
 import OrderRecord from '../../src/components/member/OrderRecord';
@@ -17,7 +17,6 @@ import MyAccount from '../../src/components/member/MyAccount';
 import { GlobalContext } from '../../src/context/global.state';
 import util from '../../src/utils/util';
 import Service from '../../src/utils/util.service';
-import useDeftags from '../../src/utils/useDeftags';
 
 //
 const TabPanel = ({ value, indexKey, children, ...other }) => (
@@ -33,14 +32,13 @@ const TabPanel = ({ value, indexKey, children, ...other }) => (
 );
 
 //
-const Account = ({ pageData }) => {
+const Account = ({ langs, pageData }) => {
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
 
     // Hook
     const matches = useMediaQuery((theme) => theme.breakpoints.down('mobile'));
-    const [deftag] = useDeftags();
 
     // State
     const [type, setType] = useState('product');
@@ -57,15 +55,15 @@ const Account = ({ pageData }) => {
     // 所有 type
     const types = {
         product: {
-            title: deftag?.member_my_product,
+            title: langs.member_my_product,
             component: <MyProduct data={pageData.list} />,
         },
         order: {
-            title: deftag?.order_text_order_record,
+            title: langs.order_text_order_record,
             component: <OrderRecord data={orderRecordList} />,
         },
         account: {
-            title: deftag?.member_account_update,
+            title: langs.member_account_update,
             component: <MyAccount data={profile} />,
         },
     };
@@ -92,8 +90,11 @@ const Account = ({ pageData }) => {
     return (
 
         <Fragment>
-            <HeadTag title={`${deftag?.member_account_center}-${types[type].title}`} />
-            <TitleLayout>{deftag?.member_account_center}</TitleLayout>
+            <Head
+                title={`${langs.member_account_center}-${types[type].title}`}
+                description={langs.og_description}
+            />
+            <TitleLayout>{langs.member_account_center}</TitleLayout>
 
             <TabWrapLayout>
                 <Tabs
@@ -116,7 +117,7 @@ const Account = ({ pageData }) => {
 
                 {
                     // 手機版下載提示
-                    (matches && (type === 'product')) && <p className="download-notice">{deftag?.member_mobile_download_notice}</p>
+                    (matches && (type === 'product')) && <p className="download-notice">{langs.member_mobile_download_notice}</p>
                 }
 
                 <div className={`tab-panel panel-${type}`}>
@@ -180,4 +181,4 @@ export async function getServerSideProps ({ req, locale }) {
         },
     };
 
-};
+}

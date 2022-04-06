@@ -11,7 +11,7 @@ const Content = ({ langs, children }) => {
         getGlobalData();
         globalDispatch({ type: 'lang_list', payload: langs });
 
-    }, []);
+    }, [globalDispatch, langs]);
 
     return children;
 

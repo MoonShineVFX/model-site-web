@@ -1,4 +1,6 @@
 import { useEffect, useContext } from 'react';
+import TawkTo from 'tawkto-react';
+import ReactGA from 'react-ga';
 import { Box, useMediaQuery } from '@mui/material';
 import { faShoppingCart, faThLarge } from '@fortawesome/free-solid-svg-icons';
 
@@ -63,6 +65,22 @@ const Header = () => {
     // Hook
     const matches = useMediaQuery((theme) => theme.breakpoints.down('mobile'));
     const [cartItem, setCartItem] = useLocalStorage('cartItem');
+
+    // 第三方
+    useEffect(() => {
+
+        // Tawk 線上客服
+        const tawk = new TawkTo(
+            process.env.NEXT_PUBLIC_TAWKTO_PROPERTYID,
+            process.env.NEXT_PUBLIC_TAWKTO_TAWKID
+        );
+        tawk.showWidget();
+
+        // GA
+        ReactGA.initialize(process.env.NEXT_PUBLIC_GAID);
+        ReactGA.pageview(window.location.pathname);
+
+    });
 
     useEffect(() => {
 

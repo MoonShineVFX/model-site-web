@@ -114,62 +114,43 @@ const styles = {
 };
 
 //
-const WebSite = ({ Component, pageProps, langs, ...rest }) => {
+const WebSite = ({ Component, pageProps, langs, ...rest }) => (
 
-    useEffect(() => {
+    <ThemeProvider theme={theme}>
+        <GlobalStyles styles={styles} />
 
-        // Tawk 線上客服
-        const tawk = new TawkTo(
-            process.env.NEXT_PUBLIC_TAWKTO_PROPERTYID,
-            process.env.NEXT_PUBLIC_TAWKTO_TAWKID
-        );
-        tawk.showWidget();
-
-        // GA
-        ReactGA.initialize(process.env.NEXT_PUBLIC_GAID);
-        ReactGA.pageview(window.location.pathname + window.location.search);
-
-    }, []);
-
-    return (
-
-        <ThemeProvider theme={theme}>
-            <GlobalStyles styles={styles} />
-
-            <GlobalProvider>
-                <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY}>
-                    <Header />
+        <GlobalProvider>
+            <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY}>
+                <Header />
+                <Box
+                    component="main"
+                    sx={{ display: 'flex' }}
+                >
                     <Box
-                        component="main"
-                        sx={{ display: 'flex' }}
+                        component="div"
+                        className="Model-container"
+                        sx={{
+                            paddingTop: '20px',
+                            paddingBottom: '20px',
+                        }}
                     >
-                        <Box
-                            component="div"
-                            className="Model-container"
-                            sx={{
-                                paddingTop: '20px',
-                                paddingBottom: '20px',
-                            }}
-                        >
-                            <Content {...{ langs }}>
-                                <Component
-                                    {...pageProps}
-                                    {...{
-                                        langs,
-                                        router: rest.router.state
-                                    }}
-                                />
-                            </Content>
-                        </Box>
+                        <Content {...{ langs }}>
+                            <Component
+                                {...pageProps}
+                                {...{
+                                    langs,
+                                    router: rest.router.state
+                                }}
+                            />
+                        </Content>
                     </Box>
-                    <Footer />
-                </GoogleReCaptchaProvider>
-            </GlobalProvider>
-        </ThemeProvider>
+                </Box>
+                <Footer />
+            </GoogleReCaptchaProvider>
+        </GlobalProvider>
+    </ThemeProvider>
 
-    );
-
-};
+);
 
 export default WebSite;
 

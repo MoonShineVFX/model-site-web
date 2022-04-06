@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import TawkTo from 'tawkto-react';
+import ReactGA from 'react-ga';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import { ThemeProvider } from '@mui/material/styles';
 import { GlobalStyles, Box } from '@mui/material';
@@ -112,17 +113,21 @@ const styles = {
     },
 };
 
-// tawk.to
-const propertyId = process.env.NEXT_PUBLIC_TAWKTO_PROPERTYID;
-const tawkId = process.env.NEXT_PUBLIC_TAWKTO_TAWKID;
-
 //
 const WebSite = ({ Component, pageProps, langs, ...rest }) => {
 
     useEffect(() => {
 
-        const tawk = new TawkTo(propertyId, tawkId);
+        // Tawk 線上客服
+        const tawk = new TawkTo(
+            process.env.NEXT_PUBLIC_TAWKTO_PROPERTYID,
+            process.env.NEXT_PUBLIC_TAWKTO_TAWKID
+        );
         tawk.showWidget();
+
+        // GA
+        ReactGA.initialize(process.env.NEXT_PUBLIC_GAID);
+        ReactGA.pageview(window.location.pathname + window.location.search);
 
     }, []);
 

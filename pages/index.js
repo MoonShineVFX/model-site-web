@@ -14,11 +14,15 @@ import Banner from '../src/components/home/Banner';
 
 import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
+import useGoogleAnalytics from '../src/utils/useGoogleAnalytics';
 
 const Home = ({ langs, pageData }) => {
 
     // Context
     const { globalDispatch } = useContext(GlobalContext);
+
+    // Hook
+    const [triggerGAEvent] = useGoogleAnalytics();
 
     useEffect(() => {
 
@@ -26,6 +30,17 @@ const Home = ({ langs, pageData }) => {
         globalDispatch({ type: 'target_box', payload: '' });
 
     }, [globalDispatch]);
+
+    const handleGAEvent = (e, event) => {
+
+        e.preventDefault();
+        triggerGAEvent({
+            category: event.category,
+            action: event.action,
+            label: event.label,
+        });
+
+    };
 
     return (
 
@@ -65,6 +80,11 @@ const Home = ({ langs, pageData }) => {
                                     height="336"
                                     url={`/product/${id}`}
                                     data={{ title, price, imgUrl }}
+                                    // onClick={(e) => handleGAEvent(e, {
+                                    //     category: '',
+                                    //     action: '',
+                                    //     label: '',
+                                    // })}
                                     newPage
                                 />
                             </Grid>

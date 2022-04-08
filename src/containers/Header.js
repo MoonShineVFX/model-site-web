@@ -1,6 +1,5 @@
 import { useEffect, useContext } from 'react';
 import TawkTo from 'tawkto-react';
-import ReactGA from 'react-ga';
 import { Box, useMediaQuery } from '@mui/material';
 import { faShoppingCart, faThLarge } from '@fortawesome/free-solid-svg-icons';
 
@@ -22,6 +21,7 @@ import SideNav from './SideNav';
 import { GlobalContext } from '../context/global.state';
 import Service from '../utils/util.service';
 import useLocalStorage from '../utils/useLocalStorage';
+import useGoogleAnalytics from '../utils/useGoogleAnalytics';
 
 const arrangeCartList = (array) => array.reduce((acc, obj) => {
 
@@ -52,6 +52,8 @@ const renderBoxComp = (type) => {
 //
 const Header = () => {
 
+    useGoogleAnalytics();
+
     // Context
     const {
         deftags,
@@ -75,10 +77,6 @@ const Header = () => {
             process.env.NEXT_PUBLIC_TAWKTO_TAWKID
         );
         tawk.showWidget();
-
-        // GA
-        ReactGA.initialize(process.env.NEXT_PUBLIC_GAID);
-        ReactGA.pageview(window.location.pathname);
 
     });
 

@@ -83,6 +83,7 @@ const Item = ({
     height,
     data: { title, price, imgUrl, fileSize },
     children,
+    ...rest
 }) => {
 
     // Context
@@ -95,6 +96,7 @@ const Item = ({
             {...newPage && { target: '_blank'}}
             className={`item style-${type} Model-effect-brightness`}
             title={title}
+            {...rest}
         >
             <div className="item-thumb">
                 <img

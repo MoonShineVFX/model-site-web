@@ -20,6 +20,7 @@ import util from '../../src/utils/util';
 import Service from '../../src/utils/util.service';
 import useQuery from '../../src/utils/useQuery';
 import useLocalStorage from '../../src/utils/useLocalStorage';
+import useGoogleAnalytics from '../../src/utils/useGoogleAnalytics';
 
 const {
     priceWithCommas,
@@ -55,6 +56,7 @@ const ProductDetail = ({ langs, pageData }) => {
 
     // Hook
     const matches = useMediaQuery((theme)=> theme.breakpoints.down('mobile'));
+    const eventTracker = useGoogleAnalytics();
 
     // Router
     const query = useQuery();
@@ -94,6 +96,13 @@ const ProductDetail = ({ langs, pageData }) => {
 
     // 加入購物車
     const handleAddToCart = () => {
+
+        // Tracker
+        eventTracker({
+            category: pageData.title,
+            action: `加入購物車 id_${query.id}`,
+            label: '購物車',
+        });
 
         let item = {
             ...cartItem,

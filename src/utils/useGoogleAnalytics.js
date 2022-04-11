@@ -1,28 +1,45 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import * as analytics from './analytics';
+import ReactGA from 'react-ga';
 
-export default function useGoogleAnalytics (payload = {
-    category: '',
-    action: '',
-    label: '',
-}) {
+export default function useGoogleAnalytics () {
 
     // Router
     const router = useRouter();
 
-    // State
-    // const [event, setEvent] = useState();
+    // init
+    const init = () => {
+
+        ReactGA.initialize(process.env.NEXT_PUBLIC_GAID);
+
+    };
+
+    // page
+    const sendPageview = (path) => {
+
+        ReactGA.set({ page: path });
+        ReactGA.pageview(path);
+
+    };
+
+    // event
+    const eventTracker = (payload) => {
+
+        ReactGA.event({
+            category: payload.category,
+            action: payload.action,
+            label: payload.label,
+        });
+
+    };
 
     useEffect(() => {
 
-        analytics.init();
-        analytics.sendPageview(router.pathname);
+        init();
+        sendPageview(router.pathname);
 
     }, [router]);
 
-    // const triggerEvent = analytics.sendEvent(payload);
-
-    return [analytics.sendEvent(payload)];
+    return eventTracker;
 
 }

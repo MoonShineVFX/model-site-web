@@ -19,10 +19,11 @@ import Head from '../../src/containers/Head';
 import Buttons from '../../src/components/Buttons';
 import FontIcon from '../../src/components/FontIcon';
 
-import useLocalStorage from '../../src/utils/useLocalStorage';
 import { GlobalContext } from '../../src/context/global.state';
 import util from '../../src/utils/util';
 import Service from '../../src/utils/util.service';
+import useLocalStorage from '../../src/utils/useLocalStorage';
+import useGoogleAnalytics from '../../src/utils/useGoogleAnalytics';
 
 const { priceWithCommas } = util;
 
@@ -67,6 +68,7 @@ const Item = ({
     },
 }) => {
 
+    // Hook
     const matches = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
     return (
@@ -123,6 +125,7 @@ const Cart = ({ langs, pageData }) => {
 
     // Hook
     const matches = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+    const eventTracker = useGoogleAnalytics();
 
     // Ref
     const formRef = useRef(null);
@@ -141,7 +144,14 @@ const Cart = ({ langs, pageData }) => {
     }, []);
 
     // 刪除商品
-    const handleRemoveItem = (e, { id, productId }) => {
+    const handleRemoveItem = (e, { id, productId, title }) => {
+
+        // Tracker
+        eventTracker({
+            category: title,
+            action: `刪除購物車 id_${productId}`,
+            label: '購物車',
+        });
 
         let obj = { ...cartItem };
         delete obj[productId];

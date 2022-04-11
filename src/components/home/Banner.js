@@ -8,13 +8,16 @@ import {
 } from './homeLayout';
 import Links from '../Links';
 import { GlobalContext } from '../../context/global.state';
+import useGoogleAnalytics from '../../utils/useGoogleAnalytics';
 
 const Banner = ({ pageData }) => {
 
-    const matches = useMediaQuery((theme) => theme.breakpoints.down('middle'));
-
     // Context
     const { slideshowActive } = useContext(GlobalContext);
+
+    // Hook
+    const matches = useMediaQuery((theme) => theme.breakpoints.down('middle'));
+    const eventTracker = useGoogleAnalytics();
 
     return (
 
@@ -43,6 +46,11 @@ const Banner = ({ pageData }) => {
                                     title={title}
                                     className="thumb"
                                     newPage
+                                    onClick={() => eventTracker({
+                                        category: title,
+                                        action: `點擊商品 id_${id}`,
+                                        label: 'Banner',
+                                    })}
                                 >
                                     {
                                         matches ? (

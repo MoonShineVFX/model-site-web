@@ -22,7 +22,7 @@ const Home = ({ langs, pageData }) => {
     const { globalDispatch } = useContext(GlobalContext);
 
     // Hook
-    const [triggerGAEvent] = useGoogleAnalytics();
+    const eventTracker = useGoogleAnalytics();
 
     useEffect(() => {
 
@@ -30,17 +30,6 @@ const Home = ({ langs, pageData }) => {
         globalDispatch({ type: 'target_box', payload: '' });
 
     }, [globalDispatch]);
-
-    const handleGAEvent = (e, event) => {
-
-        e.preventDefault();
-        triggerGAEvent({
-            category: event.category,
-            action: event.action,
-            label: event.label,
-        });
-
-    };
 
     return (
 
@@ -80,12 +69,12 @@ const Home = ({ langs, pageData }) => {
                                     height="336"
                                     url={`/product/${id}`}
                                     data={{ title, price, imgUrl }}
-                                    // onClick={(e) => handleGAEvent(e, {
-                                    //     category: '',
-                                    //     action: '',
-                                    //     label: '',
-                                    // })}
                                     newPage
+                                    onClick={() => eventTracker({
+                                        category: title,
+                                        action: `點擊商品 id_${id}`,
+                                        label: '最新上架',
+                                    })}
                                 />
                             </Grid>
 

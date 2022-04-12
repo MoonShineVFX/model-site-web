@@ -29,6 +29,7 @@ const Banner = ({ pageData }) => {
                 {
                     pageData.banners.map(({
                         id,
+                        productId,
                         title,
                         description,
                         link,
@@ -42,7 +43,7 @@ const Banner = ({ pageData }) => {
                         >
                             <div className="inner">
                                 <Links
-                                    url={link}
+                                    url={`/product/${productId}`}
                                     title={title}
                                     className="thumb"
                                     newPage

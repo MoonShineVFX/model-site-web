@@ -33,9 +33,6 @@ const Service = {
 
     // 取得下載連結
     donwloadLink: (reqData) => util.serviceProxy('/model_download_link', reqData),
-
-    // 取所有詞條
-    deftagList: (reqData) => util.serviceProxy('/lang_configs', reqData),
 };
 
 export default Service;

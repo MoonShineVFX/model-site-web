@@ -1,6 +1,3 @@
-import { useEffect } from 'react';
-import TawkTo from 'tawkto-react';
-import ReactGA from 'react-ga';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import { ThemeProvider } from '@mui/material/styles';
 import { GlobalStyles, Box } from '@mui/material';
@@ -157,7 +154,7 @@ export default WebSite;
 // 先撈詞條
 WebSite.getInitialProps = async ({ ctx }) => {
 
-    const resData = await util.serviceServer({ url: `/lang_configs` });
+    const resData = await util.serviceServer({ url: '/lang_configs' });
     const { data } = resData;
     return { langs: data.data[ctx.locale] };
 

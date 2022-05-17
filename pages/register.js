@@ -91,27 +91,6 @@ const Register = ({ langs }) => {
                 <FormWrap title={langs.text_register}>
                     <form onSubmit={handleSubmit(handleReqData)}>
                         <FormRow
-                            name="nickname"
-                            errors={errors}
-                        >
-                            <input
-                                type="text"
-                                name="nickname"
-                                placeholder={langs.text_nickname}
-                                {...register('nickname', { required: true })}
-                            />
-                        </FormRow>
-
-                        <FormRow name="realName">
-                            <input
-                                type="text"
-                                name="realName"
-                                placeholder={langs.text_real_name}
-                                {...register('realName')}
-                            />
-                        </FormRow>
-
-                        <FormRow
                             name="email"
                             errors={errors}
                         >

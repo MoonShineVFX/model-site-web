@@ -5,6 +5,7 @@ steps:
       - --cache=true
       - --cache-ttl=1440h
       - --snapshotMode=redo
+      - --use-new-run
 
 substitutions:
   _SERVICE_NAME: NULL_SERVICE_NAME

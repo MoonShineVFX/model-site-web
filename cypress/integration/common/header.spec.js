@@ -12,38 +12,7 @@ describe('header', () => {
 
     context('Not login', () => {
 
-        it('has host to use (from .env)', () => {
-
-            expect(Cypress.env('host')).to.be.a('string');
-
-        });
-
-        it('display logo and click to home page', () => {
-
-            cy.get('@header')
-                .find('.logo-text')
-                .then(($elem) => {
-
-                    cy.get($elem)
-                        .should('have.attr', 'href')
-                        .and('include', '/');
-
-                    cy.get($elem).click();
-                    cy.url().should('include', '/');
-
-                    cy.get($elem)
-                        .should('have.attr', 'title')
-                        .and('include', 'Moonshine Market');
-
-                    cy.get($elem)
-                        .children()
-                        .should('exist');
-
-                });
-
-        });
-
-        it('check text of menus', () => {
+        it('display logo, menus, cart and signin button', () => {
 
             const config = {
                 '0': {
@@ -60,27 +29,31 @@ describe('header', () => {
                 },
             };
 
-            cy.get('@header')
-                .find('nav:first a')
+            // Logo
+            cy.get('header .logo-text')
+                .should('have.attr', 'href')
+                .and('include', '/');
+
+            cy.get('header .logo-text').click();
+            cy.location('origin').should('eq', location.origin);
+
+            // Menus
+            cy.get('header nav:first a')
                 .should('have.length', 3)
                 .each(($elem, idx) => {
 
                     cy.get($elem)
                         .should('have.attr', 'href')
                         .and('include', config[idx].url);
+                    cy.get($elem).should('contain', config[idx].text);
 
-                    cy.get($elem)
-                        .should('have.attr', 'title')
-                        .and('include', config[idx].text);
+                    cy.get($elem).click();
+                    cy.url().should('include', config[idx].url);
 
                 });
 
-        });
-
-        it('display cart icon and count', () => {
-
-            cy.get('@header')
-                .find('[data-icon="shopping-cart"]:first')
+            // Cart
+            cy.get('header [data-icon="shopping-cart"]:first')
                 .should('exist')
                 .siblings('.count')
                 .should('exist')
@@ -91,16 +64,13 @@ describe('header', () => {
 
                 });
 
-        });
+            // Button
+            cy.log(langs)
+            // cy.get('header [type="button"]')
+            //     .should('have.text', langs.text_signin)
+                // .click();
 
-        it('display signin button and can direct to signin page', () => {
-
-            cy.get('@header')
-                .find('button')
-                .should('contain', langs.text_signin)
-                .click();
-
-            cy.url().should('include', '/signin');
+            // cy.url().should('include', '/signin');
 
         });
 

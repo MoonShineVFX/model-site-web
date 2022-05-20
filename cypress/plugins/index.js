@@ -9,6 +9,7 @@ module.exports = (on, config) => {
 
     // baseUrl
     config.baseUrl = `https://${config.env.host}`;
+    config.baseUrl = `http://localhost:1006`;
 
     return config;
 

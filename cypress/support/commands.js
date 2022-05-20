@@ -16,14 +16,7 @@ Cypress.Commands.add('deftag', (locale) => {
         url: `${Cypress.env('host')}/api/lang_configs`,
     })
     .its('body')
-    .should('have.property', 'data')
-    .then((resData) => {
-
-        expect(resData).to.have.property(locale);
-        expect(resData[locale]).to.be.an('object');
-        return resData[locale];
-
-    });
+    .then((resData) => resData.data[locale]);
 
 });
 

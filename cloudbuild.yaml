@@ -6,6 +6,9 @@ steps:
       - --cache-ttl=1440h
       - --snapshotMode=redo
       - --use-new-run
+#      - --compressed-caching=false
+
+timeout: 1800s
 
 substitutions:
   _SERVICE_NAME: NULL_SERVICE_NAME

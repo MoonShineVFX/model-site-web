@@ -48,7 +48,8 @@ jobs:
         run: |-
           gcloud builds submit \
             --quiet \
-            --config cloudbuild.yaml
+            --config cloudbuild.yaml \
+            --substitutions=_SERVICE_NAME=$SERVICE_NAME
       - name: Deploy to Cloud Run
         run: |-
           gcloud run deploy $SERVICE_NAME \

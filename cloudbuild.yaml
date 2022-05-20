@@ -5,5 +5,8 @@ steps:
       - --cache-ttl=1440h
       - --snapshotMode=redo
 
+substitutions:
+  _SERVICE_NAME: NULL_SERVICE_NAME
+
 tags:
-  - asia-east1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/${SERVICE_NAME}:latest
+  - asia-east1-docker.pkg.dev/{$PROJECT_ID}/cloud-run-source-deploy/${_SERVICE_NAME}:latest

@@ -143,6 +143,7 @@ const Header = () => {
                 }}>
                     <ShoppingCartLayout
                         onClick={() => handleClickBox('cartList')}
+                        data-device={matches ? 'mobile' : 'desktop'}
                     >
                         <FontIcon icon={faShoppingCart} />
                         <span className="count">({cart.count})</span>

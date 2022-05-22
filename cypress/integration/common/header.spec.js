@@ -1,33 +1,19 @@
 let langs;
 
-describe('header', () => {
+describe('Header', () => {
 
     beforeEach(() => {
 
         cy.visit('/index');
-        cy.get('header').as('header');
         cy.deftag().then((resData) => langs = resData);
 
     });
 
-    context('Not login', () => {
+    context('Not signin', () => {
 
         it('display logo, menus, cart and signin button', () => {
 
-            const config = {
-                '0': {
-                    url: '/product/list?page=1',
-                    text: langs.menu_store,
-                },
-                '1': {
-                    url: '/about',
-                    text: langs.menu_about,
-                },
-                '2': {
-                    url: '/tutorial',
-                    text: langs.menu_tutorial,
-                },
-            };
+            let obj = {};
 
             // Logo
             cy.get('header .logo-text')
@@ -42,13 +28,19 @@ describe('header', () => {
                 .should('have.length', 3)
                 .each(($elem, idx) => {
 
+                    obj[idx] = obj[idx] || {};
+                    obj[idx] = {
+                        url: $elem.attr('href'),
+                        text: $elem.text(),
+                    };
+
                     cy.get($elem)
                         .should('have.attr', 'href')
-                        .and('include', config[idx].url);
-                    cy.get($elem).should('contain', config[idx].text);
+                        .and('include', obj[idx].url);
 
+                    cy.get($elem).should('have.text', obj[idx].text);
                     cy.get($elem).click();
-                    cy.url().should('include', config[idx].url);
+                    cy.url().should('include', obj[idx].url);
 
                 });
 
@@ -65,18 +57,33 @@ describe('header', () => {
                 });
 
             // Button
-            cy.log(langs)
-            // cy.get('header [type="button"]')
-            //     .should('have.text', langs.text_signin)
-                // .click();
+            cy.get('header [type="button"]')
+                .should('have.text', langs.text_signin)
+                .click();
 
-            // cy.url().should('include', '/signin');
+            cy.url().should('include', '/signin');
+
+        });
+
+        it('can direct to signin page by clicking cart', () => {
+
+            cy.get('header [data-device="desktop"]').click();
+            cy.get('header .items a').should('have.length', 0);
+            cy.getCookie('token').should('not.exist');
+
+            cy.get('header .goToOrder a')
+                .contains(langs.cart_go_to_checkout)
+                .should('have.attr', 'href')
+                .and('include', '/signin');
+
+            cy.get('header .goToOrder a').click();
+            cy.url().should('include', '/signin');
 
         });
 
     });
 
-    // context('Login', () => {
+    // context('Signin', () => {
 
     //     beforeEach(() => {
 

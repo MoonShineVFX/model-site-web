@@ -88,12 +88,11 @@ const Footer = () => {
                                             url="/privacy"
                                             newPage
                                             className="light privacy-link"
-                                            title={deftags.text_privacy}
                                         >
                                             {deftags.text_privacy}
                                         </Links>
 
-                                        <Links url="mailto:service@moonshine.tw" className="light" title={deftags.text_custom_service} newPage>{deftags.text_custom_service}: service@moonshine.tw</Links>
+                                        <Links url="mailto:service@moonshine.tw" className="light" newPage>{deftags.text_custom_service}: service@moonshine.tw</Links>
                                     </div>
                                     <p className="bottom">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.</p>
                                 </div>

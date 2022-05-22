@@ -9,33 +9,37 @@ describe('/signin', () => {
 
     });
 
-    context('Display UI', () => {
+    context('HTML form submission', () => {
 
-        it('display form layout', () => {
+        let obj = {};
+
+        it('display form, title and buttons', () => {
 
             cy.get('.formWrap')
                 .should('exist')
-                .contains(langs.text_signin_title);
+                .and('contain', langs.text_signin_title);
 
-            // cy.get('[type="button"]')
-            //     .should('exist')
-            //     .click();
+            cy.get('.form-row-btns button')
+                .should('have.length', 4)
+                .each(($btn, idx) => {
 
-            // cy.url().should('include', '/signin');
+                    obj[idx] = $btn.text();
+                    cy.get($btn).should('have.text', obj[idx]);
 
-        });
+                });
 
-    });
-
-    context('HTML form submission', () => {
-
-        it('require account(email)', () => {
-
-            cy.get('form');
-            // cy.get('form').submit();
-            // cy.get('.error').should('contain', langs.error_required);
+            // cy.get('.form-row-btns button[type="submit"]')
+            //     .should('have.attr', 'disabled');
 
         });
+
+        // it('require account(email)', () => {
+
+        //     cy.get('form');
+        //     // cy.get('form').submit();
+        //     // cy.get('.error').should('contain', langs.error_required);
+
+        // });
 
         // it('require password', () => {
 

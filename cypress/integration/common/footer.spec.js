@@ -2,64 +2,50 @@ import dayjs from 'dayjs';
 
 let langs;
 
-describe('footer', () => {
+describe('Footer', () => {
 
     beforeEach(() => {
 
         cy.visit('/index');
-        cy.get('footer').as('footer');
         cy.deftag().then((resData) => langs = resData);
 
     });
 
-    it('display logo and copyright', () => {
+    it('display small logo and copyright', () => {
 
-        cy.get('@footer')
-            .then(($elem) => {
+        cy.get('footer img')
+            .should('have.attr', 'src')
+            .and('include', '/logo_small.png');
 
-                cy.get($elem)
-                    .find('img')
-                    .should('have.attr', 'src')
-                    .and('include', '/logo_small.png');
+        cy.get('footer .top span')
+            .should('have.text', `© ${dayjs().format('YYYY')} All rights reserved. Moonshine`);
 
-                cy.get($elem)
-                    .find('.top span')
-                    .should('contain', `© ${dayjs().format('YYYY')} All rights reserved. Moonshine`);
-
-                // privacy policy of google reCAPTCHA
-                cy.get($elem)
-                    .find('.bottom')
-                    .should('contain', 'This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.');
-
-            });
+        // privacy policy of google reCAPTCHA
+        cy.get('footer .bottom')
+            .should('have.text', 'This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.');
 
     });
 
     it('display links of privacy policy and custom service mail address', () => {
 
-        const config = {
-            '0': {
-                url: '/privacy',
-                text: langs.text_privacy,
-            },
-            '1': {
-                url: 'mailto:service@moonshine.tw',
-                text: langs.text_custom_service,
-            },
-        };
+        let obj = {};
 
-        cy.get('@footer')
-            .find('.top a')
+        cy.get('footer .top a')
             .should('have.length', 2)
             .each(($elem, idx) => {
 
-                cy.get($elem)
-                    .should('have.attr', 'href')
-                    .and('include', config[idx].url);
+                obj[idx] = obj[idx] || {};
+                obj[idx] = {
+                    url: $elem.attr('href'),
+                    text: $elem.text(),
+                };
 
                 cy.get($elem)
-                    .should('have.attr', 'title')
-                    .and('include', config[idx].text);
+                    .should('have.attr', 'href')
+                    .and('include', obj[idx].url);
+
+                cy.get($elem).should('have.text', obj[idx].text);
+                if (idx !== 1) cy.get($elem).click();
 
             });
 

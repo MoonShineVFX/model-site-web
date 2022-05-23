@@ -27,12 +27,12 @@ jobs:
           TAWKTO_TAWKID: ${{ secrets.MODEL_LIB_TAWKTO_TAWKID }}
           GOOGLE_GAID: ${{ secrets.MODEL_LIB_GOOGLE_GAID }}
         run: |
-          echo "NEXT_PUBLIC_HOST=$HOST" >> .env.local
-          echo "NEXT_PUBLIC_RECAPTCHA_KEY=$RECAPTCHA_KEY" >> .env.local
-          echo "NEXT_PUBLIC_GOOGLE_SIGNIN_CLIENTID=$GOOGLE_SIGNIN_CLIENTID" >> .env.local
-          echo "NEXT_PUBLIC_TAWKTO_PROPERTYID=$TAWKTO_PROPERTYID" >> .env.local
-          echo "NEXT_PUBLIC_TAWKTO_TAWKID=$TAWKTO_TAWKID" >> .env.local
-          echo "NEXT_PUBLIC_GAID=$GOOGLE_GAID" >> .env.local
+          echo "NEXT_PUBLIC_HOST=$HOST" >> .env
+          echo "NEXT_PUBLIC_RECAPTCHA_KEY=$RECAPTCHA_KEY" >> .env
+          echo "NEXT_PUBLIC_GOOGLE_SIGNIN_CLIENTID=$GOOGLE_SIGNIN_CLIENTID" >> .env
+          echo "NEXT_PUBLIC_TAWKTO_PROPERTYID=$TAWKTO_PROPERTYID" >> .env
+          echo "NEXT_PUBLIC_TAWKTO_TAWKID=$TAWKTO_TAWKID" >> .env
+          echo "NEXT_PUBLIC_GAID=$GOOGLE_GAID" >> .env
 
       - name: Cypress run
         uses: cypress-io/github-action@v2

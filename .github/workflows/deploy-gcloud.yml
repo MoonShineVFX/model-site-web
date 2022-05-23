@@ -37,7 +37,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           start: npm run dev
-          wait-on: 'http://localhost:1006'
+          wait-on: 'http://localhost:8080'
           record: true
           browser: chrome
     env:

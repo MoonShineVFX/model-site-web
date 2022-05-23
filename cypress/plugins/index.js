@@ -8,7 +8,7 @@ module.exports = (on, config) => {
     config.env.locale = 'zh';
 
     // baseUrl
-    config.baseUrl = `http://localhost:1006`;
+    config.baseUrl = `http://localhost:8080`;
 
     return config;
 

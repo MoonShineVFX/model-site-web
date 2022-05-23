@@ -14,6 +14,7 @@ env:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    container: cypress/browsers:node14.19.0-chrome100-ff99-edge
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -40,7 +41,6 @@ jobs:
           wait-on: 'http://localhost:8080'
           record: true
           browser: chrome
-          headless: true
     env:
       CYPRESS_RECORD_KEY: ${{ secrets.TEST_CYPRESS_RECORD_KEY }}
 

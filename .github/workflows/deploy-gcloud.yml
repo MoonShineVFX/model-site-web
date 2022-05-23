@@ -14,7 +14,6 @@ env:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    container: cypress/browsers:node14.19.0-chrome100-ff99-edge
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -40,7 +39,7 @@ jobs:
           start: npm run dev
           wait-on: 'http://localhost:1006'
           record: true
-          parallel: true
+          browser: chrome
     env:
       CYPRESS_RECORD_KEY: ${{ secrets.TEST_CYPRESS_RECORD_KEY }}
 
@@ -52,7 +51,6 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-# mock changes
 #      - name: Change SERVICE_NAME if dev
 #        if: github.ref == 'refs/heads/dev'
 #        run: |

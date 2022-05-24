@@ -1,4 +1,4 @@
-import React, {
+import {
     Fragment,
     useContext,
     useEffect,
@@ -14,36 +14,20 @@ import {
     SectionLayout,
     CartLayout,
     ItemLayout,
-} from '../../src/components/member/cartLayout';
+} from '../../src/components/cart/cartLayout';
 import Head from '../../src/containers/Head';
 import Buttons from '../../src/components/Buttons';
 import FontIcon from '../../src/components/FontIcon';
+import InvoiceForm from '../../src/components/cart/InvoiceForm';
 
 import { GlobalContext } from '../../src/context/global.state';
 import util from '../../src/utils/util';
+import deftag from '../../src/utils/util.deftag';
 import Service from '../../src/utils/util.service';
 import useLocalStorage from '../../src/utils/useLocalStorage';
 import useGoogleAnalytics from '../../src/utils/useGoogleAnalytics';
 
 const { priceWithCommas } = util;
-
-const fakeData = {
-    "btn_next": "下一步",
-    "cart_text_fill_out_message": "填寫購買資訊",
-    "cart_member_info_title": "會員資訊",
-    "cart_member_real_name": "真實姓名",
-    "cart_member_address": "地址",
-    "cart_invoice_title": "發票資訊",
-    "cart_invoice_type_paper": "紙本",
-    "cart_invoice_type_electronic": "電子",
-    "cart_invoice_text_same_as": "同會員資訊",
-    "cart_invoice_text_re_fill": "重新填寫",
-    "cart_invoice_way_two": "二聯式",
-    "cart_invoice_way_three": "三聯式",
-    "cart_invoice_company_name": "公司名稱",
-    "cart_invoice_tax_number": "統一編號",
-    "cart_text_fill_out_warning": "發票資訊不可更改,請確認是否都填寫正確!",
-};
 
 // 商品欄位
 const TableGrid = ({ colLeft, colRight }) => (
@@ -135,21 +119,6 @@ const Item = ({
 
 };
 
-// 會員與發票資訊
-const OtherInfoForm = ({ email }) => (
-
-    <Fragment>
-
-        <div className="btn-action">
-            <Buttons
-                text={langs.btn_confirm_order}
-                // onClick={handleClickOrder}
-            />
-            <p>{langs.cart_text_notice}</p>
-        </div>
-    </Fragment>
-);
-
 //
 const Cart = ({ langs, pageData }) => {
 
@@ -168,7 +137,7 @@ const Cart = ({ langs, pageData }) => {
     const [fields, setFields] = useState({});
     const [list, setList] = useState(pageData.list);
     const [amount, setAmount] = useState(pageData.amount);
-    const [memberInfo, setMemberInfo] = useState(false);
+    const [invoiceVisible, setInvoiceVisible] = useState(false);
 
     useEffect(() => {
 
@@ -209,7 +178,7 @@ const Cart = ({ langs, pageData }) => {
     // 下一步
     const handleNextStep = () => {
 
-        setMemberInfo(true);
+        setInvoiceVisible(true);
 
     };
 
@@ -289,15 +258,23 @@ const Cart = ({ langs, pageData }) => {
 
                 <div className="btn-action">
                     <Buttons
-                        text={fakeData.btn_next}
+                        text={deftag.btn_next}
                         onClick={handleNextStep}
                     />
-                    <p>{fakeData.cart_text_fill_out_message}</p>
+                    <p>{deftag.cart_text_fill_out_message}</p>
                 </div>
 
                 {
-                    memberInfo && <OtherInfoForm email={email} />
+                    invoiceVisible && <InvoiceForm langs={langs} />
                 }
+
+                {/* <div className="btn-action">
+                    <Buttons
+                        text={langs.btn_confirm_order}
+                        // onClick={handleClickOrder}
+                    />
+                    <p>{langs.cart_text_notice}</p>
+                </div> */}
             </SectionLayout>
 
             {

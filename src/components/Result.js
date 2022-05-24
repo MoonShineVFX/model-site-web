@@ -5,7 +5,7 @@ import {
     TitleLayout,
     SectionLayout,
     CartLayout,
-} from './member/cartLayout';
+} from './cart/cartLayout';
 import Head from '../containers/Head';
 import { ButtonLink } from './Links';
 import FontIcon from './FontIcon';

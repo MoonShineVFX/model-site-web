@@ -105,7 +105,6 @@ const ChangePassword = ({ langs }) => {
                                     },
                                 })}
                             />
-
                                 <span onClick={() => handleToggle('password')}>
                                 <FontIcon icon={paswdConfig[toggle.password].icon} />
                             </span>

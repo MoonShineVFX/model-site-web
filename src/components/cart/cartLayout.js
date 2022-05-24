@@ -1,5 +1,6 @@
 import { styled } from '@mui/system';
 import Links from '../Links';
+import FormWrap, { FormRow } from '../FormWrap';
 
 // 外層 form
 const TitleLayout = styled('h1')(({ theme }) => ({
@@ -146,9 +147,36 @@ const ItemLayout = styled(Links)(({ theme }) => ({
     },
 }));
 
+// 會員與發票資訊
+const InvoiceFormWrapLayout = styled(FormWrap)(({ theme }) => ({
+    'section': {
+        marginBottom: '60px',
+        '.title': {
+            fontWeight: 'normal',
+            borderBottom: `1px solid ${theme.palette.border.dark}`,
+            paddingBottom: '20px',
+        },
+    },
+    '.warning-text': {
+        fontSize: '.9em',
+        // color: 'red',
+        // opacity: '0.6',
+    },
+}));
+
+//
+const RadioButtonLayout = styled('label')(({ theme }) => ({
+    'input': {
+        width: '12px',
+        height: '12px',
+    },
+}));
+
 export {
     TitleLayout,
     SectionLayout,
     CartLayout,
     ItemLayout,
+    InvoiceFormWrapLayout,
+    RadioButtonLayout,
 };

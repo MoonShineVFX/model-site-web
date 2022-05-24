@@ -104,7 +104,10 @@ const SuccessMesgLayout = styled('p')(({ theme }) => ({
 //
 const FormWrap = ({ title, children, ...rest }) => (
 
-    <FormWrapLayout className="Model-form-button formWrap" {...rest}>
+    <FormWrapLayout
+        className="Model-form-button formWrap"
+        {...rest}
+    >
         <div className="form-top">
             <h3 className="title">{title}</h3>
         </div>

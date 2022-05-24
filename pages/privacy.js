@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useEffect } from 'react';
-import { TitleLayout, SectionLayout } from '../src/components/member/cartLayout';
+import { TitleLayout, SectionLayout } from '../src/components/cart/cartLayout';
 import Head from '../src/containers/Head';
 import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';

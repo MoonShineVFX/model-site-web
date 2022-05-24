@@ -1,6 +1,6 @@
 import { Fragment, useContext, useEffect } from 'react';
 import { Grid } from '@mui/material';
-import { TitleLayout } from '../../src/components/member/cartLayout';
+import { TitleLayout } from '../../src/components/cart/cartLayout';
 import { OrderDetailLayout, ItemLayout } from '../../src/components/order/orderLayout';
 import Head from '../../src/containers/Head';
 import { ButtonLink } from '../../src/components/Links';
@@ -56,7 +56,7 @@ const OrderDetail = ({ langs, pageData }) => {
                         </div>
                         <div className="row-item">
                             <h4 className="title">{langs.order_text_payment}</h4>
-                            <div className="value">{langs.[`order_payment_${pageData.paidBy}`]}</div>
+                            <div className="value">{langs[`order_payment_${pageData.paidBy}`]}</div>
                         </div>
                     </Grid>
 
@@ -75,7 +75,7 @@ const OrderDetail = ({ langs, pageData }) => {
                         </div>
                         <div className="row-item">
                             <h4 className="title">{langs.order_text_status}</h4>
-                            <div className="value">{langs.[`order_status_${pageData.status}`]}</div>
+                            <div className="value">{langs[`order_status_${pageData.status}`]}</div>
                         </div>
                         <div className="row-item">
                             <h4 className="title">{langs.order_text_invoice}</h4>

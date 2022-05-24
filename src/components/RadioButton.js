@@ -6,6 +6,10 @@ const RadioButtonLayout = styled('label')(({ theme }) => ({
     display: 'inline-block',
     marginRight: '30px',
     cursor: 'pointer',
+    '&.disabled': {
+        opacity: '0.6',
+        cursor: 'not-allowed',
+    },
     'input[type="radio"]': {
         display: 'none',
         '&:checked + .checkmark': {
@@ -55,13 +59,15 @@ const RadioButton = ({
     name,
     register,
     text,
+    disabled,
     ...rest
 }) => (
 
-    <RadioButtonLayout className={className}>
+    <RadioButtonLayout className={`${className ? className : ''} ${disabled ? 'disabled' : ''}`}>
         <input
             type="radio"
             name={name}
+            {...disabled && { disabled: true }}
             {...register}
             {...rest}
         />
@@ -71,11 +77,16 @@ const RadioButton = ({
 
 );
 
-// RadioButton.propTypes = {
-//     className: PropTypes.string,
-//     name: PropTypes.string,
-//     register: PropTypes.object,
-//     children: PropTypes.any,
-// };
+RadioButton.defaultProps = {
+    disabled: false,
+};
+
+RadioButton.propTypes = {
+    className: PropTypes.string,
+    name: PropTypes.string,
+    register: PropTypes.object,
+    text: PropTypes.string,
+    disabled: PropTypes.bool,
+};
 
 export default RadioButton;

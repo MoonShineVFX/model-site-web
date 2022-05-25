@@ -1,0 +1,10 @@
+name: "setup-env"
+runs:
+  using: "composite"
+  steps:
+    - name: Change ENV if not main
+      if: github.ref != 'refs/heads/main'
+      shell: bash
+      run: |
+        echo "SERVICE_NAME=$SERVICE_NAME-dev" >> $GITHUB_ENV
+        echo "HOST=market-dev.moonshine.tw" >> $GITHUB_ENV

@@ -1,5 +1,6 @@
 {
     "projectId": "sd4cjo",
     "viewportWidth": 1536,
-    "viewportHeight": 960
+    "viewportHeight": 960,
+    "defaultCommandTimeout": 10000
 }

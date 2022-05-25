@@ -40,7 +40,7 @@ describe('Header', () => {
 
                     cy.get($elem).should('have.text', obj[idx].text);
                     cy.get($elem).click();
-                    cy.url({timeout: 10000}).should('include', obj[idx].url);
+                    cy.url().should('include', obj[idx].url);
 
                 });
 
@@ -61,7 +61,7 @@ describe('Header', () => {
                 .should('have.text', langs.text_signin)
                 .click();
 
-            cy.url({timeout: 10000}).should('include', '/signin');
+            cy.url().should('include', '/signin');
 
         });
 
@@ -77,7 +77,7 @@ describe('Header', () => {
                 .and('include', '/signin');
 
             cy.get('header .goToOrder a').click();
-            cy.url({timeout: 10000}).should('include', '/signin');
+            cy.url().should('include', '/signin');
 
         });
 

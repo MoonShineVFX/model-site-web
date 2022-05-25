@@ -43,6 +43,7 @@ jobs:
           browser: chrome
     env:
       CYPRESS_RECORD_KEY: ${{ secrets.TEST_CYPRESS_RECORD_KEY }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   deploy:
     name: Deploy

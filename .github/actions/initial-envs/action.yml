@@ -10,11 +10,13 @@ runs:
   steps:
     - name: Change ENV if not main
       if: github.ref != 'refs/heads/main'
+      shell: bash
       run: |
         echo "SERVICE_NAME=$SERVICE_NAME-dev" >> $GITHUB_ENV
         echo "HOST=market-dev.moonshine.tw" >> $GITHUB_ENV
 
     - name: Override next.js env
+      shell: bash
       run: |
         echo "NEXT_PUBLIC_HOST=$HOST" >> ${{ inputs.filename }}
         echo "NEXT_PUBLIC_RECAPTCHA_KEY=$RECAPTCHA_KEY" >> ${{ inputs.filename }}

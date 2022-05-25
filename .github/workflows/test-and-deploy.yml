@@ -1,0 +1,78 @@
+name: Test and Deploy
+on:
+  push:
+    branches:
+      - main
+      - dev
+
+env:
+  PROJECT_ID: ms-model-lib
+
+  SERVICE_NAME: frontend-web
+  HOST: market.moonshine.tw
+
+  RECAPTCHA_KEY: ${{ secrets.MODEL_LIB_RECAPTCHA_KEY }}
+  GOOGLE_SIGNIN_CLIENTID: ${{ secrets.MODEL_LIB_GOOGLE_SIGNIN_CLIENTID }}
+  TAWKTO_PROPERTYID: ${{ secrets.MODEL_LIB_TAWKTO_PROPERTYID }}
+  TAWKTO_TAWKID: ${{ secrets.MODEL_LIB_TAWKTO_TAWKID }}
+  GOOGLE_GAID: ${{ secrets.MODEL_LIB_GOOGLE_GAID }}
+
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node14.19.0-chrome100-ff99-edge
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - uses: ./.github/actions/setup-env
+      - uses: ./.github/actions/next-js-envfile
+        with:
+          filename: .env
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm run dev
+          wait-on: 'http://localhost:1006'
+          record: true
+          browser: chrome
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  Deploy:
+    runs-on: ubuntu-latest
+    needs: Test
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - uses: ./.github/actions/setup-env
+      - uses: ./.github/actions/next-js-envfile
+        with:
+          filename: .env.local
+
+      - id: auth
+        uses: google-github-actions/auth@v0.4.0
+        with:
+          credentials_json: ${{ secrets.MODEL_LIB_GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0.3.0
+        with:
+          project_id: ${{ env.PROJECT_ID }}
+
+      - name: Build image
+        run: |-
+          gcloud builds submit \
+            --quiet \
+            --config cloudbuild.yaml \
+            --substitutions=_SERVICE_NAME=$SERVICE_NAME
+      - name: Deploy to Cloud Run
+        run: |-
+          gcloud run deploy $SERVICE_NAME \
+            --region asia-east1 \
+            --image "asia-east1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/$SERVICE_NAME:latest" \
+            --platform "managed" \
+            --quiet

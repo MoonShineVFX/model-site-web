@@ -26,8 +26,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup env
-        uses: ./.github/actions/next-js-envfile
+      - uses: ./.github/actions/setup-env
+      - uses: ./.github/actions/next-js-envfile
         with:
           filename: .env
 
@@ -50,8 +50,8 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Setup env
-        uses: ./.github/actions/next-js-envfile
+      - uses: ./.github/actions/setup-env
+      - uses: ./.github/actions/next-js-envfile
         with:
           filename: .env.local
 

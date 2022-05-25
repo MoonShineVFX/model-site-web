@@ -8,6 +8,7 @@ on:
 
 env:
   PROJECT_ID: ms-model-lib
+
   SERVICE_NAME: frontend-web
   HOST: market.moonshine.tw
 
@@ -25,20 +26,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Change ENV if not main
-        if: github.ref != 'refs/heads/main'
-        run: |
-          echo "SERVICE_NAME=$SERVICE_NAME-dev" >> $GITHUB_ENV
-          echo "HOST=market-dev.moonshine.tw" >> $GITHUB_ENV
-
-      - name: Override next.js env
-        run: |
-          echo "NEXT_PUBLIC_HOST=$HOST" >> .env
-          echo "NEXT_PUBLIC_RECAPTCHA_KEY=$RECAPTCHA_KEY" >> .env
-          echo "NEXT_PUBLIC_GOOGLE_SIGNIN_CLIENTID=$GOOGLE_SIGNIN_CLIENTID" >> .env
-          echo "NEXT_PUBLIC_TAWKTO_PROPERTYID=$TAWKTO_PROPERTYID" >> .env
-          echo "NEXT_PUBLIC_TAWKTO_TAWKID=$TAWKTO_TAWKID" >> .env
-          echo "NEXT_PUBLIC_GAID=$GOOGLE_GAID" >> .env
+      - name: Setup env
+        uses: ./.github/actions/initial-envs
+        with:
+          filename: .env
 
       - name: Cypress run
         uses: cypress-io/github-action@v2
@@ -51,12 +42,6 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.TEST_CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload env file
-        uses: actions/upload-artifact@v3
-        with:
-          name: envfile
-          path: .env
-
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
@@ -65,13 +50,10 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Download env file
-        uses: actions/download-artifact@v3
+      - name: Setup env
+        uses: ./.github/actions/initial-envs
         with:
-          name: envfile
-
-      - name: Rename env file
-        run: mv .env .env.local
+          filename: .env.local
 
       - id: auth
         uses: google-github-actions/auth@v0.4.0

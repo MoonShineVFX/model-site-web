@@ -1,0 +1,24 @@
+name: "Initial Envs"
+inputs:
+  filename:
+    required: false
+    description: "Env file name"
+    default: .env
+
+runs:
+  using: "composite"
+  steps:
+    - name: Change ENV if not main
+      if: github.ref != 'refs/heads/main'
+      run: |
+        echo "SERVICE_NAME=$SERVICE_NAME-dev" >> $GITHUB_ENV
+        echo "HOST=market-dev.moonshine.tw" >> $GITHUB_ENV
+
+    - name: Override next.js env
+      run: |
+        echo "NEXT_PUBLIC_HOST=$HOST" >> ${{ inputs.filename }}
+        echo "NEXT_PUBLIC_RECAPTCHA_KEY=$RECAPTCHA_KEY" >> ${{ inputs.filename }}
+        echo "NEXT_PUBLIC_GOOGLE_SIGNIN_CLIENTID=$GOOGLE_SIGNIN_CLIENTID" >> ${{ inputs.filename }}
+        echo "NEXT_PUBLIC_TAWKTO_PROPERTYID=$TAWKTO_PROPERTYID" >> ${{ inputs.filename }}
+        echo "NEXT_PUBLIC_TAWKTO_TAWKID=$TAWKTO_TAWKID" >> ${{ inputs.filename }}
+        echo "NEXT_PUBLIC_GAID=$GOOGLE_GAID" >> ${{ inputs.filename }}

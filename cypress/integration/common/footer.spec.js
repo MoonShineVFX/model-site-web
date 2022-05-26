@@ -41,8 +41,7 @@ describe('Footer', () => {
                 };
 
                 cy.get($elem)
-                    .should('have.attr', 'href')
-                    .and('include', obj[idx].url);
+                    .should('have.attr', 'href', obj[idx].url);
 
                 cy.get($elem).should('have.text', obj[idx].text);
                 if (idx !== 1) cy.get($elem).click();

@@ -21,11 +21,20 @@ const globalReducer = (state, { type, payload }) => {
             };
 
         case 'global_data':
+            const fakeData = {
+                email: 'aaa@gmail.com',
+                realName: '',
+                address: '',
+            };
             return {
                 ...state,
                 tags: payload.tags,
-                user: payload.other,
+                // user: payload.other,
                 logged: !!payload.other.userId,
+                user: {
+                    ...payload.other,
+                    ...fakeData,
+                },
             };
 
         case 'lang_list':

@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/system';
 
@@ -54,28 +55,27 @@ const RadioButtonLayout = styled('label')(({ theme }) => ({
 }));
 
 //
-const RadioButton = ({
+const RadioButton = forwardRef(({
     className,
     name,
-    register,
     text,
     disabled,
     ...rest
-}) => (
+}, ref) => (
 
     <RadioButtonLayout className={`${className ? className : ''} ${disabled ? 'disabled' : ''}`}>
         <input
             type="radio"
             name={name}
+            ref={ref}
             {...disabled && { disabled: true }}
-            {...register}
             {...rest}
         />
         <span className="checkmark" />
         <span className="text">{text}</span>
     </RadioButtonLayout>
 
-);
+));
 
 RadioButton.defaultProps = {
     disabled: false,
@@ -84,7 +84,6 @@ RadioButton.defaultProps = {
 RadioButton.propTypes = {
     className: PropTypes.string,
     name: PropTypes.string,
-    register: PropTypes.object,
     text: PropTypes.string,
     disabled: PropTypes.bool,
 };

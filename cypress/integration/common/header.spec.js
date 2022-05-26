@@ -17,8 +17,7 @@ describe('Header', () => {
 
             // Logo
             cy.get('header .logo-text')
-                .should('have.attr', 'href')
-                .and('include', '/');
+                .should('have.attr', 'href', '/');
 
             cy.get('header .logo-text').click();
             cy.location('origin').should('eq', location.origin);
@@ -35,10 +34,9 @@ describe('Header', () => {
                     };
 
                     cy.get($elem)
-                        .should('have.attr', 'href')
-                        .and('include', obj[idx].url);
+                        .should('have.attr', 'href', obj[idx].url)
+                        .should('have.text', obj[idx].text);
 
-                    cy.get($elem).should('have.text', obj[idx].text);
                     cy.get($elem).click();
                     cy.url().should('include', obj[idx].url);
 
@@ -73,8 +71,7 @@ describe('Header', () => {
 
             cy.get('header .goToOrder a')
                 .contains(langs.cart_go_to_checkout)
-                .should('have.attr', 'href')
-                .and('include', '/signin');
+                .should('have.attr', 'href', '/signin');
 
             cy.get('header .goToOrder a').click();
             cy.url().should('include', '/signin');

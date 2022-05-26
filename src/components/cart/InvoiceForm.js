@@ -26,11 +26,18 @@ const InvoiceForm = ({ langs }) => {
         formState: { errors },
     } = useForm();
 
+    const paperInvoiceType = register('paperInvoiceType', { required: true });
+
     // State
     const [checked, setChecked] = useState({});
 
     // change
-    const handleChange = ({ target: { name, value } }) => {
+    const handleChange = (e) => {
+
+        const { target: { name, value } } = e;
+
+        console.log('name:', name);
+        console.log('value:', value);
 
         setChecked({
             ...checked,
@@ -44,18 +51,19 @@ const InvoiceForm = ({ langs }) => {
 
         reqData = {
             ...reqData,
-            receiveName: (checked.receive === 'same') ? reqData.realName : reqData.receiveName,
-            receiveAddress: (checked.receive === 'same') ? reqData.address : reqData.receiveAddress,
+            // receiverName: (checked.receiver === 'same') ? reqData.realName : reqData.receiverName,
+            // receiverAddress: (checked.receiver === 'same') ? reqData.address : reqData.receiverAddress,
         };
 
-        delete reqData.receive;
-        delete reqData.invoiceWay;
+        delete reqData.receiver;
 
         console.log('reqData:', reqData);
         // Service.forgotPassword(reqData)
         //     .then(() => setSuccess(true));
 
     };
+
+    // console.log('watch:', watch());
 
     return (
 
@@ -64,6 +72,11 @@ const InvoiceForm = ({ langs }) => {
                 <section>
                     <h4 className="title">{deftag.cart_member_info_title}</h4>
 
+                    <div className="row">
+                        <h4 className="row-title">{langs.text_account}</h4>
+                        {user.email}
+                    </div>
+
                     <FormRow
                         name="realName"
                         errors={errors}
@@ -71,20 +84,9 @@ const InvoiceForm = ({ langs }) => {
                         <input
                             type="text"
                             name="realName"
+                            defaultValue={'aaa'}
                             placeholder={deftag.cart_member_real_name}
                             {...register('realName', { required: true })}
-                        />
-                    </FormRow>
-
-                    <FormRow
-                        name="email"
-                        errors={errors}
-                    >
-                        <input
-                            type="text"
-                            name="email"
-                            placeholder={langs.text_account}
-                            {...register('email', { required: true })}
                         />
                     </FormRow>
 
@@ -95,6 +97,7 @@ const InvoiceForm = ({ langs }) => {
                         <input
                             type="text"
                             name="address"
+                            defaultValue={'aaabbb'}
                             placeholder={deftag.cart_member_address}
                             {...register('address', { required: true })}
                         />
@@ -110,10 +113,10 @@ const InvoiceForm = ({ langs }) => {
 
                                 <RadioButton
                                     key={key}
+                                    {...register('invoiceType')}
                                     name="invoiceType"
                                     value={key}
                                     text={radios.invoiceType[key]}
-                                    register={register('invoiceType')}
                                     onChange={handleChange}
                                     {...(key === 'paper') && { checked: true }}
                                     {...(key === 'electronic') && { disabled: true }}
@@ -124,16 +127,20 @@ const InvoiceForm = ({ langs }) => {
                     </FormRow>
 
                     <div className="form-row">
-                        <FormRow name="receive">
+                        <FormRow
+                            className="form-row-radio"
+                            name="receiver"
+                            errors={errors}
+                        >
                             {
-                                Object.keys(radios.receive).map((key) => (
+                                Object.keys(radios.receiver).map((key) => (
 
                                     <RadioButton
                                         key={key}
-                                        name="receive"
+                                        name="receiver"
                                         value={key}
-                                        text={radios.receive[key]}
-                                        register={register('receive')}
+                                        text={radios.receiver[key]}
+                                        {...register('receiver', { required: true })}
                                         onChange={handleChange}
                                     />
 
@@ -142,23 +149,23 @@ const InvoiceForm = ({ langs }) => {
                         </FormRow>
 
                         {
-                            (checked.receive === 'refill') &&
+                            (checked.receiver === 'refill') &&
                                 <div className="row-receive-info">
-                                    <FormRow name="receiveName">
+                                    <FormRow name="receiverName">
                                         <input
                                             type="text"
-                                            name="receiveName"
+                                            name="receiverName"
                                             placeholder={deftag.cart_member_real_name}
-                                            {...register('receiveName')}
+                                            {...register('receiverName')}
                                         />
                                     </FormRow>
 
-                                    <FormRow name="receiveAddress">
+                                    <FormRow name="receiverAddress">
                                         <input
                                             type="text"
-                                            name="receiveAddress"
+                                            name="receiverAddress"
                                             placeholder={deftag.cart_member_address}
-                                            {...register('receiveAddress')}
+                                            {...register('receiverAddress')}
                                         />
                                     </FormRow>
                                 </div>
@@ -166,17 +173,24 @@ const InvoiceForm = ({ langs }) => {
                     </div>
 
                     <div className="form-row">
-                        <FormRow name="invoiceWay">
+                        <FormRow
+                            className="form-row-radio"
+                            name="paperInvoiceType"
+                            errors={errors}
+                        >
                             {
-                                Object.keys(radios.invoiceWay).map((key) => (
+                                Object.keys(radios.paperInvoiceType).map((key) => (
 
                                     <RadioButton
                                         key={key}
-                                        name="invoiceWay"
+                                        name="paperInvoiceType"
                                         value={key}
-                                        text={radios.invoiceWay[key]}
-                                        register={register('invoiceWay')}
-                                        onChange={handleChange}
+                                        text={radios.paperInvoiceType[key]}
+                                        {...register('paperInvoiceType', {
+                                            required: true,
+                                            onChange: (e) => console.log(e)
+                                            // onChange: handleChange,
+                                        })}
                                     />
 
                                 ))
@@ -184,7 +198,7 @@ const InvoiceForm = ({ langs }) => {
                         </FormRow>
 
                         {
-                            (checked.invoiceWay === 'three') &&
+                            (checked.paperInvoiceType === 'triplicate') &&
                                 <div className="row-invoice-way">
                                     <FormRow name="companyName">
                                         <input

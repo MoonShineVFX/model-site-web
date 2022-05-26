@@ -10,6 +10,7 @@ import {
 // Global
 const globalInitState = {
     page: '',
+    user: {},
     tags: [],
     slideshowActive: 0,
     logged: false,
@@ -45,6 +46,7 @@ const GlobalProvider = ({ children }) => {
     const [lightboxState, lightboxDispatch] = useReducer(lightboxReducer, lightboxInitState);
     const {
         page,
+        user,
         tags,
         slideshowActive,
         logged,
@@ -86,6 +88,7 @@ const GlobalProvider = ({ children }) => {
         <Provider value={{
             // 全域資料
             page,
+            user,
             tags,
             slideshowActive,
             logged,

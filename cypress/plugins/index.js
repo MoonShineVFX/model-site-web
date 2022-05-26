@@ -4,11 +4,8 @@ module.exports = (on, config) => {
 
     // env
     config.env = config.env || {};
-    config.env.host = process.env.NEXT_PUBLIC_HOST;
+    config.env.api_host = process.env.NEXT_PUBLIC_HOST;
     config.env.locale = 'zh';
-
-    // baseUrl
-    config.baseUrl = `http://localhost:1006`;
 
     return config;
 

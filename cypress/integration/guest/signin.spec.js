@@ -1,4 +1,8 @@
 let langs;
+const fake = {
+    account: 'abc@gmail.com',
+    password: 'abc123456',
+};
 
 describe('/signin', () => {
 
@@ -13,7 +17,7 @@ describe('/signin', () => {
 
         let obj = {};
 
-        it('display form, title and buttons', () => {
+        it('display form, title, buttons and forgot password link', () => {
 
             cy.get('.formWrap')
                 .should('exist')
@@ -28,45 +32,74 @@ describe('/signin', () => {
 
                 });
 
-            // cy.get('.form-row-btns button[type="submit"]')
-            //     .should('have.attr', 'disabled');
+            cy.get('.form-row-btns a')
+                .contains(langs.text_forgot_password)
+                .should('have.attr', 'href', '/forgot_password');
 
         });
 
-        // it('require account(email)', () => {
+        it('require account (email)', () => {
 
-        //     cy.get('form');
-        //     // cy.get('form').submit();
-        //     // cy.get('.error').should('contain', langs.error_required);
+            cy.get('.formWrap form').submit();
+            cy.get('.formWrap .error-mesg').should('contain', langs.error_required);
 
-        // });
+        });
 
-        // it('require password', () => {
+        it('require password', () => {
 
-        //     cy.get('[name="account"]').type(account);
-        //     cy.get('form').submit();
-        //     cy.get('.error').should('contain', langs.error_required);
+            cy.get('.formWrap [name="email"]').type(fake.account);
+            cy.get('.formWrap form').submit();
+            cy.get('.formWrap .error-mesg').should('contain', langs.error_required);
 
-        // });
+        });
 
-        // it('require valid account and password', () => {
+        it('require valid account and password', () => {
 
-        //     cy.get('[name="account"]').type(account);
-        //     cy.get('[name="password"]').type('12345');
-        //     cy.get('form').submit();
-        //     cy.get('.ant-modal-confirm-error').should('contain', 'password wrong');
+            cy.get('.formWrap button[type="submit"]').should('have.attr', 'disabled');
+            cy.get('.formWrap [name="email"]').type(fake.account);
+            cy.get('.formWrap [name="password"]').type('12345');
 
-        // });
+            // "點我驗證" 按鈕
+            cy.get('.formWrap [type="button"]')
+                .contains(langs.btn_verify)
+                .click()
+                .should('have.attr', 'disabled');
 
-        // it('successful signin', () => {
+            cy.get('.formWrap button[type="submit"]').should(($btn) => {
 
-        //     cy.get('[name="account"]').type(account);
-        //     cy.get('[name="password"]').type(account);
-        //     cy.get('form').submit();
-        //     cy.url().should('include', '/index');
-        //     cy.getCookie('pmb-session').should('exist');
+                expect($btn).not.to.have.attr('disabled');
 
-        // });
+            }).click();
+
+            cy.get('.formWrap .error-mesg').should('contain', langs.error_password_at_least_eight);
+            cy.get('.formWrap [name="password"]').type('12345678');
+            cy.get('.formWrap .error-mesg').should('not.exist');
+            cy.get('.formWrap button[type="submit"]').click();
+
+            // alert 錯誤
+            cy.on('window:alert', (mesg) => {
+
+                expect(mesg).to.deep.equal(['detail: 用户名或者密码错误。']);
+
+            });
+
+        });
+
+        it('successful signin', () => {
+
+            cy.get('.formWrap [name="email"]').type(fake.account);
+            cy.get('.formWrap [name="password"]').type(fake.password);
+
+            // "點我驗證" 按鈕
+            cy.get('.formWrap [type="button"]')
+                .contains(langs.btn_verify)
+                .click();
+
+            cy.get('.formWrap button[type="submit"]').click();
+            cy.location('origin').should('eq', location.origin);
+            // cy.getCookie('token').should('exist');
+
+        });
 
     });
 

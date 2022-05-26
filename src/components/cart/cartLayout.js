@@ -157,6 +157,13 @@ const InvoiceFormWrapLayout = styled(FormWrap)(({ theme }) => ({
             paddingBottom: '20px',
         },
     },
+    '.row': {
+        marginBottom: '30px',
+    },
+    '.row-title': {
+        margin: '0 0 16px',
+        opacity: '0.65',
+    },
     '.warning-text': {
         fontSize: '.9em',
         // color: 'red',

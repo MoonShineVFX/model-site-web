@@ -13,7 +13,7 @@ Cypress.Commands.add('deftag', (locale) => {
 
     cy.request({
         method: 'GET',
-        url: `${Cypress.env('host')}/api/lang_configs`,
+        url: `${Cypress.env('api_host')}/api/lang_configs`,
     })
     .its('body')
     .then((resData) => resData.data[locale]);

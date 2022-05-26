@@ -73,6 +73,11 @@ const FormRowLayout = styled('div')(({ theme }) => ({
         marginTop: '8px',
         paddingLeft: '40px',
     },
+    '&.form-row-radio': {
+        '.error-mesg': {
+            paddingLeft: '0',
+        },
+    },
     [theme.breakpoints.down('sm')]: {
         '.error-mesg': {
             fontSize: '1em',

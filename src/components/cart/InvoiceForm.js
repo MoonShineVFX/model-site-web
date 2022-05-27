@@ -1,20 +1,35 @@
-import { Fragment, useContext, useState } from 'react';
+import {
+    Fragment,
+    useContext,
+    useState,
+    useRef,
+} from 'react';
 import { useForm } from 'react-hook-form';
 
-import { InvoiceFormWrapLayout, RadioButtonLayout } from './cartLayout';
-import FormWrap, { FormRow, FormSuccessMesg } from '../FormWrap';
+import { InvoiceFormWrapLayout } from './cartLayout';
+import { FormRow } from '../FormWrap';
 import Buttons from '../Buttons';
 import RadioButton from '../RadioButton';
-import { radios } from './radioButtonConfig';
-
 import { GlobalContext } from '../../context/global.state';
-import util from '../../utils/util';
-import deftag from '../../utils/util.deftag';
-
-const { priceWithCommas } = util;
 
 //
-const InvoiceForm = ({ langs }) => {
+const InvoiceForm = ({ langs, items }) => {
+
+    // Radio Button 設定檔
+    const radios = {
+        invoiceType: {
+            paper: langs.cart_invoice_type_paper,
+            electronic: langs.cart_invoice_type_electronic,
+        },
+        receiver: {
+            same: langs.cart_invoice_text_same_as,
+            refill: langs.cart_invoice_text_re_fill,
+        },
+        paperInvoiceType: {
+            duplicate: langs.cart_invoice_way_duplicate,
+            triplicate: langs.cart_invoice_way_triplicate,
+        },
+    };
 
     // Context
     const { user } = useContext(GlobalContext);
@@ -24,25 +39,39 @@ const InvoiceForm = ({ langs }) => {
         handleSubmit,
         register,
         formState: { errors },
+        resetField,
     } = useForm();
 
-    const paperInvoiceType = register('paperInvoiceType', { required: true });
+    // Ref
+    const formRef = useRef(null);
 
     // State
     const [checked, setChecked] = useState({});
+    const [fields, setFields] = useState({});
 
     // change
-    const handleChange = (e) => {
-
-        const { target: { name, value } } = e;
-
-        console.log('name:', name);
-        console.log('value:', value);
+    const handleChange = ({ target: { name, value } }) => {
 
         setChecked({
             ...checked,
             [name]: value,
         });
+
+        // 清空值
+        if (value === 'same') {
+
+            resetField('receiverName');
+            resetField('receiverAddress');
+
+        }
+
+        // 清空值
+        if (value === 'duplicate') {
+
+            resetField('companyName');
+            resetField('taxNumber');
+
+        }
 
     };
 
@@ -51,189 +80,236 @@ const InvoiceForm = ({ langs }) => {
 
         reqData = {
             ...reqData,
-            // receiverName: (checked.receiver === 'same') ? reqData.realName : reqData.receiverName,
-            // receiverAddress: (checked.receiver === 'same') ? reqData.address : reqData.receiverAddress,
+            cartIds: items.flatMap(({ id }) => id),
+            receiverName: (checked.receiver === 'same') ? reqData.realName : reqData.receiverName,
+            receiverAddress: (checked.receiver === 'same') ? reqData.address : reqData.receiverAddress,
         };
 
+        // 二聯式不需要送的欄位
+        if (reqData.paperInvoiceType === 'duplicate') {
+
+            delete reqData.companyName;
+            delete reqData.taxNumber;
+
+        }
+
+        // 此欄位無任何意義
         delete reqData.receiver;
 
-        console.log('reqData:', reqData);
-        // Service.forgotPassword(reqData)
-        //     .then(() => setSuccess(true));
+        Service.order(reqData)
+            .then((resData) => {
+
+                setFields({ ...resData });
+                formRef.current.submit();
+                localStorage.removeItem('cartItem'); // 清除暫存購物車
+
+            });
 
     };
 
-    // console.log('watch:', watch());
-
     return (
 
-        <InvoiceFormWrapLayout>
-            <form onSubmit={handleSubmit(handleReqData)}>
-                <section>
-                    <h4 className="title">{deftag.cart_member_info_title}</h4>
+        <Fragment>
+            <InvoiceFormWrapLayout>
+                <form onSubmit={handleSubmit(handleReqData)}>
+                    <section>
+                        <h4 className="title">{langs.cart_member_info_title}</h4>
 
-                    <div className="row">
-                        <h4 className="row-title">{langs.text_account}</h4>
-                        {user.email}
-                    </div>
+                        <div className="row">
+                            <h4 className="row-title">{langs.text_account}</h4>
+                            {user.email}
+                        </div>
 
-                    <FormRow
-                        name="realName"
-                        errors={errors}
-                    >
-                        <input
-                            type="text"
+                        <FormRow
                             name="realName"
-                            defaultValue={'aaa'}
-                            placeholder={deftag.cart_member_real_name}
-                            {...register('realName', { required: true })}
-                        />
-                    </FormRow>
+                            errors={errors}
+                        >
+                            <input
+                                type="text"
+                                name="realName"
+                                placeholder={langs.cart_member_real_name}
+                                {...register('realName', { required: true })}
+                            />
+                        </FormRow>
 
-                    <FormRow
-                        name="address"
-                        errors={errors}
-                    >
-                        <input
-                            type="text"
+                        <FormRow
                             name="address"
-                            defaultValue={'aaabbb'}
-                            placeholder={deftag.cart_member_address}
-                            {...register('address', { required: true })}
+                            errors={errors}
+                        >
+                            <input
+                                type="text"
+                                name="address"
+                                placeholder={langs.cart_member_address}
+                                {...register('address', { required: true })}
+                            />
+                        </FormRow>
+                    </section>
+
+                    <section>
+                        <h4 className="title">{langs.cart_invoice_title}</h4>
+
+                        <FormRow name="invoiceType">
+                            {
+                                Object.keys(radios.invoiceType).map((key) => (
+
+                                    <RadioButton
+                                        key={key}
+                                        name="invoiceType"
+                                        value={key}
+                                        text={radios.invoiceType[key]}
+                                        {...register('invoiceType')}
+                                        {...(key === 'paper') && { checked: true }}
+                                        {...(key === 'electronic') && { disabled: true }}
+                                    />
+
+                                ))
+                            }
+                        </FormRow>
+
+                        <div className="form-row">
+                            <FormRow
+                                className="form-row-radio"
+                                name="receiver"
+                                errors={errors}
+                            >
+                                {
+                                    Object.keys(radios.receiver).map((key) => (
+
+                                        <RadioButton
+                                            key={key}
+                                            name="receiver"
+                                            value={key}
+                                            text={radios.receiver[key]}
+                                            {...register('receiver', {
+                                                required: true,
+                                                onChange: handleChange,
+                                            })}
+                                        />
+
+                                    ))
+                                }
+                            </FormRow>
+
+                            {
+                                (checked.receiver === 'refill') &&
+                                    <div className="row-receive-info">
+                                        <FormRow
+                                            name="receiverName"
+                                            errors={errors}
+                                        >
+                                            <input
+                                                type="text"
+                                                name="receiverName"
+                                                placeholder={langs.cart_member_real_name}
+                                                {...register('receiverName', { required: true })}
+                                            />
+                                        </FormRow>
+
+                                        <FormRow
+                                            name="receiverAddress"
+                                            errors={errors}
+                                        >
+                                            <input
+                                                type="text"
+                                                name="receiverAddress"
+                                                placeholder={langs.cart_member_address}
+                                                {...register('receiverAddress', { required: true })}
+                                            />
+                                        </FormRow>
+                                    </div>
+                            }
+                        </div>
+
+                        <div className="form-row">
+                            <FormRow
+                                className="form-row-radio"
+                                name="paperInvoiceType"
+                                errors={errors}
+                            >
+                                {
+                                    Object.keys(radios.paperInvoiceType).map((key) => (
+
+                                        <RadioButton
+                                            key={key}
+                                            name="paperInvoiceType"
+                                            value={key}
+                                            text={radios.paperInvoiceType[key]}
+                                            {...register('paperInvoiceType', {
+                                                required: true,
+                                                onChange: handleChange,
+                                            })}
+                                        />
+
+                                    ))
+                                }
+                            </FormRow>
+
+                            {
+                                (checked.paperInvoiceType === 'triplicate') &&
+                                    <div className="row-invoice-way">
+                                        <FormRow
+                                            name="companyName"
+                                            errors={errors}
+                                        >
+                                            <input
+                                                type="text"
+                                                name="companyName"
+                                                placeholder={langs.cart_invoice_company_name}
+                                                {...register('companyName', { required: true })}
+                                            />
+                                        </FormRow>
+
+                                        <FormRow
+                                            name="taxNumber"
+                                            errors={errors}
+                                        >
+                                            <input
+                                                type="text"
+                                                name="taxNumber"
+                                                placeholder={langs.cart_invoice_tax_number}
+                                                {...register('taxNumber', { required: true })}
+                                            />
+                                        </FormRow>
+                                    </div>
+                            }
+                        </div>
+
+                        <p className="warning-text">{langs.cart_text_fill_out_warning}</p>
+                    </section>
+
+                    <div className="btn-action">
+                        <Buttons
+                            type="submit"
+                            text={langs.btn_confirm_order}
                         />
-                    </FormRow>
-                </section>
+                        <p>{langs.cart_text_notice}</p>
+                    </div>
+                </form>
+            </InvoiceFormWrapLayout>
 
-                <section>
-                    <h4 className="title">{deftag.cart_invoice_title}</h4>
-
-                    <FormRow name="invoiceType">
+            {
+                !!Object.keys(fields).length &&
+                    <form
+                        name="Newebpay"
+                        method="POST"
+                        action="https://ccore.newebpay.com/MPG/mpg_gateway"
+                        ref={formRef}
+                    >
                         {
-                            Object.keys(radios.invoiceType).map((key) => (
+                            Object.keys(fields).map((key) => (
 
-                                <RadioButton
+                                <input
                                     key={key}
-                                    {...register('invoiceType')}
-                                    name="invoiceType"
-                                    value={key}
-                                    text={radios.invoiceType[key]}
-                                    onChange={handleChange}
-                                    {...(key === 'paper') && { checked: true }}
-                                    {...(key === 'electronic') && { disabled: true }}
+                                    type="hidden"
+                                    name={key}
+                                    value={fields[key]}
                                 />
 
                             ))
                         }
-                    </FormRow>
-
-                    <div className="form-row">
-                        <FormRow
-                            className="form-row-radio"
-                            name="receiver"
-                            errors={errors}
-                        >
-                            {
-                                Object.keys(radios.receiver).map((key) => (
-
-                                    <RadioButton
-                                        key={key}
-                                        name="receiver"
-                                        value={key}
-                                        text={radios.receiver[key]}
-                                        {...register('receiver', { required: true })}
-                                        onChange={handleChange}
-                                    />
-
-                                ))
-                            }
-                        </FormRow>
-
-                        {
-                            (checked.receiver === 'refill') &&
-                                <div className="row-receive-info">
-                                    <FormRow name="receiverName">
-                                        <input
-                                            type="text"
-                                            name="receiverName"
-                                            placeholder={deftag.cart_member_real_name}
-                                            {...register('receiverName')}
-                                        />
-                                    </FormRow>
-
-                                    <FormRow name="receiverAddress">
-                                        <input
-                                            type="text"
-                                            name="receiverAddress"
-                                            placeholder={deftag.cart_member_address}
-                                            {...register('receiverAddress')}
-                                        />
-                                    </FormRow>
-                                </div>
-                        }
-                    </div>
-
-                    <div className="form-row">
-                        <FormRow
-                            className="form-row-radio"
-                            name="paperInvoiceType"
-                            errors={errors}
-                        >
-                            {
-                                Object.keys(radios.paperInvoiceType).map((key) => (
-
-                                    <RadioButton
-                                        key={key}
-                                        name="paperInvoiceType"
-                                        value={key}
-                                        text={radios.paperInvoiceType[key]}
-                                        {...register('paperInvoiceType', {
-                                            required: true,
-                                            onChange: (e) => console.log(e)
-                                            // onChange: handleChange,
-                                        })}
-                                    />
-
-                                ))
-                            }
-                        </FormRow>
-
-                        {
-                            (checked.paperInvoiceType === 'triplicate') &&
-                                <div className="row-invoice-way">
-                                    <FormRow name="companyName">
-                                        <input
-                                            type="text"
-                                            name="companyName"
-                                            placeholder={deftag.cart_invoice_company_name}
-                                            {...register('companyName')}
-                                        />
-                                    </FormRow>
-
-                                    <FormRow name="taxNumber">
-                                        <input
-                                            type="text"
-                                            name="taxNumber"
-                                            placeholder={deftag.cart_invoice_tax_number}
-                                            {...register('taxNumber')}
-                                        />
-                                    </FormRow>
-                                </div>
-                        }
-                    </div>
-
-                    <p className="warning-text">{deftag.cart_text_fill_out_warning}</p>
-                </section>
-
-                <div className="btn-action">
-                    <Buttons
-                        type="submit"
-                        text={langs.btn_confirm_order}
-                        // onClick={handleClickOrder}
-                    />
-                    <p>{langs.cart_text_notice}</p>
-                </div>
-            </form>
-        </InvoiceFormWrapLayout>
+                    </form>
+            }
+        </Fragment>
 
     );
 

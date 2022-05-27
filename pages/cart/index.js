@@ -3,9 +3,7 @@ import {
     useContext,
     useEffect,
     useState,
-    useRef,
 } from 'react';
-
 import { Grid, useMediaQuery } from '@mui/material';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
@@ -129,12 +127,8 @@ const Cart = ({ langs, pageData }) => {
     const matches = useMediaQuery((theme) => theme.breakpoints.down('sm'));
     const eventTracker = useGoogleAnalytics();
 
-    // Ref
-    const formRef = useRef(null);
-
     // State
     const [cartItem, setCartItem] = useLocalStorage('cartItem');
-    const [fields, setFields] = useState({});
     const [list, setList] = useState(pageData.list);
     const [amount, setAmount] = useState(pageData.amount);
     const [invoiceVisible, setInvoiceVisible] = useState(false);
@@ -176,25 +170,7 @@ const Cart = ({ langs, pageData }) => {
     };
 
     // 下一步
-    const handleNextStep = () => {
-
-        setInvoiceVisible(true);
-
-    };
-
-    // 送出訂單
-    const handleClickOrder = () => {
-
-        Service.order({ cartIds: pageData.list.flatMap(({ id }) => id) })
-            .then((resData) => {
-
-                setFields({ ...resData });
-                formRef.current.submit();
-                localStorage.removeItem('cartItem'); // 清除暫存購物車
-
-            });
-
-    };
+    const handleNextStep = () => setInvoiceVisible(true);
 
     return (
 
@@ -203,6 +179,7 @@ const Cart = ({ langs, pageData }) => {
                 title={langs.cart_order_title}
                 description={langs.og_description}
             />
+
             <TitleLayout>{langs.cart_order_title}</TitleLayout>
 
             <SectionLayout>
@@ -265,40 +242,13 @@ const Cart = ({ langs, pageData }) => {
                 </div>
 
                 {
-                    invoiceVisible && <InvoiceForm langs={langs} />
+                    invoiceVisible &&
+                        <InvoiceForm
+                            langs={langs}
+                            items={list}
+                        />
                 }
-
-                {/* <div className="btn-action">
-                    <Buttons
-                        text={langs.btn_confirm_order}
-                        // onClick={handleClickOrder}
-                    />
-                    <p>{langs.cart_text_notice}</p>
-                </div> */}
             </SectionLayout>
-
-            {
-                !!Object.keys(fields).length &&
-                    <form
-                        name="Newebpay"
-                        method="POST"
-                        action="https://ccore.newebpay.com/MPG/mpg_gateway"
-                        ref={formRef}
-                    >
-                        {
-                            Object.keys(fields).map((key) => (
-
-                                <input
-                                    key={key}
-                                    type="hidden"
-                                    name={key}
-                                    value={fields[key]}
-                                />
-
-                            ))
-                        }
-                    </form>
-            }
         </Fragment>
 
     );

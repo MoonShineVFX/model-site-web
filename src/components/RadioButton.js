@@ -14,13 +14,13 @@ const RadioButtonLayout = styled('label')(({ theme }) => ({
     'input[type="radio"]': {
         display: 'none',
         '&:checked + .checkmark': {
-            borderColor: '#FFF',
+            borderColor: theme.palette.primary.main,
             position: 'relative',
             '&:after': {
                 content: '""',
                 width: '12px',
                 height: '12px',
-                backgroundColor: '#FFF',
+                backgroundColor: theme.palette.primary.main,
                 borderRadius: '50%',
                 position: 'absolute',
                 top: '50%',

@@ -122,7 +122,7 @@ const ItemLayout = styled(Links)(({ theme }) => ({
     },
     '.action': {
         fontSize: '1em',
-        color: '#ce5151',
+        color: theme.palette.error.light,
         padding: '4px',
         float: 'right',
     },
@@ -165,9 +165,8 @@ const InvoiceFormWrapLayout = styled(FormWrap)(({ theme }) => ({
         opacity: '0.65',
     },
     '.warning-text': {
-        fontSize: '.9em',
-        // color: 'red',
-        // opacity: '0.6',
+        fontSize: '0.9em',
+        textAlign: 'center',
     },
 }));
 

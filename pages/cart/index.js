@@ -20,7 +20,6 @@ import InvoiceForm from '../../src/components/cart/InvoiceForm';
 
 import { GlobalContext } from '../../src/context/global.state';
 import util from '../../src/utils/util';
-import deftag from '../../src/utils/util.deftag';
 import Service from '../../src/utils/util.service';
 import useLocalStorage from '../../src/utils/useLocalStorage';
 import useGoogleAnalytics from '../../src/utils/useGoogleAnalytics';
@@ -235,18 +234,14 @@ const Cart = ({ langs, pageData }) => {
 
                 <div className="btn-action">
                     <Buttons
-                        text={deftag.btn_next}
+                        text={langs.btn_next}
                         onClick={handleNextStep}
                     />
-                    <p>{deftag.cart_text_fill_out_message}</p>
+                    <p>{langs.cart_text_fill_out_message}</p>
                 </div>
 
                 {
-                    invoiceVisible &&
-                        <InvoiceForm
-                            langs={langs}
-                            items={list}
-                        />
+                    invoiceVisible && <InvoiceForm items={list} />
                 }
             </SectionLayout>
         </Fragment>

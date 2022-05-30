@@ -12,12 +12,6 @@ const MyAccount = ({ data }) => {
     // Context
     const { deftags } = useContext(GlobalContext);
 
-    // Fake
-    data.realName = '雙木林';
-    data.address = '忠孝東路四段';
-    deftags.cart_member_real_name = '真實姓名';
-    deftags.cart_member_address = '地址';
-
     // React Hook Form
     const { handleSubmit, register } = useForm();
 
@@ -39,7 +33,7 @@ const MyAccount = ({ data }) => {
 
             <form onSubmit={handleSubmit(handleReqData)}>
                 <FormRow name="realName">
-                    {/* <label className="title">{deftags.cart_member_real_name}</label> */}
+                    <div className="title">{deftags.cart_member_real_name}</div>
                     <input
                         type="text"
                         name="realName"
@@ -50,7 +44,7 @@ const MyAccount = ({ data }) => {
                 </FormRow>
 
                 <FormRow name="address">
-                    {/* <h4 className="title">{deftags.cart_member_real_name}</h4> */}
+                    <div className="title">{deftags.cart_member_address}</div>
                     <input
                         type="text"
                         name="address"

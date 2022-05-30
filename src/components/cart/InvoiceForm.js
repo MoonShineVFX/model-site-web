@@ -15,24 +15,24 @@ import { GlobalContext } from '../../context/global.state';
 //
 const InvoiceForm = ({ langs, items }) => {
 
+    // Context
+    const { user, deftags } = useContext(GlobalContext);
+
     // Radio Button 設定檔
     const radios = {
         invoiceType: {
-            paper: langs.cart_invoice_type_paper,
-            electronic: langs.cart_invoice_type_electronic,
+            paper: deftags.cart_invoice_type_paper,
+            electronic: deftags.cart_invoice_type_electronic,
         },
         receiver: {
-            same: langs.cart_invoice_text_same_as,
-            refill: langs.cart_invoice_text_re_fill,
+            same: deftags.cart_invoice_text_same_as,
+            refill: deftags.cart_invoice_text_re_fill,
         },
         paperInvoiceType: {
-            duplicate: langs.cart_invoice_way_duplicate,
-            triplicate: langs.cart_invoice_way_triplicate,
+            duplicate: deftags.cart_invoice_way_duplicate,
+            triplicate: deftags.cart_invoice_way_triplicate,
         },
     };
-
-    // Context
-    const { user } = useContext(GlobalContext);
 
     // React Hook Form
     const {
@@ -113,10 +113,10 @@ const InvoiceForm = ({ langs, items }) => {
             <InvoiceFormWrapLayout>
                 <form onSubmit={handleSubmit(handleReqData)}>
                     <section>
-                        <h4 className="title">{langs.cart_member_info_title}</h4>
+                        <h4 className="title">{deftags.cart_member_info_title}</h4>
 
                         <div className="row">
-                            <h4 className="row-title">{langs.text_account}</h4>
+                            <h4 className="row-title">{deftags.text_account}</h4>
                             {user.email}
                         </div>
 
@@ -124,10 +124,11 @@ const InvoiceForm = ({ langs, items }) => {
                             name="realName"
                             errors={errors}
                         >
+                            <div className="row-title">{deftags.cart_member_real_name}</div>
                             <input
                                 type="text"
                                 name="realName"
-                                placeholder={langs.cart_member_real_name}
+                                placeholder={deftags.cart_member_real_name}
                                 {...register('realName', { required: true })}
                             />
                         </FormRow>
@@ -136,17 +137,18 @@ const InvoiceForm = ({ langs, items }) => {
                             name="address"
                             errors={errors}
                         >
+                            <div className="row-title">{deftags.cart_member_address}</div>
                             <input
                                 type="text"
                                 name="address"
-                                placeholder={langs.cart_member_address}
+                                placeholder={deftags.cart_member_address}
                                 {...register('address', { required: true })}
                             />
                         </FormRow>
                     </section>
 
                     <section>
-                        <h4 className="title">{langs.cart_invoice_title}</h4>
+                        <h4 className="title">{deftags.cart_invoice_title}</h4>
 
                         <FormRow name="invoiceType">
                             {
@@ -200,7 +202,7 @@ const InvoiceForm = ({ langs, items }) => {
                                             <input
                                                 type="text"
                                                 name="receiverName"
-                                                placeholder={langs.cart_member_real_name}
+                                                placeholder={deftags.cart_member_real_name}
                                                 {...register('receiverName', { required: true })}
                                             />
                                         </FormRow>
@@ -212,7 +214,7 @@ const InvoiceForm = ({ langs, items }) => {
                                             <input
                                                 type="text"
                                                 name="receiverAddress"
-                                                placeholder={langs.cart_member_address}
+                                                placeholder={deftags.cart_member_address}
                                                 {...register('receiverAddress', { required: true })}
                                             />
                                         </FormRow>
@@ -254,7 +256,7 @@ const InvoiceForm = ({ langs, items }) => {
                                             <input
                                                 type="text"
                                                 name="companyName"
-                                                placeholder={langs.cart_invoice_company_name}
+                                                placeholder={deftags.cart_invoice_company_name}
                                                 {...register('companyName', { required: true })}
                                             />
                                         </FormRow>
@@ -266,7 +268,7 @@ const InvoiceForm = ({ langs, items }) => {
                                             <input
                                                 type="text"
                                                 name="taxNumber"
-                                                placeholder={langs.cart_invoice_tax_number}
+                                                placeholder={deftags.cart_invoice_tax_number}
                                                 {...register('taxNumber', { required: true })}
                                             />
                                         </FormRow>
@@ -274,15 +276,15 @@ const InvoiceForm = ({ langs, items }) => {
                             }
                         </div>
 
-                        <p className="warning-text">{langs.cart_text_fill_out_warning}</p>
+                        <p className="warning-text">{deftags.cart_text_fill_out_warning}</p>
                     </section>
 
                     <div className="btn-action">
                         <Buttons
                             type="submit"
-                            text={langs.btn_confirm_order}
+                            text={deftags.btn_confirm_order}
                         />
-                        <p>{langs.cart_text_notice}</p>
+                        <p>{deftags.cart_text_notice}</p>
                     </div>
                 </form>
             </InvoiceFormWrapLayout>

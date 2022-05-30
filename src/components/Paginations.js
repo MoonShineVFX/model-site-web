@@ -40,7 +40,7 @@ const Paginations = ({
 
 Paginations.defaultProps = {
     currPage: 1,
-    perPage: 40, // 一頁 40 筆
+    perPage: 10, // 一頁 10 筆
 };
 
 Paginations.propTypes = {

@@ -70,6 +70,7 @@ const FormRowLayout = styled('div')(({ theme }) => ({
     },
     '.error-mesg': {
         fontSize: '0.8em',
+        color: theme.palette.error.light,
         marginTop: '8px',
         paddingLeft: '40px',
     },

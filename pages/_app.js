@@ -22,7 +22,9 @@ const styles = {
         },
     },
     a: {
+        color: theme.palette.secondary.main,
         display: 'inline-block',
+        textDecoration: 'none',
     },
     '.Model-container': {
         width: '100%',

@@ -33,22 +33,6 @@ const arrangeCartList = (array) => array.reduce((acc, obj) => {
 
 }, {});
 
-// 購物車 || 我的帳號
-const renderBoxComp = (type) => {
-
-    switch (type) {
-        case 'cartList':
-            return <Cart />;
-
-        case 'myAccount':
-            return <MyAccountBox />;
-
-        default:
-            return null;
-    }
-
-};
-
 //
 const Header = () => {
 
@@ -142,7 +126,7 @@ const Header = () => {
                     alignItems: 'center',
                 }}>
                     <ShoppingCartLayout
-                        onClick={() => handleClickBox('cartList')}
+                        url={`/${logged ? 'cart' : 'signin'}`}
                         data-device={matches ? 'mobile' : 'desktop'}
                     >
                         <FontIcon icon={faShoppingCart} />
@@ -168,7 +152,7 @@ const Header = () => {
                         )
                     }
 
-                    {renderBoxComp(targetBox)}
+                    {(targetBox === 'myAccount') && <MyAccountBox />}
                 </Box>
 
                 <Box sx={{

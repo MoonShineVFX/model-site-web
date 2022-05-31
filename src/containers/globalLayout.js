@@ -1,5 +1,6 @@
 import { Toolbar } from '@mui/material';
 import { styled } from '@mui/system';
+import Links from '../components/Links';
 
 /** Header */
 const AppBarLayout = styled('header')(({ theme }) => ({
@@ -23,7 +24,7 @@ const HeaderLayout = styled(Toolbar)(({ theme }) => ({
 }));
 
 // 購物車 icon
-const ShoppingCartLayout = styled('div')(({ theme }) => ({
+const ShoppingCartLayout = styled(Links)(({ theme }) => ({
     fontSize: '1.4em',
     marginRight: '30px',
     cursor: 'pointer',

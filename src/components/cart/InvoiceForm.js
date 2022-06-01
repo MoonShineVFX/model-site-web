@@ -11,6 +11,7 @@ import { FormRow } from '../FormWrap';
 import Buttons from '../Buttons';
 import RadioButton from '../RadioButton';
 import { GlobalContext } from '../../context/global.state';
+import Service from '../../utils/util.service';
 
 //
 const InvoiceForm = ({ langs, items }) => {
@@ -129,6 +130,7 @@ const InvoiceForm = ({ langs, items }) => {
                                 type="text"
                                 name="realName"
                                 placeholder={deftags.cart_member_real_name}
+                                defaultValue={user.realName}
                                 {...register('realName', { required: true })}
                             />
                         </FormRow>
@@ -142,6 +144,7 @@ const InvoiceForm = ({ langs, items }) => {
                                 type="text"
                                 name="address"
                                 placeholder={deftags.cart_member_address}
+                                defaultValue={user.address}
                                 {...register('address', { required: true })}
                             />
                         </FormRow>

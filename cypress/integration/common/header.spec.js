@@ -65,15 +65,11 @@ describe('Header', () => {
 
         it('can direct to signin page by clicking cart', () => {
 
-            cy.get('header [data-device="desktop"]').click();
-            cy.get('header .items a').should('have.length', 0);
+            cy.get('header [data-device="desktop"]')
+                .should('have.attr', 'href', '/signin')
+                .click();
+
             cy.getCookie('token').should('not.exist');
-
-            cy.get('header .goToOrder a')
-                .contains(langs.cart_go_to_checkout)
-                .should('have.attr', 'href', '/signin');
-
-            cy.get('header .goToOrder a').click();
             cy.url().should('include', '/signin');
 
         });

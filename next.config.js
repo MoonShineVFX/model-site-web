@@ -10,6 +10,9 @@ module.exports = {
     images: {
         domains: ['market-dev.moonshine.tw', 'market.moonshine.tw'],
     },
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
     async redirects () {
         return [
             {

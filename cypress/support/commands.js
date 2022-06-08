@@ -26,8 +26,7 @@ Cypress.Commands.add('login', (
     password = 'abc123456'
 ) => {
 
-    const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUzNzUzMTg2LCJpYXQiOjE2NTM3NDk1ODYsImp0aSI6IjllOWEwZDMyZDQ3YjRmMDViYzA0MDVjMWNkYTQzZWM0IiwidXNlcl9pZCI6Miwic2NvcGUiOiJjdXN0b21lciJ9.-xlMsRJO9UcfGuMsrEr2jM7tzxkHvi3mIdJk0bFAidE';
-
+    cy.intercept('**/api/login').as('signin');
     cy.get('.formWrap [name="email"]').type(account);
     cy.get('.formWrap [name="password"]').type(password);
 
@@ -38,14 +37,12 @@ Cypress.Commands.add('login', (
 
     cy.get('.formWrap button[type="submit"]').click();
 
-    cy.location()
-        .then((loc) => {
+    // localhost 環境才需要手動加 token
+    cy.wait('@signin').then((xhr) => {
 
-            if (loc.origin === 'http://localhost:1006') cy.setCookie('token', token);
+        cy.setCookie('token', xhr.response.body.data.token);
+        cy.reload();
 
-        });
-
-    cy.getCookie('token').should('exist');
-    cy.location('origin').should('eq', location.origin);
+    });
 
 });

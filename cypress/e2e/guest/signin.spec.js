@@ -1,5 +1,4 @@
 let langs;
-const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUzNzUzMTg2LCJpYXQiOjE2NTM3NDk1ODYsImp0aSI6IjllOWEwZDMyZDQ3YjRmMDViYzA0MDVjMWNkYTQzZWM0IiwidXNlcl9pZCI6Miwic2NvcGUiOiJjdXN0b21lciJ9.-xlMsRJO9UcfGuMsrEr2jM7tzxkHvi3mIdJk0bFAidE';
 const fake = {
     account: 'abc@gmail.com',
     password: 'abc123456',
@@ -88,6 +87,7 @@ describe('/signin', () => {
 
         it('successful signin', () => {
 
+            cy.intercept('**/api/login').as('signin');
             cy.get('.formWrap [name="email"]').type(fake.account);
             cy.get('.formWrap [name="password"]').type(fake.password);
 
@@ -97,65 +97,73 @@ describe('/signin', () => {
                 .click();
 
             cy.get('.formWrap button[type="submit"]').click();
-            cy.location()
-                .then((loc) => {
 
-                    if (loc.origin === 'http://localhost:1006') cy.setCookie('token', token);
+            // localhost 環境才需要手動加 token
+            cy.wait('@signin').then((xhr) => {
 
-                });
+                cy.setCookie('token', xhr.response.body.data.token);
+                cy.visit('/');
+
+            });
 
             cy.getCookie('token').should('exist');
-            cy.location('origin').should('eq', location.origin);
+            cy.get('header [type="button"]').should('contain', langs.member_my_account);
 
         });
 
     });
 
-    // context('Reusable "signin" custom command', () => {
+    context('Reusable "signin" custom command', () => {
 
-    //     Cypress.Commands.add('mkwsignin', (
-    //         account = 'abc@gmail.com',
-    //         password = 'abc123456'
-    //     ) => {
+        Cypress.Commands.add('mkwsignin', (
+            account = 'abc@gmail.com',
+            password = 'abc123456'
+        ) => {
 
-    //         cy.get('.formWrap [name="email"]').type(account);
-    //         cy.get('.formWrap [name="password"]').type(password);
+            // localhost 環境才需要手動加 token
+            cy.intercept('**/api/login').as('signin');
+            cy.get('.formWrap [name="email"]').type(account);
+            cy.get('.formWrap [name="password"]').type(password);
 
-    //         // "點我驗證" 按鈕
-    //         cy.get('.formWrap [type="button"]')
-    //             .contains(langs.btn_verify)
-    //             .click();
+            // "點我驗證" 按鈕
+            cy.get('.formWrap [type="button"]')
+                .contains(langs.btn_verify)
+                .click();
 
-    //         cy.get('.formWrap button[type="submit"]').click();
+            cy.get('.formWrap button[type="submit"]').click();
+            cy.wait('@signin').then((xhr) => {
 
-    //     });
+                cy.setCookie('token', xhr.response.body.data.token);
 
-    //     beforeEach(() => cy.mkwsignin());
+            });
 
-    //     it('can visit /index', () => {
+        });
 
-    //         cy.visit('/index');
-    //         cy.get('main').should('have.class', 'main');
+        beforeEach(() => cy.mkwsignin());
 
-    //     });
+        it('can visit home page', () => {
 
-    //     it('can simply request other authenticated pages', () => {
+            cy.visit('/');
+            cy.get('header [type="button"]').should('contain', langs.member_my_account);
 
-    //         cy.request({
-    //             method: 'POST',
-    //             url: '/api/web_departments_roles_skills',
-    //         })
-    //         .its('body')
-    //         .should('have.property', 'data')
-    //         .then((resData) => {
+        });
 
-    //             expect(resData).to.have.property('departments');
-    //             expect(resData.departments).to.be.an('array');
+        it('can simply request other authenticated pages', () => {
 
-    //         });
+            cy.visit('/');
+            cy.get('header [type="button"]').click();
+            cy.get('header [type="button"]')
+                .next()
+                .should('exist')
+                .find('.menu-item')
+                .contains(langs.member_account_center)
+                .should('have.attr', 'href', '/member/account')
+                .click();
 
-    //     });
+            cy.location('pathname').should('eq', '/member/account');
 
-    // });
+        });
+
+    });
 
 });

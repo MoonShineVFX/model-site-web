@@ -11,14 +11,15 @@ describe('/tutorial', () => {
     it('visits the page', () => {
 
         cy.visit('/tutorial');
-        cy.url().should('include', '/tutorial');
+        cy.location('pathname').should('eq', '/tutorial');
+        cy.title().should('contain', langs.menu_tutorial);
 
     });
 
     it('display page title and data length at least one', () => {
 
         cy.visit('/tutorial');
-        cy.title().should('include', langs.menu_tutorial);
+        cy.get('main .Model-container h1').should('contain', langs.menu_tutorial);
         cy.get('main .Model-container .MuiGrid-item')
             .its('length')
             .should('gte', 1);

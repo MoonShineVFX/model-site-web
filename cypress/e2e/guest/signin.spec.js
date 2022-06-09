@@ -15,10 +15,9 @@ describe('/signin', () => {
 
     context('HTML form submission', () => {
 
-        let obj = {};
-
         it('display form, title, buttons and forgot password link', () => {
 
+            cy.title().should('contain', langs.text_signin);
             cy.get('.formWrap')
                 .should('exist')
                 .and('contain', langs.text_signin_title);
@@ -27,8 +26,7 @@ describe('/signin', () => {
                 .should('have.length', 4)
                 .each(($btn, idx) => {
 
-                    obj[idx] = $btn.text();
-                    cy.get($btn).should('have.text', obj[idx]);
+                    cy.get($btn).should('contain', $btn.text());
 
                 });
 

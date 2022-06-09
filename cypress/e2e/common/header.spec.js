@@ -13,32 +13,22 @@ describe('Header', () => {
 
         it('display logo, menus, cart and signin button', () => {
 
-            let obj = {};
-
             // Logo
-            cy.get('header .logo-text')
-                .should('have.attr', 'href', '/');
-
+            cy.get('header .logo-text').should('have.attr', 'href', '/');
             cy.get('header .logo-text').click();
             cy.location('origin').should('eq', location.origin);
 
             // Menus
             cy.get('header nav:first a')
                 .should('have.length', 3)
-                .each(($elem, idx) => {
-
-                    obj[idx] = obj[idx] || {};
-                    obj[idx] = {
-                        url: $elem.attr('href'),
-                        text: $elem.text(),
-                    };
+                .each(($elem) => {
 
                     cy.get($elem)
-                        .should('have.attr', 'href', obj[idx].url)
-                        .should('have.text', obj[idx].text);
+                        .should('have.attr', 'href', $elem.attr('href'))
+                        .and('contain', $elem.text());
 
                     cy.get($elem).click();
-                    cy.url().should('include', obj[idx].url);
+                    cy.url().should('include', $elem.attr('href'));
 
                 });
 
@@ -56,10 +46,10 @@ describe('Header', () => {
 
             // Button
             cy.get('header [type="button"]')
-                .should('have.text', langs.text_signin)
+                .should('contain', langs.text_signin)
                 .click();
 
-            cy.url().should('include', '/signin');
+            cy.location('pathname').should('eq', '/signin');
 
         });
 
@@ -70,7 +60,7 @@ describe('Header', () => {
                 .click();
 
             cy.getCookie('token').should('not.exist');
-            cy.url().should('include', '/signin');
+            cy.location('pathname').should('eq', '/signin');
 
         });
 
@@ -113,7 +103,7 @@ describe('Header', () => {
     //         cy.get('[name="account"]').type(account);
     //         cy.get('[name="password"]').type(account);
     //         cy.get('form').submit();
-    //         cy.url().should('include', '/index');
+    //         cy.location('pathname).should('eq', '/index');
     //         cy.getCookie('pmb-session').should('exist');
 
     //     });

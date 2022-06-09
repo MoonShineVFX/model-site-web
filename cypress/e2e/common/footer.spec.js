@@ -18,32 +18,23 @@ describe('Footer', () => {
             .and('include', '/logo_small.png');
 
         cy.get('footer .top span')
-            .should('have.text', `© ${dayjs().format('YYYY')} All rights reserved. Moonshine`);
+            .should('contain', `© ${dayjs().format('YYYY')} All rights reserved. Moonshine`);
 
         // privacy policy of google reCAPTCHA
         cy.get('footer .bottom')
-            .should('have.text', 'This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.');
+            .should('contain', 'This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.');
 
     });
 
     it('display links of privacy policy and custom service mail address', () => {
 
-        let obj = {};
-
         cy.get('footer .top a')
             .should('have.length', 2)
             .each(($elem, idx) => {
 
-                obj[idx] = obj[idx] || {};
-                obj[idx] = {
-                    url: $elem.attr('href'),
-                    text: $elem.text(),
-                };
+                cy.get($elem).should('have.attr', 'href', $elem.attr('href'));
+                cy.get($elem).should('contain', $elem.text());
 
-                cy.get($elem)
-                    .should('have.attr', 'href', obj[idx].url);
-
-                cy.get($elem).should('have.text', obj[idx].text);
                 if (idx !== 1) cy.get($elem).click();
 
             });
@@ -53,11 +44,11 @@ describe('Footer', () => {
     it('display language option and default is zh', () => {
 
         cy.get('select[name="lang"] :selected')
-            .should('have.text', langs[`lang_${Cypress.env('locale')}`])
+            .should('contain', langs[`lang_${Cypress.env('locale')}`])
             .invoke('val')
             .should('eq', Cypress.env('locale'));
 
-        cy.url().should('not.include', '/en');
+        cy.location('pathname').should('not.include', '/en');
 
     });
 
@@ -65,9 +56,9 @@ describe('Footer', () => {
 
         cy.get('select[name="lang"]').select('en');
         cy.get('select[name="lang"] :selected')
-            .should('have.text', langs.lang_en);
+            .should('contain', langs.lang_en);
 
-        cy.url().should('include', '/en');
+        cy.location('pathname').should('include', '/en');
 
     });
 

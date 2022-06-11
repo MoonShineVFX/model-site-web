@@ -9,7 +9,7 @@ describe('Header', () => {
 
     });
 
-    context('Not signin', () => {
+    context('Not signin header', () => {
 
         it('display logo, menus, cart and signin button', () => {
 
@@ -66,48 +66,72 @@ describe('Header', () => {
 
     });
 
-    // context('Signin', () => {
+    context('Signin header', () => {
 
-    //     beforeEach(() => {
+        beforeEach(() => cy.login());
 
-    //         cy.visit('/signin');
+        it('display my account button', () => {
 
-    //     });
+            cy.get('header [type="button"]')
+                .should('contain', langs.member_my_account)
+                .click();
 
-    //     it('require account(email)', () => {
+            cy.get('header [type="button"]')
+                .next()
+                .should('exist')
+                .find('.menu-item')
+                .each(($elem) => {
 
-    //         cy.get('form').submit();
-    //         cy.get('.error').should('contain', errorMesg);
+                    cy.get($elem).should('have.attr', 'href', $elem.attr('href'));
+                    cy.get($elem).should('contain', $elem.text());
 
-    //     });
+                });
 
-    //     it('require password', () => {
+        });
 
-    //         cy.get('[name="account"]').type(account);
-    //         cy.get('form').submit();
-    //         cy.get('.error').should('contain', errorMesg);
+        it('can direct to my account page by clicking account center button', () => {
 
-    //     });
+            cy.get('header [type="button"]')
+                .should('contain', langs.member_my_account)
+                .click();
 
-    //     it('require valid account and password', () => {
+            cy.get('header [type="button"]')
+                .next()
+                .find('.menu-item')
+                .contains(langs.member_account_center)
+                .click();
 
-    //         cy.get('[name="account"]').type(account);
-    //         cy.get('[name="password"]').type('12345');
-    //         cy.get('form').submit();
-    //         cy.get('.ant-modal-confirm-error').should('contain', 'password wrong');
+            cy.location('pathname').should('eq', '/member/account');
 
-    //     });
+        });
 
-    //     it('successful signin', () => {
+        it('can logout by clicking logout button', () => {
 
-    //         cy.get('[name="account"]').type(account);
-    //         cy.get('[name="password"]').type(account);
-    //         cy.get('form').submit();
-    //         cy.location('pathname).should('eq', '/index');
-    //         cy.getCookie('pmb-session').should('exist');
+            cy.get('header [type="button"]')
+                .should('contain', langs.member_my_account)
+                .click();
 
-    //     });
+            cy.get('header [type="button"]')
+                .next()
+                .find('.menu-item')
+                .contains(langs.text_logout)
+                .click();
 
-    // });
+            // localhost 環境才需要手動清除
+            cy.location().then((locate) => {
+
+                if (locate.host === 'localhost:1006') {
+
+                    cy.clearCookie('token');
+
+                }
+
+            });
+
+            cy.getCookie('token').should('not.exist');
+
+        });
+
+    });
 
 });

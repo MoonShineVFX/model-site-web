@@ -26,13 +26,14 @@ Cypress.Commands.add('login', (
     password = 'abc123456'
 ) => {
 
+    cy.visit('/signin');
     cy.intercept('**/api/login').as('signin');
     cy.get('.formWrap [name="email"]').type(account);
     cy.get('.formWrap [name="password"]').type(password);
 
     // "點我驗證" 按鈕
     cy.get('.formWrap [type="button"]')
-        .contains(langs.btn_verify)
+        .contains('點我驗證')
         .click();
 
     cy.get('.formWrap button[type="submit"]').click();

@@ -1,24 +1,16 @@
-let langs;
-
 describe('/about', () => {
 
-    beforeEach(() => {
-
-        cy.deftag().then((resData) => langs = resData);
-
-    });
+    beforeEach(() => cy.visit('/about'));
 
     it('visits the page', () => {
 
-        cy.visit('/about');
         cy.location('pathname').should('eq', '/about');
-        cy.title().should('contain', langs.about_title);
+        cy.title().should('contain', '關於我們');
 
     });
 
     it('display thumb, data title and description in banner section', () => {
 
-        cy.visit('/about');
         cy.get('[data-section="banner"]').then(($elem) => {
 
             const $thumb = $elem.find('.thumb img');
@@ -43,7 +35,6 @@ describe('/about', () => {
 
     it('display data in support section', () => {
 
-        cy.visit('/about');
         cy.get('[data-section="support"] .MuiGrid-item')
             .should('have.length', 3)
             .each(($elem) => {

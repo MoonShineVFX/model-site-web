@@ -1,23 +1,30 @@
-describe('/tutorial', () => {
+const currPath = '/product/list?page=1';
 
-    beforeEach(() => cy.visit('/tutorial'));
+describe(`${currPath}`, () => {
+
+    beforeEach(() => cy.visit(currPath));
 
     it('visits the page', () => {
 
-        cy.location('pathname').should('eq', '/tutorial');
-        cy.title().should('contain', '文章');
+        cy.location().should((locate) => {
+
+            expect(locate.pathname).to.eq('/product/list');
+            expect(locate.search).to.eq('?page=1');
+
+        });
+
+        cy.title().should('contain', '商店');
 
     });
 
     it('display page title and data length at least one', () => {
 
-        cy.get('main .Model-container h1').should('contain', '文章');
-        cy.get('main .Model-container .MuiGrid-item')
+        cy.get('figure .MuiGrid-item')
             .its('length')
             .should('gte', 1);
 
         // data thumb and title
-        cy.get('main .Model-container .MuiGrid-item')
+        cy.get('figure .MuiGrid-item')
             .each(($elem) => {
 
                 const $item = $elem.find('.item');

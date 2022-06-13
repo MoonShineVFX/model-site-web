@@ -1,4 +1,3 @@
-let langs;
 const fake = {
     account: 'abc@gmail.com',
     password: 'abc123456',
@@ -6,21 +5,16 @@ const fake = {
 
 describe('/signin', () => {
 
-    beforeEach(() => {
-
-        cy.visit('/signin');
-        cy.deftag().then((resData) => langs = resData);
-
-    });
+    beforeEach(() => cy.visit('/signin'));
 
     context('HTML form submission', () => {
 
         it('display form, title, buttons and forgot password link', () => {
 
-            cy.title().should('contain', langs.text_signin);
+            cy.title().should('contain', '登入');
             cy.get('.formWrap')
                 .should('exist')
-                .and('contain', langs.text_signin_title);
+                .and('contain', '帳號登入');
 
             cy.get('.form-row-btns button')
                 .should('have.length', 4)
@@ -31,7 +25,7 @@ describe('/signin', () => {
                 });
 
             cy.get('.form-row-btns a')
-                .contains(langs.text_forgot_password)
+                .contains('忘記密碼')
                 .should('have.attr', 'href', '/forgot_password');
 
         });
@@ -39,7 +33,7 @@ describe('/signin', () => {
         it('require account (email)', () => {
 
             cy.get('.formWrap form').submit();
-            cy.get('.formWrap .error-mesg').should('contain', langs.error_required);
+            cy.get('.formWrap .error-mesg').should('contain', '此欄位為必填');
 
         });
 
@@ -47,7 +41,7 @@ describe('/signin', () => {
 
             cy.get('.formWrap [name="email"]').type(fake.account);
             cy.get('.formWrap form').submit();
-            cy.get('.formWrap .error-mesg').should('contain', langs.error_required);
+            cy.get('.formWrap .error-mesg').should('contain', '此欄位為必填');
 
         });
 
@@ -59,7 +53,7 @@ describe('/signin', () => {
 
             // "點我驗證" 按鈕
             cy.get('.formWrap [type="button"]')
-                .contains(langs.btn_verify)
+                .contains('點我驗證')
                 .click()
                 .should('have.attr', 'disabled');
 
@@ -69,7 +63,7 @@ describe('/signin', () => {
 
             }).click();
 
-            cy.get('.formWrap .error-mesg').should('contain', langs.error_password_at_least_eight);
+            cy.get('.formWrap .error-mesg').should('contain', '至少 8 碼');
             cy.get('.formWrap [name="password"]').type('12345678');
             cy.get('.formWrap .error-mesg').should('not.exist');
             cy.get('.formWrap button[type="submit"]').click();
@@ -91,7 +85,7 @@ describe('/signin', () => {
 
             // "點我驗證" 按鈕
             cy.get('.formWrap [type="button"]')
-                .contains(langs.btn_verify)
+                .contains('點我驗證')
                 .click();
 
             cy.get('.formWrap button[type="submit"]').click();
@@ -105,7 +99,7 @@ describe('/signin', () => {
             });
 
             cy.getCookie('token').should('exist');
-            cy.get('header [type="button"]').should('contain', langs.member_my_account);
+            cy.get('header [type="button"]').should('contain', '我的帳號');
 
         });
 
@@ -125,7 +119,7 @@ describe('/signin', () => {
 
             // "點我驗證" 按鈕
             cy.get('.formWrap [type="button"]')
-                .contains(langs.btn_verify)
+                .contains('點我驗證')
                 .click();
 
             cy.get('.formWrap button[type="submit"]').click();
@@ -142,7 +136,7 @@ describe('/signin', () => {
         it('can visit home page', () => {
 
             cy.visit('/');
-            cy.get('header [type="button"]').should('contain', langs.member_my_account);
+            cy.get('header [type="button"]').should('contain', '我的帳號');
 
         });
 
@@ -154,7 +148,7 @@ describe('/signin', () => {
                 .next()
                 .should('exist')
                 .find('.menu-item')
-                .contains(langs.member_account_center)
+                .contains('會員中心')
                 .should('have.attr', 'href', '/member/account')
                 .click();
 

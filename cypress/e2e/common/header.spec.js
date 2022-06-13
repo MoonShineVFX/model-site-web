@@ -1,13 +1,6 @@
-let langs;
-
 describe('Header', () => {
 
-    beforeEach(() => {
-
-        cy.visit('/index');
-        cy.deftag().then((resData) => langs = resData);
-
-    });
+    beforeEach(() => cy.visit('/index'));
 
     context('Not signin header', () => {
 
@@ -46,7 +39,7 @@ describe('Header', () => {
 
             // Button
             cy.get('header [type="button"]')
-                .should('contain', langs.text_signin)
+                .should('contain', '登入')
                 .click();
 
             cy.location('pathname').should('eq', '/signin');
@@ -73,7 +66,7 @@ describe('Header', () => {
         it('display my account button', () => {
 
             cy.get('header [type="button"]')
-                .should('contain', langs.member_my_account)
+                .should('contain', '我的帳號')
                 .click();
 
             cy.get('header [type="button"]')
@@ -92,13 +85,13 @@ describe('Header', () => {
         it('can direct to my account page by clicking account center button', () => {
 
             cy.get('header [type="button"]')
-                .should('contain', langs.member_my_account)
+                .should('contain', '我的帳號')
                 .click();
 
             cy.get('header [type="button"]')
                 .next()
                 .find('.menu-item')
-                .contains(langs.member_account_center)
+                .contains('會員中心')
                 .click();
 
             cy.location('pathname').should('eq', '/member/account');
@@ -108,13 +101,13 @@ describe('Header', () => {
         it('can logout by clicking logout button', () => {
 
             cy.get('header [type="button"]')
-                .should('contain', langs.member_my_account)
+                .should('contain', '我的帳號')
                 .click();
 
             cy.get('header [type="button"]')
                 .next()
                 .find('.menu-item')
-                .contains(langs.text_logout)
+                .contains('登出')
                 .click();
 
             // localhost 環境才需要手動清除

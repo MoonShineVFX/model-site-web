@@ -1,15 +1,8 @@
 import dayjs from 'dayjs';
 
-let langs;
-
 describe('Footer', () => {
 
-    beforeEach(() => {
-
-        cy.visit('/index');
-        cy.deftag().then((resData) => langs = resData);
-
-    });
+    beforeEach(() => cy.visit('/index'));
 
     it('display small logo and copyright', () => {
 
@@ -35,7 +28,8 @@ describe('Footer', () => {
                 cy.get($elem).should('have.attr', 'href', $elem.attr('href'));
                 cy.get($elem).should('contain', $elem.text());
 
-                if (idx !== 1) cy.get($elem).click();
+                // 先刪除另開分頁屬性
+                if (idx !== 1) cy.get($elem).invoke('removeAttr', 'target').click();
 
             });
 
@@ -43,8 +37,15 @@ describe('Footer', () => {
 
     it('display language option and default is zh', () => {
 
+        const config = {
+            zh: '繁體中文',
+            en: 'English',
+            cn: '简体中文',
+            jp: '日文',
+        };
+
         cy.get('select[name="lang"] :selected')
-            .should('contain', langs[`lang_${Cypress.env('locale')}`])
+            .should('contain', config[`${Cypress.env('locale')}`])
             .invoke('val')
             .should('eq', Cypress.env('locale'));
 
@@ -56,7 +57,7 @@ describe('Footer', () => {
 
         cy.get('select[name="lang"]').select('en');
         cy.get('select[name="lang"] :selected')
-            .should('contain', langs.lang_en);
+            .should('contain', 'English');
 
         cy.location('pathname').should('include', '/en');
 

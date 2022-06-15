@@ -186,6 +186,10 @@ FormErrorMesg.propTypes = {
     errors: PropTypes.object.isRequired,
 };
 
+FormSuccessMesg.propTypes = {
+    mesg: PropTypes.string,
+};
+
 export {
     FormWrap as default,
     FormRow,

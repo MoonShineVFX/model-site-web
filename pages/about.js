@@ -124,7 +124,7 @@ const About = ({ langs, pageData }) => {
                 description={langs.og_description}
             />
 
-            <BannerLayout>
+            <BannerLayout data-section="banner">
                 <div className="thumb">
                     <img
                         src={imgUrl}
@@ -144,6 +144,7 @@ const About = ({ langs, pageData }) => {
                 container
                 component="section"
                 columnSpacing={2}
+                data-section="support"
             >
                 {
                     Object.keys(support).map((key) => (

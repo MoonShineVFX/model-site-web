@@ -1,15 +1,8 @@
 import dayjs from 'dayjs';
 
-let langs;
-
 describe('Footer', () => {
 
-    beforeEach(() => {
-
-        cy.visit('/index');
-        cy.deftag().then((resData) => langs = resData);
-
-    });
+    beforeEach(() => cy.visit('/index'));
 
     it('display small logo and copyright', () => {
 
@@ -18,33 +11,25 @@ describe('Footer', () => {
             .and('include', '/logo_small.png');
 
         cy.get('footer .top span')
-            .should('have.text', `© ${dayjs().format('YYYY')} All rights reserved. Moonshine`);
+            .should('contain', `© ${dayjs().format('YYYY')} All rights reserved. Moonshine`);
 
         // privacy policy of google reCAPTCHA
         cy.get('footer .bottom')
-            .should('have.text', 'This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.');
+            .should('contain', 'This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.');
 
     });
 
     it('display links of privacy policy and custom service mail address', () => {
 
-        let obj = {};
-
         cy.get('footer .top a')
             .should('have.length', 2)
             .each(($elem, idx) => {
 
-                obj[idx] = obj[idx] || {};
-                obj[idx] = {
-                    url: $elem.attr('href'),
-                    text: $elem.text(),
-                };
+                cy.get($elem).should('have.attr', 'href', $elem.attr('href'));
+                cy.get($elem).should('contain', $elem.text());
 
-                cy.get($elem)
-                    .should('have.attr', 'href', obj[idx].url);
-
-                cy.get($elem).should('have.text', obj[idx].text);
-                if (idx !== 1) cy.get($elem).click();
+                // 先刪除另開分頁屬性
+                if (idx !== 1) cy.get($elem).invoke('removeAttr', 'target').click();
 
             });
 
@@ -52,12 +37,19 @@ describe('Footer', () => {
 
     it('display language option and default is zh', () => {
 
+        const config = {
+            zh: '繁體中文',
+            en: 'English',
+            cn: '简体中文',
+            jp: '日文',
+        };
+
         cy.get('select[name="lang"] :selected')
-            .should('have.text', langs[`lang_${Cypress.env('locale')}`])
+            .should('contain', config[`${Cypress.env('locale')}`])
             .invoke('val')
             .should('eq', Cypress.env('locale'));
 
-        cy.url().should('not.include', '/en');
+        cy.location('pathname').should('not.include', '/en');
 
     });
 
@@ -65,9 +57,9 @@ describe('Footer', () => {
 
         cy.get('select[name="lang"]').select('en');
         cy.get('select[name="lang"] :selected')
-            .should('have.text', langs.lang_en);
+            .should('contain', 'English');
 
-        cy.url().should('include', '/en');
+        cy.location('pathname').should('include', '/en');
 
     });
 

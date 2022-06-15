@@ -14,7 +14,7 @@ import { GlobalContext } from '../../context/global.state';
 import Service from '../../utils/util.service';
 
 //
-const InvoiceForm = ({ langs, items }) => {
+const InvoiceForm = ({ items }) => {
 
     // Context
     const { user, deftags } = useContext(GlobalContext);
@@ -297,7 +297,7 @@ const InvoiceForm = ({ langs, items }) => {
                     <form
                         name="Newebpay"
                         method="POST"
-                        action="https://ccore.newebpay.com/MPG/mpg_gateway"
+                        action={`https://${(NEXT_PUBLIC_HOST === 'market.moonshine.tw') ? 'core' : 'ccore'}.newebpay.com/MPG/mpg_gateway`}
                         ref={formRef}
                     >
                         {

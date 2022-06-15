@@ -221,7 +221,7 @@ const DetailContentLayout = styled(Grid)(({ theme }) => ({
 }));
 
 //
-const FormatAndRenderLayout = styled('ul')(({ theme }) => ({
+const FormatAndRendererLayout = styled('ul')(({ theme }) => ({
     margin: '0',
     paddingInlineStart: '20px',
     '.item': {
@@ -298,7 +298,7 @@ export {
     ItemWrapLayout,
     DetailWrapLayout,
     DetailContentLayout,
-    FormatAndRenderLayout,
+    FormatAndRendererLayout,
     DemoImageWrapLayout,
     DemoImageLayout,
     RelativeProductsLayout,

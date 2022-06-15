@@ -1,44 +1,27 @@
-let langs;
-
 describe('Header', () => {
 
-    beforeEach(() => {
+    beforeEach(() => cy.visit('/index'));
 
-        cy.visit('/index');
-        cy.deftag().then((resData) => langs = resData);
-
-    });
-
-    context('Not signin', () => {
+    context('Not signin header', () => {
 
         it('display logo, menus, cart and signin button', () => {
 
-            let obj = {};
-
             // Logo
-            cy.get('header .logo-text')
-                .should('have.attr', 'href', '/');
-
+            cy.get('header .logo-text').should('have.attr', 'href', '/');
             cy.get('header .logo-text').click();
             cy.location('origin').should('eq', location.origin);
 
             // Menus
             cy.get('header nav:first a')
                 .should('have.length', 3)
-                .each(($elem, idx) => {
-
-                    obj[idx] = obj[idx] || {};
-                    obj[idx] = {
-                        url: $elem.attr('href'),
-                        text: $elem.text(),
-                    };
+                .each(($elem) => {
 
                     cy.get($elem)
-                        .should('have.attr', 'href', obj[idx].url)
-                        .should('have.text', obj[idx].text);
+                        .should('have.attr', 'href', $elem.attr('href'))
+                        .and('contain', $elem.text());
 
                     cy.get($elem).click();
-                    cy.url().should('include', obj[idx].url);
+                    cy.url().should('include', $elem.attr('href'));
 
                 });
 
@@ -56,10 +39,10 @@ describe('Header', () => {
 
             // Button
             cy.get('header [type="button"]')
-                .should('have.text', langs.text_signin)
+                .should('contain', '登入')
                 .click();
 
-            cy.url().should('include', '/signin');
+            cy.location('pathname').should('eq', '/signin');
 
         });
 
@@ -70,54 +53,78 @@ describe('Header', () => {
                 .click();
 
             cy.getCookie('token').should('not.exist');
-            cy.url().should('include', '/signin');
+            cy.location('pathname').should('eq', '/signin');
 
         });
 
     });
 
-    // context('Signin', () => {
+    context('Signin header', () => {
 
-    //     beforeEach(() => {
+        beforeEach(() => cy.login());
 
-    //         cy.visit('/signin');
+        it('display my account button', () => {
 
-    //     });
+            cy.get('header [type="button"]')
+                .should('contain', '我的帳號')
+                .click();
 
-    //     it('require account(email)', () => {
+            cy.get('header [type="button"]')
+                .next()
+                .should('exist')
+                .find('.menu-item')
+                .each(($elem) => {
 
-    //         cy.get('form').submit();
-    //         cy.get('.error').should('contain', errorMesg);
+                    cy.get($elem).should('have.attr', 'href', $elem.attr('href'));
+                    cy.get($elem).should('contain', $elem.text());
 
-    //     });
+                });
 
-    //     it('require password', () => {
+        });
 
-    //         cy.get('[name="account"]').type(account);
-    //         cy.get('form').submit();
-    //         cy.get('.error').should('contain', errorMesg);
+        it('can direct to my account page by clicking account center button', () => {
 
-    //     });
+            cy.get('header [type="button"]')
+                .should('contain', '我的帳號')
+                .click();
 
-    //     it('require valid account and password', () => {
+            cy.get('header [type="button"]')
+                .next()
+                .find('.menu-item')
+                .contains('會員中心')
+                .click();
 
-    //         cy.get('[name="account"]').type(account);
-    //         cy.get('[name="password"]').type('12345');
-    //         cy.get('form').submit();
-    //         cy.get('.ant-modal-confirm-error').should('contain', 'password wrong');
+            cy.location('pathname').should('eq', '/member/account');
 
-    //     });
+        });
 
-    //     it('successful signin', () => {
+        it('can logout by clicking logout button', () => {
 
-    //         cy.get('[name="account"]').type(account);
-    //         cy.get('[name="password"]').type(account);
-    //         cy.get('form').submit();
-    //         cy.url().should('include', '/index');
-    //         cy.getCookie('pmb-session').should('exist');
+            cy.get('header [type="button"]')
+                .should('contain', '我的帳號')
+                .click();
 
-    //     });
+            cy.get('header [type="button"]')
+                .next()
+                .find('.menu-item')
+                .contains('登出')
+                .click();
 
-    // });
+            // localhost 環境才需要手動清除
+            cy.location().then((locate) => {
+
+                if (locate.host === 'localhost:1006') {
+
+                    cy.clearCookie('token');
+
+                }
+
+            });
+
+            cy.getCookie('token').should('not.exist');
+
+        });
+
+    });
 
 });

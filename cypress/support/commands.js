@@ -26,15 +26,24 @@ Cypress.Commands.add('login', (
     password = 'abc123456'
 ) => {
 
-    let auth = btoa(`${account}:${password}`);
+    cy.visit('/signin');
+    cy.intercept('**/api/login').as('signin');
+    cy.get('.formWrap [name="email"]').type(account);
+    cy.get('.formWrap [name="password"]').type(password);
 
-    cy.request({
-        method: 'POST',
-        url: '/api/login',
-        form: true,
-        headers: {
-            Authorization: `Basic ${auth}`,
-        },
+    // "點我驗證" 按鈕
+    cy.get('.formWrap [type="button"]')
+        .contains('點我驗證')
+        .click();
+
+    cy.get('.formWrap button[type="submit"]').click();
+
+    // localhost 環境才需要手動加 token
+    cy.wait('@signin').then((xhr) => {
+
+        cy.setCookie('token', xhr.response.body.data.token);
+        cy.reload();
+
     });
 
 });

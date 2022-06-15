@@ -65,7 +65,7 @@ const MyAccountBox = () => {
                         url={(key === 'logout') ? '#' : `/member/${key}`}
                         title={menus[key]}
                         className="menu-item"
-                        onClick={key === 'logout' ? handleClickLogout : handleClickAccount}
+                        onClick={(key === 'logout') ? handleClickLogout : handleClickAccount}
                     >
                         {menus[key]}
                     </Links>

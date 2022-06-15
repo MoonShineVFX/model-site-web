@@ -5,7 +5,7 @@ import {
     productDetailStyles,
     DetailWrapLayout,
     DetailContentLayout,
-    FormatAndRenderLayout,
+    FormatAndRendererLayout,
     DemoImageWrapLayout,
     DemoImageLayout,
     RelativeProductsLayout,
@@ -145,7 +145,10 @@ const ProductDetail = ({ langs, pageData }) => {
                     />
                 </div>
 
-                <DetailContentLayout container>
+                <DetailContentLayout
+                    container
+                    data-section="detail-data"
+                >
                     <Grid
                         item
                         xs={12}
@@ -176,9 +179,9 @@ const ProductDetail = ({ langs, pageData }) => {
                         }
 
                         <p className="description">{pageData.description}</p>
-                        <div>
-                            <div className="label">{langs.product_detail_format_and_render}</div>
-                            <FormatAndRenderLayout>
+                        <div className="format-and-renderer">
+                            <div className="label">{langs.product_detail_format_and_renderer}</div>
+                            <FormatAndRendererLayout>
                                 {
                                     Object.keys(arrangeFormatAndRender(pageData.models)).map((id) => (
 
@@ -195,7 +198,7 @@ const ProductDetail = ({ langs, pageData }) => {
 
                                     ))
                                 }
-                            </FormatAndRenderLayout>
+                            </FormatAndRendererLayout>
                         </div>
                         <p className="notice">{langs.product_detail_notice_message}</p>
                     </Grid>
@@ -273,36 +276,39 @@ const ProductDetail = ({ langs, pageData }) => {
                 </Grid>
             </DemoImageWrapLayout>
 
-            <RelativeProductsLayout
-                title={langs.product_detail_section_title02}
-                showMore={false}
-            >
-                <Grid
-                    container
-                    wrap="nowrap"
-                    className="items"
-                    spacing={{ xs: '12px', mobile: '30px' }}
-                >
-                    {
-                        pageData.relativeProducts.map(({ id, title, price, imgUrl }, idx) => (
+            {
+                !!pageData.relativeProducts.length &&
+                    <RelativeProductsLayout
+                        title={langs.product_detail_section_title02}
+                        showMore={false}
+                    >
+                        <Grid
+                            container
+                            wrap="nowrap"
+                            className="items"
+                            spacing={{ xs: '12px', mobile: '30px' }}
+                        >
+                            {
+                                pageData.relativeProducts.map(({ id, title, price, imgUrl }, idx) => (
 
-                            <Grid
-                                key={idx}
-                                item
-                                xs={12}
-                                md={3}
-                                className="itemWrap"
-                            >
-                                <Item
-                                    url={`/product/${id}`}
-                                    data={{ title, price, imgUrl }}
-                                />
-                            </Grid>
+                                    <Grid
+                                        key={idx}
+                                        item
+                                        xs={12}
+                                        md={3}
+                                        className="itemWrap"
+                                    >
+                                        <Item
+                                            url={`/product/${id}`}
+                                            data={{ title, price, imgUrl }}
+                                        />
+                                    </Grid>
 
-                        ))
-                    }
-                </Grid>
-            </RelativeProductsLayout>
+                                ))
+                            }
+                        </Grid>
+                    </RelativeProductsLayout>
+            }
 
             {
                 (visible && currEvent === 'viewImg') &&

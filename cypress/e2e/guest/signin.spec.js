@@ -1,4 +1,3 @@
-let langs;
 const fake = {
     account: 'abc@gmail.com',
     password: 'abc123456',
@@ -6,34 +5,27 @@ const fake = {
 
 describe('/signin', () => {
 
-    beforeEach(() => {
-
-        cy.visit('/signin');
-        cy.deftag().then((resData) => langs = resData);
-
-    });
+    beforeEach(() => cy.visit('/signin'));
 
     context('HTML form submission', () => {
 
-        let obj = {};
-
         it('display form, title, buttons and forgot password link', () => {
 
+            cy.title().should('contain', '登入');
             cy.get('.formWrap')
                 .should('exist')
-                .and('contain', langs.text_signin_title);
+                .and('contain', '帳號登入');
 
             cy.get('.form-row-btns button')
                 .should('have.length', 4)
                 .each(($btn, idx) => {
 
-                    obj[idx] = $btn.text();
-                    cy.get($btn).should('have.text', obj[idx]);
+                    cy.get($btn).should('contain', $btn.text());
 
                 });
 
             cy.get('.form-row-btns a')
-                .contains(langs.text_forgot_password)
+                .contains('忘記密碼')
                 .should('have.attr', 'href', '/forgot_password');
 
         });
@@ -41,7 +33,7 @@ describe('/signin', () => {
         it('require account (email)', () => {
 
             cy.get('.formWrap form').submit();
-            cy.get('.formWrap .error-mesg').should('contain', langs.error_required);
+            cy.get('.formWrap .error-mesg').should('contain', '此欄位為必填');
 
         });
 
@@ -49,7 +41,7 @@ describe('/signin', () => {
 
             cy.get('.formWrap [name="email"]').type(fake.account);
             cy.get('.formWrap form').submit();
-            cy.get('.formWrap .error-mesg').should('contain', langs.error_required);
+            cy.get('.formWrap .error-mesg').should('contain', '此欄位為必填');
 
         });
 
@@ -61,7 +53,7 @@ describe('/signin', () => {
 
             // "點我驗證" 按鈕
             cy.get('.formWrap [type="button"]')
-                .contains(langs.btn_verify)
+                .contains('點我驗證')
                 .click()
                 .should('have.attr', 'disabled');
 
@@ -71,7 +63,7 @@ describe('/signin', () => {
 
             }).click();
 
-            cy.get('.formWrap .error-mesg').should('contain', langs.error_password_at_least_eight);
+            cy.get('.formWrap .error-mesg').should('contain', '至少 8 碼');
             cy.get('.formWrap [name="password"]').type('12345678');
             cy.get('.formWrap .error-mesg').should('not.exist');
             cy.get('.formWrap button[type="submit"]').click();
@@ -87,101 +79,83 @@ describe('/signin', () => {
 
         it('successful signin', () => {
 
+            cy.intercept('**/api/login').as('signin');
             cy.get('.formWrap [name="email"]').type(fake.account);
             cy.get('.formWrap [name="password"]').type(fake.password);
 
             // "點我驗證" 按鈕
             cy.get('.formWrap [type="button"]')
-                .contains(langs.btn_verify)
+                .contains('點我驗證')
                 .click();
 
             cy.get('.formWrap button[type="submit"]').click();
-            cy.location('origin').should('eq', location.origin);
-            // cy.getCookie('token').should('exist');
+
+            // localhost 環境才需要手動加 token
+            cy.wait('@signin').then((xhr) => {
+
+                cy.setCookie('token', xhr.response.body.data.token);
+                cy.visit('/');
+
+            });
+
+            cy.getCookie('token').should('exist');
+            cy.get('header [type="button"]').should('contain', '我的帳號');
 
         });
 
     });
 
-    // context('HTML form submission with cy.request', () => {
+    context('Reusable "signin" custom command', () => {
 
-    //     let auth = btoa(`${account}:${account}`);
+        Cypress.Commands.add('mkwsignin', (
+            account = 'abc@gmail.com',
+            password = 'abc123456'
+        ) => {
 
-    //     it('google reCAPTCHA by api', () => {
+            // localhost 環境才需要手動加 token
+            cy.intercept('**/api/login').as('signin');
+            cy.get('.formWrap [name="email"]').type(account);
+            cy.get('.formWrap [name="password"]').type(password);
 
-    //         cy.request({
-    //             method: 'POST',
-    //             url: '/api/signin',
-    //             form: true,
-    //             headers: {
-    //                 Authorization: `Basic ${auth}`,
-    //             },
-    //         });
+            // "點我驗證" 按鈕
+            cy.get('.formWrap [type="button"]')
+                .contains('點我驗證')
+                .click();
 
-    //         cy.getCookie('pmb-session').should('exist');
+            cy.get('.formWrap button[type="submit"]').click();
+            cy.wait('@signin').then((xhr) => {
 
-    //     });
+                cy.setCookie('token', xhr.response.body.data.token);
 
-    //     it('signin by api', () => {
+            });
 
-    //         cy.request({
-    //             method: 'POST',
-    //             url: '/api/signin',
-    //             form: true,
-    //             headers: {
-    //                 Authorization: `Basic ${auth}`,
-    //             },
-    //         });
+        });
 
-    //         cy.getCookie('pmb-session').should('exist');
+        beforeEach(() => cy.mkwsignin());
 
-    //     });
+        it('can visit home page', () => {
 
-    // });
+            cy.visit('/');
+            cy.get('header [type="button"]').should('contain', '我的帳號');
 
-    // context('Reusable "signin" custom command', () => {
+        });
 
-    //     Cypress.Commands.add('mkwsignin', (account = 'admin', password = 'admin') => {
+        it('can simply request other authenticated pages', () => {
 
-    //         let auth = btoa(`${account}:${password}`);
+            cy.visit('/');
+            cy.get('header [type="button"]').click();
+            cy.get('header [type="button"]')
+                .next()
+                .should('exist')
+                .find('.menu-item')
+                .contains('會員中心')
+                .should('have.attr', 'href', '/member/account')
+                .click();
 
-    //         return cy.request({
-    //             method: 'POST',
-    //             url: '/api/signin',
-    //             form: true,
-    //             headers: {
-    //                 Authorization: `Basic ${auth}`,
-    //             },
-    //         });
+            cy.location('pathname').should('eq', '/member/account');
 
-    //     });
+        });
 
-    //     beforeEach(() => cy.mkwsignin());
-
-    //     it('can visit /index', () => {
-
-    //         cy.visit('/index');
-    //         cy.get('main').should('have.class', 'main');
-
-    //     });
-
-    //     it('can simply request other authenticated pages', () => {
-
-    //         cy.request({
-    //             method: 'POST',
-    //             url: '/api/web_departments_roles_skills',
-    //         })
-    //         .its('body')
-    //         .should('have.property', 'data')
-    //         .then((resData) => {
-
-    //             expect(resData).to.have.property('departments');
-    //             expect(resData.departments).to.be.an('array');
-
-    //         });
-
-    //     });
-
-    // });
+    });
 
 });

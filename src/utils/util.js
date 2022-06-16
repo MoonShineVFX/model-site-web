@@ -19,31 +19,15 @@ const util = {
      */
     serviceProxy: (service, reqData = {}, option) => {
 
+        // 檢查物件或字串
+        const condi = (typeof service === 'string');
+
         // method, url 與環境設定
-        const CONFIG = () => {
+        const showErrorMesg = (message, callback) => {
 
-                let url = '';
-                let method = 'post';
+            alert(message || '出了些狀況');
 
-                if (typeof service === 'string') url = service;
-                else {
-
-                    url = service.url;
-                    method = service.method;
-
-                }
-
-                return {
-                    url: (process.env.NODE_ENV === 'development') ? `https://${process.env.HOST}/api${url}` : `/api${url}`,
-                    method,
-                };
-
-            },
-            showErrorMesg = (message, callback) => {
-
-                alert(message || '出了些狀況');
-
-            };
+        };
 
         // 回傳 promise
         return new Promise((resolve, reject) => {
@@ -54,7 +38,12 @@ const util = {
                 },
             };
 
-            axios[CONFIG().method](CONFIG().url, reqData, {
+            axios({
+                baseURL: (process.env.NODE_ENV === 'development') ? `https://${process.env.HOST}/api` : '/api',
+                url: service,
+                method: 'post',
+                ...condi && { data: reqData },
+                ...service,
                 ...option,
                 ...(Cookies.get()?.token) && { ...authHeader },
             })
@@ -62,7 +51,7 @@ const util = {
                 // result: 1
                 ({ data }) => {
 
-                    resolve(data.data);
+                    resolve(condi ? data.data : data);
 
                 },
                 // result: 0
@@ -77,7 +66,7 @@ const util = {
                     ));
 
                 },
-            )
+            );
 
         });
 
@@ -86,7 +75,8 @@ const util = {
     serviceServer: ({ method = 'post', url, headers }) => {
 
         return axios({
-            url: `https://${process.env.HOST}/api${url}`,
+            baseURL: `https://${process.env.HOST}/api`,
+            url,
             method,
             ...headers && { headers: { ...headers } }, // 有傳 headers 才送
         });

@@ -21,7 +21,18 @@ describe(`${currPath}`, () => {
 
         cy.get('figure .MuiGrid-item')
             .its('length')
-            .should('gte', 1);
+            .then((length) => {
+
+                expect(length).to.gte(1);
+
+                // pagination
+                if (length > 10) {
+
+                    cy.get('.paginations').should('exist');
+
+                }
+
+            });
 
         // data thumb and title
         cy.get('figure .MuiGrid-item')

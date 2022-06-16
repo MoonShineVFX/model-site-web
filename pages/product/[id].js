@@ -235,6 +235,7 @@ const ProductDetail = ({ langs, pageData }) => {
             <DemoImageWrapLayout
                 title={langs.product_detail_section_title01}
                 showMore={false}
+                data-section="demo-image"
             >
                 <Grid
                     container

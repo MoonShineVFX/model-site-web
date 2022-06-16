@@ -168,7 +168,7 @@ const ProductList = ({ langs, pageData }) => {
                                 columnSpacing="16px"
                             >
                                 {
-                                    pageData.products.map(({ id, title, price, imgUrl }) => (
+                                    pageData.products.map(({ id, title, price, imgUrl }, idx) => (
 
                                         <Grid
                                             key={id}
@@ -176,6 +176,7 @@ const ProductList = ({ langs, pageData }) => {
                                             xs={6}
                                             sm={4}
                                             mobile={3}
+                                            data-index={idx}
                                         >
                                             <Item
                                                 type="product"
@@ -195,13 +196,12 @@ const ProductList = ({ langs, pageData }) => {
                     }
 
                     {
-                        (pageData.products.length > 40) &&
+                        (pageData.products.length > 10) &&
                             <Paginations
                                 length={pageData.products.length}
                                 currPage={+query.page}
                                 onChange={handleChangePage}
                             />
-
                     }
                 </Grid>
             </GridLayout>

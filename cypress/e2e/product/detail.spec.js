@@ -12,10 +12,11 @@ describe('/product/{id}', () => {
 
     it('visits the page', () => {
 
-        cy.get('@list').each(($elem, idx) => {
+        // 商品列表
+        cy.get('@list').each(($list, idx) => {
 
-            const $item = $elem.find('.item');
-            const title = $elem.find('.item .item-content .title').text();
+            const $item = $list.find('.item');
+            const title = $list.find('.item .item-content .title').text();
 
             cy.get(`[data-index="${idx}"]`)
                 .find(`.item`)
@@ -34,6 +35,7 @@ describe('/product/{id}', () => {
 
     it('display product information', () => {
 
+        // 商品列表
         cy.get('@list').each(($list, idx) => {
 
             const $item = $list.find('.item');
@@ -101,23 +103,51 @@ describe('/product/{id}', () => {
 
                 });
 
-            // demo images
-            cy.get('[data-section="demo-image"]').find('h2.title').should('contain', '商品內容展示圖');
-            cy.get('[data-section="demo-image"]').find('.MuiGrid-item').each(($elem) => {
+            cy.go('back');
+            cy.wait(ms);
 
-                cy.get($elem)
-                    .find('img')
-                    .then(($img) => {
+        });
 
-                        /**
-                         * Betty notes: image length 至少一筆
-                         */
-                        cy.get($img).should('exist');
-                        cy.get($img).should('have.attr', 'src', $img.attr('src'));
+    });
 
-                    });
+    it('display product demo images and can preview', () => {
 
-            });
+        // 商品列表
+        cy.get('@list').each(($list, idx) => {
+
+            cy.get(`[data-index="${idx}"]`)
+                .find(`.item`)
+                .invoke('removeAttr', 'target')
+                .click();
+
+            cy.get('[data-section="demo-image"]')
+                .find('h2.title')
+                .should('contain', '商品內容展示圖');
+
+            cy.get('[data-section="demo-image"]')
+                .find('.MuiGrid-item')
+                .its('length')
+                .should('gte', 1);
+
+            cy.get('[data-section="demo-image"]')
+                .find('.MuiGrid-item')
+                .each(($elem, _idx) => {
+
+                    cy.get($elem)
+                        .find('img')
+                        .then(($img) => {
+
+                            cy.get($img).should('exist');
+                            cy.get($img).should('have.attr', 'src', $img.attr('src'));
+
+                        });
+
+                    cy.get($elem).find(`[data-index="${_idx}"]`).click();
+
+                    cy.get('[data-section="preview-image"]').should('have.length', 1);
+                    // cy.get('[data-section="preview-image"] button').should('have.class', 'active');
+
+                });
 
             cy.go('back');
             cy.wait(ms);
@@ -125,4 +155,46 @@ describe('/product/{id}', () => {
         });
 
     });
+
+    // it('display relatived like product', () => {
+
+    //     // 商品列表
+    //     cy.get('@list').each(($list, idx) => {
+
+    //         cy.get(`[data-index="${idx}"]`)
+    //             .find(`.item`)
+    //             .invoke('removeAttr', 'target')
+    //             .click();
+
+    //         cy.get('[data-section="demo-image"]')
+    //             .find('h2.title')
+    //             .should('contain', '你可能會喜歡的');
+
+    //         cy.get('[data-section="demo-image"]')
+    //             .find('.MuiGrid-item')
+    //             .its('length')
+    //             .should('gte', 1);
+
+    //         cy.get('[data-section="demo-image"]')
+    //             .find('.MuiGrid-item')
+    //             .each(($elem) => {
+
+    //                 cy.get($elem)
+    //                     .find('img')
+    //                     .then(($img) => {
+
+    //                         cy.get($img).should('exist');
+    //                         cy.get($img).should('have.attr', 'src', $img.attr('src'));
+
+    //                     });
+
+    //             });
+
+    //         cy.go('back');
+    //         cy.wait(ms);
+
+    //     });
+
+    // });
+
 });

@@ -27,7 +27,7 @@ const ImageEnlargeLayout = styled('div')(({ theme }) => ({
             zIndex: '100',
         },
     },
-    '.img-wrap': {
+    '.image-wrap': {
         height: '90vh',
         textAlign: 'center',
         display: 'inline-block',
@@ -98,8 +98,11 @@ const ImageEnlarge = ({ id, imgUrl }) => {
 
     return (
 
-        <ImageEnlargeLayout className={visible ? 'active' : ''}>
-            <div className="Model-y-align img-wrap">
+        <ImageEnlargeLayout
+            className={visible ? 'active' : ''}
+            data-section="preview-image"
+        >
+            <div className="Model-y-align image-wrap">
                 <CloseButton onClick={handleClose} />
                 <img src={imgUrl} alt={id} />
             </div>

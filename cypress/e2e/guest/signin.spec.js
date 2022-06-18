@@ -18,13 +18,13 @@ describe('/signin', () => {
 
             cy.get('.form-row-btns button')
                 .should('have.length', 4)
-                .each(($btn, idx) => {
+                .each(($btn) => {
 
                     cy.get($btn).should('contain', $btn.text());
 
-                });
-
-            cy.get('.form-row-btns a')
+                })
+                .parent()
+                .find('a')
                 .contains('忘記密碼')
                 .should('have.attr', 'href', '/forgot_password');
 

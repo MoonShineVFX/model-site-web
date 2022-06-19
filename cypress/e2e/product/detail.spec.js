@@ -203,10 +203,15 @@ describe('/product/{id}', () => {
 
                         cy.get($item)
                             .find('.item-content .title')
-                            .should('contain', $elem.find('.item-content .title').text())
+                            .should('contain', $item.find('.item-content .title').text())
                             .parent()
                             .find('.price')
-                            .should('contain', $elem.find('.item-content .price').text());
+                            .should('contain', $item.find('.item-content .price').text());
+
+                    })
+                    .should(($item) => {
+
+                        expect($item.length).to.be.lessThan(8);
 
                     });
 

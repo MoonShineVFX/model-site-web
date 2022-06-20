@@ -32,14 +32,14 @@ const Banner = ({ pageData }) => {
                         productId,
                         title,
                         description,
-                        link,
                         imgUrl,
                         mobileImgUrl,
                     }, idx) => (
 
                         <SlideShowItemLayout
                             key={id}
-                            className={`${(idx === slideshowActive) ? 'active' : 'hide'} item`}
+                            className={`item ${(idx === slideshowActive) ? 'active' : 'hide'}`}
+                            data-index={idx}
                         >
                             <div className="inner">
                                 <Links

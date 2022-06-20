@@ -12,9 +12,7 @@ const SlideShowLayout = styled('section')(() => ({
 }));
 
 // 容器
-const SlideShowContainer = styled('div', {
-    name: 'slideshow-container',
-})(() => ({
+const SlideShowContainer = styled('div')(() => ({
     '.hide': {
         display: 'none',
     },
@@ -24,9 +22,7 @@ const SlideShowContainer = styled('div', {
 }));
 
 // 點點
-const Dots = styled('span', {
-    name: 'slideshow-control-dots',
-})(({ theme }) => ({
+const Dots = styled('span')(({ theme }) => ({
     position: 'absolute',
     bottom: '16px',
     '> *': {
@@ -122,12 +118,14 @@ const SlideShow = ({ data, showDot, children, ...rest }) => {
                 <Button
                     className="Model-y-align"
                     onClick={handleArrowLeft}
+                    data-button="left"
                 >
                     <FontIcon icon={faChevronLeft} />
                 </Button>
                 <Button
                     className="Model-y-align"
                     onClick={handleArrowRight}
+                    data-button="right"
                 >
                     <FontIcon icon={faChevronRight} />
                 </Button>

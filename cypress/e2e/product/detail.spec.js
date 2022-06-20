@@ -18,8 +18,7 @@ describe('/product/{id}', () => {
             const $item = $list.find('.item');
             const title = $list.find('.item .item-content .title').text();
 
-            cy.get(`[data-index="${idx}"]`)
-                .find(`.item`)
+            cy.get(`[data-index="${idx}"] .item`)
                 .invoke('removeAttr', 'target')
                 .click();
 
@@ -41,8 +40,7 @@ describe('/product/{id}', () => {
             const $item = $list.find('.item');
             const title = $list.find('.item .item-content .title').text();
 
-            cy.get(`[data-index="${idx}"]`)
-                .find(`.item`)
+            cy.get(`[data-index="${idx}"] .item`)
                 .invoke('removeAttr', 'target')
                 .click();
 
@@ -133,8 +131,7 @@ describe('/product/{id}', () => {
         // 商品列表
         cy.get('@list').each(($list, idx) => {
 
-            cy.get(`[data-index="${idx}"]`)
-                .find(`.item`)
+            cy.get(`[data-index="${idx}"] .item`)
                 .invoke('removeAttr', 'target')
                 .click();
 
@@ -177,8 +174,7 @@ describe('/product/{id}', () => {
         // 商品列表
         cy.get('@list').each(($list, idx) => {
 
-            cy.get(`[data-index="${idx}"]`)
-                .find(`.item`)
+            cy.get(`[data-index="${idx}"] .item`)
                 .invoke('removeAttr', 'target')
                 .click();
 

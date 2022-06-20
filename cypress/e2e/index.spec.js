@@ -12,33 +12,82 @@ describe('/index', () => {
     it('display banner section and data length at least one', () => {
 
         cy.get('.banner-wrap .item')
-            .should('have.class', 'hide')
             .its('length')
             .should('gte', 1);
 
-        // cy.get('main .Model-container .MuiGrid-item')
-        //     .its('length')
-        //     .should('gte', 1);
+        cy.get('.banner-wrap .item').each(($elem, idx) => {
+
+            // 當前 banner 才能點擊
+            if ($elem.hasClass('active')) {
+
+                cy.get($elem).children().should('have.class', 'inner');
+
+                cy.get($elem)
+                    .find('a')
+                    .invoke('removeAttr', 'target')
+                    .click()
+                    .should('have.attr', 'href', $elem.find('a').attr('href'))
+                    .find('img')
+                    .should('exist')
+                    .and('have.attr', 'src', $elem.find('img').attr('src'));
+
+                cy.get($elem)
+                    .find('.slideshow-info-wrap .flag')
+                    .should('contain', 'New')
+                    .next()
+                    .should('contain', $elem.find('.slideshow-info-wrap .title').text())
+                    .next()
+                    .should('contain', $elem.find('.slideshow-info-wrap .description').text());
+
+            }
+
+            cy.get('[data-button="right"]').click();
+            cy.get('[data-button="left"]').click();
+            cy.get($elem).should('have.attr', 'data-index', idx);
+
+        });
 
     });
 
-    // it('display data thumb and title', () => {
+    it('display banner section and data length at least one', () => {
 
-    //     cy.get('main .Model-container .MuiGrid-item')
-    //         .each(($elem) => {
+        cy.get('.banner-wrap .item')
+            .its('length')
+            .should('gte', 1);
 
-    //             const $item = $elem.find('.item');
+        cy.get('.banner-wrap .item').each(($elem, idx) => {
 
-    //             cy.get($elem).children().should('have.class', 'item');
-    //             cy.get($item).should('have.attr', 'href', $item.attr('href'));
-    //             cy.get($item).should('contain', $item.text());
-    //             cy.get($item)
-    //                 .find('img')
-    //                 .should('exist')
-    //                 .and('have.attr', 'src', $item.find('img').attr('src'));
+            // 當前 banner 才能點擊
+            if ($elem.hasClass('active')) {
 
-    //         });
+                cy.get($elem).children().should('have.class', 'inner');
 
-    // });
+                cy.get($elem)
+                    .find('a')
+                    .invoke('removeAttr', 'target')
+                    .click()
+                    .should('have.attr', 'href', $elem.find('a').attr('href'))
+                    .find('img')
+                    .should('exist')
+                    .and('have.attr', 'src', $elem.find('img').attr('src'));
+
+                cy.get($elem)
+                    .find('.slideshow-info-wrap .flag')
+                    .should('contain', 'New')
+                    .next()
+                    .should('contain', $elem.find('.slideshow-info-wrap .title').text())
+                    .next()
+                    .should('contain', $elem.find('.slideshow-info-wrap .description').text());
+
+            }
+
+            // 左右箭頭
+            cy.get('[data-button="right"]').click();
+            cy.get('[data-button="left"]').click();
+            cy.get($elem).should('have.attr', 'data-index', idx);
+
+        });
+
+    });
 
 });

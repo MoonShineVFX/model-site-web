@@ -75,7 +75,6 @@ const ResetPassword = ({ langs }) => {
         reqData = {
             ...reqData,
             ...router.query,
-            uid: +router.query.uid,
         };
 
         delete reqData.confirm_password;

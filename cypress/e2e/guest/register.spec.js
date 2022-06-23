@@ -1,62 +1,88 @@
+import dayjs from 'dayjs';
+
 const fake = {
-    account: 'staff+0621001@moonshine.tw',
+    account: `staff+test${dayjs().format('MMDDmmss')}@moonshine.tw`,
     password: 'abc123456',
 };
 
+const errorMesg = '此欄位為必填';
+
 describe('/register', () => {
 
-    beforeEach(() => cy.visit('/signin'));
+    context('Go to register page', () => {
 
-    context('HTML form submission', () => {
+        beforeEach(() => {
 
-        it('display form, title, buttons and forgot password link', () => {
-
-            cy.title().should('contain', '登入');
-            cy.get('.formWrap')
-                .should('exist')
-                .and('contain', '帳號登入');
-
-            cy.get('.form-row-btns button')
-                .should('have.length', 4)
-                .each(($btn) => {
-
-                    cy.get($btn).should('contain', $btn.text());
-
-                })
-                .parent()
-                .find('a')
-                .contains('忘記密碼')
-                .should('have.attr', 'href', '/forgot_password');
+            cy.visit('/signin');
+            cy.get('.btn-register button[type="button"]').click();
 
         });
 
+        it('display form, title, and redirect to signin link', () => {
+
+            cy.title().should('contain', '註冊');
+            cy.get('.formWrap')
+                .should('exist')
+                .and('contain', '註冊');
+
+            cy.get('.form-row-btns button[type="button"]')
+                .should('have.length', 1)
+                .contains('回到登入頁')
+                .click();
+
+            cy.location('pathname').should('eq', '/signin');
+
+        });
+
+        it('visible submit button by checking I aggreee checkbox', () => {
+
+            cy.get('.formWrap button[type="submit"]').should('be.disabled');
+            cy.get('.formWrap .checkmark').click();
+            cy.get('.formWrap form').submit();
+            cy.get('.formWrap button[type="submit"]').should('not.be.disabled');
+            cy.get('.formWrap .error-mesg').should('contain', errorMesg);
+
+            cy.get('.formWrap [type="checkbox"]')
+                .parent()
+                .find('a')
+                .then(($a) => {
+
+                    cy.get($a).should('have.attr', 'href', '/privacy');
+                    cy.get($a).invoke('removeAttr', 'target').click();
+
+                });
+
+        });
+
+    });
+
+    context('HTML form submission', () => {
+
+        beforeEach(() => cy.visit('/register'));
+
         it('require account (email)', () => {
 
+            cy.get('.formWrap .checkmark').click();
             cy.get('.formWrap form').submit();
-            cy.get('.formWrap .error-mesg').should('contain', '此欄位為必填');
+            cy.get('.formWrap .error-mesg').should('contain', errorMesg);
 
         });
 
         it('require password', () => {
 
             cy.get('.formWrap [name="email"]').type(fake.account);
+            cy.get('.formWrap .checkmark').click();
             cy.get('.formWrap form').submit();
-            cy.get('.formWrap .error-mesg').should('contain', '此欄位為必填');
+            cy.get('.formWrap .error-mesg').should('contain', errorMesg);
 
         });
 
         it('require valid account and password', () => {
 
-            cy.get('.formWrap button[type="submit"]').should('have.attr', 'disabled');
-            cy.get('.formWrap [name="email"]').type(fake.account);
+            cy.get('.formWrap [name="email"]').type('abc123456');
             cy.get('.formWrap [name="password"]').type('12345');
 
-            // "點我驗證" 按鈕
-            cy.get('.formWrap [type="button"]')
-                .contains('點我驗證')
-                .click()
-                .should('have.attr', 'disabled');
-
+            cy.get('.formWrap .checkmark').click();
             cy.get('.formWrap button[type="submit"]').should(($btn) => {
 
                 expect($btn).not.to.have.attr('disabled');
@@ -64,95 +90,35 @@ describe('/register', () => {
             }).click();
 
             cy.get('.formWrap .error-mesg').should('contain', '至少 8 碼');
-            cy.get('.formWrap [name="password"]').type('12345678');
+            cy.get('.formWrap [name="password"]').clear().type(fake.password);
+            cy.get('.formWrap .error-mesg').should('contain', errorMesg);
+            cy.get('.formWrap [name="confirm_password"]').type('12345678');
+            cy.get('.formWrap button[type="submit"]').click();
+            cy.get('.formWrap .error-mesg').should('contain', '兩次輸入的密碼可能不同');
+            cy.get('.formWrap [name="confirm_password"]').clear().type(fake.password);
             cy.get('.formWrap .error-mesg').should('not.exist');
             cy.get('.formWrap button[type="submit"]').click();
 
             // alert 錯誤
             cy.on('window:alert', (mesg) => {
 
-                expect(mesg).to.deep.equal(['detail: 用户名或者密码错误。']);
+                expect(mesg).to.deep.equal(['email: 请输入合法的邮件地址。']);
 
             });
 
         });
 
-        it('successful signin', () => {
+        it('successful register', () => {
 
-            cy.intercept('**/api/login').as('signin');
             cy.get('.formWrap [name="email"]').type(fake.account);
             cy.get('.formWrap [name="password"]').type(fake.password);
-
-            // "點我驗證" 按鈕
-            cy.get('.formWrap [type="button"]')
-                .contains('點我驗證')
-                .click();
-
+            cy.get('.formWrap [name="confirm_password"]').type(fake.password);
+            cy.get('.formWrap .checkmark').click();
             cy.get('.formWrap button[type="submit"]').click();
 
-            // localhost 環境才需要手動加 token
-            cy.wait('@signin').then((xhr) => {
-
-                cy.setCookie('token', xhr.response.body.data.token);
-                cy.visit('/');
-
-            });
-
-            cy.getCookie('token').should('exist');
-            cy.get('header [type="button"]').should('contain', '我的帳號');
-
-        });
-
-    });
-
-    context('Reusable "signin" custom command', () => {
-
-        Cypress.Commands.add('mkwsignin', (
-            account = 'abc@gmail.com',
-            password = 'abc123456'
-        ) => {
-
-            // localhost 環境才需要手動加 token
-            cy.intercept('**/api/login').as('signin');
-            cy.get('.formWrap [name="email"]').type(account);
-            cy.get('.formWrap [name="password"]').type(password);
-
-            // "點我驗證" 按鈕
-            cy.get('.formWrap [type="button"]')
-                .contains('點我驗證')
-                .click();
-
-            cy.get('.formWrap button[type="submit"]').click();
-            cy.wait('@signin').then((xhr) => {
-
-                cy.setCookie('token', xhr.response.body.data.token);
-
-            });
-
-        });
-
-        beforeEach(() => cy.mkwsignin());
-
-        it('can visit home page', () => {
-
-            cy.visit('/');
-            cy.get('header [type="button"]').should('contain', '我的帳號');
-
-        });
-
-        it('can simply request other authenticated pages', () => {
-
-            cy.visit('/');
-            cy.get('header [type="button"]').click();
-            cy.get('header [type="button"]')
-                .next()
-                .should('exist')
-                .find('.menu-item')
-                .contains('會員中心')
-                .should('have.attr', 'href', '/member/account')
-                .click();
-
-            cy.location('pathname').should('eq', '/member/account');
+            // 驗證信提示
+            cy.get('.MuiDialog-container').should('contain', '請至信箱收取驗證信並啟用帳號。');
+            cy.get('.MuiDialog-container button').click();
 
         });
 

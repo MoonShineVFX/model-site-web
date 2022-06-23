@@ -145,6 +145,7 @@ const Signin = ({ langs }) => {
                                 <Links
                                     url="/forgot_password"
                                     title={langs.text_forgot_password}
+                                    data-link="forgot-password"
                                 >
                                     {langs.text_forgot_password}
                                 </Links>

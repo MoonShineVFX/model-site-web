@@ -25,8 +25,9 @@ describe('Footer', () => {
             .should('have.length', 2)
             .each(($elem, idx) => {
 
-                cy.get($elem).should('have.attr', 'href', $elem.attr('href'));
-                cy.get($elem).should('contain', $elem.text());
+                cy.get($elem)
+                    .should('have.attr', 'href', $elem.attr('href'))
+                    .and('contain', $elem.text());
 
                 // 先刪除另開分頁屬性
                 if (idx !== 1) cy.get($elem).invoke('removeAttr', 'target').click();
@@ -56,9 +57,7 @@ describe('Footer', () => {
     it('change to other language with en', () => {
 
         cy.get('select[name="lang"]').select('en');
-        cy.get('select[name="lang"] :selected')
-            .should('contain', 'English');
-
+        cy.get('select[name="lang"] :selected').should('contain', 'English');
         cy.location('pathname').should('include', '/en');
 
     });

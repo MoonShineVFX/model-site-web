@@ -238,7 +238,9 @@ const FormatAndRendererLayout = styled('ul')(({ theme }) => ({
 
 //
 const DemoImageWrapLayout = styled(ItemsWrap)(({ theme }) => ({
-    margin: '40px 0',
+    '&[data-section="demo-image"]': {
+        margin: '40px 0',
+    },
     [theme.breakpoints.up('mobile')]: {
         margin: '80px 0 100px',
     },
@@ -267,8 +269,15 @@ const DemoImageLayout = styled('div')(({ theme }) => ({
 
 // 你可能會喜歡
 const RelativeProductsLayout = styled(ItemsWrap)(({ theme }) => ({
+    overflowX: 'hidden',
+    '.items': {
+        display: 'flex',
+        margin: '0 -15px',
+        overflowX: 'auto',
+    },
     '.itemWrap': {
-        minWidth: '180px',
+        minWidth: '282px',
+        padding: '0 15px',
     },
     '.title': {
         WebkitLineClamp: theme.lineClamp(1),
@@ -276,16 +285,22 @@ const RelativeProductsLayout = styled(ItemsWrap)(({ theme }) => ({
     'img': {
         height: '100%',
     },
+    [theme.breakpoints.down('md')]: {
+        '.itemWrap': {
+            minWidth: '218px',
+        },
+    },
     [theme.breakpoints.down('mobile')]: {
         padding: '0 30px',
         '.items': {
-            overflowX: 'auto',
+            margin: '0 -8px',
         },
         '.itemWrap': {
-            maxWidth: '180px',
-            '.item': {
-                width: '100%',
-            },
+            minWidth: '180px',
+            padding: '0 8px',
+        },
+        '.item': {
+            width: 'auto',
         },
     },
 }));

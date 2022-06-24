@@ -75,8 +75,9 @@ describe('Header', () => {
                 .find('.menu-item')
                 .each(($elem) => {
 
-                    cy.get($elem).should('have.attr', 'href', $elem.attr('href'));
-                    cy.get($elem).should('contain', $elem.text());
+                    cy.get($elem)
+                        .should('have.attr', 'href', $elem.attr('href'))
+                        .and('contain', $elem.text());
 
                 });
 

@@ -13,21 +13,16 @@ describe('/about', () => {
 
         cy.get('[data-section="banner"]').then(($elem) => {
 
-            const $thumb = $elem.find('.thumb img');
-            const $desc = $elem.find('.description');
-
             cy.get($elem)
                 .find('.thumb img')
                 .should('exist')
-                .and('have.attr', 'src', $thumb.attr('src'));
-
-            cy.get($desc)
+                .and('have.attr', 'src', $elem.find('.thumb img').attr('src'))
+                .parents($elem)
                 .find('.title')
-                .should('contain', $desc.find('.title').text());
-
-            cy.get($desc)
+                .should('contain', $elem.find('.description .title').text())
+                .parent()
                 .find('p')
-                .should('contain', $desc.find('p').text());
+                .should('contain', $elem.find('.description p').text());
 
         });
 

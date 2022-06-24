@@ -3,6 +3,8 @@ const fake = {
     password: 'abc123456',
 };
 
+const errorMesg = '此欄位為必填';
+
 describe('/signin', () => {
 
     beforeEach(() => cy.visit('/signin'));
@@ -18,13 +20,13 @@ describe('/signin', () => {
 
             cy.get('.form-row-btns button')
                 .should('have.length', 4)
-                .each(($btn, idx) => {
+                .each(($btn) => {
 
                     cy.get($btn).should('contain', $btn.text());
 
-                });
-
-            cy.get('.form-row-btns a')
+                })
+                .parent()
+                .find('a')
                 .contains('忘記密碼')
                 .should('have.attr', 'href', '/forgot_password');
 
@@ -33,7 +35,7 @@ describe('/signin', () => {
         it('require account (email)', () => {
 
             cy.get('.formWrap form').submit();
-            cy.get('.formWrap .error-mesg').should('contain', '此欄位為必填');
+            cy.get('.formWrap .error-mesg').should('contain', errorMesg);
 
         });
 
@@ -41,7 +43,7 @@ describe('/signin', () => {
 
             cy.get('.formWrap [name="email"]').type(fake.account);
             cy.get('.formWrap form').submit();
-            cy.get('.formWrap .error-mesg').should('contain', '此欄位為必填');
+            cy.get('.formWrap .error-mesg').should('contain', errorMesg);
 
         });
 

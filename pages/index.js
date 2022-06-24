@@ -45,7 +45,11 @@ const Home = ({ langs, pageData }) => {
                     <Banner pageData={pageData} />
             }
 
-            <ItemsWrap title={langs.home_section_title01} url="/product/list?page=1">
+            <ItemsWrap
+                title={langs.home_section_title01}
+                url="/product/list?page=1"
+                data-section="product"
+            >
                 <ItemNewArrivalLayout
                     container
                     wrap="nowrap"
@@ -83,7 +87,11 @@ const Home = ({ langs, pageData }) => {
                 </ItemNewArrivalLayout>
             </ItemsWrap>
 
-            <ItemsWrap title={langs.home_section_title02} url="/tutorial">
+            <ItemsWrap
+                title={langs.home_section_title02}
+                url="/tutorial"
+                data-section="tutorial"
+            >
                 <ItemTutorialLayout>
                     {
                         pageData.tutorials.map(({ id, title, description, imgUrl, link }) => (

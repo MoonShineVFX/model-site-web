@@ -235,6 +235,7 @@ const ProductDetail = ({ langs, pageData }) => {
             <DemoImageWrapLayout
                 title={langs.product_detail_section_title01}
                 showMore={false}
+                data-section="demo-image"
             >
                 <Grid
                     container
@@ -250,7 +251,7 @@ const ProductDetail = ({ langs, pageData }) => {
                     }}
                 >
                     {
-                        pageData.previews.map(({ id, url }) => (
+                        pageData.previews.map(({ id, url }, idx) => (
 
                             <Grid
                                 key={id}
@@ -261,6 +262,7 @@ const ProductDetail = ({ langs, pageData }) => {
                                 <DemoImageLayout
                                     className="Model-effect-brightness"
                                     onClick={() => handleClickImgEnlarge(url, id)}
+                                    data-index={idx}
                                 >
                                     <img
                                         src={url}
@@ -282,31 +284,23 @@ const ProductDetail = ({ langs, pageData }) => {
                         title={langs.product_detail_section_title02}
                         showMore={false}
                     >
-                        <Grid
-                            container
-                            wrap="nowrap"
-                            className="items"
-                            spacing={{ xs: '12px', mobile: '30px' }}
-                        >
+                        <div className="items">
                             {
                                 pageData.relativeProducts.map(({ id, title, price, imgUrl }, idx) => (
 
-                                    <Grid
+                                    <div
                                         key={idx}
-                                        item
-                                        xs={12}
-                                        md={3}
                                         className="itemWrap"
                                     >
                                         <Item
                                             url={`/product/${id}`}
                                             data={{ title, price, imgUrl }}
                                         />
-                                    </Grid>
+                                    </div>
 
                                 ))
                             }
-                        </Grid>
+                        </div>
                     </RelativeProductsLayout>
             }
 

@@ -20,15 +20,18 @@ describe('/tutorial', () => {
         cy.get('main .Model-container .MuiGrid-item')
             .each(($elem) => {
 
-                const $item = $elem.find('.item');
-
                 cy.get($elem).children().should('have.class', 'item');
-                cy.get($item).should('have.attr', 'href', $item.attr('href'));
-                cy.get($item).should('contain', $item.text());
-                cy.get($item)
+
+                cy.get($elem)
+                    .find('.item')
+                    .should('have.attr', 'href', $elem.find('.item').attr('href'))
                     .find('img')
                     .should('exist')
-                    .and('have.attr', 'src', $item.find('img').attr('src'));
+                    .and('have.attr', 'src', $elem.find('.item-thumb img').attr('src'));
+
+                cy.get($elem)
+                    .find('.item-content .title')
+                    .should('contain', $elem.find('.item-content .title').text());
 
             });
 

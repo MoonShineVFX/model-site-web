@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BtnDirectLayout } from '../member/memberSignLayout';
 import { BoxWrapLayout } from './accountLayout';
@@ -12,8 +12,24 @@ const MyAccount = ({ data }) => {
     // Context
     const { deftags } = useContext(GlobalContext);
 
+    // State
+    const [profile, setProfile] = useState(data);
+
     // React Hook Form
-    const { handleSubmit, register } = useForm();
+    const {
+        handleSubmit,
+        register,
+        formState: { errors },
+        reset,
+    } = useForm();
+
+    useEffect(() => {
+
+        const { email, ...rest } = data;
+        setProfile(data);
+        reset(rest);
+
+    }, [reset, data]);
 
     // 送資料
     const handleReqData = (reqData) => {
@@ -32,25 +48,31 @@ const MyAccount = ({ data }) => {
             </div>
 
             <form onSubmit={handleSubmit(handleReqData)}>
-                <FormRow name="realName">
+                <FormRow
+                    name="realName"
+                    errors={errors}
+                >
                     <div className="title">{deftags.cart_member_real_name}</div>
                     <input
                         type="text"
                         name="realName"
                         placeholder={deftags.cart_member_real_name}
-                        defaultValue={data.realName}
-                        {...register('realName')}
+                        defaultValue={profile.realName}
+                        {...register('realName', { required: true })}
                     />
                 </FormRow>
 
-                <FormRow name="address">
+                <FormRow
+                    name="address"
+                    errors={errors}
+                >
                     <div className="title">{deftags.cart_member_address}</div>
                     <input
                         type="text"
                         name="address"
                         placeholder={deftags.cart_member_address}
-                        defaultValue={data.address}
-                        {...register('address')}
+                        defaultValue={profile.address}
+                        {...register('address', { required: true })}
                     />
                 </FormRow>
 

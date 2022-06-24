@@ -6,6 +6,7 @@ const fake = {
 };
 
 const errorMesg = '此欄位為必填';
+const ms = 500;
 
 describe('/register', () => {
 
@@ -15,10 +16,11 @@ describe('/register', () => {
 
             cy.visit('/signin');
             cy.get('.btn-register button[type="button"]').click();
+            cy.wait(ms);
 
         });
 
-        it('display form, title, and redirect to signin link', () => {
+        it('display form and title', () => {
 
             cy.title().should('contain', '註冊');
             cy.get('.formWrap')
@@ -26,11 +28,9 @@ describe('/register', () => {
                 .and('contain', '註冊');
 
             cy.get('.form-row-btns button[type="button"]')
-                .should('have.length', 1)
-                .contains('回到登入頁')
-                .click();
+                .should('have.length', 1);
 
-            cy.location('pathname').should('eq', '/signin');
+            cy.location('pathname').should('eq', '/register');
 
         });
 

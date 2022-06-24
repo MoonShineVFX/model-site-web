@@ -3,6 +3,7 @@ const fake = {
 };
 
 const errorMesg = '此欄位為必填';
+const ms = 500;
 
 describe('/forgot_password', () => {
 
@@ -10,25 +11,23 @@ describe('/forgot_password', () => {
 
         cy.visit('/signin');
         cy.get('a[data-link="forgot-password"]').click();
+        cy.wait(ms);
 
     });
 
-    // it('display form, title, and redirect to signin link', () => {
+    it('display form, title', () => {
 
-    //     cy.title().should('contain', '忘記密碼');
-    //     cy.get('.formWrap')
-    //         .should('exist')
-    //         .and('contain', '忘記密碼');
+        cy.title().should('contain', '忘記密碼');
+        cy.get('.formWrap')
+            .should('exist')
+            .and('contain', '忘記密碼');
 
-    //     cy.get('.form-row-btns button[type="button"]')
-    //         .should('have.length', 1)
-    //         .contains('回到登入頁')
-    //         .click();
+        cy.get('.form-row-btns button[type="button"]')
+            .should('have.length', 1);
 
-    //     cy.location('pathname').should('eq', '/signin');
-    //     cy.get('a[data-link="forgot-password"]').click();
+        cy.location('pathname').should('eq', '/forgot_password');
 
-    // });
+    });
 
     it('require account (email)', () => {
 

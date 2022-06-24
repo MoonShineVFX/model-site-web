@@ -22,7 +22,7 @@ Cypress.Commands.add('deftag', (locale) => {
 
 // login
 Cypress.Commands.add('login', (
-    account = 'abc@gmail.com',
+    account = 'staff+test06235545@moonshine.tw',
     password = 'abc123456'
 ) => {
 

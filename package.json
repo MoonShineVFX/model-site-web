@@ -40,7 +40,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "cy:open": "cypress open",
-    "cy:run": "cypress run"
+    "cy:run": "cypress run",
+    "analyze": "cross-env ANALYZE=true next build",
+    "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
+    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
   },
   "eslintConfig": {
     "extends": [
@@ -61,6 +64,8 @@
     ]
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^12.1.6",
+    "cross-env": "^7.0.3",
     "cypress": "^10.1.0",
     "dotenv": "^16.0.1",
     "eslint-plugin-cypress": "^2.12.1"

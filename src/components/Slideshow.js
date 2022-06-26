@@ -118,6 +118,7 @@ const SlideShow = ({ data, showDot, children, ...rest }) => {
                 <Button
                     className="Model-y-align"
                     onClick={handleArrowLeft}
+                    aria-label="Left Arrow"
                     data-button="left"
                 >
                     <FontIcon icon={faChevronLeft} />
@@ -125,6 +126,7 @@ const SlideShow = ({ data, showDot, children, ...rest }) => {
                 <Button
                     className="Model-y-align"
                     onClick={handleArrowRight}
+                    aria-label="Right Arrow"
                     data-button="right"
                 >
                     <FontIcon icon={faChevronRight} />

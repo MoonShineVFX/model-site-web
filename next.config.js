@@ -1,4 +1,8 @@
-module.exports = {
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
+module.exports = withBundleAnalyzer({
     env: {
         HOST: process.env.NEXT_PUBLIC_HOST || 'market.moonshine.tw',
     },
@@ -9,6 +13,7 @@ module.exports = {
     },
     images: {
         domains: ['market-dev.moonshine.tw', 'market.moonshine.tw'],
+        formats: ['image/avif', 'image/webp'],
     },
     eslint: {
         ignoreDuringBuilds: true,
@@ -20,18 +25,6 @@ module.exports = {
                 destination: '/',
                 permanent: true,
             },
-            // {
-            //     source: '/:path((?!signin|register).*)',
-            //     has: [
-            //         {
-            //             type: 'cookie',
-            //             key: 'test',
-            //             value: '123',
-            //         },
-            //     ],
-            //     destination: '/signin',
-            //     permanent: false,
-            // },
         ]
     },
-}
+});

@@ -140,7 +140,7 @@ const SlideshowInfoLayout = styled('div')(({ theme }) => ({
 }));
 
 //
-const ItemNewArrivalLayout = styled(Grid)(({ theme }) => ({
+const ItemLatestLayout = styled(Grid)(({ theme }) => ({
     '.items': {
         minWidth: '180px',
     },
@@ -232,6 +232,6 @@ export {
     SlideShowWrapLayout,
     SlideShowItemLayout,
     SlideshowInfoLayout,
-    ItemNewArrivalLayout,
+    ItemLatestLayout,
     ItemTutorialLayout,
 };

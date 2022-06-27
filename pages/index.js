@@ -1,20 +1,26 @@
 import { Fragment, useContext, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { Grid } from '@mui/material';
 import {
     homeStyles,
-    ItemNewArrivalLayout,
+    ItemLatestLayout,
     ItemTutorialLayout,
 } from '../src/components/home/homeLayout';
 
 import Head from '../src/containers/Head';
 import Links from '../src/components/Links';
-import ItemsWrap from '../src/components/ItemsWrap';
+// import ItemsWrap from '../src/components/ItemsWrap';
 import Item from '../src/components/Item';
 import Banner from '../src/components/home/Banner';
 
 import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
 import useGoogleAnalytics from '../src/utils/useGoogleAnalytics';
+
+const ItemsWrap = dynamic(() => import('../src/components/ItemsWrap'), {
+    loading: () => `Loading...`,
+    ssr: false,
+});
 
 const Home = ({ langs, pageData }) => {
 
@@ -50,7 +56,7 @@ const Home = ({ langs, pageData }) => {
                 url="/product/list?page=1"
                 data-section="product"
             >
-                <ItemNewArrivalLayout
+                <ItemLatestLayout
                     container
                     wrap="nowrap"
                     columnSpacing={{
@@ -84,7 +90,7 @@ const Home = ({ langs, pageData }) => {
 
                         ))
                     }
-                </ItemNewArrivalLayout>
+                </ItemLatestLayout>
             </ItemsWrap>
 
             <ItemsWrap

@@ -1,8 +1,5 @@
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-    enabled: process.env.ANALYZE === 'true',
-});
-
-module.exports = withBundleAnalyzer({
+const { PHASE_DEVELOPMENT_SERVER } = require('next/constants');
+const config = {
     env: {
         HOST: process.env.NEXT_PUBLIC_HOST || 'market.moonshine.tw',
     },
@@ -27,4 +24,20 @@ module.exports = withBundleAnalyzer({
             },
         ]
     },
-});
+};
+
+module.exports = (phase, { defaultConfig }) => {
+
+    if (phase === PHASE_DEVELOPMENT_SERVER) {
+
+        const withBundleAnalyzer = require('@next/bundle-analyzer')({
+            enabled: process.env.ANALYZE === 'true',
+        });
+
+        return withBundleAnalyzer(config);
+
+    }
+
+    return config;
+
+};

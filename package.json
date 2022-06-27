@@ -41,13 +41,7 @@
     "eject": "react-scripts eject",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-<<<<<<< HEAD
     "analyze": "cross-env ANALYZE=true next build"
-=======
-    "analyze": "cross-env ANALYZE=true next build",
-    "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
-    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
->>>>>>> - Add next bundle analyzer
   },
   "eslintConfig": {
     "extends": [

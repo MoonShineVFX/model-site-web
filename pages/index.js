@@ -1,6 +1,7 @@
 import { Fragment, useContext, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { Grid } from '@mui/material';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import {
     homeStyles,
     ItemLatestLayout,
@@ -9,6 +10,8 @@ import {
 
 import Head from '../src/containers/Head';
 import Links from '../src/components/Links';
+import FontIcon from '../src/components/FontIcon';
+
 // import ItemsWrap from '../src/components/ItemsWrap';
 import Item from '../src/components/Item';
 import Banner from '../src/components/home/Banner';
@@ -18,7 +21,7 @@ import util from '../src/utils/util';
 import useGoogleAnalytics from '../src/utils/useGoogleAnalytics';
 
 const ItemsWrap = dynamic(() => import('../src/components/ItemsWrap'), {
-    loading: () => `Loading...`,
+    loading: () => <FontIcon icon={faSpinner} />,
     ssr: false,
 });
 

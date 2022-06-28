@@ -1,6 +1,8 @@
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import { ThemeProvider } from '@mui/material/styles';
 import { GlobalStyles, Box } from '@mui/material';
+import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
 
 import { GlobalProvider } from '../src/context/global.state';
 import theme from '../src/utils/theme';
@@ -8,6 +10,8 @@ import Header from '../src/containers/Header';
 import Content from '../src/containers/Content';
 import Footer from '../src/containers/Footer';
 import util from '../src/utils/util';
+
+config.autoAddCss = false;
 
 const styles = {
     body: {

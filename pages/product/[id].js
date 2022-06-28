@@ -1,4 +1,5 @@
 import { Fragment, useContext, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { Grid, useMediaQuery } from '@mui/material';
 
 import {
@@ -6,13 +7,11 @@ import {
     DetailWrapLayout,
     DetailContentLayout,
     FormatAndRendererLayout,
-    DemoImageWrapLayout,
-    DemoImageLayout,
-    RelativeProductsLayout,
 } from '../../src/components/product/productLayout';
 import Head from '../../src/containers/Head';
-import Item from '../../src/components/Item';
 import Buttons from '../../src/components/Buttons';
+import Loading from '../../src/components/Loading';
+import Images from '../../src/components/Images';
 import ImageEnlarge from '../../src/components/ImageEnlarge';
 
 import { GlobalContext } from '../../src/context/global.state';
@@ -22,6 +21,18 @@ import useQuery from '../../src/utils/useQuery';
 import useLocalStorage from '../../src/utils/useLocalStorage';
 import useGoogleAnalytics from '../../src/utils/useGoogleAnalytics';
 
+// dynamic
+const PreviewImage = dynamic(() => import('../../src/components/product/PreviewImage'), {
+    loading: () => <Loading />,
+    ssr: false,
+});
+
+const RelativeProductItem = dynamic(() => import('../../src/components/product/RelativeProductItem'), {
+    loading: () => <Loading />,
+    ssr: false,
+});
+
+//
 const {
     priceWithCommas,
     mappingTags,
@@ -67,9 +78,7 @@ const ProductDetail = ({ langs, pageData }) => {
         currEvent,
         tags,
         formStorageData,
-        formStorageDispatch,
         globalDispatch,
-        lightboxDispatch,
     } = useContext(GlobalContext);
 
     // State
@@ -82,17 +91,6 @@ const ProductDetail = ({ langs, pageData }) => {
         globalDispatch({ type: 'target_box', payload: '' });
 
     }, [visible, currEvent, globalDispatch]);
-
-    // 點圖放大
-    const handleClickImgEnlarge = (url, id) => {
-
-        lightboxDispatch({ type: 'SHOW', currEvent: 'viewImg' });
-        formStorageDispatch({
-            type: 'COLLECT',
-            payload: { id, imgUrl: url },
-        });
-
-    };
 
     // 加入購物車
     const handleAddToCart = () => {
@@ -137,7 +135,7 @@ const ProductDetail = ({ langs, pageData }) => {
 
             <DetailWrapLayout>
                 <div className="detail-banner">
-                    <img
+                    <Images
                         src={matches ? pageData.mobileImgUrl : pageData.imgUrl}
                         alt={pageData.title}
                         width="1200"
@@ -232,76 +230,16 @@ const ProductDetail = ({ langs, pageData }) => {
                 </DetailContentLayout>
             </DetailWrapLayout>
 
-            <DemoImageWrapLayout
+            <PreviewImage
                 title={langs.product_detail_section_title01}
                 showMore={false}
                 data-section="demo-image"
-            >
-                <Grid
-                    container
-                    rowSpacing={{
-                        xs: '20px',
-                        mobile: '40px',
-                        md: '60px',
-                    }}
-                    columnSpacing={{
-                        xs: '20px',
-                        mobile: '40px',
-                        md: '80px',
-                    }}
-                >
-                    {
-                        pageData.previews.map(({ id, url }, idx) => (
-
-                            <Grid
-                                key={id}
-                                item
-                                xs={6}
-                                mobile={6}
-                            >
-                                <DemoImageLayout
-                                    className="Model-effect-brightness"
-                                    onClick={() => handleClickImgEnlarge(url, id)}
-                                    data-index={idx}
-                                >
-                                    <img
-                                        src={url}
-                                        alt={id}
-                                        width="560"
-                                        height="317"
-                                    />
-                                </DemoImageLayout>
-                            </Grid>
-
-                        ))
-                    }
-                </Grid>
-            </DemoImageWrapLayout>
+                lists={pageData.previews}
+            />
 
             {
                 !!pageData.relativeProducts.length &&
-                    <RelativeProductsLayout
-                        title={langs.product_detail_section_title02}
-                        showMore={false}
-                    >
-                        <div className="items">
-                            {
-                                pageData.relativeProducts.map(({ id, title, price, imgUrl }, idx) => (
-
-                                    <div
-                                        key={idx}
-                                        className="itemWrap"
-                                    >
-                                        <Item
-                                            url={`/product/${id}`}
-                                            data={{ title, price, imgUrl }}
-                                        />
-                                    </div>
-
-                                ))
-                            }
-                        </div>
-                    </RelativeProductsLayout>
+                    <RelativeProductItem lists={pageData.relativeProducts} />
             }
 
             {

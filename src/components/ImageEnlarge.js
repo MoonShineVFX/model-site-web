@@ -1,9 +1,18 @@
 import { useContext, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import dynamic from 'next/dynamic';
 import { styled } from '@mui/system';
 import { IconButton } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
+
+import Loading from './Loading';
 import { GlobalContext } from '../context/global.state';
+
+// dynamic
+const Images = dynamic(() => import('./Images'), {
+    loading: () => <Loading />,
+    ssr: false,
+});
 
 //
 const ImageEnlargeLayout = styled('div')(({ theme }) => ({
@@ -42,6 +51,7 @@ const ImageEnlargeLayout = styled('div')(({ theme }) => ({
         position: 'absolute',
         right: '20px',
         top: '20px',
+        zIndex: '1',
         '&:hover': {
             backgroundColor: theme.palette.card.light,
         },
@@ -104,7 +114,12 @@ const ImageEnlarge = ({ id, imgUrl }) => {
         >
             <div className="Model-y-align image-wrap">
                 <CloseButton onClick={handleClose} />
-                <img src={imgUrl} alt={id} />
+                <Images
+                    src={imgUrl}
+                    alt={id}
+                    width="840"
+                    height="480"
+                />
             </div>
         </ImageEnlargeLayout>
 

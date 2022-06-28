@@ -4,8 +4,8 @@ import {
     useEffect,
     useState,
 } from 'react';
-
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 
 import {
     Grid,
@@ -13,23 +13,26 @@ import {
     ListItemText,
     ListItemIcon,
 } from '@mui/material';
-
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+
 import {
     GridLayout,
     ListTitleLayout,
     ListItemLayout,
-    ItemWrapLayout,
 } from '../../src/components/product/productLayout';
-
 import Head from '../../src/containers/Head';
-import FontIcon from '../../src/components/FontIcon';
-import Item from '../../src/components/Item';
+import Loading from '../../src/components/Loading';
 import Paginations from '../../src/components/Paginations';
 
 import { GlobalContext } from '../../src/context/global.state';
 import util from '../../src/utils/util';
 import useQuery from '../../src/utils/useQuery';
+
+// dynamic
+const ListItem = dynamic(() => import('../../src/components/product/ListItem'), {
+    loading: () => <Loading />,
+    ssr: false,
+});
 
 // 整理 URL 標籤格式
 const arrangeTags = (string) => {
@@ -162,35 +165,7 @@ const ProductList = ({ langs, pageData }) => {
                     {
                         pageData.products.length ? (
 
-                            <ItemWrapLayout
-                                container
-                                rowSpacing="40px"
-                                columnSpacing="16px"
-                            >
-                                {
-                                    pageData.products.map(({ id, title, price, imgUrl }, idx) => (
-
-                                        <Grid
-                                            key={id}
-                                            item
-                                            xs={6}
-                                            sm={4}
-                                            mobile={3}
-                                            data-index={idx}
-                                        >
-                                            <Item
-                                                type="product"
-                                                url={`/product/${id}`}
-                                                width="321"
-                                                height="186"
-                                                data={{ title, price, imgUrl }}
-                                                newPage
-                                            />
-                                        </Grid>
-
-                                    ))
-                                }
-                            </ItemWrapLayout>
+                            <ListItem lists={pageData.products} />
 
                         ) : <h2 className="no-product">{langs.product_no_data}</h2>
                     }

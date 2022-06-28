@@ -237,7 +237,7 @@ const FormatAndRendererLayout = styled('ul')(({ theme }) => ({
 }));
 
 //
-const DemoImageWrapLayout = styled(ItemsWrap)(({ theme }) => ({
+const PreviewImageWrapLayout = styled(ItemsWrap)(({ theme }) => ({
     '&[data-section="demo-image"]': {
         margin: '40px 0',
     },
@@ -314,7 +314,7 @@ export {
     DetailWrapLayout,
     DetailContentLayout,
     FormatAndRendererLayout,
-    DemoImageWrapLayout,
+    PreviewImageWrapLayout,
     DemoImageLayout,
     RelativeProductsLayout,
 };

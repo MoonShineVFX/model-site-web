@@ -10,7 +10,7 @@ import Links from '../Links';
 import { GlobalContext } from '../../context/global.state';
 import useGoogleAnalytics from '../../utils/useGoogleAnalytics';
 
-const Banner = ({ pageData }) => {
+const Banner = ({ lists }) => {
 
     // Context
     const { slideshowActive } = useContext(GlobalContext);
@@ -23,11 +23,11 @@ const Banner = ({ pageData }) => {
 
         <BannerWrapLayout>
             <SlideShowWrapLayout
-                data={pageData.banners}
+                data={lists}
                 className="banner-wrap"
             >
                 {
-                    pageData.banners.map(({
+                    lists.map(({
                         id,
                         productId,
                         title,

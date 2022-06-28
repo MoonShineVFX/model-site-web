@@ -1,18 +1,11 @@
 import { Fragment, useContext, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { Grid } from '@mui/material';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import {
-    homeStyles,
-    ItemLatestLayout,
-    ItemTutorialLayout,
-} from '../src/components/home/homeLayout';
 
+import { homeStyles, ItemLatestLayout } from '../src/components/home/homeLayout';
 import Head from '../src/containers/Head';
-import Links from '../src/components/Links';
-import FontIcon from '../src/components/FontIcon';
-
-// import ItemsWrap from '../src/components/ItemsWrap';
+import Loading from '../src/components/Loading';
+import ItemsWrap from '../src/components/ItemsWrap';
 import Item from '../src/components/Item';
 import Banner from '../src/components/home/Banner';
 
@@ -20,8 +13,9 @@ import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
 import useGoogleAnalytics from '../src/utils/useGoogleAnalytics';
 
-const ItemsWrap = dynamic(() => import('../src/components/ItemsWrap'), {
-    loading: () => <FontIcon icon={faSpinner} />,
+// dynamic
+const Tutorial = dynamic(() => import('../src/components/home/Tutorial'), {
+    loading: () => <Loading />,
     ssr: false,
 });
 
@@ -51,7 +45,7 @@ const Home = ({ langs, pageData }) => {
 
             {
                 !!pageData.banners.length &&
-                    <Banner pageData={pageData} />
+                    <Banner lists={pageData.banners} />
             }
 
             <ItemsWrap
@@ -101,34 +95,7 @@ const Home = ({ langs, pageData }) => {
                 url="/tutorial"
                 data-section="tutorial"
             >
-                <ItemTutorialLayout>
-                    {
-                        pageData.tutorials.map(({ id, title, description, imgUrl, link }) => (
-
-                            <Links
-                                key={id}
-                                url={link}
-                                title={title}
-                                className="itemWrap"
-                                newPage
-                            >
-                                <div className="item-thumb">
-                                    <img
-                                        src={imgUrl}
-                                        alt={title}
-                                        width="380"
-                                        height="206"
-                                    />
-                                </div>
-                                <div className="item-content">
-                                    <h3 className="title">{title}</h3>
-                                    <p>{description}</p>
-                                </div>
-                            </Links>
-
-                        ))
-                    }
-                </ItemTutorialLayout>
+                <Tutorial lists={pageData.tutorials} />
             </ItemsWrap>
         </Fragment>
 

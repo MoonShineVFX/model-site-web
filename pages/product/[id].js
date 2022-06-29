@@ -139,8 +139,8 @@ const ProductDetail = ({ langs, pageData }) => {
                     <Images
                         src={matches ? pageData.mobileImgUrl : pageData.imgUrl}
                         alt={pageData.title}
-                        width={1200}
-                        height={396}
+                        width="1200"
+                        height="396"
                     />
                 </div>
 
@@ -258,7 +258,12 @@ const ProductDetail = ({ langs, pageData }) => {
 
 export default ProductDetail;
 
-export async function getServerSideProps ({ params, locale }) {
+export async function getServerSideProps ({ res, params, locale }) {
+
+    res.setHeader(
+        'Cache-Control',
+        'public, max-age=31536000, stale-while-revalidate=31536000, immutable'
+    );
 
     const resData = await util.serviceServer({
         method: 'get',

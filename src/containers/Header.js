@@ -14,7 +14,6 @@ import Logo from '../components/Logo';
 import FontIcon from '../components/FontIcon';
 import Navbar from './Navbar';
 import SideNavIcon from './SideNavIcon';
-import Cart from '../components/member/Cart';
 import MyAccountBox from '../components/member/MyAccountBox';
 import SideNav from './SideNav';
 

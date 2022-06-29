@@ -37,6 +37,7 @@ const {
     priceWithCommas,
     mappingTags,
     arrangeFormatAndRender,
+    formatBytes,
 } = util;
 
 // 價格
@@ -52,7 +53,7 @@ const renderOtherInfo = (pageData, langs) => (
         </div>
         <div className="other-info-item">
             <div className="label">{langs.product_file_size}</div>
-            <p>{pageData.fileSize}</p>
+            <p>{formatBytes(pageData.fileSize)}</p>
         </div>
         <div className="other-info-item">
             <div className="label">{langs.product_per_image_size}</div>
@@ -138,8 +139,8 @@ const ProductDetail = ({ langs, pageData }) => {
                     <Images
                         src={matches ? pageData.mobileImgUrl : pageData.imgUrl}
                         alt={pageData.title}
-                        width="1200"
-                        height="396"
+                        width={1200}
+                        height={396}
                     />
                 </div>
 

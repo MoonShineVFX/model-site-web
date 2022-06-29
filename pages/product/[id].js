@@ -136,8 +136,8 @@ const ProductDetail = ({ langs, pageData }) => {
                     <Images
                         src={matches ? pageData.mobileImgUrl : pageData.imgUrl}
                         alt={pageData.title}
-                        width="1200"
-                        height="396"
+                        width={1200}
+                        height={396}
                     />
                 </div>
 

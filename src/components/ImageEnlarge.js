@@ -1,18 +1,10 @@
 import { useContext, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import dynamic from 'next/dynamic';
 import { styled } from '@mui/system';
 import { IconButton } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
-
-import Loading from './Loading';
+import LazyImages from './LazyImages';
 import { GlobalContext } from '../context/global.state';
-
-// dynamic
-const Images = dynamic(() => import('./Images'), {
-    loading: () => <Loading />,
-    ssr: false,
-});
 
 //
 const ImageEnlargeLayout = styled('div')(({ theme }) => ({
@@ -114,7 +106,7 @@ const ImageEnlarge = ({ id, imgUrl }) => {
         >
             <div className="Model-y-align image-wrap">
                 <CloseButton onClick={handleClose} />
-                <Images
+                <LazyImages
                     src={imgUrl}
                     alt={id}
                     width="840"

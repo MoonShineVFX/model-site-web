@@ -4,7 +4,7 @@ const RelativeProductItem = ({ lists }) => (
 
     <div className="items">
         {
-            pageData.relativeProducts.map(({ id, title, price, imgUrl }, idx) => (
+            lists.map(({ id, title, price, imgUrl }, idx) => (
 
                 <div
                     key={idx}

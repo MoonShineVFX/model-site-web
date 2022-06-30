@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { Grid } from '@mui/material';
 import { PreviewImageWrapLayout, DemoImageLayout } from './productLayout';
+import LazyImages from '../LazyImages';
 import { GlobalContext } from '../../context/global.state';
 
 const PreviewImage = ({ lists, ...rest }) => {
@@ -49,7 +50,7 @@ const PreviewImage = ({ lists, ...rest }) => {
                                 onClick={() => handleClickImgEnlarge(url, id)}
                                 data-index={idx}
                             >
-                                <img
+                                <LazyImages
                                     src={url}
                                     alt={id}
                                     width="560"

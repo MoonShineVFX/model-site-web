@@ -153,7 +153,7 @@ const DetailContentLayout = styled(Grid)(({ theme }) => ({
     },
     '.title': {
         fontSize: '1.8em',
-        margin: '10px 0',
+        margin: '0 0 10px', // Betty: 目前沒有 tag，上方不需要空間
     },
     '.description': {
         lineHeight: '2',
@@ -238,7 +238,7 @@ const FormatAndRendererLayout = styled('ul')(({ theme }) => ({
 
 //
 const PreviewImageWrapLayout = styled(ItemsWrap)(({ theme }) => ({
-    '&[data-section="demo-image"]': {
+    '&[data-section="preview-image"]': {
         margin: '40px 0',
     },
     [theme.breakpoints.up('mobile')]: {

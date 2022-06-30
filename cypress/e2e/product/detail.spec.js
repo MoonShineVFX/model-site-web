@@ -135,14 +135,14 @@ describe('/product/{id}', () => {
                 .invoke('removeAttr', 'target')
                 .click();
 
-            cy.get('[data-section="demo-image"] h2.title')
+            cy.get('[data-section="preview-image"] h2.title')
                 .should('contain', '商品內容展示圖')
-                .parents('[data-section="demo-image"]')
+                .parents('[data-section="preview-image"]')
                 .find('.MuiGrid-item')
                 .its('length')
                 .should('gte', 1);
 
-            cy.get('[data-section="demo-image"] .MuiGrid-item').each(($elem, _idx) => {
+            cy.get('[data-section="preview-image"] .MuiGrid-item').each(($elem, _idx) => {
 
                 cy.get($elem).find('img').then(($img) => {
 
@@ -178,7 +178,7 @@ describe('/product/{id}', () => {
                 .invoke('removeAttr', 'target')
                 .click();
 
-            cy.get('[data-section="demo-image"]').then(($elem) => {
+            cy.get('[data-section="preview-image"]').then(($elem) => {
 
                 // 你可能會喜歡區塊若沒有就跳過
                 if (!$elem.next().length) return;

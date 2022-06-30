@@ -15,7 +15,6 @@ const Images = ({
         alt={alt}
         width={width}
         height={height}
-        layout="responsive"
         {...rest}
     />
 

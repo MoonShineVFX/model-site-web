@@ -8,10 +8,15 @@ const Images = ({ src, alt, width, height, ...rest }) => (
         alt={alt}
         width={width}
         height={height}
+        layout="responsive"
         {...rest}
     />
 
 );
+
+Images.defaultProps = {
+    alt: 'Moonshine Market',
+};
 
 Images.propTypes = {
     src: PropTypes.string.isRequired,

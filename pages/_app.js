@@ -14,7 +14,7 @@ import util from '../src/utils/util';
 config.autoAddCss = false;
 
 const styles = {
-    body: {
+    'body': {
         lineHeight: '1.6',
         fontSize: '1em',
         fontFamily: 'Arial, 文泉驛正黑, WenQuanYi Zen Hei, 儷黑 Pro, LiHei Pro, 微軟正黑體, Microsoft JhengHei',
@@ -25,7 +25,7 @@ const styles = {
             boxSizing: 'border-box',
         },
     },
-    a: {
+    'a': {
         color: theme.palette.secondary.main,
         display: 'inline-block',
         textDecoration: 'none',
@@ -65,7 +65,7 @@ const styles = {
     'img': {
         maxWidth: '100%',
         maxHeight: '100%',
-        objectFit: 'cover',
+        // objectFit: 'cover', // Betty: comment to implement next/image
     },
     'select': {
         outline: 'none',

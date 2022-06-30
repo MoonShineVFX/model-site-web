@@ -7,12 +7,14 @@ import {
     DetailWrapLayout,
     DetailContentLayout,
     FormatAndRendererLayout,
+    RelativeProductsLayout,
 } from '../../src/components/product/productLayout';
 import Head from '../../src/containers/Head';
 import Buttons from '../../src/components/Buttons';
-import Loading from '../../src/components/Loading';
 import Images from '../../src/components/Images';
+import Loading from '../../src/components/Loading';
 import ImageEnlarge from '../../src/components/ImageEnlarge';
+import PreviewImage from '../../src/components/product/PreviewImage';
 
 import { GlobalContext } from '../../src/context/global.state';
 import util from '../../src/utils/util';
@@ -22,11 +24,6 @@ import useLocalStorage from '../../src/utils/useLocalStorage';
 import useGoogleAnalytics from '../../src/utils/useGoogleAnalytics';
 
 // dynamic
-const PreviewImage = dynamic(() => import('../../src/components/product/PreviewImage'), {
-    loading: () => <Loading />,
-    ssr: false,
-});
-
 const RelativeProductItem = dynamic(() => import('../../src/components/product/RelativeProductItem'), {
     loading: () => <Loading />,
     ssr: false,
@@ -234,13 +231,18 @@ const ProductDetail = ({ langs, pageData }) => {
             <PreviewImage
                 title={langs.product_detail_section_title01}
                 showMore={false}
-                data-section="demo-image"
+                data-section="preview-image"
                 lists={pageData.previews}
             />
 
             {
                 !!pageData.relativeProducts.length &&
-                    <RelativeProductItem lists={pageData.relativeProducts} />
+                    <RelativeProductsLayout
+                        title={langs.product_detail_section_title02}
+                        showMore={false}
+                    >
+                        <RelativeProductItem lists={pageData.relativeProducts} />
+                    </RelativeProductsLayout>
             }
 
             {

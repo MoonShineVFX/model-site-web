@@ -1,5 +1,6 @@
 import { ItemTutorialLayout } from './homeLayout';
 import Links from '../Links';
+import Images from '../Images';
 
 const Tutorial = ({ lists }) => (
 
@@ -15,7 +16,7 @@ const Tutorial = ({ lists }) => (
                     newPage
                 >
                     <div className="item-thumb">
-                        <img
+                        <Images
                             src={imgUrl}
                             alt={title}
                             width="380"

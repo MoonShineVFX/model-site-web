@@ -1,16 +1,16 @@
 import PropTypes from 'prop-types';
-import Image from 'next/image';
+import dynamic from 'next/dynamic';
+import Loading from './Loading';
 
-const Images = ({
-    src,
-    alt,
-    width,
-    height,
-    ...rest
-}) => (
+// dynamic
+const Images = dynamic(() => import('./Images'), {
+    loading: () => <Loading />,
+    ssr: false,
+});
 
-    <Image
-        // loader={({ src, w }) => `${src}?w=${w}`}
+const LazyImages = ({ src, alt, width, height, ...rest }) => (
+
+    <Images
         src={src}
         alt={alt}
         width={width}
@@ -20,11 +20,7 @@ const Images = ({
 
 );
 
-Images.defaultProps = {
-    alt: 'Moonshine Market',
-};
-
-Images.propTypes = {
+LazyImages.propTypes = {
     src: PropTypes.string.isRequired,
     alt: PropTypes.any.isRequired,
     width: PropTypes.oneOfType([
@@ -37,4 +33,4 @@ Images.propTypes = {
     ]).isRequired,
 };
 
-export default Images;
+export default LazyImages;

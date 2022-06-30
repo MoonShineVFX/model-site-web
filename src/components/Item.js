@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/system';
 import Links from './Links';
+import Images from './Images';
 import { GlobalContext } from '../context/global.state';
 import util from '../utils/util';
 
@@ -15,6 +16,9 @@ const ItemLayout = styled(Links)(({ theme }) => ({
     },
     '.title': {
         margin: '0',
+    },
+    'img': {
+        objectFit: 'cover',
     },
     '&.style-section': {
         borderRadius: '16px',
@@ -99,7 +103,7 @@ const Item = ({
             {...rest}
         >
             <div className="item-thumb">
-                <img
+                <Images
                     src={imgUrl}
                     alt={title}
                     width={width}

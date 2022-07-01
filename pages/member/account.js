@@ -32,7 +32,13 @@ const TabPanel = ({ value, indexKey, children, ...other }) => (
 );
 
 // Empty
-const EmptyMesg = ({ mesg = '您尚未購買任何模型。' }) => <p>{mesg}</p>;
+const EmptyMesg = () => {
+
+    // Context
+    const { deftags } = useContext(GlobalContext);
+    return <p>{deftags.member_no_data}</p>;
+
+};
 
 //
 const Account = ({ langs, pageData }) => {
@@ -59,11 +65,11 @@ const Account = ({ langs, pageData }) => {
     const types = {
         product: {
             title: langs.member_my_product,
-            component: pageData.list.length ? <MyProduct data={pageData.list} /> : <EmptyMesg mesg={langs.member_no_data} />,
+            component: pageData.list.length ? <MyProduct data={pageData.list} /> : <EmptyMesg />,
         },
         order: {
             title: langs.order_text_order_record,
-            component: orderRecordList.length ? <OrderRecord data={orderRecordList} /> : <EmptyMesg mesg={langs.member_no_data} />,
+            component: orderRecordList.length ? <OrderRecord data={orderRecordList} /> : <EmptyMesg />,
         },
         account: {
             title: langs.member_account_update,

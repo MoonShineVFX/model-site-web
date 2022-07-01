@@ -40,7 +40,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "cy:open": "cypress open",
-    "cy:run": "cypress run"
+    "cy:run": "cypress run",
+    "analyze": "cross-env ANALYZE=true next build"
   },
   "eslintConfig": {
     "extends": [

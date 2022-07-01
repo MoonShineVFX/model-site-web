@@ -297,7 +297,7 @@ const InvoiceForm = ({ items }) => {
                     <form
                         name="Newebpay"
                         method="POST"
-                        action={`https://${(NEXT_PUBLIC_HOST === 'market.moonshine.tw') ? 'core' : 'ccore'}.newebpay.com/MPG/mpg_gateway`}
+                        action={`https://${(process.env.NEXT_PUBLIC_HOST === 'market.moonshine.tw') ? 'core' : 'ccore'}.newebpay.com/MPG/mpg_gateway`}
                         ref={formRef}
                     >
                         {

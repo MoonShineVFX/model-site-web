@@ -7,6 +7,7 @@ import {
     SlideshowInfoLayout,
 } from './homeLayout';
 import Links from '../Links';
+import Images from '../Images';
 import { GlobalContext } from '../../context/global.state';
 import useGoogleAnalytics from '../../utils/useGoogleAnalytics';
 
@@ -56,7 +57,7 @@ const Banner = ({ lists }) => {
                                     {
                                         matches ? (
 
-                                            <img
+                                            <Images
                                                 src={mobileImgUrl}
                                                 alt={title}
                                                 width="436"
@@ -65,7 +66,7 @@ const Banner = ({ lists }) => {
 
                                         ) : (
 
-                                            <img
+                                            <Images
                                                 src={imgUrl}
                                                 alt={title}
                                                 width="840"

@@ -9,6 +9,7 @@ import util from '../utils/util';
 const { priceWithCommas, formatBytes } = util;
 
 const ItemLayout = styled(Links)(({ theme }) => ({
+    display: 'block',
     color: theme.palette.textColor,
     textDecoration: 'none',
     '.item-content': {
@@ -18,7 +19,7 @@ const ItemLayout = styled(Links)(({ theme }) => ({
         margin: '0',
     },
     'img': {
-        objectFit: 'cover',
+        // objectFit: 'cover',
     },
     '&.style-section': {
         borderRadius: '16px',

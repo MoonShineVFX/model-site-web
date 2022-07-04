@@ -28,6 +28,7 @@ const styles = {
     'a': {
         color: theme.palette.secondary.main,
         display: 'inline-block',
+        // display: 'block',
         textDecoration: 'none',
     },
     '.Model-container': {
@@ -63,8 +64,8 @@ const styles = {
         },
     },
     'img': {
-        maxWidth: '100%',
-        maxHeight: '100%',
+        // maxWidth: '100%',
+        // maxHeight: '100%',
         // objectFit: 'cover', // Betty: comment to implement next/image
     },
     'select': {

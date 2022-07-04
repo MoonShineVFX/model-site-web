@@ -1,15 +1,17 @@
 import { useContext } from 'react';
 import { styled } from '@mui/system';
 import Links from './Links';
+import Images from './Images';
 import { GlobalContext } from '../context/global.state';
 
 const LogoLayout = styled('span')(({ theme }) => ({
     '.logo-text': {
         width: '170px',
+        verticalAlign: 'middle',
     },
     'img': {
-        height: '100%',
-        verticalAlign: 'middle',
+        // height: '100%',
+        // verticalAlign: 'middle',
     },
     [theme.breakpoints.down('middle')]: {
         fontSize: '1.4em',
@@ -30,7 +32,7 @@ const Logo = ({ ...rest }) => {
                 className="logo-text"
                 title={deftags.text_logo}
             >
-                <img
+                <Images
                     src="/logo_large.png"
                     alt={deftags.text_logo}
                     width="291"

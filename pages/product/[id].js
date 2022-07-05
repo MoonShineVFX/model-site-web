@@ -138,6 +138,7 @@ const ProductDetail = ({ langs, pageData }) => {
                         alt={pageData.title}
                         width="1200"
                         height="396"
+                        isBlur
                     />
                 </div>
 

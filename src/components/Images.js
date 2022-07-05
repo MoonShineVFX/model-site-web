@@ -6,15 +6,27 @@ const Images = ({
     alt,
     width,
     height,
+    isOrigin,
+    isBlur,
     ...rest
 }) => (
 
     <Image
-        // loader={({ src, w }) => `${src}?w=${w}`}
         src={src}
         alt={alt}
         width={width}
         height={height}
+        {
+            ...isOrigin
+                ? { loader: ({ src, w }) => `${src}?w=${w}` }
+                : { layout: 'responsive' }
+        }
+        {
+            ...isBlur && {
+                placeholder: 'blur',
+                blurDataURL: src,
+            }
+        }
         {...rest}
     />
 
@@ -22,6 +34,8 @@ const Images = ({
 
 Images.defaultProps = {
     alt: 'Moonshine Market',
+    isOrigin: false,
+    isBlur: false,
 };
 
 Images.propTypes = {
@@ -35,6 +49,8 @@ Images.propTypes = {
         PropTypes.string,
         PropTypes.number,
     ]).isRequired,
+    isOrigin: PropTypes.bool,
+    isBlur: PropTypes.bool,
 };
 
 export default Images;

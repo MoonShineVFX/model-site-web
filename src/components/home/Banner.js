@@ -71,6 +71,7 @@ const Banner = ({ lists }) => {
                                                 alt={title}
                                                 width="840"
                                                 height="386"
+                                                isBlur
                                             />
 
                                         )

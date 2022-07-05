@@ -19,7 +19,7 @@ const ItemLayout = styled(Links)(({ theme }) => ({
         margin: '0',
     },
     'img': {
-        // objectFit: 'cover',
+        objectFit: 'cover',
     },
     '&.style-section': {
         borderRadius: '16px',
@@ -109,6 +109,7 @@ const Item = ({
                     alt={title}
                     width={width}
                     height={height}
+                    isBlur
                 />
             </div>
             <div className="item-content">

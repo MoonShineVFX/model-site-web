@@ -106,6 +106,9 @@ const SlideShowItemLayout = styled('div')(({ theme }) => ({
         borderRadius: '15px',
         display: 'flex',
         overflow: 'hidden',
+        'a': {
+            width: '840px',
+        },
     },
     '.price': {
         fontSize: '1.15em',

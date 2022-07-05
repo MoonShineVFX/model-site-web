@@ -93,6 +93,9 @@ const ListItemLayout = styled(ListItemButton)(({ theme }) => ({
 // Betty: 暫時隱藏 tag
 //
 const ItemWrapLayout = styled(Grid)(({ theme }) => ({
+    '.item-thumb > span': {
+        height: '100% !important', // Notes: 解決引用 next/image 圖片太小問題
+    },
     // display: 'flex',
     // flexWrap: 'wrap',
     // margin: '0 -8px 0',

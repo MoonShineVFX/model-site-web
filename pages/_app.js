@@ -28,7 +28,6 @@ const styles = {
     'a': {
         color: theme.palette.secondary.main,
         display: 'inline-block',
-        // display: 'block',
         textDecoration: 'none',
     },
     '.Model-container': {
@@ -62,11 +61,6 @@ const styles = {
         '&:hover': {
             filter: 'brightness(1.2)',
         },
-    },
-    'img': {
-        // maxWidth: '100%',
-        // maxHeight: '100%',
-        // objectFit: 'cover', // Betty: comment to implement next/image
     },
     'select': {
         outline: 'none',

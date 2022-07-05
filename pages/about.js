@@ -2,6 +2,7 @@ import React, { Fragment, useContext, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { styled } from '@mui/system';
 import Head from '../src/containers/Head';
+import Images from '../src/components/Images';
 import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
 
@@ -126,11 +127,12 @@ const About = ({ langs, pageData }) => {
 
             <BannerLayout data-section="banner">
                 <div className="thumb">
-                    <img
+                    <Images
                         src={imgUrl}
                         alt={title}
                         width="1200"
                         height="396"
+                        isBlur
                     />
                 </div>
 

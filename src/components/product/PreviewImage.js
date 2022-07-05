@@ -1,8 +1,15 @@
 import { useContext } from 'react';
+import dynamic from 'next/dynamic';
 import { Grid } from '@mui/material';
 import { PreviewImageWrapLayout, DemoImageLayout } from './productLayout';
-import LazyImages from '../LazyImages';
+import Loading from '../Loading';
 import { GlobalContext } from '../../context/global.state';
+
+// dynamic
+const Images = dynamic(() => import('../Images'), {
+    loading: () => <Loading />,
+    ssr: false,
+});
 
 const PreviewImage = ({ lists, ...rest }) => {
 
@@ -50,7 +57,7 @@ const PreviewImage = ({ lists, ...rest }) => {
                                 onClick={() => handleClickImgEnlarge(url, id)}
                                 data-index={idx}
                             >
-                                <LazyImages
+                                <Images
                                     src={url}
                                     alt={id}
                                     width="560"

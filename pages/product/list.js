@@ -23,16 +23,11 @@ import {
 import Head from '../../src/containers/Head';
 import Loading from '../../src/components/Loading';
 import Paginations from '../../src/components/Paginations';
+import ListItem from '../../src/components/product/ListItem';
 
 import { GlobalContext } from '../../src/context/global.state';
 import util from '../../src/utils/util';
 import useQuery from '../../src/utils/useQuery';
-
-// dynamic
-const ListItem = dynamic(() => import('../../src/components/product/ListItem'), {
-    loading: () => <Loading />,
-    ssr: false,
-});
 
 // 整理 URL 標籤格式
 const arrangeTags = (string) => {

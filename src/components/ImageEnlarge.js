@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { styled } from '@mui/system';
 import { IconButton } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
-import LazyImages from './LazyImages';
+import Images from './Images';
 import { GlobalContext } from '../context/global.state';
 
 //
@@ -29,7 +29,7 @@ const ImageEnlargeLayout = styled('div')(({ theme }) => ({
         },
     },
     '.image-wrap': {
-        height: '90vh',
+        height: '80vh',
         textAlign: 'center',
         display: 'inline-block',
         position: 'relative',
@@ -106,11 +106,13 @@ const ImageEnlarge = ({ id, imgUrl }) => {
         >
             <div className="Model-y-align image-wrap">
                 <CloseButton onClick={handleClose} />
-                <LazyImages
+                <Images
                     src={imgUrl}
                     alt={id}
                     width="840"
                     height="480"
+                    isOrigin
+                    isBlur
                 />
             </div>
         </ImageEnlargeLayout>

@@ -9,10 +9,6 @@ const LogoLayout = styled('span')(({ theme }) => ({
         width: '170px',
         verticalAlign: 'middle',
     },
-    'img': {
-        // height: '100%',
-        // verticalAlign: 'middle',
-    },
     [theme.breakpoints.down('middle')]: {
         fontSize: '1.4em',
     },
@@ -37,6 +33,7 @@ const Logo = ({ ...rest }) => {
                     alt={deftags.text_logo}
                     width="291"
                     height="78"
+                    priority
                 />
             </Links>
         </LogoLayout>

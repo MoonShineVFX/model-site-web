@@ -4,6 +4,7 @@ import {
     useEffect,
     useState,
 } from 'react';
+import dynamic from 'next/dynamic';
 import { useForm } from 'react-hook-form';
 
 import {
@@ -22,10 +23,16 @@ import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
 import utilConst from '../src/utils/util.const';
 import Service from '../src/utils/util.service';
-import useReCaptchaVerify from '../src/utils/useReCaptchaVerify';
+// import useReCaptchaVerify from '../src/utils/useReCaptchaVerify';
 
 const { redirectTo } = util;
 const { paswdConfig } = utilConst;
+
+// dynamic
+const useReCaptchaVerify = dynamic(() => import('../src/utils/useReCaptchaVerify'), {
+    loading: () => <Loading />,
+    ssr: false,
+});
 
 const Signin = ({ langs }) => {
 

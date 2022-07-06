@@ -1,6 +1,5 @@
 import { useEffect, useContext } from 'react';
-import dynamic from 'next/dynamic';
-// import TawkTo from 'tawkto-react';
+import TawkTo from 'tawkto-react';
 import { Box, useMediaQuery } from '@mui/material';
 import { faShoppingCart, faThLarge } from '@fortawesome/free-solid-svg-icons';
 
@@ -53,9 +52,7 @@ const Header = () => {
     const [cartItem, setCartItem] = useLocalStorage('cartItem');
 
     // 第三方: Tawk 線上客服
-    useEffect(async () => {
-
-        const TawkTo = (await import('tawkto-react')).default;
+    useEffect(() => {
 
         const tawk = new TawkTo(
             process.env.NEXT_PUBLIC_TAWKTO_PROPERTYID,

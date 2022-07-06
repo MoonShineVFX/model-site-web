@@ -19,8 +19,8 @@ const Tutorial = ({ lists }) => (
                         <Images
                             src={imgUrl}
                             alt={title}
-                            width="380"
-                            height="206"
+                            width="273"
+                            height="161"
                         />
                     </div>
                     <div className="item-content">

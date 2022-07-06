@@ -1,6 +1,7 @@
 module.exports = async (phase, { defaultConfig }) => {
 
     const config = {
+        productionBrowserSourceMaps: true,
         env: {
             HOST: process.env.NEXT_PUBLIC_HOST || 'market.moonshine.tw',
         },

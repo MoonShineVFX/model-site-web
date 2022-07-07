@@ -1,26 +1,22 @@
 import { useEffect, useContext } from 'react';
+import dynamic from 'next/dynamic';
 import TawkTo from 'tawkto-react';
 import { Box, useMediaQuery } from '@mui/material';
-import { faShoppingCart, faThLarge } from '@fortawesome/free-solid-svg-icons';
+import { faThLarge } from '@fortawesome/free-solid-svg-icons';
 
-import {
-    AppBarLayout,
-    HeaderLayout,
-    ShoppingCartLayout,
-} from './globalLayout';
-import { ButtonLink } from '../components/Links';
-import Buttons from '../components/Buttons';
+import { AppBarLayout, HeaderLayout } from './globalLayout';
 import Logo from '../components/Logo';
-import FontIcon from '../components/FontIcon';
 import Navbar from './Navbar';
 import SideNavIcon from './SideNavIcon';
-import MyAccountBox from '../components/member/MyAccountBox';
 import SideNav from './SideNav';
 
 import { GlobalContext } from '../context/global.state';
 import Service from '../utils/util.service';
 import useLocalStorage from '../utils/useLocalStorage';
 import useGoogleAnalytics from '../utils/useGoogleAnalytics';
+
+// dynamic
+const Status = dynamic(() => import('./header/Status'));
 
 const arrangeCartList = (array) => array.reduce((acc, obj) => {
 
@@ -39,11 +35,9 @@ const Header = () => {
 
     // Context
     const {
-        deftags,
         logged,
         targetBox,
         sideNav,
-        cart,
         globalDispatch,
     } = useContext(GlobalContext);
 
@@ -123,34 +117,7 @@ const Header = () => {
                     display: { xs: 'none', mobile: 'flex' },
                     alignItems: 'center',
                 }}>
-                    <ShoppingCartLayout
-                        url={`/${logged ? 'cart' : 'signin'}`}
-                        data-device={matches ? 'mobile' : 'desktop'}
-                    >
-                        <FontIcon icon={faShoppingCart} />
-                        <span className="count">({cart.count})</span>
-                    </ShoppingCartLayout>
-
-                    {
-                        logged ? (
-
-                            <Buttons
-                                text={deftags.member_my_account}
-                                variant="outlined"
-                                onClick={() => handleClickBox('myAccount')}
-                            />
-
-                        ) : (
-
-                            <ButtonLink
-                                url="/signin"
-                                text={deftags.text_signin}
-                            />
-
-                        )
-                    }
-
-                    {(targetBox === 'myAccount') && <MyAccountBox />}
+                    <Status />
                 </Box>
 
                 <Box sx={{

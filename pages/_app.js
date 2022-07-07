@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import { ThemeProvider } from '@mui/material/styles';
 import { GlobalStyles, Box } from '@mui/material';
@@ -6,13 +7,15 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 
 import { GlobalProvider } from '../src/context/global.state';
 import theme from '../src/utils/theme';
-import Header from '../src/containers/Header';
-import Content from '../src/containers/Content';
-import Footer from '../src/containers/Footer';
 import util from '../src/utils/util';
 import globalStyles from '../src/utils/globalStyles';
 
 config.autoAddCss = false;
+
+// dynamic
+const Header = dynamic(() => import('../src/containers/Header'), { ssr: false });
+const Content = dynamic(() => import('../src/containers/Content'), { ssr: false });
+const Footer = dynamic(() => import('../src/containers/Footer'), { ssr: false });
 
 //
 const WebSite = ({ Component, pageProps, langs, ...rest }) => (

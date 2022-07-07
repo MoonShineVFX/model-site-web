@@ -72,6 +72,7 @@ const Banner = ({ lists }) => {
                                                 width="840"
                                                 height="386"
                                                 isBlur
+                                                priority
                                             />
 
                                         )

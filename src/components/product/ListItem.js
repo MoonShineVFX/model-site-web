@@ -1,6 +1,9 @@
+import dynamic from 'next/dynamic';
 import { Grid } from '@mui/material';
 import { ItemWrapLayout } from './productLayout';
-import Item from '../Item';
+
+// dynamic
+const Item = dynamic(() => import('../Item'), { ssr: false });
 
 const ListItem = ({ lists }) => (
 

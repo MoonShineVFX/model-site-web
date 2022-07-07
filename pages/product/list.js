@@ -1,46 +1,22 @@
-import {
-    Fragment,
-    useContext,
-    useEffect,
-    useState,
-} from 'react';
+import { Fragment, useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
+import { Grid } from '@mui/material';
 
-import {
-    Grid,
-    List,
-    ListItemText,
-    ListItemIcon,
-} from '@mui/material';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-
-import {
-    GridLayout,
-    ListTitleLayout,
-    ListItemLayout,
-} from '../../src/components/product/productLayout';
+import { GridLayout } from '../../src/components/product/productLayout';
 import Head from '../../src/containers/Head';
 import Loading from '../../src/components/Loading';
-import Paginations from '../../src/components/Paginations';
-import ListItem from '../../src/components/product/ListItem';
-
 import { GlobalContext } from '../../src/context/global.state';
 import util from '../../src/utils/util';
 import useQuery from '../../src/utils/useQuery';
 
-// 整理 URL 標籤格式
-const arrangeTags = (string) => {
-
-    let data = string.split(',');
-    return data.reduce((acc, curr) => {
-
-        acc[curr] = true;
-        return acc;
-
-    }, {});
-
-};
+// dynamic
+const Category = dynamic(() => import('../../src/components/product/Category'), { ssr: false });
+const ListItem = dynamic(() => import('../../src/components/product/ListItem'), {
+    loading: () => <Loading />,
+    ssr: false,
+});
+const Paginations = dynamic(() => import('../../src/components/Paginations'), { ssr: false });
 
 const ProductList = ({ langs, pageData }) => {
 
@@ -49,43 +25,14 @@ const ProductList = ({ langs, pageData }) => {
     const query = useQuery();
 
     // Context
-    const {
-        tags: tagsOpt,
-        globalDispatch,
-    } = useContext(GlobalContext);
-
-    // State
-    const [selectedTag, setSelectedTag] = useState({});
+    const { globalDispatch } = useContext(GlobalContext);
 
     useEffect(() => {
-
-        // 沒有 tag 也不要丟空值
-        if (query.tags) setSelectedTag(arrangeTags(query.tags));
 
         globalDispatch({ type: 'sidenav', payload: false });
         globalDispatch({ type: 'target_box', payload: '' });
 
     }, []);
-
-    // 選擇標籤
-    const handleSelectedTag = (id) => {
-
-        // 另外用物件暫存選取行為，若丟到 state 會有非同步問題
-        let obj = {};
-        obj = {
-            ...selectedTag,
-            [id]: !selectedTag[id],
-        };
-
-        let param = (Object.keys(obj).some((id) => obj[id])) ? { ...query, tags: Object.keys(obj).filter((key) => obj[key]).join(',') } : { page: query.page };
-
-        setSelectedTag(obj);
-        router.push({
-            pathname: router.pathname,
-            query: { ...param },
-        });
-
-    };
 
     // Click page
     const handleChangePage = (e, page) => {
@@ -112,7 +59,11 @@ const ProductList = ({ langs, pageData }) => {
                 className="page-product"
             >
                 {
-                    // Betty: 暫時隱藏 tag
+                    /**
+                     * Notes:
+                     * 1. 暫時隱藏 tag
+                     * 2. 之後有顯示分類，右側 grid 可以加 loading
+                     */
                     false &&
                         <Grid
                             item
@@ -122,30 +73,7 @@ const ProductList = ({ langs, pageData }) => {
                             component="aside"
                             className="tagsList"
                         >
-                            <ListTitleLayout>{langs.product_select_label}</ListTitleLayout>
-                            <List>
-                                {
-                                    tagsOpt.map(({ id, name }) => (
-
-                                        <ListItemLayout
-                                            key={id}
-                                            selected={selectedTag[id]}
-                                            onClick={() => handleSelectedTag(id)}
-                                            component="li"
-                                        >
-                                            <ListItemText>{name}</ListItemText>
-
-                                            {
-                                                selectedTag[id] &&
-                                                    <ListItemIcon className="checked">
-                                                        <FontIcon icon={faCheck} />
-                                                    </ListItemIcon>
-                                            }
-                                        </ListItemLayout>
-
-                                    ))
-                                }
-                            </List>
+                            <Category />
                         </Grid>
                 }
 

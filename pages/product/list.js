@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import { Grid } from '@mui/material';
 
-import { GridLayout } from '../../src/components/product/productLayout';
 import Head from '../../src/containers/Head';
 import Loading from '../../src/components/Loading';
 import { GlobalContext } from '../../src/context/global.state';
@@ -14,9 +13,11 @@ import useQuery from '../../src/utils/useQuery';
 const Category = dynamic(() => import('../../src/components/product/Category'), { ssr: false });
 const ListItem = dynamic(() => import('../../src/components/product/ListItem'), {
     loading: () => <Loading />,
-    ssr: false,
 });
 const Paginations = dynamic(() => import('../../src/components/Paginations'), { ssr: false });
+const GridLayout = dynamic(() =>
+    import('../../src/components/product/productLayout').then((mod) => mod.GridLayout)
+);
 
 const ProductList = ({ langs, pageData }) => {
 

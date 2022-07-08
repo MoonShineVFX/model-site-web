@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
+// import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import { ThemeProvider } from '@mui/material/styles';
 import { GlobalStyles, Box } from '@mui/material';
 import { config } from '@fortawesome/fontawesome-svg-core';
@@ -16,6 +16,9 @@ config.autoAddCss = false;
 const Header = dynamic(() => import('../src/containers/Header'), { ssr: false });
 const Content = dynamic(() => import('../src/containers/Content'), { ssr: false });
 const Footer = dynamic(() => import('../src/containers/Footer'), { ssr: false });
+const GoogleReCaptchaProvider = dynamic(() =>
+    import('react-google-recaptcha-v3').then((mod) => mod.GoogleReCaptchaProvider)
+);
 
 //
 const WebSite = ({ Component, pageProps, langs, ...rest }) => (
@@ -24,20 +27,20 @@ const WebSite = ({ Component, pageProps, langs, ...rest }) => (
         <GlobalStyles styles={globalStyles} />
 
         <GlobalProvider>
-            <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY}>
-                <Header />
+            <Header />
+            <Box
+                component="main"
+                sx={{ display: 'flex' }}
+            >
                 <Box
-                    component="main"
-                    sx={{ display: 'flex' }}
+                    component="div"
+                    className="Model-container"
+                    sx={{
+                        paddingTop: '20px',
+                        paddingBottom: '20px',
+                    }}
                 >
-                    <Box
-                        component="div"
-                        className="Model-container"
-                        sx={{
-                            paddingTop: '20px',
-                            paddingBottom: '20px',
-                        }}
-                    >
+                    <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY}>
                         <Content {...{ langs }}>
                             <Component
                                 {...pageProps}
@@ -47,10 +50,10 @@ const WebSite = ({ Component, pageProps, langs, ...rest }) => (
                                 }}
                             />
                         </Content>
-                    </Box>
+                    </GoogleReCaptchaProvider>
                 </Box>
-                <Footer />
-            </GoogleReCaptchaProvider>
+            </Box>
+            <Footer />
         </GlobalProvider>
     </ThemeProvider>
 

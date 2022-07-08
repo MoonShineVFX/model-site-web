@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic';
-// import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import { ThemeProvider } from '@mui/material/styles';
 import { GlobalStyles, Box } from '@mui/material';
 import { config } from '@fortawesome/fontawesome-svg-core';
@@ -13,8 +12,8 @@ import globalStyles from '../src/utils/globalStyles';
 config.autoAddCss = false;
 
 // dynamic
-const Header = dynamic(() => import('../src/containers/Header'), { ssr: false });
-const Content = dynamic(() => import('../src/containers/Content'), { ssr: false });
+const Header = dynamic(() => import('../src/containers/Header'));
+const Content = dynamic(() => import('../src/containers/Content'));
 const Footer = dynamic(() => import('../src/containers/Footer'), { ssr: false });
 const GoogleReCaptchaProvider = dynamic(() =>
     import('react-google-recaptcha-v3').then((mod) => mod.GoogleReCaptchaProvider)

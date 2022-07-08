@@ -2,19 +2,10 @@ import { Fragment, useContext, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { Grid, useMediaQuery } from '@mui/material';
 
-import {
-    productDetailStyles,
-    DetailWrapLayout,
-    DetailContentLayout,
-    FormatAndRendererLayout,
-    RelativeProductsLayout,
-} from '../../src/components/product/productLayout';
+import { productDetailStyles } from '../../src/components/product/productLayout';
 import Head from '../../src/containers/Head';
 import Buttons from '../../src/components/Buttons';
 import Images from '../../src/components/Images';
-import Loading from '../../src/components/Loading';
-import ImageEnlarge from '../../src/components/ImageEnlarge';
-import PreviewImage from '../../src/components/product/PreviewImage';
 
 import { GlobalContext } from '../../src/context/global.state';
 import util from '../../src/utils/util';
@@ -24,41 +15,34 @@ import useLocalStorage from '../../src/utils/useLocalStorage';
 import useGoogleAnalytics from '../../src/utils/useGoogleAnalytics';
 
 // dynamic
-const RelativeProductItem = dynamic(() => import('../../src/components/product/RelativeProductItem'), {
-    loading: () => <Loading />,
-    ssr: false,
-});
+const OtherInfo = dynamic(() => import('../../src/components/product/OtherInfo'));
+const PreviewImage = dynamic(() => import('../../src/components/product/PreviewImage'), { ssr: false });
+const RelativeProductItem = dynamic(() => import('../../src/components/product/RelativeProductItem'), { ssr: false, });
+const ImageEnlarge = dynamic(() => import('../../src/components/ImageEnlarge'), { ssr: false });
+
+// dynamic with promise
+const DetailWrapLayout = dynamic(() =>
+    import('../../src/components/product/productLayout').then((mod) => mod.DetailWrapLayout)
+);
+const DetailContentLayout = dynamic(() =>
+    import('../../src/components/product/productLayout').then((mod) => mod.DetailContentLayout)
+);
+const FormatAndRendererLayout = dynamic(() =>
+    import('../../src/components/product/productLayout').then((mod) => mod.FormatAndRendererLayout)
+);
+const RelativeProductsLayout = dynamic(() =>
+    import('../../src/components/product/productLayout').then((mod) => mod.RelativeProductsLayout)
+);
 
 //
 const {
     priceWithCommas,
     mappingTags,
     arrangeFormatAndRender,
-    formatBytes,
 } = util;
 
 // 價格
 const renderPrice = (price) => <h2 className="price">{priceWithCommas(price)}</h2>;
-
-// 其他資訊
-const renderOtherInfo = (pageData, langs) => (
-
-    <div className="other-info">
-        <div className="other-info-item">
-            <div className="label">{langs.product_model_sum}</div>
-            <p>{pageData.modelSum}</p>
-        </div>
-        <div className="other-info-item">
-            <div className="label">{langs.product_file_size}</div>
-            <p>{formatBytes(pageData.fileSize)}</p>
-        </div>
-        <div className="other-info-item">
-            <div className="label">{langs.product_per_image_size}</div>
-            <p>{pageData.perImgSize}</p>
-        </div>
-    </div>
-
-);
 
 //
 const ProductDetail = ({ langs, pageData }) => {
@@ -208,7 +192,12 @@ const ProductDetail = ({ langs, pageData }) => {
                     >
                         {
                             // mWeb
-                            matches && renderOtherInfo(pageData, langs)
+                            matches &&
+                                <OtherInfo
+                                    modelSum={pageData.modelSum}
+                                    fileSize={pageData.fileSize}
+                                    perImgSize={pageData.perImgSize}
+                                />
                         }
 
                         {
@@ -223,7 +212,12 @@ const ProductDetail = ({ langs, pageData }) => {
 
                         {
                             // Web
-                            !matches && renderOtherInfo(pageData, langs)
+                            !matches &&
+                                <OtherInfo
+                                    modelSum={pageData.modelSum}
+                                    fileSize={pageData.fileSize}
+                                    perImgSize={pageData.perImgSize}
+                                />
                         }
                     </Grid>
                 </DetailContentLayout>

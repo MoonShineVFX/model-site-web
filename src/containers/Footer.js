@@ -1,11 +1,21 @@
 import { Fragment, useContext } from 'react';
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 import dayjs from 'dayjs';
 import { Grid, useMediaQuery } from '@mui/material';
-import { FooterLayout, LangOptionLayout } from './globalLayout';
+// import { FooterLayout, LangOptionLayout } from './globalLayout';
 import Links from '../components/Links';
-import Community from '../components/Community';
+// import Community from '../components/Community';
 import { GlobalContext } from '../context/global.state';
+
+// dynamic
+const Community = dynamic(() => import('../components/Community'));
+const FooterLayout = dynamic(() =>
+    import('./globalLayout').then((mod) => mod.FooterLayout)
+);
+const LangOptionLayout = dynamic(() =>
+    import('./globalLayout').then((mod) => mod.LangOptionLayout)
+);
 
 // 語系選單
 const LangOption = ({ deftag }) => {

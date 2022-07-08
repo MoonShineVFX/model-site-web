@@ -1,15 +1,20 @@
 import { useContext } from 'react';
 import dynamic from 'next/dynamic';
 import { Grid } from '@mui/material';
-import { PreviewImageWrapLayout, DemoImageLayout } from './productLayout';
-import Loading from '../Loading';
+import Images from '../Images';
 import { GlobalContext } from '../../context/global.state';
 
 // dynamic
-const Images = dynamic(() => import('../Images'), {
-    loading: () => <Loading />,
-    ssr: false,
-});
+const PreviewImageWrapLayout = dynamic(() =>
+    import('./productLayout').then((mod) => mod.PreviewImageWrapLayout), {
+        ssr: false,
+    }
+);
+const DemoImageLayout = dynamic(() =>
+    import('./productLayout').then((mod) => mod.DemoImageLayout), {
+        ssr: false,
+    }
+);
 
 const PreviewImage = ({ lists, ...rest }) => {
 
@@ -62,6 +67,7 @@ const PreviewImage = ({ lists, ...rest }) => {
                                     alt={id}
                                     width="560"
                                     height="317"
+                                    isBlur
                                 />
                             </DemoImageLayout>
                         </Grid>

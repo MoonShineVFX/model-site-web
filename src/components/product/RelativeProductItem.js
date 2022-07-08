@@ -1,4 +1,7 @@
-import Item from '../Item';
+import dynamic from 'next/dynamic';
+
+// dynamic
+const Item = dynamic(() => import('../Item'), { ssr: false });
 
 const RelativeProductItem = ({ lists }) => (
 

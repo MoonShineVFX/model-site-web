@@ -4,16 +4,13 @@ import dynamic from 'next/dynamic';
 import { Grid } from '@mui/material';
 
 import Head from '../../src/containers/Head';
-import Loading from '../../src/components/Loading';
+import Category from '../../src/components/product/Category';
+import ListItem from '../../src/components/product/ListItem';
 import { GlobalContext } from '../../src/context/global.state';
 import util from '../../src/utils/util';
 import useQuery from '../../src/utils/useQuery';
 
 // dynamic
-const Category = dynamic(() => import('../../src/components/product/Category'), { ssr: false });
-const ListItem = dynamic(() => import('../../src/components/product/ListItem'), {
-    loading: () => <Loading />,
-});
 const Paginations = dynamic(() => import('../../src/components/Paginations'), { ssr: false });
 const GridLayout = dynamic(() =>
     import('../../src/components/product/productLayout').then((mod) => mod.GridLayout)

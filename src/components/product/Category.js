@@ -5,16 +5,24 @@ import {
     useState,
 } from 'react';
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 import {
     List,
     ListItemText,
     ListItemIcon,
 } from '@mui/material';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { ListTitleLayout, ListItemLayout } from './productLayout';
-import FontIcon from '../FontIcon';
 import { GlobalContext } from '../../context/global.state';
 import useQuery from '../../utils/useQuery';
+
+// dynamic
+const FontIcon = dynamic(() => import('../FontIcon'), { ssr: false });
+const ListTitleLayout = dynamic(() =>
+    import('./productLayout').then((mod) => mod.ListTitleLayout)
+);
+const ListItemLayout = dynamic(() =>
+    import('./productLayout').then((mod) => mod.ListItemLayout)
+);
 
 // 整理 URL 標籤格式
 const arrangeTags = (string) => {

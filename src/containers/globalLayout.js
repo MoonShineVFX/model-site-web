@@ -3,13 +3,13 @@ import { styled } from '@mui/system';
 import Links from '../components/Links';
 
 /** Header */
-export const AppBarLayout = styled('header')(({ theme }) => ({
+const AppBarLayout = styled('header')(({ theme }) => ({
     backgroundColor: theme.palette.bgColor,
     boxShadow: 'none',
 }));
 
 //
-export const HeaderLayout = styled(Toolbar)(({ theme }) => ({
+const HeaderLayout = styled(Toolbar)(({ theme }) => ({
     padding: '30px 0 10px',
     [theme.breakpoints.up('sm')]: {
         paddingLeft: 0,
@@ -24,7 +24,7 @@ export const HeaderLayout = styled(Toolbar)(({ theme }) => ({
 }));
 
 // 購物車 icon
-export const ShoppingCartLayout = styled(Links)(({
+const ShoppingCartLayout = styled(Links)(({
     fontSize: '1.4em',
     marginRight: '30px',
     cursor: 'pointer',
@@ -34,7 +34,7 @@ export const ShoppingCartLayout = styled(Links)(({
 }));
 
 /** Navbar */
-export const NavMenuLayout = styled('nav')(({ theme }) => ({
+const NavMenuLayout = styled('nav')(({ theme }) => ({
     display: 'inline-block',
     verticalAlign: 'middle',
     marginLeft: '40px',
@@ -55,7 +55,7 @@ export const NavMenuLayout = styled('nav')(({ theme }) => ({
 }));
 
 // mWeb sidenav
-export const SideNavLayout = styled('div')(({ theme }) => ({
+const SideNavLayout = styled('div')(({ theme }) => ({
     display: 'none',
     [theme.breakpoints.down('mobile')]: {
         width: '100%',
@@ -128,7 +128,7 @@ export const SideNavLayout = styled('div')(({ theme }) => ({
 }));
 
 //
-export const SideNavIconLayout = styled('span')(({ theme }) => ({
+const SideNavIconLayout = styled('span')(({ theme }) => ({
     width: '40px',
     height: '40px',
     lineHeight: '40px',
@@ -155,7 +155,7 @@ export const SideNavIconLayout = styled('span')(({ theme }) => ({
 }));
 
 /** Footer */
-export const FooterLayout = styled('footer')(({ theme }) => ({
+const FooterLayout = styled('footer')(({ theme }) => ({
     fontSize: '0.9em',
     borderTop: '1px solid rgba(255,255,255,0.10)',
     marginTop: '160px',
@@ -237,7 +237,7 @@ export const FooterLayout = styled('footer')(({ theme }) => ({
 }));
 
 // 語系
-export const LangOptionLayout = styled('select')(({ theme }) => ({
+const LangOptionLayout = styled('select')(({ theme }) => ({
     fontSize: '1em',
     backgroundColor: theme.palette.card.main,
     border: '0',
@@ -248,13 +248,13 @@ export const LangOptionLayout = styled('select')(({ theme }) => ({
     },
 }));
 
-// export {
-//     AppBarLayout,
-//     HeaderLayout,
-//     ShoppingCartLayout,
-//     NavMenuLayout,
-//     SideNavLayout,
-//     SideNavIconLayout,
-//     FooterLayout,
-//     LangOptionLayout,
-// };
+export {
+    AppBarLayout,
+    HeaderLayout,
+    ShoppingCartLayout,
+    NavMenuLayout,
+    SideNavLayout,
+    SideNavIconLayout,
+    FooterLayout,
+    LangOptionLayout,
+};

@@ -3,9 +3,7 @@ import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import dayjs from 'dayjs';
 import { Grid, useMediaQuery } from '@mui/material';
-// import { FooterLayout, LangOptionLayout } from './globalLayout';
 import Links from '../components/Links';
-// import Community from '../components/Community';
 import { GlobalContext } from '../context/global.state';
 
 // dynamic

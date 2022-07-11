@@ -3,10 +3,13 @@ import dynamic from 'next/dynamic';
 import Loading from './Loading';
 
 // dynamic
-const Images = dynamic(() => import('./Images'), {
-    loading: () => <Loading />,
-    ssr: false,
-});
+const Images = dynamic(
+    () => import('./Images'),
+    {
+        loading: () => <Loading />,
+        ssr: false,
+    },
+);
 
 const LazyImages = ({ src, alt, width, height, ...rest }) => (
 

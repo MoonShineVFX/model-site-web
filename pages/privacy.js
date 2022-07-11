@@ -1,8 +1,16 @@
-import React, { Fragment, useContext, useEffect } from 'react';
-import { TitleLayout, SectionLayout } from '../src/components/cart/cartLayout';
+import { Fragment, useContext, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import Head from '../src/containers/Head';
 import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
+
+// dynamic
+const TitleLayout = dynamic(() =>
+    import('../src/components/cart/cartLayout').then((mod) => mod.TitleLayout)
+);
+const SectionLayout = dynamic(() =>
+    import('../src/components/cart/cartLayout').then((mod) => mod.SectionLayout)
+);
 
 const Privacy = ({ langs, pageData }) => {
 

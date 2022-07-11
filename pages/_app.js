@@ -14,9 +14,12 @@ config.autoAddCss = false;
 // dynamic
 const Header = dynamic(() => import('../src/containers/Header'));
 const Content = dynamic(() => import('../src/containers/Content'));
-const Footer = dynamic(() => import('../src/containers/Footer'), { ssr: false });
-const GoogleReCaptchaProvider = dynamic(() =>
-    import('react-google-recaptcha-v3').then((mod) => mod.GoogleReCaptchaProvider)
+const Footer = dynamic(
+    () => import('../src/containers/Footer'),
+    { ssr: false },
+);
+const GoogleReCaptchaProvider = dynamic(
+    () => import('react-google-recaptcha-v3').then((mod) => mod.GoogleReCaptchaProvider)
 );
 
 //

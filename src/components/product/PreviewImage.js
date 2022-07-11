@@ -5,15 +5,14 @@ import Images from '../Images';
 import { GlobalContext } from '../../context/global.state';
 
 // dynamic
-const PreviewImageWrapLayout = dynamic(() =>
-    import('./productLayout').then((mod) => mod.PreviewImageWrapLayout), {
-        ssr: false,
-    }
+const PreviewImageWrapLayout = dynamic(
+    () => import('./productLayout').then((mod) => mod.PreviewImageWrapLayout),
+    { ssr: false },
 );
-const DemoImageLayout = dynamic(() =>
-    import('./productLayout').then((mod) => mod.DemoImageLayout), {
-        ssr: false,
-    }
+
+const DemoImageLayout = dynamic(
+    () => import('./productLayout').then((mod) => mod.DemoImageLayout),
+    { ssr: false },
 );
 
 const PreviewImage = ({ lists, ...rest }) => {
@@ -34,7 +33,7 @@ const PreviewImage = ({ lists, ...rest }) => {
 
     return (
 
-        <PreviewImageWrapLayout {...rest} >
+        <PreviewImageWrapLayout {...rest}>
             <Grid
                 container
                 rowSpacing={{

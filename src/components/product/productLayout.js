@@ -9,10 +9,10 @@ const detailStyles = {
 };
 
 // Detail Style
-export const productDetailStyles = <GlobalStyles styles={detailStyles} />;
+const productDetailStyles = <GlobalStyles styles={detailStyles} />;
 
 //
-export const GridLayout = styled(Grid)(({ theme }) => ({
+const GridLayout = styled(Grid)(({ theme }) => ({
     paddingTop: '60px',
     '.productList': {
         '.MuiButtonBase-root': {
@@ -47,7 +47,7 @@ export const GridLayout = styled(Grid)(({ theme }) => ({
 }));
 
 //
-export const ListTitleLayout = styled('h4')(({ theme }) => ({
+const ListTitleLayout = styled('h4')(({ theme }) => ({
     fontWeight: 'normal',
     margin: 0,
     '&:after': {
@@ -63,7 +63,7 @@ export const ListTitleLayout = styled('h4')(({ theme }) => ({
 }));
 
 //
-export const ListItemLayout = styled(ListItemButton)(({ theme }) => ({
+const ListItemLayout = styled(ListItemButton)(({ theme }) => ({
     marginBottom: '10px',
     opacity: '0.8',
     transition: 'all .5s ease',
@@ -93,7 +93,7 @@ export const ListItemLayout = styled(ListItemButton)(({ theme }) => ({
 /**
  * Notes: 暫時隱藏 tag
  */
-export const ItemWrapLayout = styled(Grid)(({ theme }) => ({
+const ItemWrapLayout = styled(Grid)(({ theme }) => ({
     '.item-thumb > span': {
         height: '100% !important', // Notes: 解決引用 next/image 圖片太小問題
     },
@@ -115,7 +115,7 @@ export const ItemWrapLayout = styled(Grid)(({ theme }) => ({
 }));
 
 /** Detail */
-export const DetailWrapLayout = styled('section')(({ theme }) => ({
+const DetailWrapLayout = styled('section')(({ theme }) => ({
     backgroundColor: theme.palette.card.main,
     borderRadius: theme.borderRadius,
     overflow: 'hidden',
@@ -141,7 +141,7 @@ export const DetailWrapLayout = styled('section')(({ theme }) => ({
 }));
 
 //
-export const DetailContentLayout = styled(Grid)(({ theme }) => ({
+const DetailContentLayout = styled(Grid)(({ theme }) => ({
     fontSize: '1.15em',
     padding: '48px 60px',
     'p': {
@@ -225,7 +225,7 @@ export const DetailContentLayout = styled(Grid)(({ theme }) => ({
 }));
 
 //
-export const FormatAndRendererLayout = styled('ul')(({ theme }) => ({
+const FormatAndRendererLayout = styled('ul')(({ theme }) => ({
     margin: '0',
     paddingInlineStart: '20px',
     '.item': {
@@ -241,7 +241,7 @@ export const FormatAndRendererLayout = styled('ul')(({ theme }) => ({
 }));
 
 //
-export const PreviewImageWrapLayout = styled(ItemsWrap)(({ theme }) => ({
+const PreviewImageWrapLayout = styled(ItemsWrap)(({ theme }) => ({
     '&[data-section="preview-image"]': {
         margin: '40px 0',
     },
@@ -258,7 +258,7 @@ export const PreviewImageWrapLayout = styled(ItemsWrap)(({ theme }) => ({
 }));
 
 //
-export const DemoImageLayout = styled('div')(({ theme }) => ({
+const DemoImageLayout = styled('div')(({ theme }) => ({
     height: '317px',
     borderRadius: theme.borderRadius,
     overflow: 'hidden',
@@ -272,7 +272,7 @@ export const DemoImageLayout = styled('div')(({ theme }) => ({
 }));
 
 // 你可能會喜歡
-export const RelativeProductsLayout = styled(ItemsWrap)(({ theme }) => ({
+const RelativeProductsLayout = styled(ItemsWrap)(({ theme }) => ({
     overflowX: 'hidden',
     '.items': {
         display: 'flex',
@@ -308,3 +308,17 @@ export const RelativeProductsLayout = styled(ItemsWrap)(({ theme }) => ({
         },
     },
 }));
+
+export {
+    productDetailStyles,
+    GridLayout,
+    ListTitleLayout,
+    ListItemLayout,
+    ItemWrapLayout,
+    DetailWrapLayout,
+    DetailContentLayout,
+    FormatAndRendererLayout,
+    PreviewImageWrapLayout,
+    DemoImageLayout,
+    RelativeProductsLayout,
+};

@@ -14,10 +14,13 @@ import util from '../src/utils/util';
 import useGoogleAnalytics from '../src/utils/useGoogleAnalytics';
 
 // dynamic
-const Tutorial = dynamic(() => import('../src/components/home/Tutorial'), {
-    loading: () => <Loading />,
-    ssr: false,
-});
+const Tutorial = dynamic(
+    () => import('../src/components/home/Tutorial'),
+    {
+        loading: () => <Loading />,
+        ssr: false,
+    },
+);
 
 const Home = ({ langs, pageData }) => {
 

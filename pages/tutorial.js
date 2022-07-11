@@ -1,12 +1,13 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import { Fragment, useContext, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { Grid } from '@mui/material';
 import { styled } from '@mui/system';
-
 import Head from '../src/containers/Head';
-import Item from '../src/components/Item';
-
 import { GlobalContext } from '../src/context/global.state';
 import util from '../src/utils/util';
+
+// dynamic
+const Item = dynamic(() => import('../src/components/Item'));
 
 //
 const TitleLayout = styled('h1')(({ theme }) => ({

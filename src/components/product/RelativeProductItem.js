@@ -1,27 +1,36 @@
 import dynamic from 'next/dynamic';
 
 // dynamic
-const Item = dynamic(() => import('../Item'), { ssr: false });
+const Item = dynamic(
+    () => import('../Item'),
+    { ssr: false },
+);
 
-const RelativeProductItem = ({ lists }) => (
+const RelativeProductsLayout = dynamic(() =>
+    import('./productLayout').then((mod) => mod.RelativeProductsLayout)
+);
 
-    <div className="items">
-        {
-            lists.map(({ id, title, price, imgUrl }, idx) => (
+const RelativeProductItem = ({ lists, ...rest }) => (
 
-                <div
-                    key={idx}
-                    className="itemWrap"
-                >
-                    <Item
-                        url={`/product/${id}`}
-                        data={{ title, price, imgUrl }}
-                    />
-                </div>
+    <RelativeProductsLayout {...rest}>
+        <div className="items">
+            {
+                lists.map(({ id, title, price, imgUrl }, idx) => (
 
-            ))
-        }
-    </div>
+                    <div
+                        key={idx}
+                        className="itemWrap"
+                    >
+                        <Item
+                            url={`/product/${id}`}
+                            data={{ title, price, imgUrl }}
+                        />
+                    </div>
+
+                ))
+            }
+        </div>
+    </RelativeProductsLayout>
 
 );
 

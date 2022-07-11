@@ -11,7 +11,11 @@ import util from '../../src/utils/util';
 import useQuery from '../../src/utils/useQuery';
 
 // dynamic
-const Paginations = dynamic(() => import('../../src/components/Paginations'), { ssr: false });
+const Paginations = dynamic(
+    () => import('../../src/components/Paginations'),
+    { ssr: false },
+);
+
 const GridLayout = dynamic(() =>
     import('../../src/components/product/productLayout').then((mod) => mod.GridLayout)
 );

@@ -1,4 +1,5 @@
 name: "setup-env"
+description: "set vars by branch name"
 runs:
   using: "composite"
   steps:
@@ -6,5 +7,5 @@ runs:
       if: github.ref != 'refs/heads/main'
       shell: bash
       run: |
-        echo "SERVICE_NAME=$SERVICE_NAME-dev" >> $GITHUB_ENV
-        echo "HOST=market-dev.moonshine.tw" >> $GITHUB_ENV
+        echo "SERVICE_NAME=$SERVICE_NAME-$GITHUB_REF_NAME" >> $GITHUB_ENV
+        echo "HOST=market-$GITHUB_REF_NAME.moonshine.tw" >> $GITHUB_ENV

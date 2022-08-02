@@ -1,4 +1,5 @@
 name: "next-js-envfile"
+description: "write envs to file"
 inputs:
   filename:
     required: false

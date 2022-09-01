@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import { styled } from '@mui/system';
-import Cookies from 'js-cookie';
 import Box from '../Box';
 import Links from '../Links';
 import { GlobalContext } from '../../context/global.state';
 import util from '../../utils/util';
+import Service from '../../utils/util.service';
 
 const { redirectTo } = util;
 
@@ -47,10 +47,14 @@ const MyAccountBox = () => {
     const handleClickLogout = (e) => {
 
         e.preventDefault();
-        Cookies.remove('token');
-        globalDispatch({ type: 'target_box', payload: '' });
-        localStorage.removeItem('cartItem'); // 清除暫存購物車
-        redirectTo();
+        Service.singout()
+            .then(() => {
+
+                globalDispatch({ type: 'target_box', payload: '' });
+                localStorage.removeItem('cartItem'); // 清除暫存購物車
+                redirectTo();
+
+            });
 
     };
 

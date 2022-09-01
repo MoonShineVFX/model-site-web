@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { faTimes, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import Cookies from 'js-cookie';
 
 import { SideNavLayout } from './globalLayout';
 import Links from '../components/Links';
@@ -11,6 +10,7 @@ import SideNavIcon from './SideNavIcon';
 
 import { GlobalContext } from '../context/global.state';
 import util from '../utils/util';
+import Service from '../utils/util.service';
 
 const { redirectTo } = util;
 
@@ -32,10 +32,14 @@ const Sidenav = () => {
     const handleClickLogout = (e) => {
 
         e.preventDefault();
-        Cookies.remove('token');
-        globalDispatch({ type: 'target_box', payload: '' });
-        localStorage.removeItem('cartItem'); // 清除暫存購物車
-        redirectTo();
+        Service.logout()
+            .then(() => {
+
+                globalDispatch({ type: 'target_box', payload: '' });
+                localStorage.removeItem('cartItem'); // 清除暫存購物車
+                redirectTo();
+
+            });
 
     };
 

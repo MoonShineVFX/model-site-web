@@ -17,4 +17,4 @@ runs:
         echo "NEXT_PUBLIC_GOOGLE_SIGNIN_CLIENTID=$GOOGLE_SIGNIN_CLIENTID" >> ${{ inputs.filename }}
         echo "NEXT_PUBLIC_TAWKTO_PROPERTYID=$TAWKTO_PROPERTYID" >> ${{ inputs.filename }}
         echo "NEXT_PUBLIC_TAWKTO_TAWKID=$TAWKTO_TAWKID" >> ${{ inputs.filename }}
-        echo "NEXT_PUBLIC_GAID=$GOOGLE_GAID" >> ${{ inputs.filename }}
+        echo "NEXT_PUBLIC_GAID=$GAID" >> ${{ inputs.filename }}

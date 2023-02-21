@@ -25,6 +25,7 @@ const globalReducer = (state, { type, payload }) => {
                 ...state,
                 tags: payload.tags,
                 user: payload.other,
+                fxRate: payload.fxRate,
                 logged: !!payload.other.userId,
             };
 

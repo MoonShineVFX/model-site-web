@@ -22,6 +22,7 @@ const globalInitState = {
     dynamicAction: '',
     isVerified: false,
     deftags: {},
+    fxRate: 1,
 };
 
 // Form values
@@ -58,6 +59,7 @@ const GlobalProvider = ({ children }) => {
         dynamicAction,
         isVerified,
         deftags,
+        fxRate,
     } = globalState;
 
     const { formStorageData } = formStorageState;
@@ -100,6 +102,7 @@ const GlobalProvider = ({ children }) => {
             dynamicAction,
             isVerified,
             deftags,
+            fxRate,
             getGlobalData,
 
             // Form 表單暫存

@@ -3,6 +3,7 @@ import router from 'next/router';
 import dayjs from 'dayjs';
 import Cookies from 'js-cookie';
 import deftag from './util.deftag';
+import { GlobalContext } from '../src/context/global.state';
 
 const { currency_tw, currency_en } = deftag;
 
@@ -91,9 +92,15 @@ const util = {
      */
     priceWithCommas: (price, fixed) => {
 
+        // Context
+        const { fxRate } = useContext(GlobalContext);
+
         let priceFormat = '';
 
-        if (price === null) price = '';
+        if (price === null) 
+            price = '';
+        else 
+            price = price / fxRate;
 
         if (fixed !== null && !isNaN(parseFloat(price)))
             price = parseFloat(price.toString().replace(/,/g, '')).toFixed(fixed);

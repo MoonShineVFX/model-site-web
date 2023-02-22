@@ -3,7 +3,6 @@ import router from 'next/router';
 import dayjs from 'dayjs';
 import Cookies from 'js-cookie';
 import deftag from './util.deftag';
-import { GlobalContext } from '../src/context/global.state';
 
 const { currency_tw, currency_en } = deftag;
 
@@ -88,19 +87,17 @@ const util = {
      * @author Betty
      * @param  {number} price - 金額 (美金USD)
      * @param  {number} fixed - 位數
+     * @param  {number} fxRate - 匯率
      * @returns {string}}
      */
-    priceWithCommas: (price, fixed) => {
-
-        // Context
-        const { fxRate } = useContext(GlobalContext);
+    priceWithCommas: (price, fixed, fxRate) => {
 
         let priceFormat = '';
 
-        if (price === null) 
-            price = '';
-        else 
-            price = price / fxRate;
+        if (price === null) price = '';
+        else
+            if (fxRate !== null && !isNaN(parseFloat(fxRate)))
+                price = (price / fxRate).toFixed(2);
 
         if (fixed !== null && !isNaN(parseFloat(price)))
             price = parseFloat(price.toString().replace(/,/g, '')).toFixed(fixed);

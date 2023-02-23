@@ -212,7 +212,7 @@ const Cart = ({ langs, pageData }) => {
 
                                             <div>
                                                 <span>總額</span>
-                                                <span className="price">{priceWithCommas(price, 2, fxRate)}</span>
+                                                <span className="price">{priceWithCommas(amount, 2, fxRate)}</span>
                                             </div>
 
                                         ) : (
@@ -221,7 +221,7 @@ const Cart = ({ langs, pageData }) => {
                                                 colRight={(
                                                     <div>
                                                         <span>總額</span>
-                                                        <div className="price">{priceWithCommas(price, 2, fxRate)}</div>
+                                                        <div className="price">{priceWithCommas(amount, 2, fxRate)}</div>
                                                     </div>
                                                 )}
                                             />

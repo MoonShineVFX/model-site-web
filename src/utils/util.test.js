@@ -51,7 +51,7 @@ it('dateFormat', () => {
 });
 
 it('formatBytes', () => {
-
+    expect(formatBytes(100)).toBe('100 B');
     expect(formatBytes(1024)).toBe('1 KB');
     expect(formatBytes(54024)).toBe('52.76 KB');
     expect(formatBytes(748691048)).toBe('714.01 MB');

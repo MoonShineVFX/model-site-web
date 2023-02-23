@@ -13,11 +13,12 @@ it('priceWithCommas', () => {
 
     expect(priceWithCommas(0)).toBe('USD$ 0');
     expect(priceWithCommas(100)).toBe('USD$ 100');
-    expect(priceWithCommas(1000)).toBe('USD$ 1,000');
+    expect(priceWithCommas(1000)).toBe('USD$ 1000');
     expect(priceWithCommas(1000, NaN, 10)).toBe('USD$ 100');
     expect(priceWithCommas(1000, NaN, 34.5)).toBe('USD$ 29');
-    expect(priceWithCommas(1000, NaN, "A")).toBe('USD$ 1,000');
-    // expect(priceWithCommas(1000.524, 2)).toBe('USD$ 1,000.52'); // ???
+    //expect(priceWithCommas(1000, 2, 34.5)).toBe('USD$ 28.99 NT$ 1000');
+    expect(priceWithCommas(1000, NaN, "A")).toBe('USD$ 1000');
+    expect(priceWithCommas(1000.524, 2)).toBe('USD$ 1001');
 
 });
 

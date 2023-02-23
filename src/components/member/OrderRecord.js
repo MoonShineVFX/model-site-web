@@ -59,6 +59,7 @@ const Item = ({
         invoice,
     },
     deftag,
+    fxRate,
 }) => (
 
     renderItemCell({
@@ -67,7 +68,7 @@ const Item = ({
             createAt: dateFormat(createdAt),
             status: deftag?.[`order_status_${status}`],
             quantity: totalItems,
-            price: priceWithCommas(price),
+            price: priceWithCommas(price, 2, fxRate),
             payment: deftag?.[`order_payment_${paidBy}`],
             paidAt: dateFormat(paidAt),
             invoice,
@@ -77,7 +78,7 @@ const Item = ({
 );
 
 // Web
-const withTable = (data, deftag) => (
+const withTable = (data, deftag, fxRate) => (
 
     <OrderRecordLayout>
         {
@@ -103,6 +104,7 @@ const withTable = (data, deftag) => (
                     key={obj.id}
                     data={obj}
                     deftag={deftag}
+                    fxRate={fxRate}
                 />
 
             ))
@@ -112,7 +114,7 @@ const withTable = (data, deftag) => (
 );
 
 // mWeb
-const withCard = (data, deftag) => (
+const withCard = (data, deftag, fxRate) => (
 
     <OrderRecordGridLayout
         container
@@ -158,7 +160,7 @@ const withCard = (data, deftag) => (
                         </div>
                         <div className="item">
                             <h4 className="title">{deftag?.order_text_total_price}</h4>
-                            {priceWithCommas(price)}
+                            {priceWithCommas(price, 2, fxRate)}
                         </div>
                         <div className="item">
                             <h4 className="title">{deftag?.order_text_status}</h4>
@@ -189,14 +191,14 @@ const withCard = (data, deftag) => (
 const OrderRecord = ({ data }) => {
 
     // Context
-    const { deftags } = useContext(GlobalContext);
+    const { fxRate, deftags } = useContext(GlobalContext);
 
     // Hook
     const matches = useMediaQuery((theme) => theme.breakpoints.up('mobile'));
 
     return (
 
-        matches ? withTable(data, deftags) : withCard(data, deftags)
+        matches ? withTable(data, deftags, fxRate) : withCard(data, deftags, fxRate)
 
     );
 

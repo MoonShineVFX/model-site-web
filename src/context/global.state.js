@@ -22,7 +22,7 @@ const globalInitState = {
     dynamicAction: '',
     isVerified: false,
     deftags: {},
-    fxRate: 1,
+    fxRate: 2,
 };
 
 // Form values

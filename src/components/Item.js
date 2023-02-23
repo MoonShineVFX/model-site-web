@@ -87,7 +87,7 @@ const Item = ({
 }) => {
 
     // Context
-    const { deftags } = useContext(GlobalContext);
+    const { fxRate, deftags } = useContext(GlobalContext);
 
     return (
 
@@ -110,7 +110,7 @@ const Item = ({
                 <h3 className="title web-line-clamp">{title}</h3>
                 {
                     price &&
-                        <span className="price">{priceWithCommas(price)}</span>
+                        <span className="price">{priceWithCommas(price, 2, fxRate)}</span>
                 }
                 {
                     fileSize &&

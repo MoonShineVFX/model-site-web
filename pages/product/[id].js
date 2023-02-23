@@ -30,7 +30,7 @@ const {
 } = util;
 
 // 價格
-const renderPrice = (price, fxRate) => <h2 className="price">{priceWithCommas(price=price, fxRate=fxRate)}</h2>;
+const renderPrice = (price, fxRate) => <h2 className="price">{priceWithCommas(price, 2, fxRate)}</h2>;
 
 // 其他資訊
 const renderOtherInfo = (pageData, langs) => (

@@ -12,7 +12,7 @@ const { priceWithCommas, dateFormat } = util;
 const OrderDetail = ({ langs, pageData }) => {
 
     // Context
-    const { globalDispatch } = useContext(GlobalContext);
+    const { fxRate, globalDispatch } = useContext(GlobalContext);
 
     useEffect(() => {
 
@@ -71,7 +71,7 @@ const OrderDetail = ({ langs, pageData }) => {
                         </div>
                          <div className="row-item">
                             <h4 className="title">{langs.order_text_total_price}</h4>
-                            <div className="value">{priceWithCommas(pageData.price)}</div>
+                            <div className="value">{priceWithCommas(pageData.price, 1, fxRate)}</div>
                         </div>
                         <div className="row-item">
                             <h4 className="title">{langs.order_text_status}</h4>
@@ -117,7 +117,7 @@ const OrderDetail = ({ langs, pageData }) => {
                                         </span>
                                         <span className="content">
                                             <h4 className="title web-line-clamp">{title}</h4>
-                                            <span>{priceWithCommas(price)}</span>
+                                            <span>{priceWithCommas(price, 1, fxRate)}</span>
                                         </span>
                                     </ItemLayout>
                                 </Grid>

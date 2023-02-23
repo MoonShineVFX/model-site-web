@@ -95,7 +95,7 @@ const Item = ({
                             <h4 className="title web-line-clamp" title={title}>{title}</h4>
                             {
                                 matches &&
-                                    <span className="price">{priceWithCommas(price=price, fxRate=fxRate)}</span>
+                                    <span className="price">{priceWithCommas(price, 2, fxRate)}</span>
                             }
                         </div>
                     </Fragment>
@@ -104,7 +104,7 @@ const Item = ({
                     <div>
                         {
                             !matches &&
-                                <span className="price">{priceWithCommas(price=price, fxRate=fxRate)}</span>
+                                <span className="price">{priceWithCommas(price, 2, fxRate)}</span>
                         }
 
                         <span className="action" onClick={onClick}>
@@ -212,7 +212,7 @@ const Cart = ({ langs, pageData }) => {
 
                                             <div>
                                                 <span>總額</span>
-                                                <span className="price">{priceWithCommas(price=amount, fxRate=fxRate)}</span>
+                                                <span className="price">{priceWithCommas(price, 2, fxRate)}</span>
                                             </div>
 
                                         ) : (
@@ -221,7 +221,7 @@ const Cart = ({ langs, pageData }) => {
                                                 colRight={(
                                                     <div>
                                                         <span>總額</span>
-                                                        <div className="price">{priceWithCommas(price=amount, fxRate=fxRate)}</div>
+                                                        <div className="price">{priceWithCommas(price, 2, fxRate)}</div>
                                                     </div>
                                                 )}
                                             />

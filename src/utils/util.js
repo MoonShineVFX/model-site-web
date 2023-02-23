@@ -4,7 +4,9 @@ import dayjs from 'dayjs';
 import Cookies from 'js-cookie';
 import deftag from './util.deftag';
 
-const { currency_tw } = deftag;
+const Decimal = require('decimal.js');
+
+const { currency_tw, currency_en } = deftag;
 
 const util = {
     /**
@@ -85,23 +87,29 @@ const util = {
 
     /**
      * @author Betty
-     * @param  {number} price - 金額
+     * @param  {number} price - 金額 (台幣NTD)
      * @param  {number} fixed - 位數
+     * @param  {number} fxRate - 匯率
      * @returns {string}}
      */
-    priceWithCommas: (price, fixed) => {
+    priceWithCommas: (price, fixed, fxRate) => {
 
         let priceFormat = '';
+        let priceUSD = '';
 
         if (price === null) price = '';
+        else
+            price = new Decimal(price);
+            priceUSD = new Decimal(price);
 
-        if (fixed !== null && !isNaN(parseFloat(price)))
-            price = parseFloat(price.toString().replace(/,/g, '')).toFixed(fixed);
+            if (fxRate !== null && !isNaN(parseFloat(fxRate)))
+                priceUSD = price.div(fxRate);
 
-        // 千分位處理
-        priceFormat = Math.round(price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
-        return (price < 0) ? `-$${priceFormat.replace(/-/g, '')}` : `${currency_tw}$ ${priceFormat}`;
+            // 目前美金強制四捨五入到整數
+            //if (Number.isInteger(fixed))
+            //    priceUSD = priceUSD.toFixed(fixed);
+            priceUSD = priceUSD.round()
+        return (price < 0) ? `-$${priceFormat.replace(/-/g, '')}` : `${currency_en}$ ${priceUSD}`;
 
     },
 
@@ -142,10 +150,10 @@ const util = {
 
         const k = 1024;
         const dm = decimals < 0 ? 0 : decimals;
-        const sizes = ['B', 'K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'];
+        const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
         const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-        return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}B`;
+        return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
 
     },
 

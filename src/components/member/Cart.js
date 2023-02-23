@@ -62,7 +62,7 @@ const ItemWrapLayout = styled(Links)(({ theme }) => ({
 const Cart = () => {
 
     // Context
-    const { deftags, logged, cart, globalDispatch } = useContext(GlobalContext);
+    const { fxRate, deftags, logged, cart, globalDispatch } = useContext(GlobalContext);
 
     // 當頁再次點擊要關閉 box
     const handleResetBox = () => globalDispatch({ type: 'target_box', payload: '' });
@@ -92,7 +92,7 @@ const Cart = () => {
                                 </div>
                                 <div className="content">
                                     <h4 className="title">{cart.items[id].title}</h4>
-                                    <span className="price">{priceWithCommas(cart.items[id].price)}</span>
+                                    <span className="price">{priceWithCommas(cart.items[id].price, 2, fxRate)}</span>
                                 </div>
                             </ItemWrapLayout>
 

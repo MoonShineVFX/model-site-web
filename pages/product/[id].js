@@ -30,7 +30,7 @@ const {
 } = util;
 
 // 價格
-const renderPrice = (price) => <h2 className="price">{priceWithCommas(price)}</h2>;
+const renderPrice = (price, fxRate) => <h2 className="price">{priceWithCommas(price, 2, fxRate)}</h2>;
 
 // 其他資訊
 const renderOtherInfo = (pageData, langs) => (
@@ -71,6 +71,7 @@ const ProductDetail = ({ langs, pageData }) => {
         formStorageDispatch,
         globalDispatch,
         lightboxDispatch,
+        fxRate,
     } = useContext(GlobalContext);
 
     // State
@@ -176,7 +177,7 @@ const ProductDetail = ({ langs, pageData }) => {
 
                         {
                             // mWeb
-                            matches && renderPrice(pageData.price)
+                            matches && renderPrice(pageData.price, fxRate)
                         }
 
                         <p className="description">{pageData.description}</p>
@@ -217,7 +218,7 @@ const ProductDetail = ({ langs, pageData }) => {
 
                         {
                             // Web
-                            !matches && renderPrice(pageData.price)
+                            !matches && renderPrice(pageData.price, fxRate)
                         }
 
                         <Buttons

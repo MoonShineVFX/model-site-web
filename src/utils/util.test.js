@@ -11,10 +11,14 @@ const {
 
 it('priceWithCommas', () => {
 
-    expect(priceWithCommas(0)).toBe('NT$ 0 元');
-    expect(priceWithCommas(100)).toBe('NT$ 100 元');
-    expect(priceWithCommas(1000)).toBe('NT$ 1,000 元');
-    // expect(priceWithCommas(1000.524, 2)).toBe('NT$ 1,000.52 元'); // ???
+    expect(priceWithCommas(0)).toBe('USD$ 0');
+    expect(priceWithCommas(100)).toBe('USD$ 100');
+    expect(priceWithCommas(1000)).toBe('USD$ 1000');
+    expect(priceWithCommas(1000, NaN, 10)).toBe('USD$ 100');
+    expect(priceWithCommas(1000, NaN, 34.5)).toBe('USD$ 29');
+    //expect(priceWithCommas(1000, 2, 34.5)).toBe('USD$ 28.99 NT$ 1000');
+    expect(priceWithCommas(1000, NaN, "A")).toBe('USD$ 1000');
+    expect(priceWithCommas(1000.524, 2)).toBe('USD$ 1001');
 
 });
 
@@ -47,11 +51,11 @@ it('dateFormat', () => {
 });
 
 it('formatBytes', () => {
-
-    expect(formatBytes(1024)).toBe('1K');
-    expect(formatBytes(54024)).toBe('52.76K');
-    expect(formatBytes(748691048)).toBe('714.01M');
-    expect(formatBytes(94608991654987)).toBe('86.05T');
+    expect(formatBytes(100)).toBe('100 B');
+    expect(formatBytes(1024)).toBe('1 KB');
+    expect(formatBytes(54024)).toBe('52.76 KB');
+    expect(formatBytes(748691048)).toBe('714.01 MB');
+    expect(formatBytes(94608991654987)).toBe('86.05 TB');
 
 });
 

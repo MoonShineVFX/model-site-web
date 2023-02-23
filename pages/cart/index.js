@@ -70,6 +70,9 @@ const Item = ({
     // Hook
     const matches = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
+    // Context
+    const { fxRate } = useContext(GlobalContext);
+
     return (
 
         <ItemLayout
@@ -92,7 +95,7 @@ const Item = ({
                             <h4 className="title web-line-clamp" title={title}>{title}</h4>
                             {
                                 matches &&
-                                    <span className="price">{priceWithCommas(price)}</span>
+                                    <span className="price">{priceWithCommas(price, 2, fxRate)}</span>
                             }
                         </div>
                     </Fragment>
@@ -101,7 +104,7 @@ const Item = ({
                     <div>
                         {
                             !matches &&
-                                <span className="price">{priceWithCommas(price)}</span>
+                                <span className="price">{priceWithCommas(price, 2, fxRate)}</span>
                         }
 
                         <span className="action" onClick={onClick}>
@@ -120,7 +123,7 @@ const Item = ({
 const Cart = ({ langs, pageData }) => {
 
     // Context
-    const { globalDispatch } = useContext(GlobalContext);
+    const { fxRate, globalDispatch } = useContext(GlobalContext);
 
     // Hook
     const matches = useMediaQuery((theme) => theme.breakpoints.down('sm'));
@@ -209,7 +212,7 @@ const Cart = ({ langs, pageData }) => {
 
                                             <div>
                                                 <span>總額</span>
-                                                <span className="price">{priceWithCommas(amount)}</span>
+                                                <span className="price">{priceWithCommas(amount, 2, fxRate)}</span>
                                             </div>
 
                                         ) : (
@@ -218,7 +221,7 @@ const Cart = ({ langs, pageData }) => {
                                                 colRight={(
                                                     <div>
                                                         <span>總額</span>
-                                                        <div className="price">{priceWithCommas(amount)}</div>
+                                                        <div className="price">{priceWithCommas(amount, 2, fxRate)}</div>
                                                     </div>
                                                 )}
                                             />
